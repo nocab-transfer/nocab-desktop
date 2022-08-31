@@ -72,6 +72,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get darkModeSettingDescription => 'Open the dark mode';
 
   @override
+  String get useMaterialYouSettingTitle => 'Use Material You Design';
+
+  @override
+  String get useMaterialYouSettingDescription => 'Use Material You (Material 3) Design';
+
+  @override
   String get startOnBootSettingTitle => 'Start On Boot';
 
   @override

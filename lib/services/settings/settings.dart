@@ -41,6 +41,7 @@ class SettingsService {
     return SettingsModel(
       deviceName: (await DeviceInfoPlugin().deviceInfo).deviceName,
       darkMode: RegistryService.isDarkMode(),
+      useMaterial3: false,
       mainPort: 5001,
       finderPort: 62193,
       startOnBoot: false,

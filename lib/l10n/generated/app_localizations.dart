@@ -217,6 +217,18 @@ abstract class AppLocalizations {
   /// **'Open the dark mode'**
   String get darkModeSettingDescription;
 
+  /// No description provided for @useMaterialYouSettingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Use Material You Design'**
+  String get useMaterialYouSettingTitle;
+
+  /// No description provided for @useMaterialYouSettingDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Use Material You (Material 3) Design'**
+  String get useMaterialYouSettingDescription;
+
   /// No description provided for @startOnBootSettingTitle.
   ///
   /// In en, this message translates to:

@@ -40,7 +40,7 @@ class _MainScreenState extends State<MainScreen> {
                     height: 450,
                     width: 450,
                     child: Padding(
-                      padding: const EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -134,7 +134,7 @@ class _MainScreenState extends State<MainScreen> {
                       height: 150,
                       width: 150,
                       child: Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.max,

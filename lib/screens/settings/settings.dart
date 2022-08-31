@@ -156,6 +156,7 @@ class _SettingsState extends State<Settings> {
                                 caption: AppLocalizations.of(context)!.themeColorSettingDescription,
                                 widget: Material(
                                   child: InkWell(
+                                    borderRadius: const BorderRadius.all(Radius.circular(10)),
                                     onTap: () {
                                       Provider.of<ThemeProvider>(context, listen: false).toggleSeedColor();
                                       SettingsService().setSettings(currentSettings.copyWith(useSystemColor: !currentSettings.useSystemColor));
@@ -180,6 +181,17 @@ class _SettingsState extends State<Settings> {
                                   onChanged: (value) {
                                     SettingsService().setSettings(currentSettings.copyWith(darkMode: value));
                                     Provider.of<ThemeProvider>(context, listen: false).changeThemeMode(value ? ThemeMode.dark : ThemeMode.light);
+                                  },
+                                  activeColor: Theme.of(context).colorScheme.primary),
+                            ),
+                            SettingCard(
+                              title: AppLocalizations.of(context)!.useMaterialYouSettingTitle,
+                              caption: AppLocalizations.of(context)!.useMaterialYouSettingDescription,
+                              widget: Switch(
+                                  value: currentSettings.useMaterial3,
+                                  onChanged: (value) {
+                                    SettingsService().setSettings(currentSettings.copyWith(useMaterial3: value));
+                                    Provider.of<ThemeProvider>(context, listen: false).materialYou(value: value);
                                   },
                                   activeColor: Theme.of(context).colorScheme.primary),
                             ),
