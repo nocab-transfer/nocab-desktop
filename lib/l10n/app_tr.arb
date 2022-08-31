@@ -1,8 +1,8 @@
 {
     "appName": "NoCab Desktop",
-    "receiverTitle": "Receiver",
+    "receiverTitle": "Alıcı",
     "@receiverTitle": {},
-    "senderTitle": "Sender",
+    "senderTitle": "Gönder",
     "@senderTitle": {},
     "networkAdapterSettingsButtonTitle": "Network Adapter Settings",
     "@networkAdapterSettingsButtonTitle": {},
