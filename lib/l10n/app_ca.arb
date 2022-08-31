@@ -1,0 +1,158 @@
+{
+    "appName": "NoCab Desktop",
+    "receiverTitle": "Receiver",
+    "@receiverTitle": {},
+    "senderTitle": "Sender",
+    "@senderTitle": {},
+    "networkAdapterSettingsButtonTitle": "Network Adapter Settings",
+    "@networkAdapterSettingsButtonTitle": {},
+    "deviceShownAsLabelText": "Device Shown As\n{device_name}",
+    "@deviceShownAsLabelText": {
+        "placeholders": {
+            "device_name": {
+                "type": "String"
+            }
+        }
+    },
+    "orLabelText": "or",
+    "@orLabelText": {},
+    "scanQrCodeLabelText": "Scan QR Code",
+    "@scanQrCodeLabelText": {},
+    "settingsTitle": "Settings",
+    "@settingsTitle": {},
+    "filesLoadingLabelText": "Files being loaded\nPlease wait...",
+    "@filesLoadingLabelText": {},
+    "chooseFilesButtonTitle": "Choose Files",
+    "@chooseFilesButtonTitle": {},
+    "dropFilesHereLabelText": "or drop files here",
+    "@dropFilesHereLabelText": {},
+    "transfersTitle": "Transfers",
+    "@transfersTitle": {},
+    "openOutputFolderButtonTitle": "Open Output Folder",
+    "@openOutputFolderButtonTitle": {},
+    "noTransferLabelText": "There is nothing here except a great silence...",
+    "@noTransferLabelText": {},
+    "deviceNameSettingTitle": "Device Name",
+    "@deviceNameSettingTitle": {},
+    "deviceNameSettingDescription": "The name of the device that will be shown to other devices.",
+    "@deviceNameSettingDescription": {},
+    "randomNameGenerateButtonTooltip": "Generate Random Name",
+    "@randomNameGenerateButtonTooltip": {},
+    "themeColorSettingTitle": "Theme Color",
+    "@themeColorSettingTitle": {},
+    "themeColorSettingDescription": "Change the color of the application",
+    "@themeColorSettingDescription": {},
+    "darkModeSettingTitle": "Dark Mode",
+    "@darkModeSettingTitle": {},
+    "darkModeSettingDescription": "Open the dark mode",
+    "@darkModeSettingDescription": {},
+    "useMaterialYouSettingTitle": "Use Material You Design",
+    "@useMaterialYouSettingTitle": {},
+    "useMaterialYouSettingDescription": "Use Material You (Material 3) Design",
+    "@useMaterialYouSettingDescription": {},
+    "startOnBootSettingTitle": "Start On Boot",
+    "@startOnBootSettingTitle": {},
+    "startOnBootSettingDescription": "Start the application on boot",
+    "@startOnBootSettingDescription": {},
+    "autoUpdateSettingTitle": "Auto Update",
+    "@autoUpdateSettingTitle": {},
+    "autoUpdateSettingDescription": "Automatically update the application",
+    "@autoUpdateSettingDescription": {},
+    "languageSettingTitle": "Language",
+    "@languageSettingTitle": {},
+    "languageSettingDescription": "Change the language of the application",
+    "@languageSettingDescription": {},
+    "finderPortSettingTitle": "Finder Port",
+    "@finderPortSettingTitle": {},
+    "finderPortSettingDescription": "The port will be use to communicate with phone.\nIf you want to device not to be found on the network, set the value to 0.\nDefault 62193",
+    "@finderPortSettingDescription": {},
+    "finderPortSettingHint": "This will take effect next time you start the application",
+    "@finderPortSettingHint": {},
+    "advancedSettingsTitle": "Advanced Settings",
+    "@advancedSettingsTitle": {},
+    "advancedSettingsDescription": "These options are for advanced users only. If you don't know what you are doing, don't touch them.",
+    "filesTitle": "Files",
+    "@filesTitle": {},
+    "filesLengthLabelText": "{files_lenght, plural, one{1 file - {files_size}} other{{files_lenght} files - {files_size}}}",
+    "@filesLengthLabelText": {
+        "placeholders": {
+            "files_lenght": {
+                "type": "Number"
+            },
+            "files_size": {
+                "type": "String"
+            }
+        }
+    },
+    "showQrCodeButtonTitle": "Show QR",
+    "@showQrCodeButtonTitle": {},
+    "emptyDeviceListLabelText": "No devices found",
+    "@emptyDeviceListLabelText": {},
+    "searchingDeviceLabelText": "Searching for devices...",
+    "@searchingDeviceLabelText": {},
+    "fileAccepterTitle": "{device_name} wants to send you a {files_lenght, plural, one{file} other{{files_lenght} files}}",
+    "@fileAccepterTitle": {
+        "placeholders": {
+            "device_name": {
+                "type": "String"
+            },
+            "files_lenght": {
+                "type": "Number"
+            }
+        }
+    },
+    "fileAccepterInfoLabelText": "Ip: {ip} - Port: {port}",
+    "@fileAccepterInfoLabelText": {
+        "placeholders": {
+            "ip": {
+                "type": "String"
+            },
+            "port": {
+                "type": "String"
+            }
+        }
+    },
+    "acceptButtonTitle": "Accept",
+    "@acceptButtonTitle": {},
+    "rejectButtonTitle": "Reject",
+    "@rejectButtonTitle": {},
+    "transferStartedLabelText": "Transfer Started\nWaiting for device to connect...",
+    "@transferStartedLabelText": {},
+    "pendingLabelText": "Pending",
+    "@pendingLabelText": {},
+    "speedCounter": "{speed} MB/s",
+    "@speedCounter": {
+        "placeholders": {
+            "speed": {}
+        }
+    },
+    "progressCounter": "{progress}%",
+    "@progressCounter": {
+        "placeholders": {
+            "progress": {}
+        }
+    },
+    "showInFolderButtonTitle": "Show in Folder",
+    "@showInFolderButtonTitle": {},
+    "openButtonTitle": "Open",
+    "@openButtonTitle": {},
+    "removeButtonTooltip": "Remove",
+    "@removeButtonTooltip": {},
+    "senderCardSuccessLabelText": "{files_lenght, plural, one{1 file} other{{files_lenght} files}} sent successfully",
+    "@senderCardSuccessLabelText": {
+        "placeholders": {
+            "files_lenght": {
+                "type": "Number"
+            }
+        }
+    },
+    "receiverCardSuccessLabelText": "{files_lenght, plural, one{1 file} other{{files_lenght} files}} received successfully",
+    "@receiverCardSuccessLabelText": {
+        "placeholders": {
+            "files_lenght": {
+                "type": "Number"
+            }
+        }
+    },
+    "transferErrorLabelText": "Transfer Failed"
+}
