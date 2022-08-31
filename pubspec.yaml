@@ -1,0 +1,58 @@
+name: nocab_desktop
+description: A new Flutter project.
+
+publish_to: 'none' 
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.18.0-271.7.beta <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  qr_flutter: ^4.0.0
+  flutter_svg: ^1.1.4
+  device_info_plus: ^4.1.2
+  window_manager: ^0.2.6
+  window_size:
+    git:
+      url: https://github.com/google/flutter-desktop-embedding.git
+      path: plugins/window_size
+  provider: ^6.0.3
+  smooth_page_indicator: ^1.0.0+2
+  win32_registry: ^1.0.2
+  username_gen: ^1.0.4
+  file_picker: ^5.0.1
+  desktop_drop: ^0.3.3
+  animations: ^2.0.3
+  flutter_bloc: ^8.1.1
+  msix: ^3.6.3
+  platform_device_id: ^1.0.1
+  path_provider: ^2.0.11
+  flutter_localizations: 
+    sdk: flutter
+  intl: ^0.17.0
+  
+dev_dependencies:
+
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^1.0.0  
+
+msix_config:
+  display_name: NoCab Desktop
+  publisher_display_name: berkekbgz
+  msix_version: 1.0.0.0
+  capabilities: "internetClient"
+  logo_path: assets/logo/logo.png
+  languages: en-us
+
+
+flutter:
+  uses-material-design: true
+  generate: true
+  assets:
+  - assets/images/
+  - assets/contex_menu_icon/big.ico
