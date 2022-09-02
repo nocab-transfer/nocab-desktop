@@ -80,7 +80,6 @@ class Server {
         }
       }, onDone: () {
         activeRequest = false;
-        print("Active request false");
       });
     });
   }

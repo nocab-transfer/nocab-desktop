@@ -34,7 +34,7 @@ Future<void> main(List<String> args) async {
           useMaterial3: SettingsService().getSettings.useMaterial3,
         ),
       ),
-      ChangeNotifierProvider(create: (_) => LocaleProvider(const Locale('en'), AppLocalizations.supportedLocales)),
+      ChangeNotifierProvider(create: (_) => LocaleProvider(Locale(SettingsService().getSettings.language), AppLocalizations.supportedLocales)),
     ],
     child: const MyApp(),
   ));

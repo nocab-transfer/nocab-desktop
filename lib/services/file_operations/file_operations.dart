@@ -42,8 +42,8 @@ class FileOperations {
 
   static void openOutputFolder() {
     // create method checks if output folder exists and creates it if not, so no need to check output folder exists
-    Directory(File(Platform.resolvedExecutable).parent.path + "\\output").create(recursive: true).then((value) {
-      Process.run("start .", [], runInShell: true, workingDirectory: File(Platform.resolvedExecutable).parent.path + "\\output");
+    Directory("${File(Platform.resolvedExecutable).parent.path}\\output").create(recursive: true).then((value) {
+      Process.run("start .", [], runInShell: true, workingDirectory: "${File(Platform.resolvedExecutable).parent.path}\\output");
     });
   }
 

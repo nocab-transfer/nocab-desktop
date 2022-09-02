@@ -19,8 +19,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get networkAdapterSettingsButtonTitle => 'Network Adapter Settings';
 
   @override
-  String deviceShownAsLabelText(String device_name) {
-    return 'Device Shown As\n${device_name}';
+  String deviceShownAsLabelText(String deviceName) {
+    return 'Device Shown As\n${deviceName}';
   }
 
   @override
@@ -114,11 +114,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get filesTitle => 'Files';
 
   @override
-  String filesLengthLabelText(num files_lenght, String files_size) {
+  String filesLengthLabelText(num filesLenght, String filesSize) {
     return intl.Intl.pluralLogic(
-      files_lenght,
+      filesLenght,
       locale: localeName,
-      other: '$files_lenght files - $files_size',
+      other: '$filesLenght files - $filesSize',
     );
   }
 
@@ -132,11 +132,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get searchingDeviceLabelText => 'Searching for devices...';
 
   @override
-  String fileAccepterTitle(String device_name, num files_lenght) {
+  String fileAccepterTitle(String deviceName, num filesLenght) {
     return intl.Intl.pluralLogic(
-      files_lenght,
+      filesLenght,
       locale: localeName,
-      other: '$files_lenght files',
+      other: '$filesLenght files',
     );
   }
 
@@ -177,22 +177,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get removeButtonTooltip => 'Remove';
 
   @override
-  String senderCardSuccessLabelText(num files_lenght) {
+  String senderCardSuccessLabelText(num filesLenght) {
     final String pluralString = intl.Intl.pluralLogic(
-      files_lenght,
+      filesLenght,
       locale: localeName,
-      other: '$files_lenght files',
+      other: '$filesLenght files',
     );
 
     return '$pluralString sent successfully';
   }
 
   @override
-  String receiverCardSuccessLabelText(num files_lenght) {
+  String receiverCardSuccessLabelText(num filesLenght) {
     final String pluralString = intl.Intl.pluralLogic(
-      files_lenght,
+      filesLenght,
       locale: localeName,
-      other: '$files_lenght files',
+      other: '$filesLenght files',
     );
 
     return '$pluralString received successfully';

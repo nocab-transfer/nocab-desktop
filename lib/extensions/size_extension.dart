@@ -6,7 +6,7 @@ extension Format on int {
     const suffixes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
     const names = ["Byte", "Kilobyte", "Megabyte", "Gigabyte", "Terabyte", "Petabyte", "Exabyte", "Zettabyte", "Yottabyte"];
     var i = (log(this) / log(1024)).floor();
-    return ((this / pow(1024, i)).toStringAsFixed(2)) + ' ' + (useName ? names[i] : suffixes[i]);
+    return '${(this / pow(1024, i)).toStringAsFixed(2)} ${useName ? names[i] : suffixes[i]}';
   }
 }
 
@@ -16,6 +16,6 @@ extension FormatDouble on double {
     const suffixes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
     const names = ["Byte", "Kilobyte", "Megabyte", "Gigabyte", "Terabyte", "Petabyte", "Exabyte", "Zettabyte", "Yottabyte"];
     var i = (log(this) / log(1024)).floor();
-    return ((this / pow(1024, i)).toStringAsFixed(2)) + ' ' + (useName ? names[i] : suffixes[i]);
+    return '${(this / pow(1024, i)).toStringAsFixed(2)} ${useName ? names[i] : suffixes[i]}';
   }
 }

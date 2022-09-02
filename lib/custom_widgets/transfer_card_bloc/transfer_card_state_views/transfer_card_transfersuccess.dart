@@ -53,7 +53,7 @@ class TransferSuccessView extends StatelessWidget {
                     ],
                   ),
                   Tooltip(
-                    message: AppLocalizations.of(context)!.removeButtonTooltip,
+                    message: AppLocalizations.of(context).removeButtonTooltip,
                     child: Material(
                       child: InkWell(
                         onTap: onClose,
@@ -73,7 +73,7 @@ class TransferSuccessView extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(isDownload ? AppLocalizations.of(context)!.receiverCardSuccessLabelText(state.files.length) : AppLocalizations.of(context)!.senderCardSuccessLabelText(state.files.length), style: const TextStyle(fontSize: 12)),
+                  child: Text(isDownload ? AppLocalizations.of(context).receiverCardSuccessLabelText(state.files.length) : AppLocalizations.of(context).senderCardSuccessLabelText(state.files.length), style: const TextStyle(fontSize: 12)),
                 ),
               ),
               Padding(
@@ -124,7 +124,7 @@ class TransferSuccessView extends StatelessWidget {
             ? Material(
                 color: Colors.transparent,
                 child: Tooltip(
-                  message: AppLocalizations.of(context)!.showInFolderButtonTitle,
+                  message: AppLocalizations.of(context).showInFolderButtonTitle,
                   child: InkWell(
                     borderRadius: const BorderRadius.all(Radius.circular(10)),
                     onTap: () => FileOperations.showInFolder(file),
@@ -145,7 +145,7 @@ class TransferSuccessView extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
-                  Text(AppLocalizations.of(context)!.openButtonTitle),
+                  Text(AppLocalizations.of(context).openButtonTitle),
                   //Icon(Icons.arrow, size: 18),
                 ],
               ),

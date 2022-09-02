@@ -47,11 +47,11 @@ class _MainScreenState extends State<MainScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(AppLocalizations.of(context)!.receiverTitle, style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold)),
+                              Text(AppLocalizations.of(context).receiverTitle, style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold)),
                               TextButton.icon(
                                 onPressed: () => showDialog(context: context, builder: (context) => const NetworkAdapterSettings()),
                                 icon: const Icon(Icons.wifi_find_rounded),
-                                label: Text(AppLocalizations.of(context)!.networkAdapterSettingsButtonTitle),
+                                label: Text(AppLocalizations.of(context).networkAdapterSettingsButtonTitle),
                               ),
                             ],
                           ),
@@ -72,29 +72,27 @@ class _MainScreenState extends State<MainScreen> {
                                         return RichText(
                                           textAlign: TextAlign.center,
                                           text: TextSpan(
-                                            text: AppLocalizations.of(context)!.deviceShownAsLabelText("split").split("split")[0],
-                                            style: Theme.of(context).textTheme.headline6,
+                                            text: AppLocalizations.of(context).deviceShownAsLabelText("split").split("split")[0],
+                                            style: Theme.of(context).textTheme.titleLarge,
                                             children: [
-                                              TextSpan(text: snapshot.data?.deviceName.toUpperCase() ?? "", style: Theme.of(context).textTheme.headline6?.copyWith(color: Theme.of(context).colorScheme.primary)),
+                                              TextSpan(text: snapshot.data?.deviceName.toUpperCase() ?? "", style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold)),
                                               TextSpan(
-                                                text: AppLocalizations.of(context)!.deviceShownAsLabelText("split").split("split")[1], //FlutterI18n.translate(context, "main_screen.device_shown_as").split("{device_name}")[1],
-                                                style: Theme.of(context).textTheme.headline6,
+                                                text: AppLocalizations.of(context).deviceShownAsLabelText("split").split("split")[1],
+                                                style: Theme.of(context).textTheme.titleLarge,
                                               ),
                                             ],
                                           ),
-
-                                          //style: TextStyle(fontSize: 22, color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.w600),
                                         );
                                       },
                                     ),
                                   ],
                                 ),
                                 Text(
-                                  AppLocalizations.of(context)!.orLabelText,
+                                  AppLocalizations.of(context).orLabelText,
                                   style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
                                 ),
                                 Text(
-                                  AppLocalizations.of(context)!.scanQrCodeLabelText,
+                                  AppLocalizations.of(context).scanQrCodeLabelText,
                                   style: const TextStyle(fontSize: 20),
                                 ),
                                 Container(
@@ -139,7 +137,7 @@ class _MainScreenState extends State<MainScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            Text(AppLocalizations.of(context)!.settingsTitle, style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold)),
+                            Text(AppLocalizations.of(context).settingsTitle, style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold)),
                             const SizedBox(height: 8),
                             Center(
                               child: ElevatedButton(

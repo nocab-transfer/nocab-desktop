@@ -199,19 +199,19 @@ void _sender(List<dynamic> args) async {
 
   RawServerSocket server = await RawServerSocket.bind(InternetAddress.anyIPv4, port);
 
-  Future<void> _send(FileInfo fileInfo, RawSocket socket) async {
+  Future<void> send(FileInfo fileInfo, RawSocket socket) async {
     try {
-      final Uint8List _buffer = Uint8List(1024 * 16);
-      RandomAccessFile _file = await File(fileInfo.path!).open();
+      final Uint8List buffer = Uint8List(1024 * 16);
+      RandomAccessFile file = await File(fileInfo.path!).open();
 
-      int _bytesWritten = 0;
+      int bytesWritten = 0;
       int totalWrite = 0;
 
       int readBytesCountFromFile;
-      while ((readBytesCountFromFile = _file.readIntoSync(_buffer)) > 0) {
-        _bytesWritten = socket.write(_buffer.getRange(0, readBytesCountFromFile).toList());
-        totalWrite += _bytesWritten;
-        _file.setPositionSync(totalWrite);
+      while ((readBytesCountFromFile = file.readIntoSync(buffer)) > 0) {
+        bytesWritten = socket.write(buffer.getRange(0, readBytesCountFromFile).toList());
+        totalWrite += bytesWritten;
+        file.setPositionSync(totalWrite);
 
         sendport.send(ConnectionAction(
           ConnectionActionType.event,
@@ -237,7 +237,7 @@ void _sender(List<dynamic> args) async {
           String data = utf8.decode(socket.read()!);
           FileInfo file = files.firstWhere((element) => element.name == data);
           sendport.send(ConnectionAction(ConnectionActionType.start, currentFile: file));
-          _send(file, socket);
+          send(file, socket);
           break;
         case RawSocketEvent.readClosed:
           print("readClosed");

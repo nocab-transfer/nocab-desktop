@@ -181,11 +181,11 @@ void _receiver(List<dynamic> args) async {
 
     int totalRead = 0;
 
-    File _currentFile = File(files.first.path! + ".nocabtmp");
-    if (_currentFile.existsSync()) _currentFile.deleteSync();
-    await _currentFile.create(recursive: true);
+    File currentFile = File("${files.first.path!}.nocabtmp");
+    if (currentFile.existsSync()) currentFile.deleteSync();
+    await currentFile.create(recursive: true);
 
-    IOSink _currentSink = _currentFile.openWrite(mode: FileMode.append);
+    IOSink currentSink = currentFile.openWrite(mode: FileMode.append);
 
     socket.write(utf8.encode(files.first.name));
 
@@ -198,7 +198,7 @@ void _receiver(List<dynamic> args) async {
           buffer = socket.read();
           if (buffer != null) {
             totalRead += buffer!.length;
-            _currentSink.add(buffer!);
+            currentSink.add(buffer!);
             sendport.send(ConnectionAction(
               ConnectionActionType.event,
               currentFile: files.first,
@@ -211,11 +211,11 @@ void _receiver(List<dynamic> args) async {
 
           files.removeAt(0);
           if (files.isNotEmpty) {
-            _currentSink.close().then((value) => FileOperations.tmpToFile(_currentFile));
+            currentSink.close().then((value) => FileOperations.tmpToFile(currentFile));
             receiveFile();
           } else {
-            _currentSink.close().then((value) {
-              return FileOperations.tmpToFile(_currentFile).then((value) => sendport.send(ConnectionAction(ConnectionActionType.end)));
+            currentSink.close().then((value) {
+              return FileOperations.tmpToFile(currentFile).then((value) => sendport.send(ConnectionAction(ConnectionActionType.end)));
             });
           }
           break;

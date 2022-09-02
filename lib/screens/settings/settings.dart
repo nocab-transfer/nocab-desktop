@@ -65,7 +65,7 @@ class _SettingsState extends State<Settings> {
               ),
               child: Stack(
                 children: [
-                  Center(child: Text(AppLocalizations.of(context)!.settingsTitle, style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 24, fontWeight: FontWeight.w400))),
+                  Center(child: Text(AppLocalizations.of(context).settingsTitle, style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 24, fontWeight: FontWeight.w400))),
                   Align(
                     alignment: Alignment.centerRight,
                     child: Padding(
@@ -106,8 +106,8 @@ class _SettingsState extends State<Settings> {
                         child: Column(
                           children: [
                             SettingCard(
-                              title: AppLocalizations.of(context)!.deviceNameSettingTitle,
-                              caption: AppLocalizations.of(context)!.deviceNameSettingDescription,
+                              title: AppLocalizations.of(context).deviceNameSettingTitle,
+                              caption: AppLocalizations.of(context).deviceNameSettingDescription,
                               widget: SizedBox(
                                 width: 200,
                                 height: 50,
@@ -133,7 +133,7 @@ class _SettingsState extends State<Settings> {
                                     Material(
                                       child: Tooltip(
                                         triggerMode: TooltipTriggerMode.longPress,
-                                        message: AppLocalizations.of(context)!.randomNameGenerateButtonTooltip,
+                                        message: AppLocalizations.of(context).randomNameGenerateButtonTooltip,
                                         child: InkWell(
                                           borderRadius: const BorderRadius.all(Radius.circular(10)),
                                           onTap: () {
@@ -154,8 +154,8 @@ class _SettingsState extends State<Settings> {
                               ),
                             ),
                             SettingCard(
-                                title: AppLocalizations.of(context)!.themeColorSettingTitle,
-                                caption: AppLocalizations.of(context)!.themeColorSettingDescription,
+                                title: AppLocalizations.of(context).themeColorSettingTitle,
+                                caption: AppLocalizations.of(context).themeColorSettingDescription,
                                 widget: Material(
                                   child: InkWell(
                                     borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -176,8 +176,8 @@ class _SettingsState extends State<Settings> {
                                   ),
                                 )),
                             SettingCard(
-                              title: AppLocalizations.of(context)!.darkModeSettingTitle,
-                              caption: AppLocalizations.of(context)!.darkModeSettingDescription,
+                              title: AppLocalizations.of(context).darkModeSettingTitle,
+                              caption: AppLocalizations.of(context).darkModeSettingDescription,
                               widget: Switch(
                                   value: currentSettings.darkMode,
                                   onChanged: (value) {
@@ -187,8 +187,8 @@ class _SettingsState extends State<Settings> {
                                   activeColor: Theme.of(context).colorScheme.primary),
                             ),
                             SettingCard(
-                              title: AppLocalizations.of(context)!.useMaterialYouSettingTitle,
-                              caption: AppLocalizations.of(context)!.useMaterialYouSettingDescription,
+                              title: AppLocalizations.of(context).useMaterialYouSettingTitle,
+                              caption: AppLocalizations.of(context).useMaterialYouSettingDescription,
                               widget: Switch(
                                   value: currentSettings.useMaterial3,
                                   onChanged: (value) {
@@ -198,8 +198,8 @@ class _SettingsState extends State<Settings> {
                                   activeColor: Theme.of(context).colorScheme.primary),
                             ),
                             SettingCard(
-                              title: AppLocalizations.of(context)!.startOnBootSettingTitle,
-                              caption: AppLocalizations.of(context)!.startOnBootSettingDescription,
+                              title: AppLocalizations.of(context).startOnBootSettingTitle,
+                              caption: AppLocalizations.of(context).startOnBootSettingDescription,
                               widget: Switch(
                                   value: currentSettings.startOnBoot,
                                   onChanged: (value) {
@@ -208,8 +208,8 @@ class _SettingsState extends State<Settings> {
                                   activeColor: Theme.of(context).colorScheme.primary),
                             ),
                             SettingCard(
-                              title: AppLocalizations.of(context)!.autoUpdateSettingTitle,
-                              caption: AppLocalizations.of(context)!.autoUpdateSettingDescription,
+                              title: AppLocalizations.of(context).autoUpdateSettingTitle,
+                              caption: AppLocalizations.of(context).autoUpdateSettingDescription,
                               widget: Switch(
                                   value: currentSettings.autoUpdate,
                                   onChanged: (value) {
@@ -218,8 +218,8 @@ class _SettingsState extends State<Settings> {
                                   activeColor: Theme.of(context).colorScheme.primary),
                             ),
                             SettingCard(
-                              title: AppLocalizations.of(context)!.languageSettingTitle,
-                              caption: AppLocalizations.of(context)!.languageSettingDescription,
+                              title: AppLocalizations.of(context).languageSettingTitle,
+                              caption: AppLocalizations.of(context).languageSettingDescription,
                               widget: SizedBox(
                                 width: 150,
                                 height: 60,
@@ -233,8 +233,8 @@ class _SettingsState extends State<Settings> {
                                   }).toList(),
                                   onChanged: (value) {
                                     if (value != null) {
-                                      Provider.of<LocaleProvider>(context).setLocale(Locale(value));
-                                      //FlutterI18n.refresh(Server().navigatorKey.currentContext!, Locale(value));
+                                      Provider.of<LocaleProvider>(context, listen: false).setLocale(Locale(value));
+                                      SettingsService().setSettings(currentSettings.copyWith(language: value));
                                     }
                                   },
                                   decoration: const InputDecoration(
@@ -245,13 +245,13 @@ class _SettingsState extends State<Settings> {
                               ),
                             ),
                             const Divider(),
-                            Text(AppLocalizations.of(context)!.advancedSettingsTitle, style: Theme.of(context).textTheme.titleMedium),
-                            Text(AppLocalizations.of(context)!.advancedSettingsDescription, textAlign: TextAlign.center),
+                            Text(AppLocalizations.of(context).advancedSettingsTitle, style: Theme.of(context).textTheme.titleMedium),
+                            Text(AppLocalizations.of(context).advancedSettingsDescription, textAlign: TextAlign.center),
                             const SizedBox(height: 16),
                             SettingCard(
-                              title: AppLocalizations.of(context)!.finderPortSettingTitle,
-                              caption: AppLocalizations.of(context)!.finderPortSettingDescription,
-                              helpText: AppLocalizations.of(context)!.finderPortSettingHint,
+                              title: AppLocalizations.of(context).finderPortSettingTitle,
+                              caption: AppLocalizations.of(context).finderPortSettingDescription,
+                              helpText: AppLocalizations.of(context).finderPortSettingHint,
                               widget: SizedBox(
                                 width: 100,
                                 height: 50,

@@ -6,10 +6,10 @@
     "@senderTitle": {},
     "networkAdapterSettingsButtonTitle": "Network Adapter Settings",
     "@networkAdapterSettingsButtonTitle": {},
-    "deviceShownAsLabelText": "Device Shown As\n{device_name}",
+    "deviceShownAsLabelText": "Device Shown As\n{deviceName}",
     "@deviceShownAsLabelText": {
         "placeholders": {
-            "device_name": {
+            "deviceName": {
                 "type": "String"
             }
         }
@@ -73,13 +73,11 @@
     "advancedSettingsDescription": "These options are for advanced users only. If you don't know what you are doing, don't touch them.",
     "filesTitle": "Files",
     "@filesTitle": {},
-    "filesLengthLabelText": "{files_lenght, plural, one{1 file - {files_size}} other{{files_lenght} files - {files_size}}}",
+    "filesLengthLabelText": "{filesLenght, plural, one{1 file - {filesSize}} other{{filesLenght} files - {filesSize}}}",
     "@filesLengthLabelText": {
         "placeholders": {
-            "files_lenght": {
-                "type": "Number"
-            },
-            "files_size": {
+            "filesLenght": {},
+            "filesSize": {
                 "type": "String"
             }
         }
@@ -90,13 +88,13 @@
     "@emptyDeviceListLabelText": {},
     "searchingDeviceLabelText": "Searching for devices...",
     "@searchingDeviceLabelText": {},
-    "fileAccepterTitle": "{device_name} wants to send you a {files_lenght, plural, one{file} other{{files_lenght} files}}",
+    "fileAccepterTitle": "{deviceName} wants to send you a {filesLenght, plural, one{file} other{{filesLenght} files}}",
     "@fileAccepterTitle": {
         "placeholders": {
-            "device_name": {
+            "deviceName": {
                 "type": "String"
             },
-            "files_lenght": {
+            "filesLenght": {
                 "type": "Number"
             }
         }
@@ -138,18 +136,18 @@
     "@openButtonTitle": {},
     "removeButtonTooltip": "Remove",
     "@removeButtonTooltip": {},
-    "senderCardSuccessLabelText": "{files_lenght, plural, one{1 file} other{{files_lenght} files}} sent successfully",
+    "senderCardSuccessLabelText": "{filesLenght, plural, one{1 file} other{{filesLenght} files}} sent successfully",
     "@senderCardSuccessLabelText": {
         "placeholders": {
-            "files_lenght": {
+            "filesLenght": {
                 "type": "Number"
             }
         }
     },
-    "receiverCardSuccessLabelText": "{files_lenght, plural, one{1 file} other{{files_lenght} files}} received successfully",
+    "receiverCardSuccessLabelText": "{filesLenght, plural, one{1 file} other{{filesLenght} files}} received successfully",
     "@receiverCardSuccessLabelText": {
         "placeholders": {
-            "files_lenght": {
+            "filesLenght": {
                 "type": "Number"
             }
         }

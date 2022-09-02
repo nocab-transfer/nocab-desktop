@@ -48,7 +48,7 @@ class TransferFailedView extends StatelessWidget {
                     ],
                   ),
                   Tooltip(
-                    message: AppLocalizations.of(context)!.removeButtonTooltip,
+                    message: AppLocalizations.of(context).removeButtonTooltip,
                     child: Material(
                       child: InkWell(
                         onTap: onClose,
@@ -67,7 +67,7 @@ class TransferFailedView extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(AppLocalizations.of(context)!.transferErrorLabelText, style: const TextStyle(fontSize: 12)),
+                  child: Text(AppLocalizations.of(context).transferErrorLabelText, style: const TextStyle(fontSize: 12)),
                 ),
               ),
             ],

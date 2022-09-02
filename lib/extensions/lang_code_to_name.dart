@@ -3,9 +3,10 @@ extension LangCodeToName on String {
     switch (this) {
       case 'en':
         return "English";
+      case 'tr':
+        return "Türkçe";
       default:
-        // ignore: recursive_getters
-        return langName;
+        return this;
     }
   }
 }

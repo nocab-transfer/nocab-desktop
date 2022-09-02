@@ -69,7 +69,7 @@ class TransferStartedView extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(AppLocalizations.of(context)!.transferStartedLabelText, style: const TextStyle(fontSize: 12)),
+                  child: Text(AppLocalizations.of(context).transferStartedLabelText, style: const TextStyle(fontSize: 12)),
                 ),
               ),
             ],

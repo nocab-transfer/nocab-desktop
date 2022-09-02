@@ -64,7 +64,7 @@ class _SendStarterDialogState extends State<SendStarterDialog> {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(left: 12.0),
-                                child: Text("Files", style: Theme.of(context).textTheme.headline5?.copyWith(fontWeight: FontWeight.bold)),
+                                child: Text("Files", style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold)),
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(right: 12.0),
@@ -99,7 +99,7 @@ class _SendStarterDialogState extends State<SendStarterDialog> {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(left: 12.0),
-                                child: Text("Devices", style: Theme.of(context).textTheme.headline5?.copyWith(fontWeight: FontWeight.bold)),
+                                child: Text("Devices", style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold)),
                               ),
                             ],
                           ),

@@ -27,7 +27,7 @@ class SettingsService {
   }
 
   Future<void> initialize() async {
-    File settingsFile = File(File(Platform.resolvedExecutable).parent.path + "\\settings.json");
+    File settingsFile = File("${File(Platform.resolvedExecutable).parent.path}${Platform.pathSeparator}settings.json");
     if (!settingsFile.existsSync()) {
       await settingsFile.create();
       _settings = await _createNewSettings();
@@ -46,7 +46,7 @@ class SettingsService {
       finderPort: 62193,
       startOnBoot: false,
       autoUpdate: false,
-      language: "en",
+      language: Platform.localeName.split('_')[0],
       seedColor: RegistryService.getColor(),
       useSystemColor: true,
       networkInterfaceName: (await Network.getCurrentNetworkInterface()).name,
@@ -56,7 +56,7 @@ class SettingsService {
   Future<void> setSettings(SettingsModel settings) async {
     _settings = settings;
     _changeController.add(settings);
-    File settingsFile = File(File(Platform.resolvedExecutable).parent.path + "\\settings.json");
+    File settingsFile = File("${File(Platform.resolvedExecutable).parent.path}\\settings.json");
     await settingsFile.writeAsString(json.encode(_settings?.toJson()));
   }
 }

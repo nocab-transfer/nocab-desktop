@@ -61,10 +61,10 @@ class _DeviceFinderState extends State<DeviceFinder> {
                 child: CircularProgressIndicator(),
               ),
             ),
-            Text(AppLocalizations.of(context)!.emptyDeviceListLabelText, style: Theme.of(context).textTheme.headline6)
+            Text(AppLocalizations.of(context).emptyDeviceListLabelText, style: Theme.of(context).textTheme.titleLarge)
           ],
         ),
-        Text(AppLocalizations.of(context)!.searchingDeviceLabelText, style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontStyle: FontStyle.italic, letterSpacing: 1)),
+        Text(AppLocalizations.of(context).searchingDeviceLabelText, style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontStyle: FontStyle.italic, letterSpacing: 1)),
       ],
     );
   }

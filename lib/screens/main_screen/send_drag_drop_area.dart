@@ -64,7 +64,7 @@ class _SendDragDropState extends State<SendDragDrop> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      AppLocalizations.of(context)!.filesLoadingLabelText,
+                      AppLocalizations.of(context).filesLoadingLabelText,
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -83,7 +83,7 @@ class _SendDragDropState extends State<SendDragDrop> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Text(AppLocalizations.of(context)!.senderTitle, style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold)),
+                    Text(AppLocalizations.of(context).senderTitle, style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold)),
                     const SizedBox(height: 8),
                     Center(
                       child: ElevatedButton(
@@ -99,13 +99,13 @@ class _SendDragDropState extends State<SendDragDrop> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             const Icon(Icons.upload_file_rounded),
-                            Text(AppLocalizations.of(context)!.chooseFilesButtonTitle),
+                            Text(AppLocalizations.of(context).chooseFilesButtonTitle),
                           ],
                         ),
                       ),
                     ),
                     const SizedBox(height: 8),
-                    Center(child: Text(AppLocalizations.of(context)!.dropFilesHereLabelText)),
+                    Center(child: Text(AppLocalizations.of(context).dropFilesHereLabelText)),
                   ],
                 ),
               ),

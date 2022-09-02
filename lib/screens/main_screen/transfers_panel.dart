@@ -41,11 +41,11 @@ class _TransfersState extends State<Transfers> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(AppLocalizations.of(context)!.transfersTitle, style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold)),
+                Text(AppLocalizations.of(context).transfersTitle, style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold)),
                 TextButton.icon(
                   onPressed: FileOperations.openOutputFolder,
                   icon: const Icon(Icons.folder_outlined),
-                  label: Text(AppLocalizations.of(context)!.openOutputFolderButtonTitle),
+                  label: Text(AppLocalizations.of(context).openOutputFolderButtonTitle),
                 ),
               ],
             ),
@@ -92,7 +92,7 @@ class _TransfersState extends State<Transfers> {
           ),
           const SizedBox(height: 30),
           Text(
-            AppLocalizations.of(context)!.noTransferLabelText,
+            AppLocalizations.of(context).noTransferLabelText,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.primary),
             textAlign: TextAlign.center,
           ),

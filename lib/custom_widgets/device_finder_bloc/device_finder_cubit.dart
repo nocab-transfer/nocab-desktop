@@ -24,7 +24,7 @@ class DeviceFinderCubit extends Cubit<DeviceFinderState> {
       List<DeviceInfo> devices = [];
       for (int i = 1; i < 255; i++) {
         try {
-          Socket socket = await Socket.connect(baseIp + '.' + i.toString(), 62192, timeout: const Duration(milliseconds: 15));
+          Socket socket = await Socket.connect('$baseIp.$i', 62192, timeout: const Duration(milliseconds: 15));
           Uint8List data = await socket.first.timeout(const Duration(seconds: 5));
           if (data.isNotEmpty && socket.remoteAddress.address != currentInterface.addresses.first.address) {
             devices.add(DeviceInfo.fromJson(json.decode(utf8.decode(base64.decode(utf8.decode(data))))));

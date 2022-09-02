@@ -19,8 +19,8 @@ class AppLocalizationsTr extends AppLocalizations {
   String get networkAdapterSettingsButtonTitle => 'Ağ bağdaştırıcı ayarları';
 
   @override
-  String deviceShownAsLabelText(String device_name) {
-    return 'Cihaz ağda $device_name olarak gözüküyor';
+  String deviceShownAsLabelText(String deviceName) {
+    return 'Cihaz ağda $deviceName olarak gözüküyor';
   }
 
   @override
@@ -114,11 +114,11 @@ class AppLocalizationsTr extends AppLocalizations {
   String get filesTitle => 'Dosyalar';
 
   @override
-  String filesLengthLabelText(num files_lenght, String files_size) {
+  String filesLengthLabelText(num filesLenght, String filesSize) {
     return intl.Intl.pluralLogic(
-      files_lenght,
+      filesLenght,
       locale: localeName,
-      other: '$files_lenght dosya - $files_size',
+      other: '$filesLenght dosya - $filesSize',
     );
   }
 
@@ -132,11 +132,11 @@ class AppLocalizationsTr extends AppLocalizations {
   String get searchingDeviceLabelText => 'Cihaz aranıyor...';
 
   @override
-  String fileAccepterTitle(String device_name, num files_lenght) {
+  String fileAccepterTitle(String deviceName, num filesLenght) {
     final String pluralString = intl.Intl.pluralLogic(
-      files_lenght,
+      filesLenght,
       locale: localeName,
-      other: '$files_lenght dosya',
+      other: '$filesLenght dosya',
     );
 
     return '$pluralString göndermek istiyor';
@@ -179,22 +179,22 @@ class AppLocalizationsTr extends AppLocalizations {
   String get removeButtonTooltip => 'Kaldır';
 
   @override
-  String senderCardSuccessLabelText(num files_lenght) {
+  String senderCardSuccessLabelText(num filesLenght) {
     final String pluralString = intl.Intl.pluralLogic(
-      files_lenght,
+      filesLenght,
       locale: localeName,
-      other: '$files_lenght dosya',
+      other: '$filesLenght dosya',
     );
 
     return '$pluralString başarıyla gönderildi';
   }
 
   @override
-  String receiverCardSuccessLabelText(num files_lenght) {
+  String receiverCardSuccessLabelText(num filesLenght) {
     final String pluralString = intl.Intl.pluralLogic(
-      files_lenght,
+      filesLenght,
       locale: localeName,
-      other: '$files_lenght dosya',
+      other: '$filesLenght dosya',
     );
 
     return '$pluralString başarıyla alındı';

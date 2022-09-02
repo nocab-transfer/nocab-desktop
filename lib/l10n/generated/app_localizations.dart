@@ -64,8 +64,8 @@ abstract class AppLocalizations {
 
   final String localeName;
 
-  static AppLocalizations? of(BuildContext context) {
-    return Localizations.of<AppLocalizations>(context, AppLocalizations);
+  static AppLocalizations of(BuildContext context) {
+    return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
   }
 
   static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
@@ -120,8 +120,8 @@ abstract class AppLocalizations {
   /// No description provided for @deviceShownAsLabelText.
   ///
   /// In en, this message translates to:
-  /// **'Device Shown As\n{device_name}'**
-  String deviceShownAsLabelText(String device_name);
+  /// **'Device Shown As\n{deviceName}'**
+  String deviceShownAsLabelText(String deviceName);
 
   /// No description provided for @orLabelText.
   ///
@@ -306,8 +306,8 @@ abstract class AppLocalizations {
   /// No description provided for @filesLengthLabelText.
   ///
   /// In en, this message translates to:
-  /// **'{files_lenght, plural, one{1 file - {files_size}} other{{files_lenght} files - {files_size}}}'**
-  String filesLengthLabelText(num files_lenght, String files_size);
+  /// **'{filesLenght, plural, one{1 file - {filesSize}} other{{filesLenght} files - {filesSize}}}'**
+  String filesLengthLabelText(num filesLenght, String filesSize);
 
   /// No description provided for @showQrCodeButtonTitle.
   ///
@@ -330,8 +330,8 @@ abstract class AppLocalizations {
   /// No description provided for @fileAccepterTitle.
   ///
   /// In en, this message translates to:
-  /// **'{device_name} wants to send you a {files_lenght, plural, one{file} other{{files_lenght} files}}'**
-  String fileAccepterTitle(String device_name, num files_lenght);
+  /// **'{deviceName} wants to send you a {filesLenght, plural, one{file} other{{filesLenght} files}}'**
+  String fileAccepterTitle(String deviceName, num filesLenght);
 
   /// No description provided for @fileAccepterInfoLabelText.
   ///
@@ -396,14 +396,14 @@ abstract class AppLocalizations {
   /// No description provided for @senderCardSuccessLabelText.
   ///
   /// In en, this message translates to:
-  /// **'{files_lenght, plural, one{1 file} other{{files_lenght} files}} sent successfully'**
-  String senderCardSuccessLabelText(num files_lenght);
+  /// **'{filesLenght, plural, one{1 file} other{{filesLenght} files}} sent successfully'**
+  String senderCardSuccessLabelText(num filesLenght);
 
   /// No description provided for @receiverCardSuccessLabelText.
   ///
   /// In en, this message translates to:
-  /// **'{files_lenght, plural, one{1 file} other{{files_lenght} files}} received successfully'**
-  String receiverCardSuccessLabelText(num files_lenght);
+  /// **'{filesLenght, plural, one{1 file} other{{filesLenght} files}} received successfully'**
+  String receiverCardSuccessLabelText(num filesLenght);
 
   /// No description provided for @transferErrorLabelText.
   ///

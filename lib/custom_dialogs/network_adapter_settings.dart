@@ -33,7 +33,7 @@ class NetworkAdapterSettings extends StatelessWidget {
                 children: [
                   SizedBox(
                     height: 34,
-                    child: Text(AppLocalizations.of(context)!.networkAdapterSettingsButtonTitle, style: Theme.of(context).textTheme.headline6),
+                    child: Text(AppLocalizations.of(context).networkAdapterSettingsButtonTitle, style: Theme.of(context).textTheme.titleLarge),
                   ),
                   Material(
                     child: InkWell(
@@ -110,7 +110,7 @@ class NetworkAdapterSettings extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(interface.name, style: Theme.of(context).textTheme.headline6),
+                      Text(interface.name, style: Theme.of(context).textTheme.titleLarge),
                       Text(interface.addresses.first.address, style: Theme.of(context).textTheme.bodySmall),
                     ],
                   ),

@@ -104,7 +104,7 @@ class TransferringView extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
-                  Text(AppLocalizations.of(context)!.pendingLabelText),
+                  Text(AppLocalizations.of(context).pendingLabelText),
                   const Icon(Icons.pending_actions_rounded),
                 ],
               ),
@@ -138,8 +138,8 @@ class TransferringView extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text(AppLocalizations.of(context)!.speedCounter(state.speed.toStringAsFixed(2)), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
-                Text(AppLocalizations.of(context)!.progressCounter(state.progress.toStringAsFixed(2)), style: const TextStyle(fontSize: 14)),
+                Text(AppLocalizations.of(context).speedCounter(state.speed.toStringAsFixed(2)), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                Text(AppLocalizations.of(context).progressCounter(state.progress.toStringAsFixed(2)), style: const TextStyle(fontSize: 14)),
               ],
             )
           ],
@@ -182,7 +182,7 @@ class TransferringView extends StatelessWidget {
                     ? Material(
                         color: Colors.transparent,
                         child: Tooltip(
-                          message: AppLocalizations.of(context)!.showInFolderButtonTitle,
+                          message: AppLocalizations.of(context).showInFolderButtonTitle,
                           child: InkWell(
                             borderRadius: const BorderRadius.all(Radius.circular(10)),
                             onTap: () => FileOperations.showInFolder(file),
@@ -205,7 +205,7 @@ class TransferringView extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         children: [
-                          Text(AppLocalizations.of(context)!.openButtonTitle),
+                          Text(AppLocalizations.of(context).openButtonTitle),
                           const Icon(Icons.open_in_new_rounded),
                         ],
                       ),
