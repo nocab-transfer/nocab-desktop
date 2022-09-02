@@ -4,7 +4,7 @@ class Network {
   static Future<NetworkInterface> getCurrentNetworkInterface() async {
     // Force to select network interfaces to Wifi or Ethernet
     //                                 ↓ this stands for blocking vEthernet
-    var interfaceNameRegex = RegExp(r'(v\b|\b)(ethernet?.?\w+)|(wi?.?fi?)', caseSensitive: false);
+    var interfaceNameRegex = RegExp(r'(v\b|\b)(ethernet?.?\w+)|(wi.?fi)', caseSensitive: false);
 
     // if it is not found check this names matching
     List<String> defaultInterfaceNames = [
