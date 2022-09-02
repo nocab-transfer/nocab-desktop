@@ -2,9 +2,12 @@ import 'dart:io';
 
 class Network {
   static Future<NetworkInterface> getCurrentNetworkInterface() async {
+    // Force to select network interfaces to Wifi or Ethernet
+    //                                 ↓ this stands for blocking vEthernet
+    var interfaceNameRegex = RegExp(r'(v\b|\b)(ethernet?.?\w+)|(wi?.?fi?)', caseSensitive: false);
+
+    // if it is not found check this names matching
     List<String> defaultInterfaceNames = [
-      'Wi-Fi',
-      'Ethernet',
       'Local Area Connection',
       'Bridge',
       'en',
@@ -14,9 +17,14 @@ class Network {
       'wlan0',
     ];
 
-    List<NetworkInterface> interfaces = await NetworkInterface.list();
-
-    return interfaces.firstWhere((element) => defaultInterfaceNames.contains(element.name), orElse: () => interfaces.first);
+    var networkInterfaces = await NetworkInterface.list();
+    return networkInterfaces.firstWhere(
+      (element) => interfaceNameRegex.hasMatch(element.name),
+      orElse: () => networkInterfaces.firstWhere(
+        (element) => defaultInterfaceNames.contains(element.name),
+        orElse: () => networkInterfaces.first, // return first if not any matched :(
+      ),
+    );
   }
 
   static Future<int> getUnusedPort() {
