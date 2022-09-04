@@ -146,6 +146,7 @@ class AppLocalizationsEn extends AppLocalizations {
     return intl.Intl.pluralLogic(
       filesLenght,
       locale: localeName,
+      one: '$deviceName wants to send you a file',
       other: '$deviceName wants to send you $filesLenght files',
     );
   }
@@ -191,6 +192,7 @@ class AppLocalizationsEn extends AppLocalizations {
     final String pluralString = intl.Intl.pluralLogic(
       filesLenght,
       locale: localeName,
+      one: '1 file',
       other: '$filesLenght files',
     );
 
@@ -202,6 +204,7 @@ class AppLocalizationsEn extends AppLocalizations {
     final String pluralString = intl.Intl.pluralLogic(
       filesLenght,
       locale: localeName,
+      one: '1 file',
       other: '$filesLenght files',
     );
 

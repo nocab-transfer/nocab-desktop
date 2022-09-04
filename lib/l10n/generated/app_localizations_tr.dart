@@ -124,6 +124,7 @@ class AppLocalizationsTr extends AppLocalizations {
     return intl.Intl.pluralLogic(
       filesLenght,
       locale: localeName,
+      one: '1 dosya - $filesSize',
       other: '$filesLenght dosya - $filesSize',
     );
   }
@@ -145,6 +146,7 @@ class AppLocalizationsTr extends AppLocalizations {
     final String pluralString = intl.Intl.pluralLogic(
       filesLenght,
       locale: localeName,
+      one: '$deviceName size bir dosya',
       other: '$deviceName size $filesLenght dosya',
     );
 
@@ -192,6 +194,7 @@ class AppLocalizationsTr extends AppLocalizations {
     final String pluralString = intl.Intl.pluralLogic(
       filesLenght,
       locale: localeName,
+      one: '1 dosya',
       other: '$filesLenght dosya',
     );
 
@@ -203,6 +206,7 @@ class AppLocalizationsTr extends AppLocalizations {
     final String pluralString = intl.Intl.pluralLogic(
       filesLenght,
       locale: localeName,
+      one: '1 dosya',
       other: '$filesLenght dosya',
     );
 

@@ -94,7 +94,7 @@
     "@emptyDeviceListLabelText": {},
     "searchingDeviceLabelText": "Searching for devices...",
     "@searchingDeviceLabelText": {},
-    "fileAccepterTitle": "{filesLenght, plural, one{{deviceName} wants to send you a file} other{{deviceName} wants to send you {filesLenght} files}}",
+    "fileAccepterTitle": "{filesLenght, plural, =1{{deviceName} wants to send you a file} other{{deviceName} wants to send you {filesLenght} files}}",
     "@fileAccepterTitle": {
         "placeholders": {
             "deviceName": {
@@ -142,7 +142,7 @@
     "@openButtonTitle": {},
     "removeButtonTooltip": "Remove",
     "@removeButtonTooltip": {},
-    "senderCardSuccessLabelText": "{filesLenght, plural, one{1 file} other{{filesLenght} files}} sent successfully",
+    "senderCardSuccessLabelText": "{filesLenght, plural, =1{1 file} other{{filesLenght} files}} sent successfully",
     "@senderCardSuccessLabelText": {
         "placeholders": {
             "filesLenght": {
@@ -150,7 +150,7 @@
             }
         }
     },
-    "receiverCardSuccessLabelText": "{filesLenght, plural, one{1 file} other{{filesLenght} files}} received successfully",
+    "receiverCardSuccessLabelText": "{filesLenght, plural, =1{1 file} other{{filesLenght} files}} received successfully",
     "@receiverCardSuccessLabelText": {
         "placeholders": {
             "filesLenght": {

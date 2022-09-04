@@ -348,7 +348,7 @@ abstract class AppLocalizations {
   /// No description provided for @fileAccepterTitle.
   ///
   /// In en, this message translates to:
-  /// **'{filesLenght, plural, one{{deviceName} wants to send you a file} other{{deviceName} wants to send you {filesLenght} files}}'**
+  /// **'{filesLenght, plural, =1{{deviceName} wants to send you a file} other{{deviceName} wants to send you {filesLenght} files}}'**
   String fileAccepterTitle(String deviceName, num filesLenght);
 
   /// No description provided for @fileAccepterInfoLabelText.
@@ -414,13 +414,13 @@ abstract class AppLocalizations {
   /// No description provided for @senderCardSuccessLabelText.
   ///
   /// In en, this message translates to:
-  /// **'{filesLenght, plural, one{1 file} other{{filesLenght} files}} sent successfully'**
+  /// **'{filesLenght, plural, =1{1 file} other{{filesLenght} files}} sent successfully'**
   String senderCardSuccessLabelText(num filesLenght);
 
   /// No description provided for @receiverCardSuccessLabelText.
   ///
   /// In en, this message translates to:
-  /// **'{filesLenght, plural, one{1 file} other{{filesLenght} files}} received successfully'**
+  /// **'{filesLenght, plural, =1{1 file} other{{filesLenght} files}} received successfully'**
   String receiverCardSuccessLabelText(num filesLenght);
 
   /// No description provided for @transferErrorLabelText.

@@ -36,7 +36,7 @@
     "advancedSettingsTitle": "Gelişmiş Ayarlar",
     "advancedSettingsDescription": "Bu ayarlar deneyimli kullanıcılar içindir. Eğer ne yaptığınızı bilmiyorsanız lütfen kurcalamayın.",
     "filesTitle": "Dosyalar",
-    "filesLengthLabelText": "{filesLenght, plural, one{1 dosya - {filesSize}} other{{filesLenght} dosya - {filesSize}}}",
+    "filesLengthLabelText": "{filesLenght, plural, =1{1 dosya - {filesSize}} other{{filesLenght} dosya - {filesSize}}}",
     "devicesTitle": "Cihazlar",
     "showQrCodeButtonTitle": "QR'ı göster",
     "emptyDeviceListLabelText": "Cihaz bulunamadı",
@@ -52,7 +52,7 @@
     "showInFolderButtonTitle": "Klasörde göster",
     "openButtonTitle": "Aç",
     "removeButtonTooltip": "Kaldır",
-    "senderCardSuccessLabelText": "{filesLenght, plural, one{1 dosya} other{{filesLenght} dosya}} başarıyla gönderildi",
-    "receiverCardSuccessLabelText": "{filesLenght, plural, one{1 dosya} other{{filesLenght} dosya}} başarıyla alındı",
+    "senderCardSuccessLabelText": "{filesLenght, plural, =1{1 dosya} other{{filesLenght} dosya}} başarıyla gönderildi",
+    "receiverCardSuccessLabelText": "{filesLenght, plural, =1{1 dosya} other{{filesLenght} dosya}} başarıyla alındı",
     "transferErrorLabelText": "Transfer Başarısız"
 }
