@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:animations/animations.dart';
 import 'package:flutter/services.dart';
+import 'package:nocab_desktop/custom_dialogs/theme_color_picker.dart';
 import 'package:nocab_desktop/extensions/lang_code_to_name.dart';
 import 'package:nocab_desktop/l10n/generated/app_localizations.dart';
 import 'package:nocab_desktop/models/settings_model.dart';
@@ -8,6 +10,7 @@ import 'package:nocab_desktop/provider/locale_provider.dart';
 import 'package:nocab_desktop/provider/theme_provider.dart';
 import 'package:nocab_desktop/screens/settings/setting_card.dart';
 import 'package:flutter/material.dart';
+import 'package:nocab_desktop/services/registry/registry.dart';
 import 'package:nocab_desktop/services/settings/settings.dart';
 import 'package:provider/provider.dart';
 import 'package:username_gen/username_gen.dart';
@@ -41,8 +44,6 @@ class _SettingsState extends State<Settings> {
 
   @override
   Widget build(BuildContext context) {
-    //nameController.text = currentSettings.deviceName;
-
     return Dialog(
       elevation: 0,
       clipBehavior: Clip.antiAlias,
@@ -110,16 +111,20 @@ class _SettingsState extends State<Settings> {
                               caption: AppLocalizations.of(context).deviceNameSettingDescription,
                               widget: SizedBox(
                                 width: 200,
-                                height: 50,
+                                height: 70,
                                 child: Row(
                                   children: [
                                     SizedBox(
                                       width: 150,
                                       child: TextField(
-                                        //scrollPadding: const EdgeInsets.all(0),
                                         controller: nameController,
                                         textAlign: TextAlign.center,
-                                        decoration: const InputDecoration(border: OutlineInputBorder(), isDense: true),
+                                        decoration: const InputDecoration(border: OutlineInputBorder(), isDense: true, counterText: ""),
+                                        maxLength: 20,
+                                        inputFormatters: [
+                                          // block emojis
+                                          FilteringTextInputFormatter.deny(RegExp(r'(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])')),
+                                        ],
                                         onChanged: (String value) {
                                           if (value.isNotEmpty) {
                                             SettingsService().setSettings(currentSettings.copyWith(deviceName: value));
@@ -160,9 +165,24 @@ class _SettingsState extends State<Settings> {
                                   child: InkWell(
                                     borderRadius: const BorderRadius.all(Radius.circular(10)),
                                     onTap: () {
-                                      Provider.of<ThemeProvider>(context, listen: false).toggleSeedColor();
-                                      SettingsService().setSettings(currentSettings.copyWith(useSystemColor: !currentSettings.useSystemColor));
-                                      SettingsService().setSettings(currentSettings.copyWith(seedColor: Provider.of<ThemeProvider>(context, listen: false).seedColor));
+                                      showModal(
+                                        context: context,
+                                        builder: (context) => ThemeColorPicker(
+                                          onUseSystemColorChanged: (value) {
+                                            SettingsService().setSettings(currentSettings.copyWith(useSystemColor: value));
+                                            if (value) {
+                                              Provider.of<ThemeProvider>(context, listen: false).changeSeedColor(RegistryService.getColor());
+                                            } else {
+                                              Provider.of<ThemeProvider>(context, listen: false).changeSeedColor(currentSettings.seedColor);
+                                            }
+                                          },
+                                          onColorClicked: (color) {
+                                            SettingsService().setSettings(currentSettings.copyWith(seedColor: color));
+                                            Provider.of<ThemeProvider>(context, listen: false).changeSeedColor(color);
+                                            Navigator.pop(context);
+                                          },
+                                        ),
+                                      );
                                     },
                                     child: Container(
                                       height: 50,

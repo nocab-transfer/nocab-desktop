@@ -48,7 +48,7 @@ class SettingsService {
       autoUpdate: false,
       language: Platform.localeName.split('_')[0],
       seedColor: RegistryService.getColor(),
-      useSystemColor: true,
+      useSystemColor: Platform.isWindows,
       networkInterfaceName: (await Network.getCurrentNetworkInterface()).name,
     );
   }
