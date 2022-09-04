@@ -66,6 +66,12 @@ class AppLocalizationsTr extends AppLocalizations {
   String get themeColorSettingDescription => 'Uygulamanın rengini değiştir';
 
   @override
+  String get themeColorUseSystemColorSettingTitle => 'Sistem Rengini Kullan';
+
+  @override
+  String get themeColorUseSystemColorSettingDescription => 'Uygulama rengini olarak sistem rengini kullan';
+
+  @override
   String get darkModeSettingTitle => 'Karanlık mod';
 
   @override
@@ -123,20 +129,23 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
+  String get devicesTitle => 'Cihazlar';
+
+  @override
   String get showQrCodeButtonTitle => 'QR\'ı göster';
 
   @override
   String get emptyDeviceListLabelText => 'Cihaz bulunamadı';
 
   @override
-  String get searchingDeviceLabelText => 'Cihaz aranıyor...';
+  String get searchingDeviceLabelText => 'Cihazlar aranıyor...';
 
   @override
   String fileAccepterTitle(String deviceName, num filesLenght) {
     final String pluralString = intl.Intl.pluralLogic(
       filesLenght,
       locale: localeName,
-      other: '$filesLenght dosya',
+      other: '$deviceName size $filesLenght dosya',
     );
 
     return '$pluralString göndermek istiyor';

@@ -42,6 +42,10 @@
     "@themeColorSettingTitle": {},
     "themeColorSettingDescription": "Change the color of the application",
     "@themeColorSettingDescription": {},
+    "themeColorUseSystemColorSettingTitle": "Use System Color",
+    "@themeColorUseSystemColorSettingTitle": {},
+    "themeColorUseSystemColorSettingDescription": "Use the system color as the application color",
+    "@themeColorUseSystemColorSettingDescription": {},
     "darkModeSettingTitle": "Dark Mode",
     "@darkModeSettingTitle": {},
     "darkModeSettingDescription": "Open the dark mode",
@@ -73,7 +77,7 @@
     "advancedSettingsDescription": "These options are for advanced users only. If you don't know what you are doing, don't touch them.",
     "filesTitle": "Files",
     "@filesTitle": {},
-    "filesLengthLabelText": "{filesLenght, plural, one{1 file - {filesSize}} other{{filesLenght} files - {filesSize}}}",
+    "filesLengthLabelText": "{filesLenght, plural, =1{1 file - {filesSize}} other{{filesLenght} files - {filesSize}}}",
     "@filesLengthLabelText": {
         "placeholders": {
             "filesLenght": {},
@@ -82,13 +86,15 @@
             }
         }
     },
+    "devicesTitle": "Devices",
+    "@devicesTitle": {},
     "showQrCodeButtonTitle": "Show QR",
     "@showQrCodeButtonTitle": {},
     "emptyDeviceListLabelText": "No devices found",
     "@emptyDeviceListLabelText": {},
     "searchingDeviceLabelText": "Searching for devices...",
     "@searchingDeviceLabelText": {},
-    "fileAccepterTitle": "{deviceName} wants to send you a {filesLenght, plural, one{file} other{{filesLenght} files}}",
+    "fileAccepterTitle": "{filesLenght, plural, one{{deviceName} wants to send you a file} other{{deviceName} wants to send you {filesLenght} files}}",
     "@fileAccepterTitle": {
         "placeholders": {
             "deviceName": {

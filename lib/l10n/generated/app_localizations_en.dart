@@ -66,6 +66,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get themeColorSettingDescription => 'Change the color of the application';
 
   @override
+  String get themeColorUseSystemColorSettingTitle => 'Use System Color';
+
+  @override
+  String get themeColorUseSystemColorSettingDescription => 'Use the system color as the application color';
+
+  @override
   String get darkModeSettingTitle => 'Dark Mode';
 
   @override
@@ -118,9 +124,13 @@ class AppLocalizationsEn extends AppLocalizations {
     return intl.Intl.pluralLogic(
       filesLenght,
       locale: localeName,
+      one: '1 file - $filesSize',
       other: '$filesLenght files - $filesSize',
     );
   }
+
+  @override
+  String get devicesTitle => 'Devices';
 
   @override
   String get showQrCodeButtonTitle => 'Show QR';
@@ -136,7 +146,7 @@ class AppLocalizationsEn extends AppLocalizations {
     return intl.Intl.pluralLogic(
       filesLenght,
       locale: localeName,
-      other: '$filesLenght files',
+      other: '$deviceName wants to send you $filesLenght files',
     );
   }
 

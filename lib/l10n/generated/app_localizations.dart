@@ -207,6 +207,18 @@ abstract class AppLocalizations {
   /// **'Change the color of the application'**
   String get themeColorSettingDescription;
 
+  /// No description provided for @themeColorUseSystemColorSettingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Use System Color'**
+  String get themeColorUseSystemColorSettingTitle;
+
+  /// No description provided for @themeColorUseSystemColorSettingDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Use the system color as the application color'**
+  String get themeColorUseSystemColorSettingDescription;
+
   /// No description provided for @darkModeSettingTitle.
   ///
   /// In en, this message translates to:
@@ -306,8 +318,14 @@ abstract class AppLocalizations {
   /// No description provided for @filesLengthLabelText.
   ///
   /// In en, this message translates to:
-  /// **'{filesLenght, plural, one{1 file - {filesSize}} other{{filesLenght} files - {filesSize}}}'**
+  /// **'{filesLenght, plural, =1{1 file - {filesSize}} other{{filesLenght} files - {filesSize}}}'**
   String filesLengthLabelText(num filesLenght, String filesSize);
+
+  /// No description provided for @devicesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Devices'**
+  String get devicesTitle;
 
   /// No description provided for @showQrCodeButtonTitle.
   ///
@@ -330,7 +348,7 @@ abstract class AppLocalizations {
   /// No description provided for @fileAccepterTitle.
   ///
   /// In en, this message translates to:
-  /// **'{deviceName} wants to send you a {filesLenght, plural, one{file} other{{filesLenght} files}}'**
+  /// **'{filesLenght, plural, one{{deviceName} wants to send you a file} other{{deviceName} wants to send you {filesLenght} files}}'**
   String fileAccepterTitle(String deviceName, num filesLenght);
 
   /// No description provided for @fileAccepterInfoLabelText.
