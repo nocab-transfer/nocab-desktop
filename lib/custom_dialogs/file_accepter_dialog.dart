@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:nocab_desktop/custom_widgets/file_list/file_list.dart';
+import 'package:nocab_desktop/l10n/generated/app_localizations.dart';
 import 'package:nocab_desktop/models/file_model.dart';
 import 'package:flutter/material.dart';
 import 'package:nocab_desktop/services/server/server.dart';
@@ -48,7 +49,7 @@ class _FileAccepterDialogState extends State<FileAccepterDialog> {
                 )),
               ),
               Text(
-                "${widget.request.deviceInfo.name ?? "Unknown"} wants to send you a file",
+                AppLocalizations.of(context).fileAccepterTitle(widget.request.deviceInfo.name!, widget.request.files.length),
                 maxLines: 2,
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
@@ -57,7 +58,7 @@ class _FileAccepterDialogState extends State<FileAccepterDialog> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "Ip: ${widget.socket.remoteAddress.address} - Port: ${widget.socket.remotePort}",
+                  AppLocalizations.of(context).fileAccepterInfoLabelText(widget.request.deviceInfo.ip!, widget.request.transferPort.toString()),
                   maxLines: 2,
                   textAlign: TextAlign.left,
                   overflow: TextOverflow.ellipsis,
@@ -86,7 +87,7 @@ class _FileAccepterDialogState extends State<FileAccepterDialog> {
                       side: BorderSide(width: 2, color: Theme.of(context).colorScheme.error),
                     ),
                     child: Text(
-                      "Reject",
+                      AppLocalizations.of(context).rejectButtonTitle,
                       style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.error),
                     ),
                   ),
@@ -98,7 +99,7 @@ class _FileAccepterDialogState extends State<FileAccepterDialog> {
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
                     ),
                     child: Text(
-                      "Accept",
+                      AppLocalizations.of(context).acceptButtonTitle,
                       style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onPrimary),
                     ),
                   ),

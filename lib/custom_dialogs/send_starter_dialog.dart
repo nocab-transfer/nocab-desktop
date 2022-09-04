@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nocab_desktop/custom_widgets/device_finder_bloc/device_finder.dart';
 import 'package:nocab_desktop/custom_widgets/file_list/file_list.dart';
 import 'package:nocab_desktop/extensions/size_extension.dart';
+import 'package:nocab_desktop/l10n/generated/app_localizations.dart';
 import 'package:nocab_desktop/models/deviceinfo_model.dart';
 import 'package:nocab_desktop/models/file_model.dart';
 import 'package:nocab_desktop/services/server/server.dart';
@@ -64,11 +65,11 @@ class _SendStarterDialogState extends State<SendStarterDialog> {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(left: 12.0),
-                                child: Text("Files", style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold)),
+                                child: Text(AppLocalizations.of(context).filesTitle, style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold)),
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(right: 12.0),
-                                child: Text("${widget.files.length} file(s) - ${widget.files.map((file) => file.byteSize).reduce((a, b) => a + b).formatBytes(useName: true)}"),
+                                child: Text(AppLocalizations.of(context).filesLengthLabelText(widget.files.length, widget.files.map((file) => file.byteSize).reduce((a, b) => a + b).formatBytes(useName: true))),
                               ),
                             ],
                           ),
@@ -99,7 +100,7 @@ class _SendStarterDialogState extends State<SendStarterDialog> {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(left: 12.0),
-                                child: Text("Devices", style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold)),
+                                child: Text(AppLocalizations.of(context).devicesTitle, style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold)),
                               ),
                             ],
                           ),
@@ -123,18 +124,17 @@ class _SendStarterDialogState extends State<SendStarterDialog> {
                                 ),
                               ),
                               ElevatedButton(
-                                onPressed: () {}, //showDialog(context: context, builder: (context) => const WorkInProgress()),
+                                onPressed: () {},
                                 style: ElevatedButton.styleFrom(
                                   fixedSize: const Size(150, 40),
                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
                                 ),
-
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const [
-                                    Icon(Icons.qr_code_rounded),
-                                    Text("Show QR"),
+                                  children: [
+                                    const Icon(Icons.qr_code_rounded),
+                                    Text(AppLocalizations.of(context).showQrCodeButtonTitle),
                                   ],
                                 ),
                               ),
