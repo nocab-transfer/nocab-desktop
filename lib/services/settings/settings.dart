@@ -49,7 +49,7 @@ class SettingsService {
       language: Platform.localeName.split('_')[0],
       seedColor: RegistryService.getColor(),
       useSystemColor: Platform.isWindows,
-      networkInterfaceName: (await Network.getCurrentNetworkInterface()).name,
+      networkInterfaceName: Network.getCurrentNetworkInterface(await NetworkInterface.list()).name,
     );
   }
 

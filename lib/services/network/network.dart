@@ -1,7 +1,7 @@
 import 'dart:io';
 
 class Network {
-  static Future<NetworkInterface> getCurrentNetworkInterface() async {
+  static NetworkInterface getCurrentNetworkInterface(List<NetworkInterface> networkInterfaces) {
     // Force to select network interfaces to Wifi or Ethernet
     //                                 ↓ this stands for blocking vEthernet
     var interfaceNameRegex = RegExp(r'(v\b|\b)(ethernet?.?\w+)|(wi.?fi)', caseSensitive: false);
@@ -17,7 +17,7 @@ class Network {
       'wlan0',
     ];
 
-    var networkInterfaces = await NetworkInterface.list();
+    //var networkInterfaces = await NetworkInterface.list();
     return networkInterfaces.firstWhere(
       (element) => interfaceNameRegex.hasMatch(element.name),
       orElse: () => networkInterfaces.firstWhere(

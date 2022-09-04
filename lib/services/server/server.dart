@@ -29,7 +29,7 @@ class Server {
 
   Future<void> initialize() async {
     List<NetworkInterface> networkInterfaces = await NetworkInterface.list();
-    currentInterFace = networkInterfaces.firstWhere((element) => element.name == SettingsService().getSettings.networkInterfaceName, orElse: () => networkInterfaces.first);
+    currentInterFace = networkInterfaces.firstWhere((element) => element.name == SettingsService().getSettings.networkInterfaceName, orElse: () => Network.getCurrentNetworkInterface(networkInterfaces));
     deviceInfo = DeviceInfo(name: SettingsService().getSettings.deviceName, ip: currentInterFace.addresses.first.address, port: SettingsService().getSettings.mainPort, opsystem: Platform.operatingSystemVersion, uuid: deviceID);
     SettingsService().onSettingChanged.listen((settings) {
       deviceInfo = DeviceInfo(
