@@ -97,10 +97,11 @@ class _FileAccepterDialogState extends State<FileAccepterDialog> {
                     style: ElevatedButton.styleFrom(
                       fixedSize: const Size(100, 50),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+                      backgroundColor: Theme.of(context).colorScheme.primary,
                     ),
                     child: Text(
                       AppLocalizations.of(context).acceptButtonTitle,
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onPrimary),
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.background),
                     ),
                   ),
                 ],
