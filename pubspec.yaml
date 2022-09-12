@@ -56,4 +56,4 @@ flutter:
   generate: true
   assets:
   - assets/images/
-  - assets/contex_menu_icon/big.ico
+  - assets/context_menu_icon/icon.ico
