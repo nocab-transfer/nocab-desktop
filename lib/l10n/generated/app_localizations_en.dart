@@ -84,18 +84,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get useMaterialYouSettingDescription => 'Use Material You (Material 3) Design';
 
   @override
-  String get startOnBootSettingTitle => 'Start On Boot';
-
-  @override
-  String get startOnBootSettingDescription => 'Start the application on boot';
-
-  @override
-  String get autoUpdateSettingTitle => 'Auto Update';
-
-  @override
-  String get autoUpdateSettingDescription => 'Automatically update the application';
-
-  @override
   String get languageSettingTitle => 'Language';
 
   @override

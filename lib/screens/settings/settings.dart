@@ -44,6 +44,8 @@ class _SettingsState extends State<Settings> {
 
   @override
   Widget build(BuildContext context) {
+    if (SettingsService().errors.isNotEmpty) return buildError();
+
     return Dialog(
       elevation: 0,
       clipBehavior: Clip.antiAlias,
@@ -61,7 +63,7 @@ class _SettingsState extends State<Settings> {
             flexibleSpace: Container(
               height: 50,
               decoration: BoxDecoration(
-                color: Theme.of(context).backgroundColor,
+                color: Theme.of(context).colorScheme.background,
                 borderRadius: BorderRadius.circular(25),
               ),
               child: Stack(
@@ -92,7 +94,7 @@ class _SettingsState extends State<Settings> {
             width: 550,
             height: MediaQuery.of(context).size.height - 20,
             decoration: BoxDecoration(
-              color: Theme.of(context).backgroundColor,
+              color: Theme.of(context).colorScheme.background,
               borderRadius: const BorderRadius.all(Radius.circular(25)),
             ),
             child: Padding(
@@ -159,42 +161,43 @@ class _SettingsState extends State<Settings> {
                               ),
                             ),
                             SettingCard(
-                                title: AppLocalizations.of(context).themeColorSettingTitle,
-                                caption: AppLocalizations.of(context).themeColorSettingDescription,
-                                widget: Material(
-                                  child: InkWell(
-                                    borderRadius: const BorderRadius.all(Radius.circular(10)),
-                                    onTap: () {
-                                      showModal(
-                                        context: context,
-                                        builder: (context) => ThemeColorPicker(
-                                          onUseSystemColorChanged: (value) {
-                                            SettingsService().setSettings(currentSettings.copyWith(useSystemColor: value));
-                                            if (value) {
-                                              Provider.of<ThemeProvider>(context, listen: false).changeSeedColor(RegistryService.getColor());
-                                            } else {
-                                              Provider.of<ThemeProvider>(context, listen: false).changeSeedColor(currentSettings.seedColor);
-                                            }
-                                          },
-                                          onColorClicked: (color) {
-                                            SettingsService().setSettings(currentSettings.copyWith(seedColor: color));
-                                            Provider.of<ThemeProvider>(context, listen: false).changeSeedColor(color);
-                                            Navigator.pop(context);
-                                          },
-                                        ),
-                                      );
-                                    },
-                                    child: Container(
-                                      height: 50,
-                                      width: 50,
-                                      decoration: BoxDecoration(
-                                        borderRadius: const BorderRadius.all(Radius.circular(10)),
-                                        color: Theme.of(context).colorScheme.primary,
+                              title: AppLocalizations.of(context).themeColorSettingTitle,
+                              caption: AppLocalizations.of(context).themeColorSettingDescription,
+                              widget: Material(
+                                child: InkWell(
+                                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                                  onTap: () {
+                                    showModal(
+                                      context: context,
+                                      builder: (context) => ThemeColorPicker(
+                                        onUseSystemColorChanged: (value) {
+                                          SettingsService().setSettings(currentSettings.copyWith(useSystemColor: value));
+                                          if (value) {
+                                            Provider.of<ThemeProvider>(context, listen: false).changeSeedColor(RegistryService.getColor());
+                                          } else {
+                                            Provider.of<ThemeProvider>(context, listen: false).changeSeedColor(currentSettings.seedColor);
+                                          }
+                                        },
+                                        onColorClicked: (color) {
+                                          SettingsService().setSettings(currentSettings.copyWith(seedColor: color));
+                                          Provider.of<ThemeProvider>(context, listen: false).changeSeedColor(color);
+                                          //Navigator.pop(context);
+                                        },
                                       ),
-                                      child: Icon(Icons.ads_click_rounded, color: Theme.of(context).colorScheme.onPrimary),
+                                    );
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    width: 50,
+                                    decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.all(Radius.circular(10)),
+                                      color: Theme.of(context).colorScheme.primary,
                                     ),
+                                    child: Icon(Icons.ads_click_rounded, color: Theme.of(context).colorScheme.onPrimary),
                                   ),
-                                )),
+                                ),
+                              ),
+                            ),
                             SettingCard(
                               title: AppLocalizations.of(context).darkModeSettingTitle,
                               caption: AppLocalizations.of(context).darkModeSettingDescription,
@@ -214,26 +217,6 @@ class _SettingsState extends State<Settings> {
                                   onChanged: (value) {
                                     SettingsService().setSettings(currentSettings.copyWith(useMaterial3: value));
                                     Provider.of<ThemeProvider>(context, listen: false).materialYou(value: value);
-                                  },
-                                  activeColor: Theme.of(context).colorScheme.primary),
-                            ),
-                            SettingCard(
-                              title: AppLocalizations.of(context).startOnBootSettingTitle,
-                              caption: AppLocalizations.of(context).startOnBootSettingDescription,
-                              widget: Switch(
-                                  value: currentSettings.startOnBoot,
-                                  onChanged: (value) {
-                                    SettingsService().setSettings(currentSettings.copyWith(startOnBoot: value));
-                                  },
-                                  activeColor: Theme.of(context).colorScheme.primary),
-                            ),
-                            SettingCard(
-                              title: AppLocalizations.of(context).autoUpdateSettingTitle,
-                              caption: AppLocalizations.of(context).autoUpdateSettingDescription,
-                              widget: Switch(
-                                  value: currentSettings.autoUpdate,
-                                  onChanged: (value) {
-                                    SettingsService().setSettings(currentSettings.copyWith(autoUpdate: value));
                                   },
                                   activeColor: Theme.of(context).colorScheme.primary),
                             ),
@@ -299,6 +282,125 @@ class _SettingsState extends State<Settings> {
                       ),
                     ),
                   ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildError() {
+    return Dialog(
+      elevation: 0,
+      clipBehavior: Clip.antiAlias,
+      alignment: Alignment.centerLeft,
+      backgroundColor: Colors.transparent,
+      child: SizedBox(
+        width: 550,
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            backgroundColor: Colors.transparent,
+            scrolledUnderElevation: 0,
+            elevation: 0,
+            flexibleSpace: Container(
+              height: 50,
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.background,
+                borderRadius: BorderRadius.circular(25),
+              ),
+              child: Stack(
+                children: [
+                  Center(child: Text(AppLocalizations.of(context).settingsTitle, style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 24, fontWeight: FontWeight.w400))),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 16.0),
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          onTap: () => Navigator.pop(context),
+                          borderRadius: BorderRadius.circular(8),
+                          child: const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Icon(Icons.close_rounded, size: 24),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          body: Container(
+            width: 550,
+            height: MediaQuery.of(context).size.height - 20,
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.background,
+              borderRadius: const BorderRadius.all(Radius.circular(25)),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Center(
+                child: Container(
+                  height: 500,
+                  width: 500,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.surfaceVariant,
+                    borderRadius: const BorderRadius.all(Radius.circular(25)),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text('Error', style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Theme.of(context).colorScheme.error)),
+                            Text('Try recreate settings file or restart the application', style: Theme.of(context).textTheme.bodyLarge),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: OutlinedButton(
+                                onPressed: () {
+                                  SettingsService().recreateSettings();
+                                },
+                                child: const Text('Recreate settings file'),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: ListView.builder(
+                                reverse: true,
+                                itemCount: SettingsService().errors.length,
+                                shrinkWrap: true,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                      height: 70,
+                                      width: 50,
+                                      decoration: BoxDecoration(
+                                        color: Theme.of(context).colorScheme.errorContainer.withOpacity(.2),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(SettingsService().errors[index], style: Theme.of(context).textTheme.labelSmall?.copyWith(color: Theme.of(context).colorScheme.error)),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),

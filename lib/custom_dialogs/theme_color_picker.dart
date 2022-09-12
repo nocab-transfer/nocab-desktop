@@ -39,7 +39,8 @@ class ThemeColorPickerState extends State<ThemeColorPicker> {
       elevation: 0,
       clipBehavior: Clip.antiAlias,
       backgroundColor: Colors.transparent,
-      insetPadding: const EdgeInsets.all(16),
+      insetPadding: const EdgeInsets.all(64),
+      alignment: Alignment.topRight,
       child: AnimatedContainer(
         width: 500,
         height: currentSettings.useSystemColor ? 120 : 500,
@@ -47,7 +48,7 @@ class ThemeColorPickerState extends State<ThemeColorPicker> {
         duration: const Duration(milliseconds: 300),
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.background,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(25),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,

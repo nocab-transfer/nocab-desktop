@@ -243,30 +243,6 @@ abstract class AppLocalizations {
   /// **'Use Material You (Material 3) Design'**
   String get useMaterialYouSettingDescription;
 
-  /// No description provided for @startOnBootSettingTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Start On Boot'**
-  String get startOnBootSettingTitle;
-
-  /// No description provided for @startOnBootSettingDescription.
-  ///
-  /// In en, this message translates to:
-  /// **'Start the application on boot'**
-  String get startOnBootSettingDescription;
-
-  /// No description provided for @autoUpdateSettingTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Auto Update'**
-  String get autoUpdateSettingTitle;
-
-  /// No description provided for @autoUpdateSettingDescription.
-  ///
-  /// In en, this message translates to:
-  /// **'Automatically update the application'**
-  String get autoUpdateSettingDescription;
-
   /// No description provided for @languageSettingTitle.
   ///
   /// In en, this message translates to:

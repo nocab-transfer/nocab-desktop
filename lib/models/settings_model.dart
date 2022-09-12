@@ -6,8 +6,6 @@ class SettingsModel {
   late final int mainPort;
   late final bool darkMode;
   late final bool useMaterial3;
-  late final bool startOnBoot;
-  late final bool autoUpdate;
   late final Color seedColor;
   late final bool useSystemColor;
   late final String language;
@@ -19,8 +17,6 @@ class SettingsModel {
     required this.mainPort,
     required this.darkMode,
     required this.useMaterial3,
-    required this.startOnBoot,
-    required this.autoUpdate,
     required this.language,
     required this.seedColor,
     required this.useSystemColor,
@@ -33,8 +29,6 @@ class SettingsModel {
     mainPort = json['mainPort'];
     darkMode = json['darkMode'];
     useMaterial3 = json['useMaterial3'];
-    startOnBoot = json['startOnBoot'];
-    autoUpdate = json['autoUpdate'];
     language = json['language'];
     seedColor = Color(json['seedColor']);
     useSystemColor = json['useSystemColor'];
@@ -48,8 +42,6 @@ class SettingsModel {
     data['mainPort'] = mainPort;
     data['darkMode'] = darkMode;
     data['useMaterial3'] = useMaterial3;
-    data['startOnBoot'] = startOnBoot;
-    data['autoUpdate'] = autoUpdate;
     data['language'] = language;
     data['seedColor'] = seedColor.value;
     data['useSystemColor'] = useSystemColor;
@@ -65,8 +57,6 @@ extension SettingsExtenios on SettingsModel {
     int? mainPort,
     bool? darkMode,
     bool? useMaterial3,
-    bool? startOnBoot,
-    bool? autoUpdate,
     Color? seedColor,
     bool? useSystemColor,
     String? language,
@@ -78,8 +68,6 @@ extension SettingsExtenios on SettingsModel {
       mainPort: mainPort ?? this.mainPort,
       darkMode: darkMode ?? this.darkMode,
       useMaterial3: useMaterial3 ?? this.useMaterial3,
-      startOnBoot: startOnBoot ?? this.startOnBoot,
-      autoUpdate: autoUpdate ?? this.autoUpdate,
       seedColor: seedColor ?? this.seedColor,
       useSystemColor: useSystemColor ?? this.useSystemColor,
       language: language ?? this.language,

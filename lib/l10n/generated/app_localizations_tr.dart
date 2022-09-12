@@ -84,18 +84,6 @@ class AppLocalizationsTr extends AppLocalizations {
   String get useMaterialYouSettingDescription => 'Material You (Material 3) tasarımı kullan';
 
   @override
-  String get startOnBootSettingTitle => 'Bilgisayar açılırken başlat';
-
-  @override
-  String get startOnBootSettingDescription => 'Uygulamayı bilgisayar açılırken başlatır ve sizi 2 fare tıkından kurtarır.';
-
-  @override
-  String get autoUpdateSettingTitle => 'Otomatik Güncelleme';
-
-  @override
-  String get autoUpdateSettingDescription => 'Uygulamayı otomatik günceller';
-
-  @override
   String get languageSettingTitle => 'Dil';
 
   @override
