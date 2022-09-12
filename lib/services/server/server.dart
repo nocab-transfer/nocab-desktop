@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:nocab_desktop/custom_dialogs/file_accepter_dialog.dart';
 import 'package:nocab_desktop/models/deviceinfo_model.dart';
 import 'package:nocab_desktop/models/file_model.dart';
+import 'package:nocab_desktop/models/settings_model.dart';
 import 'package:nocab_desktop/services/file_operations/file_operations.dart';
 import 'package:nocab_desktop/services/network/network.dart';
 import 'package:nocab_desktop/services/settings/settings.dart';
@@ -29,7 +30,12 @@ class Server {
 
   Future<void> initialize() async {
     List<NetworkInterface> networkInterfaces = await NetworkInterface.list();
-    currentInterFace = networkInterfaces.firstWhere((element) => element.name == SettingsService().getSettings.networkInterfaceName, orElse: () => Network.getCurrentNetworkInterface(networkInterfaces));
+    currentInterFace = networkInterfaces.firstWhere((element) => element.name == SettingsService().getSettings.networkInterfaceName, orElse: () {
+      var networkInterface = Network.getCurrentNetworkInterface(networkInterfaces);
+      SettingsService().setSettings(SettingsService().getSettings.copyWith(networkInterfaceName: networkInterface.name));
+      return networkInterface;
+    });
+
     deviceInfo = DeviceInfo(name: SettingsService().getSettings.deviceName, ip: currentInterFace.addresses.first.address, port: SettingsService().getSettings.mainPort, opsystem: Platform.operatingSystemVersion, uuid: deviceID);
     SettingsService().onSettingChanged.listen((settings) {
       deviceInfo = DeviceInfo(
@@ -54,9 +60,14 @@ class Server {
   bool activeRequest = false;
   Future<void> startReceiver() async {
     // other devices can find this device
-    ServerSocket finderSocket = await ServerSocket.bind(InternetAddress.anyIPv4, SettingsService().getSettings.finderPort);
+    ServerSocket? finderSocket;
+    try {
+      await ServerSocket.bind(InternetAddress.anyIPv4, SettingsService().getSettings.finderPort);
+    } catch (e) {
+      //showDialog(context: , builder: builder)
+    }
 
-    finderSocket.listen((socket) {
+    finderSocket?.listen((socket) {
       socket.write(base64.encode(utf8.encode(json.encode(deviceInfo.toJson()))));
     });
 
