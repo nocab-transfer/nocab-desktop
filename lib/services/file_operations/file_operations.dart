@@ -47,11 +47,21 @@ class FileOperations {
     });
   }
 
-  /// If the path does not specify a file, remove the file from the list
-  static Future<List<FileInfo>> cleanFiles(List<FileInfo> files) async {
-    for (FileInfo file in files) {
-      if (!(await FileSystemEntity.isFile(file.path!))) files.remove(file);
+  static Future<List<FileInfo>> convertPathsToFileInfos(List<String> paths) async {
+    // create a list contains all directories
+    var directoryList = paths.fold(<Directory>[], (previousValue, path) {
+      if (Directory(path).existsSync()) previousValue.add(Directory(path));
+      return previousValue;
+    });
+
+    // create a list contains all files
+    List<FileInfo> files = [];
+    for (var filePath in paths.where((path) => File(path).existsSync())) {
+      files.add(FileInfo(name: p.basename(filePath), byteSize: await File(filePath).length(), isEncrypted: false, hash: "test", path: filePath));
     }
+
+    // add files under directories
+    await Future.forEach(directoryList, (dir) async => files.addAll(await FileOperations.getFilesUnderDirectory(dir.path)));
     return files;
   }
 }

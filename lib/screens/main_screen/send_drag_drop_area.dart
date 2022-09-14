@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:desktop_drop/desktop_drop.dart';
 import 'package:flutter/material.dart';
 import 'package:nocab_desktop/l10n/generated/app_localizations.dart';
@@ -28,24 +26,9 @@ class _SendDragDropState extends State<SendDragDrop> {
         if (loading) return;
 
         setState(() => loading = true);
-        // Check if the files contains directories and if so, get all files under those directories
-
-        // create a list contains all directories
-        var directoryList = details.files.fold(<Directory>[], (previousValue, element) {
-          if (Directory(element.path).existsSync()) previousValue.add(Directory(element.path));
-          return previousValue;
-        });
-
-        // create a list contains all files
-        List<FileInfo> files = [];
-        for (var file in details.files.where((element) => File(element.path).existsSync())) {
-          files.add(FileInfo(name: file.name, byteSize: await file.length(), isEncrypted: false, hash: "test", path: file.path));
-        }
-
-        // add files under directories
-        await Future.forEach(directoryList, (dir) async => files.addAll(await FileOperations.getFilesUnderDirectory(dir.path)));
-
+        List<FileInfo> files = await FileOperations.convertPathsToFileInfos(details.files.map((e) => e.path).toList());
         setState(() => loading = false);
+
         widget.onFilesReady?.call(files);
       },
       child: loading
