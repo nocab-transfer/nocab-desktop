@@ -69,7 +69,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get themeColorUseSystemColorSettingTitle => 'Sistem Rengini Kullan';
 
   @override
-  String get themeColorUseSystemColorSettingDescription => 'Uygulama rengini olarak sistem rengini kullan';
+  String get themeColorUseSystemColorSettingDescription => 'Uygulama rengi olarak sistem rengini kullan';
 
   @override
   String get darkModeSettingTitle => 'Karanlık mod';
