@@ -31,10 +31,8 @@ class SettingsService {
   }
 
   Future<void> initialize() async {
-    isMsixInstalled = Platform.resolvedExecutable.startsWith('C:\\Program Files\\WindowsApps');
-
     try {
-      File settingsFile = File(isMsixInstalled! ? getMsixSettingsPath() : getdefaultSettingsPath());
+      File settingsFile = File(getdefaultSettingsPath());
 
       if (await settingsFile.exists()) {
         _settings = SettingsModel.fromJson(json.decode(await settingsFile.readAsString()));
@@ -67,7 +65,7 @@ class SettingsService {
   Future<void> recreateSettings() async {
     try {
       errors.clear();
-      var settingsFile = File(isMsixInstalled! ? getMsixSettingsPath() : getdefaultSettingsPath());
+      var settingsFile = File(getdefaultSettingsPath());
       if (await settingsFile.exists()) await settingsFile.delete();
       await initialize();
       _changeController.add(_settings!);
@@ -81,7 +79,7 @@ class SettingsService {
     try {
       _settings = settings;
       _changeController.add(settings);
-      File settingsFile = File(isMsixInstalled! ? getMsixSettingsPath() : getdefaultSettingsPath());
+      File settingsFile = File(getdefaultSettingsPath());
       await settingsFile.writeAsString(json.encode(_settings?.toJson()));
       return true;
     } catch (e) {
@@ -91,15 +89,8 @@ class SettingsService {
     }
   }
 
-  String getMsixSettingsPath() {
-    if (isMsixInstalled ?? false) {
-      String msixAppName = "${File(Platform.resolvedExecutable).parent.path.split(Platform.pathSeparator).last.split('_').first}_${File(Platform.resolvedExecutable).parent.path.split(Platform.pathSeparator).last.split('_').last}";
-      return p.joinAll(['${Platform.environment['LOCALAPPDATA']}\\Packages', msixAppName, 'LocalState\\settings.json']);
-    }
-    return '';
-  }
-
   String getdefaultSettingsPath() {
+    if (Platform.isWindows) return p.join(Platform.environment['APPDATA']!, r'\NoCab Desktop\settings.json');
     return p.join(File(Platform.resolvedExecutable).parent.path, "settings.json");
   }
 }
