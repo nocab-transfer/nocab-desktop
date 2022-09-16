@@ -19,7 +19,7 @@ import 'package:window_manager/window_manager.dart';
 Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await IPC().initialize(args, (data) async {
+  await IPC().initialize(args, onData: (data) async {
     // yeah i know this is bad but i dont know how to do it better
     while (Server().navigatorKey.currentContext == null) {
       await Future.delayed(const Duration(milliseconds: 100));
