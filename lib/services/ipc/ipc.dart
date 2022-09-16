@@ -12,8 +12,6 @@ class IPC {
 
   IPC._internal();
 
-  String? lastMessagePid;
-
   Future<void> initialize(List<String> args, Function(List<String> data)? onData) async {
     if (Platform.isWindows) {
       if (await isNoCabAlreadyRunning()) {
