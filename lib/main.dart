@@ -8,6 +8,7 @@ import 'package:nocab_desktop/provider/locale_provider.dart';
 import 'package:nocab_desktop/provider/theme_provider.dart';
 import 'package:nocab_desktop/screens/main_screen/main_screen.dart';
 import 'package:nocab_desktop/services/file_operations/file_operations.dart';
+import 'package:nocab_desktop/services/ipc/ipc.dart';
 import 'package:nocab_desktop/services/registry/registry.dart';
 import 'package:nocab_desktop/services/server/server.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +18,27 @@ import 'package:window_manager/window_manager.dart';
 
 Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
-  await SettingsService().initialize();
 
+  await IPC().initialize(args, (data) async {
+    // yeah i know this is bad but i dont know how to do it better
+    while (Server().navigatorKey.currentContext == null) {
+      await Future.delayed(const Duration(milliseconds: 100));
+    }
+    showDialog(
+      context: Server().navigatorKey.currentContext!,
+      builder: (context) => LoadingDialog(title: AppLocalizations.of(Server().navigatorKey.currentContext!).filesLoadingLabelText),
+      barrierDismissible: false,
+    );
+    List<FileInfo> files = await FileOperations.convertPathsToFileInfos(data);
+    Navigator.pop(Server().navigatorKey.currentContext!);
+    showModal(
+      context: Server().navigatorKey.currentContext!,
+      configuration: const FadeScaleTransitionConfiguration(barrierDismissible: false),
+      builder: ((context) => SendStarterDialog(files: files)),
+    );
+  });
+
+  await SettingsService().initialize();
   await Server().initialize();
   await Server().startReceiver();
   await windowManager.ensureInitialized();
