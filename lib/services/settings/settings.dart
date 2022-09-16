@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter/foundation.dart';
 import 'package:nocab_desktop/extensions/variables_from_base_deviceinfo.dart';
 import 'package:nocab_desktop/models/settings_model.dart';
 import 'package:nocab_desktop/services/network/network.dart';
@@ -39,7 +40,7 @@ class SettingsService {
         return;
       }
 
-      await settingsFile.create();
+      await settingsFile.create(recursive: true);
       _settings = await _createNewSettings();
       await settingsFile.writeAsString(json.encode(_settings?.toJson()));
     } catch (e) {
@@ -53,7 +54,7 @@ class SettingsService {
       deviceName: (await DeviceInfoPlugin().deviceInfo).deviceName,
       darkMode: RegistryService.isDarkMode(),
       useMaterial3: false,
-      mainPort: 5001,
+      mainPort: 0,
       finderPort: 62193,
       language: Platform.localeName.split('_')[0],
       seedColor: RegistryService.getColor(),
@@ -90,7 +91,8 @@ class SettingsService {
   }
 
   String getdefaultSettingsPath() {
-    if (Platform.isWindows) return p.join(Platform.environment['APPDATA']!, r'\NoCab Desktop\settings.json');
+    if (kDebugMode) return p.join(File(Platform.resolvedExecutable).parent.path, "settings.json");
+    if (Platform.isWindows) return p.join(Platform.environment['APPDATA']!, r'NoCab Desktop\settings.json');
     return p.join(File(Platform.resolvedExecutable).parent.path, "settings.json");
   }
 }
