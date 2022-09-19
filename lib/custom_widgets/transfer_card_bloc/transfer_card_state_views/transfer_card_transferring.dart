@@ -186,8 +186,6 @@ class TransferringView extends StatelessWidget {
                           child: InkWell(
                             borderRadius: const BorderRadius.all(Radius.circular(10)),
                             onTap: () => FileOperations.showInFolder(file),
-                            //Process.run('start .\\output\\${file.name}', [], runInShell: true, workingDirectory: File(Platform.resolvedExecutable).parent.path);
-
                             child: const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Icon(Icons.folder_outlined),

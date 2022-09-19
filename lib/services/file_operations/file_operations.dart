@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:nocab_desktop/models/file_model.dart';
+import 'package:nocab_desktop/services/settings/settings.dart';
 import 'package:path/path.dart' as p;
 
 class FileOperations {
@@ -42,8 +43,8 @@ class FileOperations {
 
   static void openOutputFolder() {
     // create method checks if output folder exists and creates it if not, so no need to check output folder exists
-    Directory("${File(Platform.resolvedExecutable).parent.path}\\output").create(recursive: true).then((value) {
-      Process.run("start .", [], runInShell: true, workingDirectory: "${File(Platform.resolvedExecutable).parent.path}\\output");
+    Directory(SettingsService().getSettings.downloadPath).create(recursive: true).then((value) {
+      Process.run("start .", [], runInShell: true, workingDirectory: SettingsService().getSettings.downloadPath);
     });
   }
 

@@ -36,7 +36,9 @@ class SettingsService {
       File settingsFile = File(getdefaultSettingsPath());
 
       if (await settingsFile.exists()) {
-        _settings = SettingsModel.fromJson(json.decode(await settingsFile.readAsString()));
+        var settings = SettingsModel.fromJson(json.decode(await settingsFile.readAsString()));
+        if (!(await Directory(settings.downloadPath).exists())) throw p.PathException("Download path does not exist\n${settings.downloadPath}");
+        _settings = settings;
         return;
       }
 
@@ -45,7 +47,7 @@ class SettingsService {
       await settingsFile.writeAsString(json.encode(_settings?.toJson()));
     } catch (e) {
       _settings = await _createNewSettings();
-      errors.add(e.toString());
+      errors.add("$e\nUsing default options");
     }
   }
 
@@ -60,6 +62,7 @@ class SettingsService {
       seedColor: RegistryService.getColor(),
       useSystemColor: Platform.isWindows,
       networkInterfaceName: Network.getCurrentNetworkInterface(await NetworkInterface.list()).name,
+      downloadPath: Platform.isWindows ? p.join(Platform.environment['USERPROFILE']!, 'Downloads') : p.join(File(Platform.resolvedExecutable).parent.path, 'Output'),
     );
   }
 
@@ -91,8 +94,7 @@ class SettingsService {
   }
 
   String getdefaultSettingsPath() {
-    if (kDebugMode) return p.join(File(Platform.resolvedExecutable).parent.path, "settings.json");
-    if (Platform.isWindows) return p.join(Platform.environment['APPDATA']!, r'NoCab Desktop\settings.json');
+    if (Platform.isWindows | !kDebugMode) return p.join(Platform.environment['APPDATA']!, r'NoCab Desktop\settings.json');
     return p.join(File(Platform.resolvedExecutable).parent.path, "settings.json");
   }
 }

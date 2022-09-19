@@ -10,6 +10,7 @@ class SettingsModel {
   late final bool useSystemColor;
   late final String language;
   late final String networkInterfaceName;
+  late String downloadPath;
 
   SettingsModel({
     required this.deviceName,
@@ -21,6 +22,7 @@ class SettingsModel {
     required this.seedColor,
     required this.useSystemColor,
     required this.networkInterfaceName,
+    required this.downloadPath,
   });
 
   SettingsModel.fromJson(Map<String, dynamic> json) {
@@ -33,6 +35,7 @@ class SettingsModel {
     seedColor = Color(json['seedColor']);
     useSystemColor = json['useSystemColor'];
     networkInterfaceName = json['networkInterfaceName'];
+    downloadPath = json['downloadPath'];
   }
 
   Map<String, dynamic> toJson() {
@@ -46,6 +49,7 @@ class SettingsModel {
     data['seedColor'] = seedColor.value;
     data['useSystemColor'] = useSystemColor;
     data['networkInterfaceName'] = networkInterfaceName;
+    data['downloadPath'] = downloadPath;
     return data;
   }
 }
@@ -61,6 +65,7 @@ extension SettingsExtenios on SettingsModel {
     bool? useSystemColor,
     String? language,
     String? networkInterfaceName,
+    String? downloadPath,
   }) {
     return SettingsModel(
       deviceName: deviceName ?? this.deviceName,
@@ -72,6 +77,7 @@ extension SettingsExtenios on SettingsModel {
       useSystemColor: useSystemColor ?? this.useSystemColor,
       language: language ?? this.language,
       networkInterfaceName: networkInterfaceName ?? this.networkInterfaceName,
+      downloadPath: downloadPath ?? this.downloadPath,
     );
   }
 }

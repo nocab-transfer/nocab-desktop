@@ -109,7 +109,7 @@ class Server {
     socket.close();
 
     request.files = request.files.map<FileInfo>((e) {
-      e.path = FileOperations.findUnusedFilePath(downloadPath: '${File(Platform.resolvedExecutable).parent.path}\\output', fileName: e.name);
+      e.path = FileOperations.findUnusedFilePath(downloadPath: SettingsService().getSettings.downloadPath, fileName: e.name);
       return e;
     }).toList();
 
