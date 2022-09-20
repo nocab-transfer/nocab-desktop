@@ -27,7 +27,10 @@ dependencies:
   desktop_drop: ^0.3.3
   animations: ^2.0.3
   flutter_bloc: ^8.1.1
-  msix: ^3.6.3
+  msix:
+    git:
+      url: https://github.com/nocab-transfer/msix.git
+      ref: main
   platform_device_id: ^1.0.1
   path_provider: ^2.0.11
   flutter_localizations: 
@@ -45,11 +48,20 @@ dev_dependencies:
 msix_config:
   display_name: NoCab Desktop
   publisher_display_name: berkekbgz
-  msix_version: 1.0.0.0
+  identity_name: 62318berkekbgz.17658C79871FF
   capabilities: "internetClient"
   logo_path: assets/logo/logo.png
-  languages: en-us
+  languages: en-us, tr-tr
+  publisher: CN=A5490F4F-4E5D-4533-AC8A-6B5DA6F167D3
 
+  context_menu_directory_id: NoCabContextMenu
+  context_menu_directory_clsid: FDDDFECC-B9ED-4837-AF07-BD891CD8B6F4
+  context_menu_background_id: NoCabContextMenu
+  context_menu_background_clsid: FDDDFECC-B9ED-4837-AF07-BD891CD8B6F4
+  context_menu_files_id: NoCabContextMenu
+  context_menu_files_clsid: FDDDFECC-B9ED-4837-AF07-BD891CD8B6F4
+  com_surrogate_server_class_id: FDDDFECC-B9ED-4837-AF07-BD891CD8B6F4
+  com_surrogate_server_name: NoCabContextMenu.dll
 
 flutter:
   uses-material-design: true

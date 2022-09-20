@@ -381,9 +381,11 @@ packages:
   msix:
     dependency: "direct main"
     description:
-      name: msix
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "."
+      ref: main
+      resolved-ref: d92972b63d777b500b7a32448e5b222979406533
+      url: "https://github.com/nocab-transfer/msix.git"
+    source: git
     version: "3.6.3"
   nested:
     dependency: transitive
