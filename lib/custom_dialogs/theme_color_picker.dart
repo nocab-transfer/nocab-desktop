@@ -35,6 +35,15 @@ class ThemeColorPickerState extends State<ThemeColorPicker> {
 
   @override
   Widget build(BuildContext context) {
+    var switchIcon = MaterialStateProperty.resolveWith<Icon?>(
+      (Set<MaterialState> states) {
+        if (states.contains(MaterialState.selected)) {
+          return Icon(Icons.check_rounded, color: Theme.of(context).colorScheme.onPrimary);
+        }
+        return Icon(Icons.close_rounded, color: Theme.of(context).colorScheme.onInverseSurface);
+      },
+    );
+
     return Dialog(
       elevation: 0,
       clipBehavior: Clip.antiAlias,
@@ -43,7 +52,7 @@ class ThemeColorPickerState extends State<ThemeColorPicker> {
       alignment: Alignment.topRight,
       child: AnimatedContainer(
         width: 500,
-        height: currentSettings.useSystemColor ? 120 : 500,
+        height: currentSettings.useSystemColor && Platform.isWindows ? 120 : 500,
         curve: Curves.ease,
         duration: const Duration(milliseconds: 300),
         decoration: BoxDecoration(
@@ -63,11 +72,12 @@ class ThemeColorPickerState extends State<ThemeColorPicker> {
                     value: currentSettings.useSystemColor,
                     onChanged: widget.onUseSystemColorChanged?.call,
                     activeColor: Theme.of(context).colorScheme.primary,
+                    thumbIcon: switchIcon,
                   ),
                 ),
               ),
             ],
-            if (!currentSettings.useSystemColor) ...[
+            if (!currentSettings.useSystemColor || !Platform.isWindows) ...[
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),

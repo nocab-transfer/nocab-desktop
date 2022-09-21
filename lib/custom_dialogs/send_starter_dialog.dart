@@ -123,19 +123,17 @@ class _SendStarterDialogState extends State<SendStarterDialog> {
                                   ),
                                 ),
                               ),
-                              ElevatedButton(
+                              ElevatedButton.icon(
                                 onPressed: () {},
+                                icon: const Icon(Icons.qr_code_rounded),
+                                label: Text(
+                                  AppLocalizations.of(context).showQrCodeButtonTitle,
+                                ),
                                 style: ElevatedButton.styleFrom(
                                   fixedSize: const Size(150, 40),
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
-                                ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Icon(Icons.qr_code_rounded),
-                                    Text(AppLocalizations.of(context).showQrCodeButtonTitle),
-                                  ],
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+                                  backgroundColor: Theme.of(context).colorScheme.primary,
+                                  foregroundColor: Theme.of(context).colorScheme.onPrimary,
                                 ),
                               ),
                             ],

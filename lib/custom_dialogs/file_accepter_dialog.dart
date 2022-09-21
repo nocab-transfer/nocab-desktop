@@ -27,7 +27,7 @@ class _FileAccepterDialogState extends State<FileAccepterDialog> {
         //height: 500,
         width: 500,
         decoration: BoxDecoration(
-          color: Theme.of(context).backgroundColor,
+          color: Theme.of(context).colorScheme.background,
           borderRadius: BorderRadius.circular(15),
         ),
         child: Padding(

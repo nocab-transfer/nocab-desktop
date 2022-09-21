@@ -110,7 +110,6 @@ class Server {
         }
       });
     }
-    print('Server started on ${serverSocket?.address.address}:${serverSocket?.port}');
 
     serverSocket?.listen((socket) {
       if (activeRequest) {

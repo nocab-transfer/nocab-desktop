@@ -46,6 +46,15 @@ class _SettingsState extends State<Settings> {
   Widget build(BuildContext context) {
     if (SettingsService().errors.isNotEmpty) return buildError();
 
+    var switchIcon = MaterialStateProperty.resolveWith<Icon?>(
+      (Set<MaterialState> states) {
+        if (states.contains(MaterialState.selected)) {
+          return Icon(Icons.check_rounded, color: Theme.of(context).colorScheme.onPrimary);
+        }
+        return Icon(Icons.close_rounded, color: Theme.of(context).colorScheme.onInverseSurface);
+      },
+    );
+
     return Dialog(
       elevation: 0,
       clipBehavior: Clip.antiAlias,
@@ -203,6 +212,7 @@ class _SettingsState extends State<Settings> {
                               caption: AppLocalizations.of(context).darkModeSettingDescription,
                               widget: Switch(
                                   value: currentSettings.darkMode,
+                                  thumbIcon: switchIcon,
                                   onChanged: (value) {
                                     SettingsService().setSettings(currentSettings.copyWith(darkMode: value));
                                     Provider.of<ThemeProvider>(context, listen: false).changeThemeMode(value ? ThemeMode.dark : ThemeMode.light);
@@ -214,6 +224,7 @@ class _SettingsState extends State<Settings> {
                               caption: AppLocalizations.of(context).useMaterialYouSettingDescription,
                               widget: Switch(
                                   value: currentSettings.useMaterial3,
+                                  thumbIcon: switchIcon,
                                   onChanged: (value) {
                                     SettingsService().setSettings(currentSettings.copyWith(useMaterial3: value));
                                     Provider.of<ThemeProvider>(context, listen: false).materialYou(value: value);
