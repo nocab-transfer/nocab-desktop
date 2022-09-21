@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_alert/flutter_platform_alert.dart';
 import 'package:nocab_desktop/custom_dialogs/file_accepter_dialog.dart';
 import 'package:nocab_desktop/models/deviceinfo_model.dart';
 import 'package:nocab_desktop/models/file_model.dart';
@@ -24,23 +25,36 @@ class Server {
 
   Server._internal();
 
-  late NetworkInterface currentInterFace;
+  late InternetAddress _selectedIp;
+
+  InternetAddress get selectedIp => _selectedIp;
+  set setSelectedIp(NetworkInterface interface) => _selectedIp = interface.addresses.firstWhere((element) => element.type == InternetAddressType.IPv4, orElse: () {
+        FlutterPlatformAlert.showAlert(
+          windowTitle: 'Warning',
+          text: 'Selected network adapter is not contain IPv4 address. Please select another network interface.',
+          options: FlutterPlatformAlertOption(additionalWindowTitleOnWindows: 'NoCab Desktop'),
+          alertStyle: AlertButtonStyle.ok,
+          iconStyle: IconStyle.warning,
+        );
+        return InternetAddress("0.0.0.0", type: InternetAddressType.IPv4);
+      });
+
   late String deviceID = "test";
   late DeviceInfo deviceInfo;
 
   Future<void> initialize() async {
     List<NetworkInterface> networkInterfaces = await NetworkInterface.list();
-    currentInterFace = networkInterfaces.firstWhere((element) => element.name == SettingsService().getSettings.networkInterfaceName, orElse: () {
+    setSelectedIp = networkInterfaces.firstWhere((element) => element.name == SettingsService().getSettings.networkInterfaceName, orElse: () {
       var networkInterface = Network.getCurrentNetworkInterface(networkInterfaces);
       SettingsService().setSettings(SettingsService().getSettings.copyWith(networkInterfaceName: networkInterface.name));
       return networkInterface;
     });
 
-    deviceInfo = DeviceInfo(name: SettingsService().getSettings.deviceName, ip: currentInterFace.addresses.first.address, port: SettingsService().getSettings.mainPort, opsystem: Platform.operatingSystemVersion, uuid: deviceID);
+    deviceInfo = DeviceInfo(name: SettingsService().getSettings.deviceName, ip: selectedIp.address, port: SettingsService().getSettings.mainPort, opsystem: Platform.operatingSystemVersion, uuid: deviceID);
     SettingsService().onSettingChanged.listen((settings) {
       deviceInfo = DeviceInfo(
         name: settings.deviceName,
-        ip: currentInterFace.addresses.first.address,
+        ip: selectedIp.address,
         port: settings.mainPort,
         opsystem: Platform.operatingSystemVersion,
         uuid: deviceID,
@@ -62,18 +76,43 @@ class Server {
     // other devices can find this device
     ServerSocket? finderSocket;
     try {
-      await ServerSocket.bind(InternetAddress.anyIPv4, SettingsService().getSettings.finderPort);
+      finderSocket = await ServerSocket.bind(InternetAddress.anyIPv4, SettingsService().getSettings.finderPort);
     } catch (e) {
-      //showDialog(context: , builder: builder)
+      FlutterPlatformAlert.showAlert(
+        windowTitle: 'Error',
+        text: 'Port ${SettingsService().getSettings.finderPort} is already in use. Please change the port in the settings.\n\n$e',
+        alertStyle: AlertButtonStyle.ok,
+        iconStyle: IconStyle.error,
+      );
     }
 
     finderSocket?.listen((socket) {
       socket.write(base64.encode(utf8.encode(json.encode(deviceInfo.toJson()))));
     });
 
-    ServerSocket serverSocket = await ServerSocket.bind(InternetAddress.anyIPv4, SettingsService().getSettings.mainPort);
+    ServerSocket? serverSocket;
+    try {
+      serverSocket = await ServerSocket.bind(InternetAddress.anyIPv4, SettingsService().getSettings.mainPort);
+    } catch (e) {
+      FlutterPlatformAlert.showCustomAlert(
+        windowTitle: 'Error',
+        text: 'Port ${SettingsService().getSettings.mainPort} is already in use. Try restarting the application.\n\nIf the problem persists, recreate settings. Recreating settings will assign an unused port.\n\n$e',
+        positiveButtonTitle: 'Quit',
+        negativeButtonTitle: 'Recreate settings file',
+        iconStyle: IconStyle.error,
+      ).then((value) async {
+        if (value == CustomButton.negativeButton) {
+          await finderSocket?.close();
+          await SettingsService().recreateSettings();
+          return;
+        } else if (value == CustomButton.positiveButton) {
+          exit(0);
+        }
+      });
+    }
+    print('Server started on ${serverSocket?.address.address}:${serverSocket?.port}');
 
-    serverSocket.listen((socket) {
+    serverSocket?.listen((socket) {
       if (activeRequest) {
         socket.write("Please try again later.");
         socket.close();
@@ -130,7 +169,7 @@ class Server {
 
     Socket socket = await Socket.connect(deviceInfo.ip, deviceInfo.port!);
     socket.write(base64.encode(utf8.encode(json.encode(ShareRequest(
-      deviceInfo: DeviceInfo(name: SettingsService().getSettings.deviceName, ip: currentInterFace.addresses.first.address, port: SettingsService().getSettings.mainPort, opsystem: Platform.operatingSystemVersion, uuid: deviceID),
+      deviceInfo: DeviceInfo(name: SettingsService().getSettings.deviceName, ip: selectedIp.address, port: SettingsService().getSettings.mainPort, opsystem: Platform.operatingSystemVersion, uuid: deviceID),
       files: files,
       transferPort: port,
       uniqueId: "test",

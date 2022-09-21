@@ -59,7 +59,7 @@ class NetworkAdapterSettings extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return _buildListTile(
                           adapters.data![index],
-                          Server().currentInterFace.addresses.first.address == adapters.data![index].addresses.first.address,
+                          SettingsService().getSettings.networkInterfaceName == adapters.data![index].name,
                           context: context,
                         );
                       },
@@ -73,6 +73,7 @@ class NetworkAdapterSettings extends StatelessWidget {
   }
 
   Widget _buildListTile(NetworkInterface interface, bool isSelected, {required BuildContext context}) {
+    var ips = interface.addresses.map((e) => e.address).toList()..sort((a, b) => a.length.compareTo(b.length));
     return Material(
       color: Colors.transparent,
       child: Padding(
@@ -80,7 +81,7 @@ class NetworkAdapterSettings extends StatelessWidget {
         child: InkWell(
           borderRadius: const BorderRadius.all(Radius.circular(10)),
           onTap: () {
-            Server().currentInterFace = interface;
+            Server().setSelectedIp = interface;
             SettingsService().setSettings(SettingsService().getSettings.copyWith(networkInterfaceName: interface.name));
             Navigator.of(context).pop();
           },
@@ -106,13 +107,25 @@ class NetworkAdapterSettings extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(interface.name, style: Theme.of(context).textTheme.titleLarge),
-                      Text(interface.addresses.first.address, style: Theme.of(context).textTheme.bodySmall),
-                    ],
+                  child: SizedBox(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(interface.name, style: Theme.of(context).textTheme.titleLarge),
+                        SizedBox(
+                          width: 450,
+                          child: ListView.builder(
+                            itemCount: ips.length,
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return Text(ips[index], style: Theme.of(context).textTheme.bodySmall);
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

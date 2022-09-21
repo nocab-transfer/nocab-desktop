@@ -26,7 +26,7 @@ class _QrState extends State<Qr> {
       initialData: SettingsService().getSettings,
       builder: (context, snapshot) {
         return QrImage(
-          data: base64.encode(utf8.encode(json.encode(DeviceInfo(name: snapshot.data?.deviceName, ip: Server().currentInterFace.addresses.first.address, port: snapshot.data?.mainPort, opsystem: Platform.operatingSystem, uuid: "").toJson()))), //server.getQr, //TODO: get qr from server
+          data: base64.encode(utf8.encode(json.encode(DeviceInfo(name: snapshot.data?.deviceName, ip: Server().selectedIp.address, port: snapshot.data?.mainPort, opsystem: Platform.operatingSystem, uuid: "").toJson()))), //server.getQr, //TODO: get qr from server
           version: QrVersions.auto,
           dataModuleStyle: const QrDataModuleStyle(color: Colors.black, dataModuleShape: QrDataModuleShape.circle),
           eyeStyle: const QrEyeStyle(color: Colors.black, eyeShape: QrEyeShape.circle),

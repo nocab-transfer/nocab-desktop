@@ -47,7 +47,7 @@ class SettingsService {
       await settingsFile.writeAsString(json.encode(_settings?.toJson()));
     } catch (e) {
       _settings = await _createNewSettings();
-      errors.add("$e\nUsing default options");
+      errors.add("$e\n\nUsing default options");
     }
   }
 
@@ -56,7 +56,7 @@ class SettingsService {
       deviceName: (await DeviceInfoPlugin().deviceInfo).deviceName,
       darkMode: RegistryService.isDarkMode(),
       useMaterial3: false,
-      mainPort: 0,
+      mainPort: await Network.getUnusedPort(),
       finderPort: 62193,
       language: Platform.localeName.split('_')[0],
       seedColor: RegistryService.getColor(),
@@ -94,7 +94,7 @@ class SettingsService {
   }
 
   String getdefaultSettingsPath() {
-    if (Platform.isWindows | !kDebugMode) return p.join(Platform.environment['APPDATA']!, r'NoCab Desktop\settings.json');
+    if (Platform.isWindows && !kDebugMode) return p.join(Platform.environment['APPDATA']!, r'NoCab Desktop\settings.json');
     return p.join(File(Platform.resolvedExecutable).parent.path, "settings.json");
   }
 }
