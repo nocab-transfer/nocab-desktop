@@ -1,7 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:nocab_desktop/custom_dialogs/loading_dialog.dart';
-import 'package:nocab_desktop/custom_dialogs/send_starter_dialog.dart';
+import 'package:nocab_desktop/custom_dialogs/loading_dialog/loading_dialog.dart';
+import 'package:nocab_desktop/custom_dialogs/send_starter_dialog/send_starter_dialog.dart';
 import 'package:nocab_desktop/l10n/generated/app_localizations.dart';
 import 'package:nocab_desktop/models/file_model.dart';
 import 'package:nocab_desktop/provider/locale_provider.dart';

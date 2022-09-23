@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:animations/animations.dart';
 import 'package:flutter/services.dart';
-import 'package:nocab_desktop/custom_dialogs/theme_color_picker.dart';
+import 'package:nocab_desktop/custom_dialogs/theme_color_picker/theme_color_picker.dart';
 import 'package:nocab_desktop/extensions/lang_code_to_name.dart';
 import 'package:nocab_desktop/l10n/generated/app_localizations.dart';
 import 'package:nocab_desktop/models/settings_model.dart';

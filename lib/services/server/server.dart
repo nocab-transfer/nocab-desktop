@@ -4,7 +4,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_alert/flutter_platform_alert.dart';
-import 'package:nocab_desktop/custom_dialogs/file_accepter_dialog.dart';
+import 'package:nocab_desktop/custom_dialogs/file_accepter_dialog/file_accepter_dialog.dart';
 import 'package:nocab_desktop/models/deviceinfo_model.dart';
 import 'package:nocab_desktop/models/file_model.dart';
 import 'package:nocab_desktop/models/settings_model.dart';

@@ -3,8 +3,8 @@ import 'dart:io';
 import 'dart:ui';
 
 import 'package:animations/animations.dart';
-import 'package:nocab_desktop/custom_dialogs/network_adapter_settings.dart';
-import 'package:nocab_desktop/custom_dialogs/send_starter_dialog.dart';
+import 'package:nocab_desktop/custom_dialogs/network_adapter_settings/network_adapter_settings.dart';
+import 'package:nocab_desktop/custom_dialogs/send_starter_dialog/send_starter_dialog.dart';
 import 'package:nocab_desktop/l10n/generated/app_localizations.dart';
 import 'package:nocab_desktop/models/deviceinfo_model.dart';
 import 'package:nocab_desktop/screens/main_screen/send_drag_drop_area.dart';
