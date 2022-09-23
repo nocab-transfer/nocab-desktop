@@ -1,14 +1,18 @@
+import 'dart:convert';
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:animations/animations.dart';
 import 'package:nocab_desktop/custom_dialogs/network_adapter_settings.dart';
 import 'package:nocab_desktop/custom_dialogs/send_starter_dialog.dart';
 import 'package:nocab_desktop/l10n/generated/app_localizations.dart';
-import 'package:nocab_desktop/screens/main_screen/qr.dart';
+import 'package:nocab_desktop/models/deviceinfo_model.dart';
 import 'package:nocab_desktop/screens/main_screen/send_drag_drop_area.dart';
 import 'package:nocab_desktop/screens/settings/settings.dart';
 import 'package:flutter/material.dart';
+import 'package:nocab_desktop/services/server/server.dart';
 import 'package:nocab_desktop/services/settings/settings.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 import 'transfers_panel.dart';
 
@@ -110,7 +114,19 @@ class _MainScreenState extends State<MainScreen> {
                                         color: Colors.white,
                                         borderRadius: BorderRadius.all(Radius.circular(20)),
                                       ),
-                                      child: const Qr(),
+                                      //QR code
+                                      child: StreamBuilder(
+                                        stream: SettingsService().onSettingChanged,
+                                        initialData: SettingsService().getSettings,
+                                        builder: (context, snapshot) {
+                                          return QrImage(
+                                            data: base64.encode(utf8.encode(json.encode(DeviceInfo(name: snapshot.data?.deviceName, ip: Server().selectedIp.address, port: snapshot.data?.mainPort, opsystem: Platform.operatingSystem, uuid: "").toJson()))), //server.getQr, //TODO: get qr from server
+                                            version: QrVersions.auto,
+                                            dataModuleStyle: const QrDataModuleStyle(color: Colors.black, dataModuleShape: QrDataModuleShape.circle),
+                                            eyeStyle: const QrEyeStyle(color: Colors.black, eyeShape: QrEyeShape.circle),
+                                          );
+                                        },
+                                      ),
                                     ),
                                   ),
                                 ),

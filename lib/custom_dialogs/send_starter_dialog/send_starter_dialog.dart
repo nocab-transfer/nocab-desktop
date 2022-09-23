@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:nocab_desktop/custom_widgets/device_finder_bloc/device_finder.dart';
 import 'package:nocab_desktop/custom_widgets/file_list/file_list.dart';
@@ -6,6 +9,7 @@ import 'package:nocab_desktop/l10n/generated/app_localizations.dart';
 import 'package:nocab_desktop/models/deviceinfo_model.dart';
 import 'package:nocab_desktop/models/file_model.dart';
 import 'package:nocab_desktop/services/server/server.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class SendStarterDialog extends StatefulWidget {
   final List<FileInfo> files;
@@ -124,7 +128,37 @@ class _SendStarterDialogState extends State<SendStarterDialog> {
                                 ),
                               ),
                               ElevatedButton.icon(
-                                onPressed: () {},
+                                onPressed: () {
+                                  showModal(
+                                    context: context,
+                                    builder: (context) {
+                                      return Dialog(
+                                        elevation: 0,
+                                        clipBehavior: Clip.antiAlias,
+                                        backgroundColor: Colors.transparent,
+                                        insetPadding: const EdgeInsets.all(64),
+                                        child: Container(
+                                          height: 250,
+                                          width: 400,
+                                          decoration: BoxDecoration(
+                                            color: Theme.of(context).colorScheme.background,
+                                            borderRadius: BorderRadius.circular(20),
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              QrImage(
+                                                data: base64.encode(utf8.encode(json.encode())), //server.getQr, //TODO: get qr from server
+                                                version: QrVersions.auto,
+                                                dataModuleStyle: const QrDataModuleStyle(color: Colors.black, dataModuleShape: QrDataModuleShape.circle),
+                                                eyeStyle: const QrEyeStyle(color: Colors.black, eyeShape: QrEyeShape.circle),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
                                 icon: const Icon(Icons.qr_code_rounded),
                                 label: Text(
                                   AppLocalizations.of(context).showQrCodeButtonTitle,
