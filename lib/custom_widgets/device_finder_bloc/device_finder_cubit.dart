@@ -41,11 +41,4 @@ class DeviceFinderCubit extends Cubit<DeviceFinderState> {
   Future<void> stopScanning() async {
     timer?.cancel();
   }
-
-  Future<bool> isDeviceStillActive(DeviceInfo device) async {
-    var socket = await Socket.connect(device.ip, 62193, timeout: const Duration(seconds: 1));
-    Uint8List data = await socket.first.timeout(const Duration(seconds: 1));
-    if (device.name == json.decode(utf8.decode(base64.decode(utf8.decode(data))))['name']) return true;
-    return false;
-  }
 }

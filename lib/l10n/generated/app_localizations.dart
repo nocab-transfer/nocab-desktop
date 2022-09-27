@@ -303,12 +303,6 @@ abstract class AppLocalizations {
   /// **'Devices'**
   String get devicesTitle;
 
-  /// No description provided for @showQrCodeButtonTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Show QR'**
-  String get showQrCodeButtonTitle;
-
   /// No description provided for @emptyDeviceListLabelText.
   ///
   /// In en, this message translates to:
@@ -320,6 +314,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Searching for devices...'**
   String get searchingDeviceLabelText;
+
+  /// No description provided for @senderQrInfoLabelText.
+  ///
+  /// In en, this message translates to:
+  /// **'Click \"Receive\" button and scan the QR code from the NoCab Mobile app'**
+  String get senderQrInfoLabelText;
+
+  /// No description provided for @serverCreatingLabelText.
+  ///
+  /// In en, this message translates to:
+  /// **'Creating server...'**
+  String get serverCreatingLabelText;
+
+  /// No description provided for @loadingLabelText.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading...'**
+  String get loadingLabelText;
+
+  /// No description provided for @waitingForConnectionLabelText.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting for connection...'**
+  String get waitingForConnectionLabelText;
 
   /// No description provided for @fileAccepterTitle.
   ///

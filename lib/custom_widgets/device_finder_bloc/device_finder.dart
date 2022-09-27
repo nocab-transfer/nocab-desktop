@@ -16,8 +16,6 @@ class DeviceFinder extends StatefulWidget {
 }
 
 class _DeviceFinderState extends State<DeviceFinder> {
-  bool isVibrated = false;
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -76,7 +74,7 @@ class _DeviceFinderState extends State<DeviceFinder> {
           return Material(
             color: Colors.transparent,
             child: InkWell(
-              onTap: widget.blockDevices.map((e) => e.name).toList().contains(devices[index].name) ? null : () => widget.onPressed?.call(devices[index]),
+              onTap: widget.blockDevices.map((e) => e.ip).toList().contains(devices[index].ip) ? null : () => widget.onPressed?.call(devices[index]),
               borderRadius: BorderRadius.circular(10),
               child: ListTile(
                 leading: Container(

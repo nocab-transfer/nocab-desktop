@@ -121,13 +121,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get devicesTitle => 'Devices';
 
   @override
-  String get showQrCodeButtonTitle => 'Show QR';
-
-  @override
   String get emptyDeviceListLabelText => 'No devices found';
 
   @override
   String get searchingDeviceLabelText => 'Searching for devices...';
+
+  @override
+  String get senderQrInfoLabelText => 'Click \"Receive\" button and scan the QR code from the NoCab Mobile app';
+
+  @override
+  String get serverCreatingLabelText => 'Creating server...';
+
+  @override
+  String get loadingLabelText => 'Loading...';
+
+  @override
+  String get waitingForConnectionLabelText => 'Waiting for connection...';
 
   @override
   String fileAccepterTitle(String deviceName, num filesLenght) {

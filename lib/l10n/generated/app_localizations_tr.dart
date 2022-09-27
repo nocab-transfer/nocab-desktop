@@ -121,13 +121,22 @@ class AppLocalizationsTr extends AppLocalizations {
   String get devicesTitle => 'Cihazlar';
 
   @override
-  String get showQrCodeButtonTitle => 'QR\'ı göster';
-
-  @override
   String get emptyDeviceListLabelText => 'Cihaz bulunamadı';
 
   @override
   String get searchingDeviceLabelText => 'Cihazlar aranıyor...';
+
+  @override
+  String get senderQrInfoLabelText => 'NoCab Mobile uygulamasında \"Al\" düğmesine tıklayın ve QR kodunu tarayın';
+
+  @override
+  String get serverCreatingLabelText => 'Sunucu oluşturuluyor...';
+
+  @override
+  String get loadingLabelText => 'Yükleniyor...';
+
+  @override
+  String get waitingForConnectionLabelText => 'Bağlantı bekleniyor...';
 
   @override
   String fileAccepterTitle(String deviceName, num filesLenght) {
