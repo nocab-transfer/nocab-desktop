@@ -41,13 +41,9 @@ class _SenderQrState extends State<SenderQr> {
       );
 
   Widget _buildInitial() {
-    return Container(
+    return SizedBox(
       height: 150,
       width: 400,
-      decoration: const BoxDecoration(
-        //border: Border.all(color: Theme.of(context).colorScheme.onBackground.withOpacity(0.2)),
-        borderRadius: BorderRadius.all(Radius.circular(8)),
-      ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -84,13 +80,9 @@ class _SenderQrState extends State<SenderQr> {
 
   Widget _buildQR(BuildContext context, String ip, int port, String verificationString, Duration currentDuration) {
     var refreshDuration = context.read<SenderQrCubit>().refreshDuration;
-    return Container(
+    return SizedBox(
       height: 150,
       width: 400,
-      decoration: const BoxDecoration(
-        //border: Border.all(color: Theme.of(context).colorScheme.onBackground.withOpacity(0.2)),
-        borderRadius: BorderRadius.all(Radius.circular(8)),
-      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
