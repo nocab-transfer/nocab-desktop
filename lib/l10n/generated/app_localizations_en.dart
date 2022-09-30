@@ -127,6 +127,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get searchingDeviceLabelText => 'Searching for devices...';
 
   @override
+  String get senderConnectionInstructionLabelText => 'Open the NoCab app on your phone and click receive.';
+
+  @override
+  String get senderConnectionSameNetworkHintText => 'Make sure both devices are on the same network.';
+
+  @override
   String get senderQrInfoLabelText => 'Click \"Receive\" button and scan the QR code from the NoCab Mobile app';
 
   @override

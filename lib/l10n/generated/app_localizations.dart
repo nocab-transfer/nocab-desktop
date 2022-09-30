@@ -315,6 +315,18 @@ abstract class AppLocalizations {
   /// **'Searching for devices...'**
   String get searchingDeviceLabelText;
 
+  /// No description provided for @senderConnectionInstructionLabelText.
+  ///
+  /// In en, this message translates to:
+  /// **'Open the NoCab app on your phone and click receive.'**
+  String get senderConnectionInstructionLabelText;
+
+  /// No description provided for @senderConnectionSameNetworkHintText.
+  ///
+  /// In en, this message translates to:
+  /// **'Make sure both devices are on the same network.'**
+  String get senderConnectionSameNetworkHintText;
+
   /// No description provided for @senderQrInfoLabelText.
   ///
   /// In en, this message translates to:

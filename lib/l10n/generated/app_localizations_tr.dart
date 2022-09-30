@@ -127,6 +127,12 @@ class AppLocalizationsTr extends AppLocalizations {
   String get searchingDeviceLabelText => 'Cihazlar aranıyor...';
 
   @override
+  String get senderConnectionInstructionLabelText => 'NoCab Mobile uygulamasını telefonunuzda açın ve Al düğmesine tıklayın.';
+
+  @override
+  String get senderConnectionSameNetworkHintText => 'Cihazların aynı ağda olduğundan emin olun.';
+
+  @override
   String get senderQrInfoLabelText => 'NoCab Mobile uygulamasında \"Al\" düğmesine tıklayın ve QR kodunu tarayın';
 
   @override

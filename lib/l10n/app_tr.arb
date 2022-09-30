@@ -36,6 +36,8 @@
     "devicesTitle": "Cihazlar",
     "emptyDeviceListLabelText": "Cihaz bulunamadı",
     "searchingDeviceLabelText": "Cihazlar aranıyor...",
+    "senderConnectionInstructionLabelText": "NoCab Mobile uygulamasını telefonunuzda açın ve Al düğmesine tıklayın.",
+    "senderConnectionSameNetworkHintText": "Cihazların aynı ağda olduğundan emin olun.",
     "senderQrInfoLabelText": "NoCab Mobile uygulamasında \"Al\" düğmesine tıklayın ve QR kodunu tarayın",
     "serverCreatingLabelText": "Sunucu oluşturuluyor...",
     "loadingLabelText": "Yükleniyor...",
