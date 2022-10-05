@@ -4,7 +4,6 @@ import 'package:animations/animations.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart';
 import 'package:nocab_desktop/custom_dialogs/theme_color_picker/theme_color_picker.dart';
-import 'package:nocab_desktop/custom_dialogs/welcome_dialog/welcome_dialog.dart';
 import 'package:nocab_desktop/extensions/lang_code_to_name.dart';
 import 'package:nocab_desktop/models/settings_model.dart';
 import 'package:nocab_desktop/provider/theme_provider.dart';
@@ -286,27 +285,6 @@ class _SettingsState extends State<Settings> {
                                   decoration: InputDecoration(
                                     border: const OutlineInputBorder(),
                                     hintText: currentSettings.finderPort.toString(),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SettingCard(
-                              title: 'settings.themeColor.title'.tr(),
-                              caption: 'settings.themeColor.description'.tr(),
-                              widget: Material(
-                                child: InkWell(
-                                  borderRadius: const BorderRadius.all(Radius.circular(10)),
-                                  onTap: () {
-                                    showModal(context: context, builder: (context) => const WelcomeDialog());
-                                  },
-                                  child: Container(
-                                    height: 50,
-                                    width: 50,
-                                    decoration: BoxDecoration(
-                                      borderRadius: const BorderRadius.all(Radius.circular(10)),
-                                      color: Theme.of(context).colorScheme.primary,
-                                    ),
-                                    child: Icon(Icons.ads_click_rounded, color: Theme.of(context).colorScheme.onPrimary),
                                   ),
                                 ),
                               ),
