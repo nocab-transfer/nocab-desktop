@@ -4,7 +4,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nocab_desktop/custom_widgets/receiver_qr_bloc/sender_qr_state.dart';
+import 'package:nocab_desktop/custom_widgets/sender_qr_bloc/sender_qr_state.dart';
 import 'package:nocab_desktop/models/deviceinfo_model.dart';
 import 'package:nocab_desktop/services/server/server.dart';
 

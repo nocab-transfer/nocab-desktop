@@ -1,9 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:nocab_desktop/custom_widgets/device_finder_bloc/device_finder.dart';
 import 'package:nocab_desktop/custom_widgets/file_list/file_list.dart';
-import 'package:nocab_desktop/custom_widgets/receiver_qr_bloc/sender_qr.dart';
+import 'package:nocab_desktop/custom_widgets/sender_qr_bloc/sender_qr.dart';
 import 'package:nocab_desktop/extensions/size_extension.dart';
-import 'package:nocab_desktop/l10n/generated/app_localizations.dart';
 import 'package:nocab_desktop/models/deviceinfo_model.dart';
 import 'package:nocab_desktop/models/file_model.dart';
 import 'package:nocab_desktop/services/server/server.dart';
@@ -67,11 +67,15 @@ class _SendStarterDialogState extends State<SendStarterDialog> {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(left: 16.0),
-                                child: Text(AppLocalizations.of(context).filesTitle, style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold)),
+                                child: Text('sender.files'.tr(), style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold)),
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(right: 16.0),
-                                child: Text(AppLocalizations.of(context).filesLengthLabelText(widget.files.length, widget.files.map((file) => file.byteSize).reduce((a, b) => a + b).formatBytes(useName: true))),
+                                child: Text(
+                                  'sender.fileCounter'.plural(widget.files.length, name: 'count', namedArgs: {
+                                    'size': widget.files.map((file) => file.byteSize).reduce((a, b) => a + b).formatBytes(useName: true),
+                                  }),
+                                ),
                               ),
                             ],
                           ),
@@ -103,7 +107,7 @@ class _SendStarterDialogState extends State<SendStarterDialog> {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(left: 16.0),
-                                child: Text(AppLocalizations.of(context).devicesTitle, style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold)),
+                                child: Text('sender.devices'.tr(), style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold)),
                               ),
                             ],
                           ),

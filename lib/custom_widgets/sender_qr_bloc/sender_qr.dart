@@ -1,10 +1,10 @@
 import 'dart:convert';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nocab_desktop/custom_widgets/receiver_qr_bloc/sender_qr_cubit.dart';
-import 'package:nocab_desktop/custom_widgets/receiver_qr_bloc/sender_qr_state.dart';
-import 'package:nocab_desktop/l10n/generated/app_localizations.dart';
+import 'package:nocab_desktop/custom_widgets/sender_qr_bloc/sender_qr_cubit.dart';
+import 'package:nocab_desktop/custom_widgets/sender_qr_bloc/sender_qr_state.dart';
 import 'package:nocab_desktop/models/deviceinfo_model.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
@@ -64,11 +64,11 @@ class _SenderQrState extends State<SenderQr> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(AppLocalizations.of(context).scanQrCodeLabelText, style: Theme.of(context).textTheme.titleMedium),
-                  Text(AppLocalizations.of(context).senderQrInfoLabelText, style: Theme.of(context).textTheme.bodySmall),
+                  Text('senderQr.title'.tr(), style: Theme.of(context).textTheme.titleMedium),
+                  Text('senderQr.instructions'.tr(), style: Theme.of(context).textTheme.bodySmall),
                   const SizedBox(height: 8),
-                  Text(AppLocalizations.of(context).serverCreatingLabelText, style: Theme.of(context).textTheme.bodySmall),
-                  Text(AppLocalizations.of(context).loadingLabelText, style: Theme.of(context).textTheme.bodyMedium),
+                  Text('senderQr.loading.title'.tr(), style: Theme.of(context).textTheme.bodySmall),
+                  Text('senderQr.loading.message'.tr(), style: Theme.of(context).textTheme.bodyMedium),
                 ],
               ),
             ),
@@ -108,11 +108,11 @@ class _SenderQrState extends State<SenderQr> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(AppLocalizations.of(context).scanQrCodeLabelText, style: Theme.of(context).textTheme.titleMedium),
-                        Text(AppLocalizations.of(context).senderQrInfoLabelText, style: Theme.of(context).textTheme.bodySmall),
+                        Text('senderQr.title'.tr(), style: Theme.of(context).textTheme.titleMedium),
+                        Text('senderQr.instructions'.tr(), style: Theme.of(context).textTheme.bodySmall),
                         const SizedBox(height: 8),
-                        Text(AppLocalizations.of(context).waitingForConnectionLabelText, style: Theme.of(context).textTheme.bodySmall),
-                        Text("$ip:$port", style: Theme.of(context).textTheme.bodyMedium),
+                        Text('senderQr.loaded.waitingConnection'.tr(), style: Theme.of(context).textTheme.bodySmall),
+                        Text('senderQr.loaded.connectionInfo'.tr(namedArgs: {'ip': ip, 'port': port.toString()}), style: Theme.of(context).textTheme.bodyMedium),
                         Text(verificationString, style: Theme.of(context).textTheme.bodySmall?.copyWith(fontStyle: FontStyle.italic, color: Theme.of(context).colorScheme.onBackground.withOpacity(0.5))),
                       ],
                     ),

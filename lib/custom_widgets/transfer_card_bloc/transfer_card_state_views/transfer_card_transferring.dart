@@ -1,8 +1,8 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:nocab_desktop/extensions/size_extension.dart';
-import 'package:nocab_desktop/l10n/generated/app_localizations.dart';
 import 'package:nocab_desktop/models/file_model.dart';
 import 'package:nocab_desktop/custom_widgets/transfer_card_bloc/transfer_card_state.dart';
 import 'package:nocab_desktop/services/file_operations/file_operations.dart';
@@ -104,7 +104,7 @@ class TransferringView extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
-                  Text(AppLocalizations.of(context).pendingLabelText),
+                  Text('mainView.transfers.card.transferring.pending'.tr()),
                   const Icon(Icons.pending_actions_rounded),
                 ],
               ),
@@ -138,8 +138,8 @@ class TransferringView extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text(AppLocalizations.of(context).speedCounter(state.speed.toStringAsFixed(2)), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
-                Text(AppLocalizations.of(context).progressCounter(state.progress.toStringAsFixed(2)), style: const TextStyle(fontSize: 14)),
+                Text('mainView.transfers.card.transferring.speed'.tr(namedArgs: {'speed': state.speed.toStringAsFixed(2)}), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                Text('mainView.transfers.card.transferring.progress'.tr(namedArgs: {'progress': state.speed.toStringAsFixed(2)}), style: const TextStyle(fontSize: 14)),
               ],
             )
           ],
@@ -182,7 +182,7 @@ class TransferringView extends StatelessWidget {
                     ? Material(
                         color: Colors.transparent,
                         child: Tooltip(
-                          message: AppLocalizations.of(context).showInFolderButtonTitle,
+                          message: 'mainView.transfers.card.showInFolder'.tr(),
                           child: InkWell(
                             borderRadius: const BorderRadius.all(Radius.circular(10)),
                             onTap: () => FileOperations.showInFolder(file),
@@ -203,7 +203,7 @@ class TransferringView extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         children: [
-                          Text(AppLocalizations.of(context).openButtonTitle),
+                          Text('mainView.transfers.card.openFile'.tr()),
                           const Icon(Icons.open_in_new_rounded),
                         ],
                       ),

@@ -1,10 +1,8 @@
 import 'package:animations/animations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:nocab_desktop/custom_dialogs/loading_dialog/loading_dialog.dart';
 import 'package:nocab_desktop/custom_dialogs/send_starter_dialog/send_starter_dialog.dart';
-import 'package:nocab_desktop/l10n/generated/app_localizations.dart';
 import 'package:nocab_desktop/models/file_model.dart';
-import 'package:nocab_desktop/provider/locale_provider.dart';
 import 'package:nocab_desktop/provider/theme_provider.dart';
 import 'package:nocab_desktop/screens/main_screen/main_screen.dart';
 import 'package:nocab_desktop/services/file_operations/file_operations.dart';
@@ -18,6 +16,7 @@ import 'package:window_manager/window_manager.dart';
 
 Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
 
   await IPC().initialize(args, onData: (data) async {
     // yeah i know this is bad but i dont know how to do it better
@@ -26,7 +25,7 @@ Future<void> main(List<String> args) async {
     }
     showDialog(
       context: Server().navigatorKey.currentContext!,
-      builder: (context) => LoadingDialog(title: AppLocalizations.of(Server().navigatorKey.currentContext!).filesLoadingLabelText),
+      builder: (context) => LoadingDialog(title: 'mainView.sender.loadingLabel'.tr()),
       barrierDismissible: false,
     );
     List<FileInfo> files = await FileOperations.convertPathsToFileInfos(data);
@@ -42,19 +41,19 @@ Future<void> main(List<String> args) async {
   await Server().initialize();
   await Server().startReceiver();
   await windowManager.ensureInitialized();
-
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider(
-        create: (_) => ThemeProvider(
-          themeMode: SettingsService().getSettings.darkMode ? ThemeMode.dark : ThemeMode.light,
-          seedColor: SettingsService().getSettings.useSystemColor ? RegistryService.getColor() : SettingsService().getSettings.seedColor,
-          useMaterial3: SettingsService().getSettings.useMaterial3,
-        ),
-      ),
-      ChangeNotifierProvider(create: (_) => LocaleProvider(Locale(SettingsService().getSettings.language), AppLocalizations.supportedLocales)),
-    ],
-    child: const MyApp(),
+  runApp(ChangeNotifierProvider(
+    create: (context) => ThemeProvider(
+      themeMode: SettingsService().getSettings.darkMode ? ThemeMode.dark : ThemeMode.light,
+      seedColor: SettingsService().getSettings.useSystemColor ? RegistryService.getColor() : SettingsService().getSettings.seedColor,
+      useMaterial3: SettingsService().getSettings.useMaterial3,
+    ),
+    child: EasyLocalization(
+      supportedLocales: const [Locale('en', 'US')],
+      path: 'assets/i18n',
+      fallbackLocale: const Locale('en'),
+      saveLocale: false,
+      child: const MyApp(),
+    ),
   ));
 
   if (args.isNotEmpty) {
@@ -62,10 +61,9 @@ Future<void> main(List<String> args) async {
     while (Server().navigatorKey.currentContext == null) {
       await Future.delayed(const Duration(milliseconds: 100));
     }
-
     showDialog(
       context: Server().navigatorKey.currentContext!,
-      builder: (context) => LoadingDialog(title: AppLocalizations.of(Server().navigatorKey.currentContext!).filesLoadingLabelText),
+      builder: (context) => LoadingDialog(title: 'mainView.sender.loadingLabel'.tr()),
       barrierDismissible: false,
     );
     List<FileInfo> files = await FileOperations.convertPathsToFileInfos(args);
@@ -83,6 +81,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.setLocale(SettingsService().getSettings.locale);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'NoCab Desktop',
@@ -91,14 +91,9 @@ class MyApp extends StatelessWidget {
       themeMode: Provider.of<ThemeProvider>(context).themeMode,
       theme: ThemeData(colorSchemeSeed: Provider.of<ThemeProvider>(context).seedColor, brightness: Brightness.light, useMaterial3: Provider.of<ThemeProvider>(context).useMaterial3),
       darkTheme: ThemeData(colorSchemeSeed: Provider.of<ThemeProvider>(context).seedColor, brightness: Brightness.dark, useMaterial3: Provider.of<ThemeProvider>(context).useMaterial3),
-      locale: Provider.of<LocaleProvider>(context).locale,
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: AppLocalizations.supportedLocales,
+      locale: context.locale,
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
     );
   }
 }

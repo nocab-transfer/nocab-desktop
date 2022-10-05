@@ -1,7 +1,6 @@
 import 'dart:io';
-
+import 'package:easy_localization/easy_localization.dart';
 import 'package:nocab_desktop/custom_widgets/file_list/file_list.dart';
-import 'package:nocab_desktop/l10n/generated/app_localizations.dart';
 import 'package:nocab_desktop/models/file_model.dart';
 import 'package:flutter/material.dart';
 import 'package:nocab_desktop/services/server/server.dart';
@@ -49,7 +48,10 @@ class _FileAccepterDialogState extends State<FileAccepterDialog> {
                 )),
               ),
               Text(
-                AppLocalizations.of(context).fileAccepterTitle(widget.request.deviceInfo.name!, widget.request.files.length),
+                //AppLocalizations.of(context).fileAccepterTitle(widget.request.deviceInfo.name!, widget.request.files.length),
+                'fileAccepter.title'.plural(widget.request.files.length, name: 'count', namedArgs: {
+                  'deviceName': widget.request.deviceInfo.name!,
+                }),
                 maxLines: 2,
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
@@ -58,7 +60,11 @@ class _FileAccepterDialogState extends State<FileAccepterDialog> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  AppLocalizations.of(context).fileAccepterInfoLabelText(widget.request.deviceInfo.ip!, widget.request.transferPort.toString()),
+                  //AppLocalizations.of(context).fileAccepterInfoLabelText(widget.request.deviceInfo.ip!, widget.request.transferPort.toString()),
+                  'fileAccepter.connectionInfo'.tr(namedArgs: {
+                    'ip': widget.request.deviceInfo.ip!,
+                    'port': widget.request.transferPort.toString(),
+                  }),
                   maxLines: 2,
                   textAlign: TextAlign.left,
                   overflow: TextOverflow.ellipsis,
@@ -87,7 +93,7 @@ class _FileAccepterDialogState extends State<FileAccepterDialog> {
                       side: BorderSide(width: 2, color: Theme.of(context).colorScheme.error),
                     ),
                     child: Text(
-                      AppLocalizations.of(context).rejectButtonTitle,
+                      'fileAccepter.rejectButton'.tr(),
                       style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.error),
                     ),
                   ),
@@ -100,7 +106,7 @@ class _FileAccepterDialogState extends State<FileAccepterDialog> {
                       backgroundColor: Theme.of(context).colorScheme.primary,
                     ),
                     child: Text(
-                      AppLocalizations.of(context).acceptButtonTitle,
+                      'fileAccepter.acceptButton'.tr(),
                       style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.background),
                     ),
                   ),

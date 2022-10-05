@@ -1,6 +1,6 @@
 import 'package:desktop_drop/desktop_drop.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:nocab_desktop/l10n/generated/app_localizations.dart';
 import 'package:nocab_desktop/models/file_model.dart';
 import 'package:nocab_desktop/services/file_operations/file_operations.dart';
 import 'package:nocab_desktop/services/file_picker_isolate/file_picker_isolate.dart';
@@ -47,7 +47,7 @@ class _SendDragDropState extends State<SendDragDrop> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      AppLocalizations.of(context).filesLoadingLabelText,
+                      'mainView.sender.loadingLabel'.tr(),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -66,7 +66,7 @@ class _SendDragDropState extends State<SendDragDrop> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Text(AppLocalizations.of(context).senderTitle, style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold)),
+                    Text('mainView.sender.title'.tr(), style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold)),
                     const SizedBox(height: 8),
                     Center(
                       child: ElevatedButton(
@@ -82,13 +82,13 @@ class _SendDragDropState extends State<SendDragDrop> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             const Icon(Icons.upload_file_rounded),
-                            Text(AppLocalizations.of(context).chooseFilesButtonTitle),
+                            Text('mainView.sender.button'.tr()),
                           ],
                         ),
                       ),
                     ),
                     const SizedBox(height: 8),
-                    Center(child: Text(AppLocalizations.of(context).dropFilesHereLabelText)),
+                    Center(child: Text('mainView.sender.dropFiles'.tr())),
                   ],
                 ),
               ),

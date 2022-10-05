@@ -1,7 +1,7 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:nocab_desktop/l10n/generated/app_localizations.dart';
 import 'package:nocab_desktop/models/settings_model.dart';
 import 'package:nocab_desktop/services/server/server.dart';
 import 'package:nocab_desktop/services/settings/settings.dart';
@@ -33,7 +33,7 @@ class NetworkAdapterSettings extends StatelessWidget {
                 children: [
                   SizedBox(
                     height: 34,
-                    child: Text(AppLocalizations.of(context).networkAdapterSettingsButtonTitle, style: Theme.of(context).textTheme.titleLarge),
+                    child: Text('mainView.receiver.networkAdapterSettings'.tr(), style: Theme.of(context).textTheme.titleLarge),
                   ),
                   Material(
                     child: InkWell(

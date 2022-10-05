@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:animations/animations.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart';
 import 'package:nocab_desktop/custom_dialogs/theme_color_picker/theme_color_picker.dart';
+import 'package:nocab_desktop/custom_dialogs/welcome_dialog/welcome_dialog.dart';
 import 'package:nocab_desktop/extensions/lang_code_to_name.dart';
-import 'package:nocab_desktop/l10n/generated/app_localizations.dart';
 import 'package:nocab_desktop/models/settings_model.dart';
-import 'package:nocab_desktop/provider/locale_provider.dart';
 import 'package:nocab_desktop/provider/theme_provider.dart';
 import 'package:nocab_desktop/screens/settings/setting_card.dart';
 import 'package:flutter/material.dart';
@@ -77,7 +77,7 @@ class _SettingsState extends State<Settings> {
               ),
               child: Stack(
                 children: [
-                  Center(child: Text(AppLocalizations.of(context).settingsTitle, style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 24, fontWeight: FontWeight.w400))),
+                  Center(child: Text('settings.title'.tr(), style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 24, fontWeight: FontWeight.w400))),
                   Align(
                     alignment: Alignment.centerRight,
                     child: Padding(
@@ -118,8 +118,8 @@ class _SettingsState extends State<Settings> {
                         child: Column(
                           children: [
                             SettingCard(
-                              title: AppLocalizations.of(context).deviceNameSettingTitle,
-                              caption: AppLocalizations.of(context).deviceNameSettingDescription,
+                              title: 'settings.deviceName.title'.tr(),
+                              caption: 'settings.deviceName.description'.tr(),
                               widget: SizedBox(
                                 width: 200,
                                 height: 70,
@@ -149,7 +149,7 @@ class _SettingsState extends State<Settings> {
                                     Material(
                                       child: Tooltip(
                                         triggerMode: TooltipTriggerMode.longPress,
-                                        message: AppLocalizations.of(context).randomNameGenerateButtonTooltip,
+                                        message: 'settings.deviceName.randomNameTooltip'.tr(),
                                         child: InkWell(
                                           borderRadius: const BorderRadius.all(Radius.circular(10)),
                                           onTap: () {
@@ -170,8 +170,8 @@ class _SettingsState extends State<Settings> {
                               ),
                             ),
                             SettingCard(
-                              title: AppLocalizations.of(context).themeColorSettingTitle,
-                              caption: AppLocalizations.of(context).themeColorSettingDescription,
+                              title: 'settings.themeColor.title'.tr(),
+                              caption: 'settings.themeColor.description'.tr(),
                               widget: Material(
                                 child: InkWell(
                                   borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -208,8 +208,8 @@ class _SettingsState extends State<Settings> {
                               ),
                             ),
                             SettingCard(
-                              title: AppLocalizations.of(context).darkModeSettingTitle,
-                              caption: AppLocalizations.of(context).darkModeSettingDescription,
+                              title: 'settings.darkMode.title'.tr(),
+                              caption: 'settings.darkMode.description'.tr(),
                               widget: Switch(
                                   value: currentSettings.darkMode,
                                   thumbIcon: switchIcon,
@@ -220,8 +220,8 @@ class _SettingsState extends State<Settings> {
                                   activeColor: Theme.of(context).colorScheme.primary),
                             ),
                             SettingCard(
-                              title: AppLocalizations.of(context).useMaterialYouSettingTitle,
-                              caption: AppLocalizations.of(context).useMaterialYouSettingDescription,
+                              title: 'settings.materialYou.title'.tr(),
+                              caption: 'settings.materialYou.description'.tr(),
                               widget: Switch(
                                   value: currentSettings.useMaterial3,
                                   thumbIcon: switchIcon,
@@ -232,23 +232,25 @@ class _SettingsState extends State<Settings> {
                                   activeColor: Theme.of(context).colorScheme.primary),
                             ),
                             SettingCard(
-                              title: AppLocalizations.of(context).languageSettingTitle,
-                              caption: AppLocalizations.of(context).languageSettingDescription,
+                              title: 'settings.language.title'.tr(),
+                              caption: 'settings.language.description'.tr(),
                               widget: SizedBox(
                                 width: 150,
                                 height: 60,
                                 child: DropdownButtonFormField(
-                                  value: Provider.of<LocaleProvider>(context).locale.languageCode,
-                                  items: AppLocalizations.supportedLocales.map((Locale value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value.languageCode,
+                                  value: context.locale, //Provider.of<LocaleProvider>(context).locale.languageCode,
+                                  items: context.supportedLocales.map((Locale value) {
+                                    return DropdownMenuItem<Locale>(
+                                      value: value,
                                       child: Text(value.languageCode.langName),
                                     );
                                   }).toList(),
                                   onChanged: (value) {
+                                    //if (value != null) context.setLocale(value);
                                     if (value != null) {
-                                      Provider.of<LocaleProvider>(context, listen: false).setLocale(Locale(value));
-                                      SettingsService().setSettings(currentSettings.copyWith(language: value));
+                                      print(value);
+                                      context.setLocale(value);
+                                      SettingsService().setSettings(currentSettings.copyWith(language: value.languageCode, country: value.countryCode));
                                     }
                                   },
                                   decoration: const InputDecoration(
@@ -259,13 +261,13 @@ class _SettingsState extends State<Settings> {
                               ),
                             ),
                             const Divider(),
-                            Text(AppLocalizations.of(context).advancedSettingsTitle, style: Theme.of(context).textTheme.titleMedium),
-                            Text(AppLocalizations.of(context).advancedSettingsDescription, textAlign: TextAlign.center),
+                            Text('settings.advanced.title'.tr(), style: Theme.of(context).textTheme.titleMedium),
+                            Text('settings.advanced.description'.tr(), textAlign: TextAlign.center),
                             const SizedBox(height: 16),
                             SettingCard(
-                              title: AppLocalizations.of(context).finderPortSettingTitle,
-                              caption: AppLocalizations.of(context).finderPortSettingDescription,
-                              helpText: AppLocalizations.of(context).finderPortSettingHint,
+                              title: 'settings.advanced.finderPort.title'.tr(),
+                              caption: 'settings.advanced.finderPort.description'.tr(),
+                              helpText: 'settings.advanced.finderPort.help'.tr(),
                               widget: SizedBox(
                                 width: 100,
                                 height: 50,
@@ -284,6 +286,27 @@ class _SettingsState extends State<Settings> {
                                   decoration: InputDecoration(
                                     border: const OutlineInputBorder(),
                                     hintText: currentSettings.finderPort.toString(),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SettingCard(
+                              title: 'settings.themeColor.title'.tr(),
+                              caption: 'settings.themeColor.description'.tr(),
+                              widget: Material(
+                                child: InkWell(
+                                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                                  onTap: () {
+                                    showModal(context: context, builder: (context) => const WelcomeDialog());
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    width: 50,
+                                    decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.all(Radius.circular(10)),
+                                      color: Theme.of(context).colorScheme.primary,
+                                    ),
+                                    child: Icon(Icons.ads_click_rounded, color: Theme.of(context).colorScheme.onPrimary),
                                   ),
                                 ),
                               ),
@@ -325,7 +348,7 @@ class _SettingsState extends State<Settings> {
               ),
               child: Stack(
                 children: [
-                  Center(child: Text(AppLocalizations.of(context).settingsTitle, style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 24, fontWeight: FontWeight.w400))),
+                  Center(child: Text('settings.title'.tr(), style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 24, fontWeight: FontWeight.w400))),
                   Align(
                     alignment: Alignment.centerRight,
                     child: Padding(

@@ -1,9 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nocab_desktop/custom_widgets/device_finder_bloc/device_finder_cubit.dart';
 import 'package:nocab_desktop/custom_widgets/device_finder_bloc/device_finder_state.dart';
 import 'package:nocab_desktop/custom_widgets/svg_color_handler/svg_color_handler.dart';
-import 'package:nocab_desktop/l10n/generated/app_localizations.dart';
 import 'package:nocab_desktop/models/deviceinfo_model.dart';
 
 class DeviceFinder extends StatefulWidget {
@@ -59,10 +59,10 @@ class _DeviceFinderState extends State<DeviceFinder> {
                 child: CircularProgressIndicator(),
               ),
             ),
-            Text(AppLocalizations.of(context).searchingDeviceLabelText, style: Theme.of(context).textTheme.titleLarge)
+            Text('deviceScanner.searching'.tr(), style: Theme.of(context).textTheme.titleLarge)
           ],
         ),
-        Text(AppLocalizations.of(context).emptyDeviceListLabelText, style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontStyle: FontStyle.italic, letterSpacing: .5)),
+        Text('deviceScanner.noDevicesFound'.tr(), style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontStyle: FontStyle.italic, letterSpacing: .5)),
         const SizedBox(height: 8),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32.0),
@@ -71,8 +71,8 @@ class _DeviceFinderState extends State<DeviceFinder> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 8),
-              Text(AppLocalizations.of(context).senderConnectionSameNetworkHintText, style: Theme.of(context).textTheme.bodySmall?.copyWith(fontStyle: FontStyle.italic)),
-              Text(AppLocalizations.of(context).senderConnectionInstructionLabelText, style: Theme.of(context).textTheme.bodySmall?.copyWith(fontStyle: FontStyle.italic)),
+              Text('deviceScanner.networkHint'.tr(), style: Theme.of(context).textTheme.bodySmall?.copyWith(fontStyle: FontStyle.italic)),
+              Text('deviceScanner.instructions'.tr(), style: Theme.of(context).textTheme.bodySmall?.copyWith(fontStyle: FontStyle.italic)),
             ],
           ),
         ),

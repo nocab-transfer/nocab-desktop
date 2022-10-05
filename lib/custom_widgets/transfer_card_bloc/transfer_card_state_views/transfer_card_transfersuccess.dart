@@ -1,8 +1,8 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:nocab_desktop/extensions/size_extension.dart';
-import 'package:nocab_desktop/l10n/generated/app_localizations.dart';
 import 'package:nocab_desktop/models/file_model.dart';
 import 'package:nocab_desktop/custom_widgets/transfer_card_bloc/transfer_card_state.dart';
 import 'package:nocab_desktop/services/file_operations/file_operations.dart';
@@ -53,7 +53,7 @@ class TransferSuccessView extends StatelessWidget {
                     ],
                   ),
                   Tooltip(
-                    message: AppLocalizations.of(context).removeButtonTooltip,
+                    message: 'mainView.transfers.card.transferSuccess.removeButtonTooltip'.tr(),
                     child: Material(
                       child: InkWell(
                         onTap: onClose,
@@ -73,7 +73,7 @@ class TransferSuccessView extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(isDownload ? AppLocalizations.of(context).receiverCardSuccessLabelText(state.files.length) : AppLocalizations.of(context).senderCardSuccessLabelText(state.files.length), style: const TextStyle(fontSize: 12)),
+                  child: Text(isDownload ? 'mainView.transfers.card.transferSuccess.receiverSuccess'.plural(state.files.length, name: 'count') : 'mainView.transfers.card.transferSuccess.senderSuccess'.plural(state.files.length, name: 'count')),
                 ),
               ),
               Padding(
@@ -124,7 +124,7 @@ class TransferSuccessView extends StatelessWidget {
             ? Material(
                 color: Colors.transparent,
                 child: Tooltip(
-                  message: AppLocalizations.of(context).showInFolderButtonTitle,
+                  message: 'mainView.transfers.card.showInFolder'.tr(),
                   child: InkWell(
                     borderRadius: const BorderRadius.all(Radius.circular(10)),
                     onTap: () => FileOperations.showInFolder(file),
@@ -145,7 +145,7 @@ class TransferSuccessView extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
-                  Text(AppLocalizations.of(context).openButtonTitle),
+                  Text('mainView.transfers.card.openFile'.tr()),
                   //Icon(Icons.arrow, size: 18),
                 ],
               ),

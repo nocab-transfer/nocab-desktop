@@ -1,0 +1,124 @@
+{
+    "mainView": {
+        "receiver": {
+            "title": "Receiver",
+            "networkAdapterSettings": "Network Adapter Settings",
+            "deviceShownAs": "Device Shown As {name}",
+            "or": "or",
+            "scanQrCode": "Scan Qr Code"
+        },
+        "settings": {
+            "title": "Settings"
+        },
+        "sender": {
+            "title": "Sender",
+            "button": "Choose Files",
+            "dropFiles": "or drop files here",
+            "loadingLabel": "Files being loaded\nPlease wait..."
+        },
+        "transfers": {
+            "title": "Transfers",
+            "emptyMessage": "There is nothing except a sea of emptiness",
+            "openOutputFolder": "Open Output File",
+            "card": {
+                "showInFolder": "Show in Folder",
+                "openFile": "Open File",
+                "transferStarted": {
+                    "message": "Transfer started\nWaiting for device to connect"
+                },
+                "transferring": {
+                    "pending": "Pending",
+                    "speed": "{speed} MB/s",
+                    "progress": "{progress}%"
+                },
+                "transferSuccess": {
+                    "removeButtonTooltip": "Remove",
+                    "receiverSuccess": {
+                        "one": "1 file received",
+                        "other": "{count} files received"
+                    },
+                    "senderSuccess": {
+                        "one": "1 file sent",
+                        "other": "{count} files sent"
+                    }
+                },
+                "transferFailed": {
+                    "removeButtonTooltip": "Remove",
+                    "message": "Transfer Failed"
+                }
+            }
+        }
+    },
+    "settings": {
+        "title": "Settings",
+        "deviceName": {
+            "title": "Device Name",
+            "description": "The name of this device as shown to other devices",
+            "randomNameTooltip": "Generate random name"
+        },
+        "themeColor": {
+            "title": "Theme Color",
+            "description": "Change the color of the application",
+            "useSystemColor": {
+                "title": "Use System Color",
+                "description": "Use the system color as the theme color"
+            }
+        },
+        "darkMode": {
+            "title": "Dark Mode",
+            "description": "Change the color of the application"
+        },
+        "materialYou": {
+            "title": "Use Material 3 Design",
+            "description": "Use Material 3 (Material You) as the theme color"
+        },
+        "language": {
+            "title": "Language",
+            "description": "Change the language of the application"
+        },
+        "advanced": {
+            "title": "Advanced Settings",
+            "description": "These options are for advanced users only. Changing these options may cause the application to malfunction.",
+            "finderPort": {
+                "title": "Finder Port",
+                "description": "The port will be used to communicate with the device you want to connect to.\nChanging this option may cause the application to malfunction.\nDefault: 62193",
+                "help": "This will take effect after restarting the application."
+            }
+        }
+    },
+    "sender": {
+        "files": "Files",
+        "fileCounter": {
+            "one": "1 file {size}",
+            "other": "{count} files {size}"
+        },
+        "devices": "Devices"
+    },
+    "deviceScanner": {
+        "searching": "Searching for devices...",
+        "noDevicesFound": "No devices found",
+        "instructions": "Open the NoCab app on your phone and click receive.",
+        "networkHint": "Make sure both devices are on the same network."
+    },
+    "senderQr": {
+        "title": "Scan QR Code",
+        "instructions": "Click \"Receive\" button and scan the QR code from the NoCab Mobile app",
+        "loading": {
+            "title": "Creating server...",
+            "message": "Please wait while the QR code is being loaded"
+        },
+        "loaded": {
+            "waitingConnection": "Waiting for connection...",
+            "connectionInfo": "Ip: {ip} Port: {port}"
+        }
+    },
+    "fileAccepter": {
+        "title": {
+            "one": "{deviceName} wants to send you a file",
+            "other": "{deviceName} wants to send you {count} files"
+        },
+        "connectionInfo": "Ip: {ip} Port: {port}",
+        "acceptButton": "Accept",
+        "rejectButton": "Reject"
+    }
+}

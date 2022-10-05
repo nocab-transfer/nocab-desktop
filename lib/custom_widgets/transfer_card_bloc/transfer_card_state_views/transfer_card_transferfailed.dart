@@ -1,6 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:nocab_desktop/custom_widgets/transfer_card_bloc/transfer_card_state.dart';
-import 'package:nocab_desktop/l10n/generated/app_localizations.dart';
 
 class TransferFailedView extends StatelessWidget {
   final TransferFailed state;
@@ -48,7 +48,7 @@ class TransferFailedView extends StatelessWidget {
                     ],
                   ),
                   Tooltip(
-                    message: AppLocalizations.of(context).removeButtonTooltip,
+                    message: 'mainView.transfers.card.transferFailed.removeButtonTooltip'.tr(),
                     child: Material(
                       child: InkWell(
                         onTap: onClose,
@@ -67,7 +67,7 @@ class TransferFailedView extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(AppLocalizations.of(context).transferErrorLabelText, style: const TextStyle(fontSize: 12)),
+                  child: Text('mainView.transfers.card.transferFailed.message'.tr(), style: const TextStyle(fontSize: 12)),
                 ),
               ),
             ],

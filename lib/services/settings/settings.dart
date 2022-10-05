@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:nocab_desktop/extensions/variables_from_base_deviceinfo.dart';
 import 'package:nocab_desktop/models/settings_model.dart';
 import 'package:nocab_desktop/services/network/network.dart';
@@ -52,13 +53,14 @@ class SettingsService {
   }
 
   Future<SettingsModel> _createNewSettings() async {
+    var rawLocale = Platform.localeName.split('.')[0];
     return SettingsModel(
       deviceName: (await DeviceInfoPlugin().deviceInfo).deviceName,
       darkMode: RegistryService.isDarkMode(),
       useMaterial3: true,
       mainPort: await Network.getUnusedPort(),
       finderPort: 62193,
-      language: Platform.localeName.split('_')[0],
+      locale: rawLocale.length == 5 ? Locale(rawLocale.substring(0, 2), rawLocale.substring(3, 5)) : Locale(rawLocale),
       seedColor: RegistryService.getColor(),
       useSystemColor: Platform.isWindows,
       networkInterfaceName: Network.getCurrentNetworkInterface(await NetworkInterface.list()).name,

@@ -1,7 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:nocab_desktop/custom_widgets/svg_color_handler/svg_color_handler.dart';
 import 'package:nocab_desktop/custom_widgets/transfer_card_bloc/transfer_card.dart';
 import 'package:flutter/material.dart';
-import 'package:nocab_desktop/l10n/generated/app_localizations.dart';
 import 'package:nocab_desktop/services/file_operations/file_operations.dart';
 import 'package:nocab_desktop/services/server/server.dart';
 import 'package:nocab_desktop/services/transfer/transfer.dart';
@@ -41,11 +41,11 @@ class _TransfersState extends State<Transfers> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(AppLocalizations.of(context).transfersTitle, style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold)),
+                Text('mainView.transfers.title'.tr(), style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold)),
                 TextButton.icon(
                   onPressed: FileOperations.openOutputFolder,
                   icon: const Icon(Icons.folder_outlined),
-                  label: Text(AppLocalizations.of(context).openOutputFolderButtonTitle),
+                  label: Text('mainView.transfers.openOutputFolder'.tr(), style: TextStyle(color: Theme.of(context).colorScheme.primary)),
                 ),
               ],
             ),
@@ -92,7 +92,7 @@ class _TransfersState extends State<Transfers> {
           ),
           const SizedBox(height: 30),
           Text(
-            AppLocalizations.of(context).noTransferLabelText,
+            'mainView.transfers.emptyMessage'.tr(),
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.primary),
             textAlign: TextAlign.center,
           ),

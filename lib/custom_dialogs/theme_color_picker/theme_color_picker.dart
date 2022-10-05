@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:nocab_desktop/l10n/generated/app_localizations.dart';
 import 'package:nocab_desktop/models/settings_model.dart';
 import 'package:nocab_desktop/screens/settings/setting_card.dart';
 import 'package:nocab_desktop/services/settings/settings.dart';
@@ -66,8 +66,8 @@ class ThemeColorPickerState extends State<ThemeColorPicker> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SettingCard(
-                  title: AppLocalizations.of(context).themeColorUseSystemColorSettingTitle,
-                  caption: AppLocalizations.of(context).themeColorUseSystemColorSettingDescription,
+                  title: 'settings.themeColor.useSystemColor.title'.tr(),
+                  caption: 'settings.themeColor.useSystemColor.description'.tr(),
                   widget: Switch(
                     value: currentSettings.useSystemColor,
                     onChanged: widget.onUseSystemColorChanged?.call,

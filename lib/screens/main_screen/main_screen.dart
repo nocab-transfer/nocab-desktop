@@ -3,9 +3,9 @@ import 'dart:io';
 import 'dart:ui';
 
 import 'package:animations/animations.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:nocab_desktop/custom_dialogs/network_adapter_settings/network_adapter_settings.dart';
 import 'package:nocab_desktop/custom_dialogs/send_starter_dialog/send_starter_dialog.dart';
-import 'package:nocab_desktop/l10n/generated/app_localizations.dart';
 import 'package:nocab_desktop/models/deviceinfo_model.dart';
 import 'package:nocab_desktop/screens/main_screen/send_drag_drop_area.dart';
 import 'package:nocab_desktop/screens/settings/settings.dart';
@@ -51,11 +51,11 @@ class _MainScreenState extends State<MainScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(AppLocalizations.of(context).receiverTitle, style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold)),
+                              Text('mainView.receiver.title'.tr(), style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold)),
                               TextButton.icon(
                                 onPressed: () => showDialog(context: context, builder: (context) => const NetworkAdapterSettings()),
                                 icon: const Icon(Icons.wifi_find_rounded),
-                                label: Text(AppLocalizations.of(context).networkAdapterSettingsButtonTitle),
+                                label: Text('mainView.receiver.networkAdapterSettings'.tr()),
                               ),
                             ],
                           ),
@@ -76,12 +76,12 @@ class _MainScreenState extends State<MainScreen> {
                                         return RichText(
                                           textAlign: TextAlign.center,
                                           text: TextSpan(
-                                            text: AppLocalizations.of(context).deviceShownAsLabelText("split").split("split")[0],
+                                            text: 'mainView.receiver.deviceShownAs'.tr(namedArgs: {'name': "split"}).split("split")[0],
                                             style: Theme.of(context).textTheme.titleLarge,
                                             children: [
                                               TextSpan(text: snapshot.data?.deviceName.toUpperCase() ?? "", style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold)),
                                               TextSpan(
-                                                text: AppLocalizations.of(context).deviceShownAsLabelText("split").split("split")[1],
+                                                text: 'mainView.receiver.deviceShownAs'.tr(namedArgs: {'name': "split"}).split("split")[1],
                                                 style: Theme.of(context).textTheme.titleLarge,
                                               ),
                                             ],
@@ -92,11 +92,11 @@ class _MainScreenState extends State<MainScreen> {
                                   ],
                                 ),
                                 Text(
-                                  AppLocalizations.of(context).orLabelText,
+                                  'mainView.receiver.or'.tr(),
                                   style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
                                 ),
                                 Text(
-                                  AppLocalizations.of(context).scanQrCodeLabelText,
+                                  'mainView.receiver.scanQrCode'.tr(),
                                   style: const TextStyle(fontSize: 20),
                                 ),
                                 Container(
@@ -153,7 +153,7 @@ class _MainScreenState extends State<MainScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            Text(AppLocalizations.of(context).settingsTitle, style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold)),
+                            Text('mainView.settings.title'.tr(), style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold)),
                             const SizedBox(height: 8),
                             Center(
                               child: ElevatedButton(
