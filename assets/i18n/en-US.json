@@ -66,11 +66,11 @@
         },
         "darkMode": {
             "title": "Dark Mode",
-            "description": "Change the color of the application"
+            "description": "Change the theme of the application"
         },
         "materialYou": {
             "title": "Use Material 3 Design",
-            "description": "Use Material 3 (Material You) as the theme color"
+            "description": "Use Material 3 (Material You) as the theme"
         },
         "language": {
             "title": "Language",
