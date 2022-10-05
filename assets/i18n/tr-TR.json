@@ -1,0 +1,124 @@
+{
+    "mainView": {
+        "receiver": {
+            "title": "Alıcı",
+            "networkAdapterSettings": "Ağ Bağdaştırıcı Ayarları",
+            "deviceShownAs": "Cihaz {name} olarak gözüküyor",
+            "or": "ya da",
+            "scanQrCode": "QR kodunu tara"
+        },
+        "settings": {
+            "title": "Ayarlar"
+        },
+        "sender": {
+            "title": "Gönder",
+            "button": "Dosyaları seç",
+            "dropFiles": "ya da buraya sürükle",
+            "loadingLabel": "Dosyalar yükleniyor\nLütfen bekleyin..."
+        },
+        "transfers": {
+            "title": "Dosya Aktarımları",
+            "emptyMessage": "Burada sessizlikten başka bir şey yok",
+            "openOutputFolder": "Çıkış klasörünü aç",
+            "card": {
+                "showInFolder": "Klasörde göster",
+                "openFile": "Dosyayı aç",
+                "transferStarted": {
+                    "message": "Dosya aktarımı başladı\nCihazın bağlanması bekleniyor"
+                },
+                "transferring": {
+                    "pending": "Bekliyor",
+                    "speed": "{speed} MB/s",
+                    "progress": "{progress}%"
+                },
+                "transferSuccess": {
+                    "removeButtonTooltip": "Kaldır",
+                    "receiverSuccess": {
+                        "one": "1 dosya alındı",
+                        "other": "{count} dosya alındı"
+                    },
+                    "senderSuccess": {
+                        "one": "1 dosya gönderildi",
+                        "other": "{count} dosya gönderildi"
+                    }
+                },
+                "transferFailed": {
+                    "removeButtonTooltip": "Kaldır",
+                    "message": "Dosya aktarımı başarısız 😞"
+                }
+            }
+        }
+    },
+    "settings": {
+        "title": "Ayarlar",
+        "deviceName": {
+            "title": "Cihaz Adı",
+            "description": "Diğer cihazların göreceği ad",
+            "randomNameTooltip": "Rastgele isim oluştur"
+        },
+        "themeColor": {
+            "title": "Tema Rengi",
+            "description": "Uygulamanın rengini değiştir",
+            "useSystemColor": {
+                "title": "Sistem Rengini Kullan",
+                "description": "Sistem rengini uygulama teması olarak kullan"
+            }
+        },
+        "darkMode": {
+            "title": "Koyu Tema",
+            "description": "Uygulama temasını değiştir"
+        },
+        "materialYou": {
+            "title": "Materyal 3 Dizaynı Kullan",
+            "description": "Materyal 3 (Material You) dizaynını kullan "
+        },
+        "language": {
+            "title": "Dil",
+            "description": "Uygulamanın dilini değiştir"
+        },
+        "advanced": {
+            "title": "Gelişmiş Ayarlar",
+            "description": "Bu ayarlar deneyimli kullanıcılar içindir. Bu ayarlar uygulamayı bozabilir",
+            "finderPort": {
+                "title": "Tarayıcı Port",
+                "description": "Port telefonunuz ile iletişim için kullanılacak.\nBu ayarı değiştirmek uygulamayı bozabilir.\nVarsayılan 62193",
+                "help": "Bu ayar uygulamayı yeniden başlattığınızda etkin olacak"
+            }
+        }
+    },
+    "sender": {
+        "files": "Dosyalar",
+        "fileCounter": {
+            "one": "1 dosya {size}",
+            "other": "{count} dosya {size}"
+        },
+        "devices": "Cihazlar"
+    },
+    "deviceScanner": {
+        "searching": "Cihazlar aranıyor...",
+        "noDevicesFound": "Cihaz bulunamadı",
+        "instructions": "Telefonunuzda NoCab uygulamasını açın ve Al düğmesine tıklayın.",
+        "networkHint": "İki cihazın da aynı ağda bulunduğundan emin olun."
+    },
+    "senderQr": {
+        "title": "QR Kodu Tara",
+        "instructions": "NoCab uygulamasında \"Al\" düğmesine tıklayın ve QR kodu tarayın.",
+        "loading": {
+            "title": "Sunucu oluşturuluyor...",
+            "message": "Lütfen QR kod yüklenirken bekleyin."
+        },
+        "loaded": {
+            "waitingConnection": "Bağlantı bekleniyor...",
+            "connectionInfo": "İnternet Adresi: {ip} Port: {port}"
+        }
+    },
+    "fileAccepter": {
+        "title": {
+            "one": "{deviceName} sana bir dosya göndermek istiyor",
+            "other": "{deviceName} sana {count} dosya göndermek istiyor"
+        },
+        "connectionInfo": "İnternet Adresi: {ip} Port: {port}",
+        "acceptButton": "Kabul Et",
+        "rejectButton": "Reddet"
+    }
+}

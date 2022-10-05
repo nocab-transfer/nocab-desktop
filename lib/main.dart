@@ -48,7 +48,7 @@ Future<void> main(List<String> args) async {
       useMaterial3: SettingsService().getSettings.useMaterial3,
     ),
     child: EasyLocalization(
-      supportedLocales: const [Locale('en', 'US')],
+      supportedLocales: const [Locale('en', 'US'), Locale('tr', 'TR')],
       path: 'assets/i18n',
       fallbackLocale: const Locale('en'),
       saveLocale: false,
