@@ -245,9 +245,7 @@ class _SettingsState extends State<Settings> {
                                     );
                                   }).toList(),
                                   onChanged: (value) {
-                                    //if (value != null) context.setLocale(value);
                                     if (value != null) {
-                                      print(value);
                                       context.setLocale(value);
                                       SettingsService().setSettings(currentSettings.copyWith(language: value.languageCode, country: value.countryCode));
                                     }

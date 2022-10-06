@@ -12,7 +12,6 @@ class RegistryService {
       if (value == null) return const Color(0xFF6750A4);
       return Color(value);
     } else {
-      // TODO: implement for other platforms
       return const Color(0xFF6750A4);
     }
   }

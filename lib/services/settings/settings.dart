@@ -32,7 +32,8 @@ class SettingsService {
     return _settings!;
   }
 
-  Future<void> initialize() async {
+  // returns true if settings creatings for the first time
+  Future<bool> initialize() async {
     try {
       File settingsFile = File(getdefaultSettingsPath());
 
@@ -40,15 +41,17 @@ class SettingsService {
         var settings = SettingsModel.fromJson(json.decode(await settingsFile.readAsString()));
         if (!(await Directory(settings.downloadPath).exists())) throw p.PathException("Download path does not exist\n${settings.downloadPath}");
         _settings = settings;
-        return;
+        return false;
       }
 
       await settingsFile.create(recursive: true);
       _settings = await _createNewSettings();
       await settingsFile.writeAsString(json.encode(_settings?.toJson()));
+      return true;
     } catch (e) {
       _settings = await _createNewSettings();
       errors.add("$e\n\nUsing default options");
+      return false;
     }
   }
 

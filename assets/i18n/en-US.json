@@ -1,4 +1,56 @@
 {
+    "welcomeDialog": {
+        "nextButton": "Next",
+        "finishButton": "Finish",
+        "welcomePage": {
+            "title": "Welcome to NoCab Desktop!",
+            "description": "Nocab Desktop is a file transfer application that allows you to transfer files between your devices without any server or third party service.\nIt is completely free and open source.",
+            "description2": "Click next button below!",
+            "madeWith": "Made with {flutterIcon}",
+            "builtBy": "Built with ❤️ by {author}"
+        },
+        "noCabMobilePage": {
+            "title": "Meet NoCab Mobile!",
+            "description": "NoCab Mobile is required to connect with your phone\nUnfortunetaly there is no ios application 😔",
+            "description2": "Download the mobile application for android!",
+            "instructions": {
+                "step1": "1- Go to {link}",
+                "step2": "2- Download the latest version of mobile application",
+                "step3": "3- Install the application on your phone"
+            }
+        },
+        "networkAdapterPage": {
+            "title": "Your Network",
+            "description": "NoCab uses your local ip to connect another devices.\nIf network adapter setted wrong the application will not work.",
+            "description2": "Make sure that your network adapter is setted correctly.",
+            "changeButton": "Change",
+            "hint": "You will be able to change from home screen"
+        },
+        "useInstructions": {
+            "title": "So how to use NoCab?",
+            "hint": "That's it! You can now send files between your devices.",
+            "instructions": {
+                "step1": "Make sure that your network adapter is setted correctly.",
+                "step2": "Open the NoCab on both devices.",
+                "step3": "Click on the send button on the device you want to send the file from",
+                "step4": "Click on the receive button on the device you want to receive the file from (no need for desktop application)"
+            }
+        },
+        "readyPage": {
+            "title": "Now You Are READY!",
+            "description": "Click finish button to start.",
+            "references": {
+                "githubLinks": "Github Links",
+                "mobile": "NoCab Mobile",
+                "desktop": "NoCab Desktop",
+                "sponsorToMe": "Sponsor to me",
+                "fromGithub": "from Github",
+                "fromBuymeacoffee": "from buymeacoffee",
+                "contactText": "If you have any questions, feel free to contact me.",
+                "email": "Email"
+            }
+        }
+    },
     "mainView": {
         "receiver": {
             "title": "Receiver",

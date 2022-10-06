@@ -1,14 +1,17 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:nocab_desktop/custom_dialogs/welcome_dialog/pages/network_adapter_info_page.dart';
 import 'package:nocab_desktop/custom_dialogs/welcome_dialog/pages/nocab_mobile_page.dart';
 import 'package:nocab_desktop/custom_dialogs/welcome_dialog/pages/use_instructions.dart';
 import 'package:nocab_desktop/custom_dialogs/welcome_dialog/pages/welcome_page.dart';
+import 'package:nocab_desktop/custom_dialogs/welcome_dialog/pages/you_are_ready_page.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class WelcomeDialog extends StatefulWidget {
-  const WelcomeDialog({Key? key}) : super(key: key);
+  final bool createdFromMain;
+  const WelcomeDialog({Key? key, this.createdFromMain = false}) : super(key: key);
 
   @override
   State<WelcomeDialog> createState() => _WelcomeDialogState();
@@ -18,14 +21,20 @@ class _WelcomeDialogState extends State<WelcomeDialog> {
   final PageController _pageController = PageController();
 
   int currentPage = 0;
-  final List<Widget> pages = [const WelcomePage(), const NoCabMobilePage(), const UseInstructions(), const NetworkAdapterInfoPage(), ...List.generate(5, (index) => Center(child: Text(index.toString())))];
+  final List<Widget> pages = [
+    const WelcomePage(),
+    const NoCabMobilePage(),
+    const NetworkAdapterInfoPage(),
+    const UseInstructions(),
+    const YouAreReadyPage(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
         child: WillPopScope(
-          onWillPop: () async => true, // TODO
+          onWillPop: () async => !widget.createdFromMain,
           child: Dialog(
             clipBehavior: Clip.antiAlias,
             backgroundColor: Colors.transparent,
@@ -76,7 +85,7 @@ class _WelcomeDialogState extends State<WelcomeDialog> {
                           fixedSize: const Size(150, 50),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
                         ),
-                        child: Text(currentPage == pages.length - 1 ? "Finish" : "Next"),
+                        child: Text(currentPage == pages.length - 1 ? "welcomeDialog.finishButton".tr() : "welcomeDialog.nextButton".tr()),
                       ),
                     ),
                   ),

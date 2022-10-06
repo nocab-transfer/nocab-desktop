@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -36,11 +37,11 @@ class _NoCabMobilePageState extends State<NoCabMobilePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Meet Nocab Mobile!", style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600)),
+            Text("welcomeDialog.noCabMobilePage.title".tr(), style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600)),
             const SizedBox(height: 20),
-            Text("NoCab Mobile is required to connect with your phone\nUnfortunetaly there is no ios application 😔", style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w400)),
+            Text("welcomeDialog.noCabMobilePage.description".tr(), style: Theme.of(context).textTheme.bodyLarge),
             const SizedBox(height: 20),
-            Text("Download the mobile application for android:", style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w400)),
+            Text("welcomeDialog.noCabMobilePage.description2".tr(), style: Theme.of(context).textTheme.bodyLarge),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -49,17 +50,17 @@ class _NoCabMobilePageState extends State<NoCabMobilePage> {
                   children: [
                     Text.rich(
                       TextSpan(
-                        text: "1- Go to ",
+                        text: "welcomeDialog.noCabMobilePage.instructions.step1".tr().split('{link}')[0],
                         children: [
-                          WidgetSpan(child: InkWell(onTap: () => launchUrlString(mobileAppLink), child: Text("NoCab Mobile Github", style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.blue, fontWeight: FontWeight.w600)))),
-                          const TextSpan(text: ".\t"),
+                          WidgetSpan(child: InkWell(onTap: () => launchUrlString(mobileAppLink), child: Text("NoCab Mobile Github Releases", style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.w600)))),
+                          TextSpan(text: "${'welcomeDialog.noCabMobilePage.instructions.step1'.tr().split('{link}')[1]}.\t"),
                           WidgetSpan(child: InkWell(onTap: () => Clipboard.setData(ClipboardData(text: mobileAppLink)), child: const Icon(Icons.copy_rounded, size: 20))),
                         ],
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ),
-                    Text("2- Download the latest version of mobile application.", style: Theme.of(context).textTheme.bodyMedium),
-                    Text("3- Install the application.", style: Theme.of(context).textTheme.bodyMedium),
+                    Text("welcomeDialog.noCabMobilePage.instructions.step2".tr(), style: Theme.of(context).textTheme.bodyMedium),
+                    Text("welcomeDialog.noCabMobilePage.instructions.step3".tr(), style: Theme.of(context).textTheme.bodyMedium),
                   ],
                 ),
                 Tooltip(

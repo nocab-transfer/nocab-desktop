@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class UseInstructions extends StatefulWidget {
@@ -9,6 +10,12 @@ class UseInstructions extends StatefulWidget {
 
 class _UseInstructionsState extends State<UseInstructions> {
   var opacity = 0.0;
+  final List<String> instructions = [
+    "welcomeDialog.useInstructions.instructions.step1".tr(),
+    "welcomeDialog.useInstructions.instructions.step2".tr(),
+    "welcomeDialog.useInstructions.instructions.step3".tr(),
+    "welcomeDialog.useInstructions.instructions.step4".tr(),
+  ];
 
   @override
   void initState() {
@@ -33,14 +40,25 @@ class _UseInstructionsState extends State<UseInstructions> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("So how to use NoCab?", style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600)),
+            Text("welcomeDialog.useInstructions.title".tr(), style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600)),
             const SizedBox(height: 20),
             // same network
-            Text("1- Make sure that both devices are connected to the same network.", style: Theme.of(context).textTheme.bodyLarge),
-            Text("2- Open the app on both devices.", style: Theme.of(context).textTheme.bodyLarge),
-            Text("3- Click on the send button on the device you want to send the file from.", style: Theme.of(context).textTheme.bodyLarge),
-            Text("4- Click on the receive button on the device you want to receive the file.", style: Theme.of(context).textTheme.bodyLarge),
-            Text("That's it! You can now send files between your devices.", style: Theme.of(context).textTheme.bodyLarge),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: instructions.length,
+              itemBuilder: (context, index) => Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Row(
+                  children: [
+                    Text("${index + 1}. ", style: Theme.of(context).textTheme.bodyLarge),
+                    Expanded(child: Text(instructions[index], style: Theme.of(context).textTheme.bodyLarge)),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            Text("welcomeDialog.useInstructions.hint".tr(), style: Theme.of(context).textTheme.bodyLarge),
           ],
         ),
       ),

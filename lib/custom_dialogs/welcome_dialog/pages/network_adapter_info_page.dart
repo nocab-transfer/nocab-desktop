@@ -1,7 +1,8 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:qr_flutter/qr_flutter.dart';
-import 'package:url_launcher/url_launcher_string.dart';
+import 'package:nocab_desktop/custom_dialogs/network_adapter_settings/network_adapter_settings.dart';
+import 'package:nocab_desktop/services/server/server.dart';
+import 'package:nocab_desktop/services/settings/settings.dart';
 
 class NetworkAdapterInfoPage extends StatefulWidget {
   const NetworkAdapterInfoPage({Key? key}) : super(key: key);
@@ -12,7 +13,7 @@ class NetworkAdapterInfoPage extends StatefulWidget {
 
 class _NetworkAdapterInfoPageState extends State<NetworkAdapterInfoPage> {
   var opacity = 0.0;
-  final String mobileAppLink = "https://github.com/nocab-transfer/nocab-mobile/releases";
+
   @override
   void initState() {
     super.initState();
@@ -36,57 +37,75 @@ class _NetworkAdapterInfoPageState extends State<NetworkAdapterInfoPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Meet Nocab Mobile!", style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600)),
+            Text("Your Network", style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600)),
             const SizedBox(height: 20),
-            Text("NoCab Mobile is required to connect with your phone\nUnfortunetaly there is no ios application 😔", style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w400)),
+            Text("NoCab uses your local ip to connect another devices.\nIf network adapter setted wrong the application will not work.", style: Theme.of(context).textTheme.bodyLarge),
             const SizedBox(height: 20),
-            Text("Download the mobile application for android:", style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w400)),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text.rich(
-                      TextSpan(
-                        text: "1- Go to ",
-                        children: [
-                          WidgetSpan(child: InkWell(onTap: () => launchUrlString(mobileAppLink), child: Text("NoCab Mobile Github", style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.blue, fontWeight: FontWeight.w600)))),
-                          const TextSpan(text: ".\t"),
-                          WidgetSpan(child: InkWell(onTap: () => Clipboard.setData(ClipboardData(text: mobileAppLink)), child: const Icon(Icons.copy_rounded, size: 20))),
-                        ],
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                    ),
-                    Text("2- Download the latest version of mobile application.", style: Theme.of(context).textTheme.bodyMedium),
-                    Text("3- Install the application.", style: Theme.of(context).textTheme.bodyMedium),
-                  ],
-                ),
-                Tooltip(
-                  message: mobileAppLink,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: const BorderRadius.all(Radius.circular(8)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Theme.of(context).colorScheme.primary.withOpacity(0.12),
-                          blurRadius: 10,
-                          spreadRadius: 5,
-                        ),
-                      ],
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: QrImage(
-                        data: mobileAppLink,
-                        size: 120,
-                      ),
+            Text("Make sure that your network adapter is setted correctly.", style: Theme.of(context).textTheme.bodyLarge),
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    color: Theme.of(context).colorScheme.surfaceVariant,
+                    border: Border.all(
+                      color: Theme.of(context).colorScheme.primary,
+                      width: 1,
                     ),
                   ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: 50,
+                        width: 5,
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.primary,
+                          borderRadius: const BorderRadius.all(Radius.circular(10)),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SizedBox(
+                          width: 450,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(
+                                width: 300,
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(SettingsService().getSettings.networkInterfaceName, style: Theme.of(context).textTheme.titleLarge, overflow: TextOverflow.ellipsis),
+                                    Text(Server().selectedIp.address, style: Theme.of(context).textTheme.bodySmall),
+                                  ],
+                                ),
+                              ),
+                              ElevatedButton(
+                                onPressed: () => showModal(context: context, builder: (context) => const NetworkAdapterSettings()).then((value) => setState(() {})),
+                                style: ElevatedButton.styleFrom(
+                                  foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                                  backgroundColor: Theme.of(context).colorScheme.primary,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                ),
+                                child: const Text("Change"),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ],
+              ),
             ),
+            const SizedBox(height: 20),
+            Text("You will be able to change from home screen.", style: Theme.of(context).textTheme.bodyLarge),
           ],
         ),
       ),

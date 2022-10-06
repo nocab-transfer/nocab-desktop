@@ -2,6 +2,7 @@ import 'package:animations/animations.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:nocab_desktop/custom_dialogs/loading_dialog/loading_dialog.dart';
 import 'package:nocab_desktop/custom_dialogs/send_starter_dialog/send_starter_dialog.dart';
+import 'package:nocab_desktop/custom_dialogs/welcome_dialog/welcome_dialog.dart';
 import 'package:nocab_desktop/models/file_model.dart';
 import 'package:nocab_desktop/provider/theme_provider.dart';
 import 'package:nocab_desktop/screens/main_screen/main_screen.dart';
@@ -18,29 +19,12 @@ Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
 
-  await IPC().initialize(args, onData: (data) async {
-    // yeah i know this is bad but i dont know how to do it better
-    while (Server().navigatorKey.currentContext == null) {
-      await Future.delayed(const Duration(milliseconds: 100));
-    }
-    showDialog(
-      context: Server().navigatorKey.currentContext!,
-      builder: (context) => LoadingDialog(title: 'mainView.sender.loadingLabel'.tr()),
-      barrierDismissible: false,
-    );
-    List<FileInfo> files = await FileOperations.convertPathsToFileInfos(data);
-    Navigator.pop(Server().navigatorKey.currentContext!);
-    showModal(
-      context: Server().navigatorKey.currentContext!,
-      configuration: const FadeScaleTransitionConfiguration(barrierDismissible: false),
-      builder: ((context) => SendStarterDialog(files: files)),
-    );
-  });
-
-  await SettingsService().initialize();
+  var isFirstTime = await SettingsService().initialize();
+  await IPC().initialize(args, onData: (data) async => _loadFiles(data));
   await Server().initialize();
   await Server().startReceiver();
   await windowManager.ensureInitialized();
+
   runApp(ChangeNotifierProvider(
     create: (context) => ThemeProvider(
       themeMode: SettingsService().getSettings.darkMode ? ThemeMode.dark : ThemeMode.light,
@@ -56,22 +40,15 @@ Future<void> main(List<String> args) async {
     ),
   ));
 
-  if (args.isNotEmpty) {
-    // ugh this is kinda dirty
+  if (args.isNotEmpty && !isFirstTime) _loadFiles(args);
+  if (isFirstTime) {
     while (Server().navigatorKey.currentContext == null) {
       await Future.delayed(const Duration(milliseconds: 100));
     }
-    showDialog(
+
+    await showDialog(
       context: Server().navigatorKey.currentContext!,
-      builder: (context) => LoadingDialog(title: 'mainView.sender.loadingLabel'.tr()),
-      barrierDismissible: false,
-    );
-    List<FileInfo> files = await FileOperations.convertPathsToFileInfos(args);
-    Navigator.pop(Server().navigatorKey.currentContext!);
-    showModal(
-      context: Server().navigatorKey.currentContext!,
-      configuration: const FadeScaleTransitionConfiguration(barrierDismissible: false),
-      builder: ((context) => SendStarterDialog(files: files)),
+      builder: (context) => const WelcomeDialog(createdFromMain: true),
     );
   }
 }
@@ -96,4 +73,23 @@ class MyApp extends StatelessWidget {
       supportedLocales: context.supportedLocales,
     );
   }
+}
+
+Future<void> _loadFiles(List<String> paths) async {
+  // yeah i know this is bad but i dont know how to do it better
+  while (Server().navigatorKey.currentContext == null) {
+    await Future.delayed(const Duration(milliseconds: 100));
+  }
+  showDialog(
+    context: Server().navigatorKey.currentContext!,
+    builder: (context) => LoadingDialog(title: 'mainView.sender.loadingLabel'.tr()),
+    barrierDismissible: false,
+  );
+  List<FileInfo> files = await FileOperations.convertPathsToFileInfos(paths);
+  Navigator.pop(Server().navigatorKey.currentContext!);
+  showModal(
+    context: Server().navigatorKey.currentContext!,
+    configuration: const FadeScaleTransitionConfiguration(barrierDismissible: false),
+    builder: ((context) => SendStarterDialog(files: files)),
+  );
 }
