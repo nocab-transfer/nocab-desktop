@@ -1,4 +1,56 @@
 {
+    "welcomeDialog": {
+        "nextButton": "Sonraki",
+        "finishButton": "Bitir",
+        "welcomePage": {
+            "title": "NoCab Uygulamasına Hoş Geldiniz!",
+            "description": "NoCab Desktop herhangi bir 3. parti yazılım veya sunucu olmadan cihazlarınız arasında dosya transferi gerçekleştiren bir uygulamadır. \nTamamen ücretsiz ve açık kaynaktır.",
+            "description2": "Devam etmek için sonraki butonuna tıklayınız.",
+            "madeWith": "{flutterIcon} ile yapıldı",
+            "builtBy": "{author} tarafından ❤️ ile oluşturuldu"
+        },
+        "noCabMobilePage": {
+            "title": "NoCab Mobile Uygulaması İle Tanışın!",
+            "description": "Telefon bağlantısı için NoCab Mobile gereklidir.\nHenüz IOS uygulaması mevcut değil. 😔",
+            "description2": "Android cihazınıza uygulamayı indirin.",
+            "instructions": {
+                "step1": "1- Şuraya gidin {link}",
+                "step2": "2- En son sürümü telefonunuza indirin",
+                "step3": "3- Uygulamayı telefonunuza kurun"
+            }
+        },
+        "networkAdapterPage": {
+            "title": "Ağınız",
+            "description": "NoCab diğer cihazlara bağlanmak için lokal internet adresinizi kullanır.\nEğer ağ adaptörü yanlış ayarlandıysa uygulama çalışmaz.",
+            "description2": "Ağ adaptörünüzün doğru ayarlandığından emin olun.",
+            "changeButton": "Değiştir",
+            "hint": "Bu ayarı daha sonra ana ekran menüsünden değiştirebilirsiniz."
+        },
+        "useInstructions": {
+            "title": "Peki NoCab nasıl kullanılır?",
+            "hint": "işte bu kadar! Artık iki cihaz arasında dosya gönderebilirsiniz.",
+            "instructions": {
+                "step1": "İki cihazın da aynı ağa bağlandığından emin olun",
+                "step2": "NoCab'i iki cihazda da açın",
+                "step3": "Dosyayı göndermek istediğiniz cihazda gönder butonuna tıklayın",
+                "step4": "Dosyayı almak istediğiniz cihazda al butonuna tıklayın (Masaüstü uygulaması için gerekli değildir)"
+            }
+        },
+        "readyPage": {
+            "title": "Şimdi HAZIRSIN!",
+            "description": "Başlamak için bitir butonuna tıklayın.",
+            "references": {
+                "githubLinks": "Github Bağlantıları",
+                "mobile": "NoCab Mobile",
+                "desktop": "NoCab Desktop",
+                "sponsorToMe": "Sponsor olun 🥺",
+                "fromGithub": "Github ile",
+                "fromBuymeacoffee": "buymeacoffee ile",
+                "contactText": "Sorularınızı sormaktan çekinmeyin.",
+                "email": "E-posta"
+            }
+        }
+    },
     "mainView": {
         "receiver": {
             "title": "Alıcı",
