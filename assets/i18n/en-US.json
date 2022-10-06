@@ -31,7 +31,7 @@
             "hint": "That's it! You can now send files between your devices.",
             "instructions": {
                 "step1": "Make sure your both devices are connected to the same network",
-                "step2": "Open the NoCab on both devices.",
+                "step2": "Open the NoCab on both devices",
                 "step3": "Click on the send button on the device you want to send the file from",
                 "step4": "Click on the receive button on the device you want to receive the file from (no need for desktop application)"
             }

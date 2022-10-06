@@ -1,4 +1,5 @@
 import 'package:animations/animations.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:nocab_desktop/custom_dialogs/network_adapter_settings/network_adapter_settings.dart';
 import 'package:nocab_desktop/services/server/server.dart';
@@ -37,11 +38,11 @@ class _NetworkAdapterInfoPageState extends State<NetworkAdapterInfoPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Your Network", style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600)),
+            Text("welcomeDialog.networkAdapterPage.title".tr(), style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600)),
             const SizedBox(height: 20),
-            Text("NoCab uses your local ip to connect another devices.\nIf network adapter setted wrong the application will not work.", style: Theme.of(context).textTheme.bodyLarge),
+            Text("welcomeDialog.networkAdapterPage.description".tr(), style: Theme.of(context).textTheme.bodyLarge),
             const SizedBox(height: 20),
-            Text("Make sure that your network adapter is setted correctly.", style: Theme.of(context).textTheme.bodyLarge),
+            Text("welcomeDialog.networkAdapterPage.description2".tr(), style: Theme.of(context).textTheme.bodyLarge),
             Center(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -93,7 +94,7 @@ class _NetworkAdapterInfoPageState extends State<NetworkAdapterInfoPage> {
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
                                 ),
-                                child: const Text("Change"),
+                                child: Text("welcomeDialog.networkAdapterPage.changeButton".tr()),
                               ),
                             ],
                           ),
@@ -105,7 +106,7 @@ class _NetworkAdapterInfoPageState extends State<NetworkAdapterInfoPage> {
               ),
             ),
             const SizedBox(height: 20),
-            Text("You will be able to change from home screen.", style: Theme.of(context).textTheme.bodyLarge),
+            Text("welcomeDialog.networkAdapterPage.hint".tr(), style: Theme.of(context).textTheme.bodyLarge),
           ],
         ),
       ),
