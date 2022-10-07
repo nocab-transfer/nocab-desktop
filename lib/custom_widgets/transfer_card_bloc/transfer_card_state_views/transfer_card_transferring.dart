@@ -176,45 +176,49 @@ class TransferringView extends StatelessWidget {
                 Text(file.byteSize.formatBytes(), style: const TextStyle(fontSize: 14)),
               ],
             ),
-            Row(
-              children: [
-                Platform.isWindows // TODO: show in folder on other platforms
-                    ? Material(
-                        color: Colors.transparent,
-                        child: Tooltip(
-                          message: 'mainView.transfers.card.showInFolder'.tr(),
-                          child: InkWell(
-                            borderRadius: const BorderRadius.all(Radius.circular(10)),
-                            onTap: () => FileOperations.showInFolder(file),
-                            child: const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Icon(Icons.folder_outlined),
-                            ),
-                          ),
-                        ),
-                      )
-                    : Container(),
-                Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    borderRadius: const BorderRadius.all(Radius.circular(10)),
-                    onTap: () => FileOperations.openFile(file),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          Text('mainView.transfers.card.openFile'.tr()),
-                          const Icon(Icons.open_in_new_rounded),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            isDownload ? _buildActions(file) : Container(),
           ],
         ),
         const SizedBox(height: 20),
+      ],
+    );
+  }
+
+  Widget _buildActions(FileInfo file) {
+    return Row(
+      children: [
+        Platform.isWindows
+            ? Material(
+                color: Colors.transparent,
+                child: Tooltip(
+                  message: 'mainView.transfers.card.showInFolder'.tr(),
+                  child: InkWell(
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    onTap: () => FileOperations.showInFolder(file),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Icon(Icons.folder_outlined),
+                    ),
+                  ),
+                ),
+              )
+            : Container(),
+        Material(
+          color: Colors.transparent,
+          child: InkWell(
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            onTap: () => FileOperations.openFile(file),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Text('mainView.transfers.card.openFile'.tr()),
+                  const Icon(Icons.open_in_new_rounded),
+                ],
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }

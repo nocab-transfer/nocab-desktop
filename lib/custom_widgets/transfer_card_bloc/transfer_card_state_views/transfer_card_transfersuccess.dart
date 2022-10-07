@@ -101,7 +101,7 @@ class TransferSuccessView extends StatelessWidget {
                                 Text(state.files[index].byteSize.formatBytes(), style: const TextStyle(fontSize: 14)),
                               ],
                             ),
-                            isDownload ? _buildActions(state.files[index], context) : Container(),
+                            isDownload ? _buildActions(state.files[index]) : Container(),
                           ],
                         ),
                         const SizedBox(height: 20),
@@ -117,10 +117,10 @@ class TransferSuccessView extends StatelessWidget {
     );
   }
 
-  Widget _buildActions(FileInfo file, BuildContext context) {
+  Widget _buildActions(FileInfo file) {
     return Row(
       children: [
-        Platform.isWindows // TODO: show in folder on other platforms
+        Platform.isWindows
             ? Material(
                 color: Colors.transparent,
                 child: Tooltip(
