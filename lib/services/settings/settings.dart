@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:nocab_desktop/extensions/variables_from_base_deviceinfo.dart';
 import 'package:nocab_desktop/models/settings_model.dart';
 import 'package:nocab_desktop/services/network/network.dart';
@@ -63,7 +63,7 @@ class SettingsService {
       useMaterial3: true,
       mainPort: await Network.getUnusedPort(),
       finderPort: 62193,
-      locale: rawLocale.length == 5 ? Locale(rawLocale.substring(0, 2), rawLocale.substring(3, 5)) : Locale(rawLocale),
+      locale: rawLocale.toLocale(),
       seedColor: RegistryService.getColor(),
       useSystemColor: Platform.isWindows,
       networkInterfaceName: Network.getCurrentNetworkInterface(await NetworkInterface.list()).name,
