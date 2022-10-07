@@ -201,7 +201,7 @@ void _sender(List<dynamic> args) async {
 
   Future<void> send(FileInfo fileInfo, RawSocket socket) async {
     try {
-      final Uint8List buffer = Uint8List(1024 * 16);
+      final Uint8List buffer = Uint8List(1024 * 8);
       RandomAccessFile file = await File(fileInfo.path!).open();
 
       int bytesWritten = 0;
