@@ -139,7 +139,7 @@ class TransferringView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text('mainView.transfers.card.transferring.speed'.tr(namedArgs: {'speed': state.speed.toStringAsFixed(2)}), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
-                Text('mainView.transfers.card.transferring.progress'.tr(namedArgs: {'progress': state.speed.toStringAsFixed(2)}), style: const TextStyle(fontSize: 14)),
+                Text('mainView.transfers.card.transferring.progress'.tr(namedArgs: {'progress': state.progress.toStringAsFixed(2)}), style: const TextStyle(fontSize: 14)),
               ],
             )
           ],
