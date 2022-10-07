@@ -9,9 +9,11 @@ import 'package:nocab_desktop/models/settings_model.dart';
 import 'package:nocab_desktop/provider/theme_provider.dart';
 import 'package:nocab_desktop/screens/settings/setting_card.dart';
 import 'package:flutter/material.dart';
+import 'package:nocab_desktop/services/github/github.dart';
 import 'package:nocab_desktop/services/registry/registry.dart';
 import 'package:nocab_desktop/services/settings/settings.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import 'package:username_gen/username_gen.dart';
 
 class Settings extends StatefulWidget {
@@ -76,6 +78,23 @@ class _SettingsState extends State<Settings> {
               ),
               child: Stack(
                 children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: Material(
+                        color: Colors.transparent,
+                        child: OutlinedButton.icon(
+                          onPressed: () => showModal(
+                            context: context,
+                            builder: _showAboutDialog,
+                          ),
+                          icon: const Icon(Icons.question_mark_rounded, size: 16),
+                          label: Text('settings.aboutButton'.tr()),
+                        ),
+                      ),
+                    ),
+                  ),
                   Center(child: Text('settings.title'.tr(), style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 24, fontWeight: FontWeight.w400))),
                   Align(
                     alignment: Alignment.centerRight,
@@ -417,6 +436,79 @@ class _SettingsState extends State<Settings> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _showAboutDialog(BuildContext context) {
+    return AboutDialog(
+      applicationIcon: ClipRRect(
+        borderRadius: BorderRadius.circular(8),
+        child: const Image(
+          image: AssetImage('assets/logo/logo.png'),
+          height: 50,
+          width: 50,
+        ),
+      ),
+      applicationVersion: '0.2.5.0',
+      children: [
+        Center(
+          child: TextButton(
+            onPressed: () => launchUrlString('https://github.com/nocab-transfer'),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text('aboutDialog.openGithubPage'.tr()),
+            ),
+          ),
+        ),
+        Text('aboutDialog.contributors'.tr(), style: Theme.of(context).textTheme.titleMedium),
+        const SizedBox(height: 8),
+        Container(
+          height: 200,
+          width: 350,
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.surfaceVariant,
+            borderRadius: const BorderRadius.all(Radius.circular(25)),
+          ),
+          child: FutureBuilder(
+            future: Github.getContributors(owner: 'nocab-transfer', repo: 'nocab-desktop'),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                if (snapshot.data!.isEmpty) {
+                  return Center(
+                    child: Text(
+                      'aboutDialog.errorMessage'.tr(),
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(fontStyle: FontStyle.italic),
+                    ),
+                  );
+                }
+                return ListView.builder(
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (context, index) {
+                    return Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: () => launchUrlString(snapshot.data![index]['html_url']),
+                        borderRadius: BorderRadius.circular(25),
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage: NetworkImage(snapshot.data![index]['avatar_url']),
+                          ),
+                          title: Text(snapshot.data![index]['login']),
+                          visualDensity: VisualDensity.compact,
+                          trailing: const Icon(Icons.arrow_forward_ios_rounded),
+                        ),
+                      ),
+                    );
+                  },
+                );
+              } else {
+                return const Center(child: CircularProgressIndicator());
+              }
+            },
+          ),
+        ),
+      ],
     );
   }
 }

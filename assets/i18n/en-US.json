@@ -103,6 +103,7 @@
     },
     "settings": {
         "title": "Settings",
+        "aboutButton": "About",
         "deviceName": {
             "title": "Device Name",
             "description": "The name of this device as shown to other devices",
@@ -172,5 +173,10 @@
         "connectionInfo": "Ip: {ip} Port: {port}",
         "acceptButton": "Accept",
         "rejectButton": "Reject"
+    },
+    "aboutDialog": {
+        "openGithubPage": "Open Github Page",
+        "contributors": "Contributors",
+        "errorMessage": "Cant fetch contributors.\nYou may exceed the rate limit of github or you not have internet connection."
     }
 }

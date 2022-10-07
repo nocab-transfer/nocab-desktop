@@ -34,8 +34,9 @@ Future<void> main(List<String> args) async {
     child: EasyLocalization(
       supportedLocales: const [Locale('en', 'US'), Locale('tr', 'TR')],
       path: 'assets/i18n',
-      fallbackLocale: const Locale('en'),
+      fallbackLocale: const Locale('en', 'US'),
       saveLocale: false,
+      useFallbackTranslations: true,
       child: const MyApp(),
     ),
   ));

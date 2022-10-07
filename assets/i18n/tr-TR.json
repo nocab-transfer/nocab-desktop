@@ -103,6 +103,7 @@
     },
     "settings": {
         "title": "Ayarlar",
+        "aboutButton": "Hakkında",
         "deviceName": {
             "title": "Cihaz Adı",
             "description": "Diğer cihazların göreceği ad",
@@ -172,5 +173,10 @@
         "connectionInfo": "İnternet Adresi: {ip} Port: {port}",
         "acceptButton": "Kabul Et",
         "rejectButton": "Reddet"
+    },
+    "aboutDialog": {
+        "openGithubPage": "Github Sayfasını Aç",
+        "contributors": "Katkıda Bulunanlar",
+        "errorMessage": "Katkıda bulunanlar alınamadı.\nGithub'ın istek sınırını geçmiş olabilirsiniz veya internet bağlantınınızda sorun olabilir."
     }
 }
