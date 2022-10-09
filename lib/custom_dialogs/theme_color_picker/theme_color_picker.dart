@@ -4,8 +4,10 @@ import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:nocab_desktop/models/settings_model.dart';
+import 'package:nocab_desktop/provider/theme_provider.dart';
 import 'package:nocab_desktop/screens/settings/setting_card.dart';
 import 'package:nocab_desktop/services/settings/settings.dart';
+import 'package:provider/provider.dart';
 
 class ThemeColorPicker extends StatefulWidget {
   final Function(bool value)? onUseSystemColorChanged;
@@ -93,13 +95,19 @@ class ThemeColorPickerState extends State<ThemeColorPicker> {
                         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(maxCrossAxisExtent: 70),
                         itemCount: Colors.accents.length,
                         itemBuilder: (context, index) {
+                          var color = ThemeData(
+                            colorSchemeSeed: Colors.accents[index],
+                            useMaterial3: SettingsService().getSettings.useMaterial3,
+                            brightness: Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark ? Brightness.dark : Brightness.light,
+                          ).colorScheme.primary;
                           return Padding(
                             padding: const EdgeInsets.all(4.0),
                             child: InkWell(
                               onTap: () => widget.onColorClicked?.call(Colors.accents[index]),
                               child: Container(
                                 decoration: BoxDecoration(
-                                  color: Colors.accents[index],
+                                  color: color,
+                                  boxShadow: Theme.of(context).colorScheme.primary == color ? [BoxShadow(color: Theme.of(context).colorScheme.primary, blurRadius: 5, spreadRadius: 1)] : null,
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                               ),
