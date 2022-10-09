@@ -39,9 +39,9 @@ class _NetworkAdapterInfoPageState extends State<NetworkAdapterInfoPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text("welcomeDialog.networkAdapterPage.title".tr(), style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600)),
-            const SizedBox(height: 20),
+            const SizedBox(height: 8),
             Text("welcomeDialog.networkAdapterPage.description".tr(), style: Theme.of(context).textTheme.bodyLarge),
-            const SizedBox(height: 20),
+            const SizedBox(height: 8),
             Text("welcomeDialog.networkAdapterPage.description2".tr(), style: Theme.of(context).textTheme.bodyLarge),
             Center(
               child: Padding(
@@ -105,7 +105,6 @@ class _NetworkAdapterInfoPageState extends State<NetworkAdapterInfoPage> {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
             Text("welcomeDialog.networkAdapterPage.hint".tr(), style: Theme.of(context).textTheme.bodyLarge),
           ],
         ),

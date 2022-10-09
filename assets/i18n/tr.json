@@ -1,17 +1,17 @@
 {
     "welcomeDialog": {
-        "nextButton": "Sonraki",
+        "nextButton": "İleri",
         "finishButton": "Bitir",
         "welcomePage": {
-            "title": "NoCab Uygulamasına Hoş Geldiniz!",
-            "description": "NoCab Desktop herhangi bir 3. parti yazılım veya sunucu olmadan cihazlarınız arasında dosya transferi gerçekleştiren bir uygulamadır. \nTamamen ücretsiz ve açık kaynaktır.",
-            "description2": "Devam etmek için sonraki butonuna tıklayınız.",
+            "title": "NoCab Desktop'a Hoş Geldiniz!",
+            "description": "Nocab Desktop, herhangi bir sunucu veya üçüncü taraf hizmeti olmadan cihazlarınız arasında dosya aktarımı yapmanızı sağlayan bir dosya aktarım uygulamasıdır.\nTamamen ücretsiz ve açık kaynaktır.",
+            "description2": "Devam etmek için ileri butonuna tıklayınız.",
             "madeWith": "{flutterIcon} ile yapıldı",
             "builtBy": "{author} tarafından ❤️ ile oluşturuldu"
         },
         "noCabMobilePage": {
-            "title": "NoCab Mobile Uygulaması İle Tanışın!",
-            "description": "Telefon bağlantısı için NoCab Mobile gereklidir.\nHenüz IOS uygulaması mevcut değil. 😔",
+            "title": "NoCab Mobile İle Tanışın!",
+            "description": "Telefonunuz ile bağlantı kurulabilmesi için NoCab Mobile gereklidir\nMaalesef henüz bir IOS uygulaması mevcut değil. 😔",
             "description2": "Android cihazınıza uygulamayı indirin.",
             "instructions": {
                 "step1": "1- Şuraya gidin {link}",
@@ -21,14 +21,14 @@
         },
         "networkAdapterPage": {
             "title": "Ağınız",
-            "description": "NoCab diğer cihazlara bağlanmak için lokal internet adresinizi kullanır.\nEğer ağ adaptörü yanlış ayarlandıysa uygulama çalışmaz.",
+            "description": "NoCab diğer cihazlarla bağlantı kurabilmek için yerel internet adresinizi kullanır. Eğer ağ adaptörü yanlış ayarlandıysa uygulama çalışamaz.",
             "description2": "Ağ adaptörünüzün doğru ayarlandığından emin olun.",
             "changeButton": "Değiştir",
-            "hint": "Bu ayarı daha sonra ana ekran menüsünden değiştirebilirsiniz."
+            "hint": "Bu ayarı daha sonra ana ekran menüsünden de değiştirebilirsiniz."
         },
         "useInstructions": {
             "title": "Peki NoCab nasıl kullanılır?",
-            "hint": "işte bu kadar! Artık iki cihaz arasında dosya gönderebilirsiniz.",
+            "hint": "İşte bu kadar! Artık cihazlarınız arasında dosya aktarabilirsiniz.",
             "instructions": {
                 "step1": "İki cihazın da aynı ağa bağlandığından emin olun",
                 "step2": "NoCab'i iki cihazda da açın",
@@ -43,10 +43,10 @@
                 "githubLinks": "Github Bağlantıları",
                 "mobile": "NoCab Mobile",
                 "desktop": "NoCab Desktop",
-                "sponsorToMe": "Sponsor olun 🥺",
-                "fromGithub": "Github ile",
-                "fromBuymeacoffee": "buymeacoffee ile",
-                "contactText": "Sorularınızı sormaktan çekinmeyin.",
+                "sponsorToMe": "Bağış Yap",
+                "fromGithub": "Github",
+                "fromBuymeacoffee": "Buy Me A Coffee",
+                "contactText": "Herhangi bir sorunuz varsa, lütfen sormaktan çekinmeyin.",
                 "email": "E-posta"
             }
         }
@@ -54,10 +54,10 @@
     "mainView": {
         "receiver": {
             "title": "Alıcı",
-            "networkAdapterSettings": "Ağ Bağdaştırıcı Ayarları",
+            "networkAdapterSettings": "Ağ Adaptörü Ayarları",
             "deviceShownAs": "Cihaz {name} olarak gözüküyor",
             "or": "ya da",
-            "scanQrCode": "QR kodunu tara"
+            "scanQrCode": "QR Kodunu Tara"
         },
         "settings": {
             "title": "Ayarlar"
@@ -66,17 +66,17 @@
             "title": "Gönder",
             "button": "Dosyaları seç",
             "dropFiles": "ya da buraya sürükle",
-            "loadingLabel": "Dosyalar yükleniyor\nLütfen bekleyin..."
+            "loadingLabel": "Dosyalar yükleniyor\nLütfen bekleyiniz..."
         },
         "transfers": {
             "title": "Dosya Aktarımları",
-            "emptyMessage": "Burada sessizlikten başka bir şey yok",
+            "emptyMessage": "Burada sessizlikten başka hiçbir şey yok",
             "openOutputFolder": "Çıkış klasörünü aç",
             "card": {
                 "showInFolder": "Klasörde göster",
                 "openFile": "Dosyayı aç",
                 "transferStarted": {
-                    "message": "Dosya aktarımı başladı\nCihazın bağlanması bekleniyor"
+                    "message": "Dosya aktarımı başladı\nCihaz bağlantısı bekleniyor"
                 },
                 "transferring": {
                     "pending": "Bekliyor",
@@ -96,7 +96,7 @@
                 },
                 "transferFailed": {
                     "removeButtonTooltip": "Kaldır",
-                    "message": "Dosya aktarımı başarısız 😞"
+                    "message": "Dosya aktarımı başarısız oldu 😞"
                 }
             }
         }
@@ -106,15 +106,15 @@
         "aboutButton": "Hakkında",
         "deviceName": {
             "title": "Cihaz Adı",
-            "description": "Diğer cihazların göreceği ad",
-            "randomNameTooltip": "Rastgele isim oluştur"
+            "description": "Bu cihazın diğer cihazlara gösterilecek adı",
+            "randomNameTooltip": "Rastgele bir isim oluştur"
         },
         "themeColor": {
             "title": "Tema Rengi",
             "description": "Uygulamanın rengini değiştir",
             "useSystemColor": {
                 "title": "Sistem Rengini Kullan",
-                "description": "Sistem rengini uygulama teması olarak kullan"
+                "description": "Uygulama teması olarak sistem rengini kullan"
             }
         },
         "darkMode": {
@@ -122,8 +122,8 @@
             "description": "Uygulama temasını değiştir"
         },
         "materialYou": {
-            "title": "Materyal 3 Dizaynı Kullan",
-            "description": "Materyal 3 (Material You) dizaynını kullan "
+            "title": "Material 3 Dizaynı Kullan",
+            "description": "Material 3 (Material You) dizaynını kullan "
         },
         "language": {
             "title": "Dil",
@@ -131,11 +131,11 @@
         },
         "advanced": {
             "title": "Gelişmiş Ayarlar",
-            "description": "Bu ayarlar deneyimli kullanıcılar içindir. Bu ayarlar uygulamayı bozabilir",
+            "description": "Bu ayarlar deneyimli kullanıcılar içindir. Bu ayarları değiştirmek uygulamayı bozabilir",
             "finderPort": {
                 "title": "Tarayıcı Port",
                 "description": "Port telefonunuz ile iletişim için kullanılacak.\nBu ayarı değiştirmek uygulamayı bozabilir.\nVarsayılan 62193",
-                "help": "Bu ayar uygulamayı yeniden başlattığınızda etkin olacak"
+                "help": "Bu ayar uygulamayı yeniden başlattığınızda etkin olacaktır"
             }
         }
     },
@@ -162,7 +162,7 @@
         },
         "loaded": {
             "waitingConnection": "Bağlantı bekleniyor...",
-            "connectionInfo": "İnternet Adresi: {ip} Port: {port}"
+            "connectionInfo": "Ip: {ip} Port: {port}"
         }
     },
     "fileAccepter": {
@@ -170,7 +170,7 @@
             "one": "{deviceName} sana bir dosya göndermek istiyor",
             "other": "{deviceName} sana {count} dosya göndermek istiyor"
         },
-        "connectionInfo": "İnternet Adresi: {ip} Port: {port}",
+        "connectionInfo": "Ip: {ip} Port: {port}",
         "acceptButton": "Kabul Et",
         "rejectButton": "Reddet"
     },
