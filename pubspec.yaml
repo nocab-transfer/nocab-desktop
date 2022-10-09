@@ -69,5 +69,6 @@ flutter:
   generate: true
   assets:
   - assets/images/
+  - assets/context_menu_icon/icon.ico
   - assets/logo/logo.png
   - assets/i18n/
