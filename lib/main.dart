@@ -19,7 +19,7 @@ Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
 
-  var isFirstTime = await SettingsService().initialize();
+  var isFirstRun = await SettingsService().initialize();
   await IPC().initialize(args, onData: (data) async => _loadFiles(data));
   await Server().initialize();
   await Server().startReceiver();
@@ -32,17 +32,18 @@ Future<void> main(List<String> args) async {
       useMaterial3: SettingsService().getSettings.useMaterial3,
     ),
     child: EasyLocalization(
-      supportedLocales: const [Locale('en', 'US'), Locale('tr', 'TR')],
+      supportedLocales: const [Locale('en'), Locale('tr')],
       path: 'assets/i18n',
-      fallbackLocale: const Locale('en', 'US'),
+      fallbackLocale: const Locale('en'),
       saveLocale: false,
       useFallbackTranslations: true,
+      useOnlyLangCode: true,
       child: const MyApp(),
     ),
   ));
 
-  if (args.isNotEmpty && !isFirstTime) _loadFiles(args);
-  if (isFirstTime) {
+  if (args.isNotEmpty && !isFirstRun) _loadFiles(args);
+  if (isFirstRun) {
     while (Server().navigatorKey.currentContext == null) {
       await Future.delayed(const Duration(milliseconds: 100));
     }

@@ -1,12 +1,14 @@
-extension LangCodeToName on String {
+import 'package:flutter/material.dart';
+
+extension LangToName on Locale {
   String get langName {
-    switch (this) {
+    switch (languageCode) {
       case 'en':
         return "English";
       case 'tr':
         return "Türkçe";
       default:
-        return this;
+        return languageCode;
     }
   }
 }

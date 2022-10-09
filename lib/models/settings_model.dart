@@ -31,7 +31,7 @@ class SettingsModel {
     mainPort = json['mainPort'];
     darkMode = json['darkMode'];
     useMaterial3 = json['useMaterial3'];
-    locale = Locale(json['language'], json['country']);
+    locale = Locale(json['language']);
     seedColor = Color(json['seedColor']);
     useSystemColor = json['useSystemColor'];
     networkInterfaceName = json['networkInterfaceName'];
@@ -46,7 +46,6 @@ class SettingsModel {
     data['darkMode'] = darkMode;
     data['useMaterial3'] = useMaterial3;
     data['language'] = locale.languageCode;
-    data['country'] = locale.countryCode;
     data['seedColor'] = seedColor.value;
     data['useSystemColor'] = useSystemColor;
     data['networkInterfaceName'] = networkInterfaceName;
@@ -65,7 +64,6 @@ extension SettingsExtenios on SettingsModel {
     Color? seedColor,
     bool? useSystemColor,
     String? language,
-    String? country,
     String? networkInterfaceName,
     String? downloadPath,
   }) {
@@ -77,7 +75,7 @@ extension SettingsExtenios on SettingsModel {
       useMaterial3: useMaterial3 ?? this.useMaterial3,
       seedColor: seedColor ?? this.seedColor,
       useSystemColor: useSystemColor ?? this.useSystemColor,
-      locale: Locale(language ?? locale.languageCode, country ?? locale.countryCode),
+      locale: Locale(language ?? locale.languageCode),
       networkInterfaceName: networkInterfaceName ?? this.networkInterfaceName,
       downloadPath: downloadPath ?? this.downloadPath,
     );

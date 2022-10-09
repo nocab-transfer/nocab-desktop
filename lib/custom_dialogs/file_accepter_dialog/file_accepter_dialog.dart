@@ -48,7 +48,6 @@ class _FileAccepterDialogState extends State<FileAccepterDialog> {
                 )),
               ),
               Text(
-                //AppLocalizations.of(context).fileAccepterTitle(widget.request.deviceInfo.name!, widget.request.files.length),
                 'fileAccepter.title'.plural(widget.request.files.length, name: 'count', namedArgs: {
                   'deviceName': widget.request.deviceInfo.name!,
                 }),
@@ -60,7 +59,6 @@ class _FileAccepterDialogState extends State<FileAccepterDialog> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  //AppLocalizations.of(context).fileAccepterInfoLabelText(widget.request.deviceInfo.ip!, widget.request.transferPort.toString()),
                   'fileAccepter.connectionInfo'.tr(namedArgs: {
                     'ip': widget.request.deviceInfo.ip!,
                     'port': widget.request.transferPort.toString(),

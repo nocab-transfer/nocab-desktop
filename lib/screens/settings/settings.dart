@@ -256,17 +256,17 @@ class _SettingsState extends State<Settings> {
                                 width: 150,
                                 height: 60,
                                 child: DropdownButtonFormField(
-                                  value: context.locale, //Provider.of<LocaleProvider>(context).locale.languageCode,
+                                  value: context.locale,
                                   items: context.supportedLocales.map((Locale value) {
                                     return DropdownMenuItem<Locale>(
                                       value: value,
-                                      child: Text(value.languageCode.langName),
+                                      child: Text(value.langName),
                                     );
                                   }).toList(),
                                   onChanged: (value) {
                                     if (value != null) {
                                       context.setLocale(value);
-                                      SettingsService().setSettings(currentSettings.copyWith(language: value.languageCode, country: value.countryCode));
+                                      SettingsService().setSettings(currentSettings.copyWith(language: value.languageCode));
                                     }
                                   },
                                   decoration: const InputDecoration(
