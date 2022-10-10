@@ -449,7 +449,7 @@ class _SettingsState extends State<Settings> {
           width: 50,
         ),
       ),
-      applicationVersion: '0.2.5.0',
+      applicationVersion: '1.0.0.0',
       children: [
         Center(
           child: TextButton(
