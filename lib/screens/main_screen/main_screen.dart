@@ -112,7 +112,7 @@ class _MainScreenState extends State<MainScreen> {
                                       padding: const EdgeInsets.all(8.0),
                                       decoration: const BoxDecoration(
                                         color: Colors.white,
-                                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                                        borderRadius: BorderRadius.all(Radius.circular(12)),
                                       ),
                                       //QR code
                                       child: StreamBuilder(
