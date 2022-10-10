@@ -1,4 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:nocab_desktop/custom_dialogs/welcome_dialog/pages/nocab_mobile_page.dart';
+import 'package:nocab_desktop/custom_dialogs/welcome_dialog/welcome_dialog.dart';
 import 'package:nocab_desktop/custom_widgets/svg_color_handler/svg_color_handler.dart';
 import 'package:nocab_desktop/custom_widgets/transfer_card_bloc/transfer_card.dart';
 import 'package:flutter/material.dart';
@@ -93,8 +95,21 @@ class _TransfersState extends State<Transfers> {
           const SizedBox(height: 30),
           Text(
             'mainView.transfers.emptyMessage'.tr(),
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.primary),
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold),
             textAlign: TextAlign.center,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextButton.icon(
+              onPressed: () {
+                showDialog(
+                  context: Server().navigatorKey.currentContext!,
+                  builder: (context) => const WelcomeDialog(overridePages: [NoCabMobilePage()]),
+                );
+              },
+              icon: const Icon(Icons.download_rounded),
+              label: Text('mainView.transfers.downloadNoCabMobile'.tr(), style: Theme.of(context).textTheme.labelLarge?.copyWith(color: Theme.of(context).colorScheme.primary)),
+            ),
           ),
           Container(),
         ],

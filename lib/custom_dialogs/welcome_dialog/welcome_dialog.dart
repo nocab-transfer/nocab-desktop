@@ -11,7 +11,8 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class WelcomeDialog extends StatefulWidget {
   final bool createdFromMain;
-  const WelcomeDialog({Key? key, this.createdFromMain = false}) : super(key: key);
+  final List<Widget>? overridePages;
+  const WelcomeDialog({Key? key, this.createdFromMain = false, this.overridePages}) : super(key: key);
 
   @override
   State<WelcomeDialog> createState() => _WelcomeDialogState();
@@ -21,13 +22,19 @@ class _WelcomeDialogState extends State<WelcomeDialog> {
   final PageController _pageController = PageController();
 
   int currentPage = 0;
-  final List<Widget> pages = [
-    const WelcomePage(),
-    const NoCabMobilePage(),
-    const NetworkAdapterInfoPage(),
-    const UseInstructions(),
-    const YouAreReadyPage(),
-  ];
+  late List<Widget> pages;
+  @override
+  void initState() {
+    super.initState();
+    pages = widget.overridePages ??
+        [
+          const WelcomePage(),
+          const NoCabMobilePage(),
+          const NetworkAdapterInfoPage(),
+          const UseInstructions(),
+          const YouAreReadyPage(),
+        ];
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -72,6 +72,7 @@
             "title": "Dosya Aktarımları",
             "emptyMessage": "Burada sessizlikten başka hiçbir şey yok",
             "openOutputFolder": "Çıkış klasörünü aç",
+            "downloadNoCabMobile": "NoCab Mobile uygulamasını indirin",
             "card": {
                 "showInFolder": "Klasörde göster",
                 "openFile": "Dosyayı aç",
@@ -151,7 +152,8 @@
         "searching": "Cihazlar aranıyor...",
         "noDevicesFound": "Cihaz bulunamadı",
         "instructions": "Telefonunuzda NoCab uygulamasını açın ve Al düğmesine tıklayın.",
-        "networkHint": "İki cihazın da aynı ağda bulunduğundan emin olun."
+        "networkHint": "İki cihazın da aynı ağda bulunduğundan emin olun.",
+        "downloadNoCabMobile": "@:mainView.transfers.downloadNoCabMobile"
     },
     "senderQr": {
         "title": "QR Kodu Tara",

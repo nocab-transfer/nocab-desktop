@@ -72,6 +72,7 @@
             "title": "Transfers",
             "emptyMessage": "There is nothing except a sea of emptiness",
             "openOutputFolder": "Open Output File",
+            "downloadNoCabMobile": "Download NoCab Mobile",
             "card": {
                 "showInFolder": "Show in Folder",
                 "openFile": "Open File",
@@ -151,7 +152,8 @@
         "searching": "Searching for devices...",
         "noDevicesFound": "No devices found",
         "instructions": "Open the NoCab app on your phone and click receive.",
-        "networkHint": "Make sure both devices are on the same network."
+        "networkHint": "Make sure both devices are on the same network.",
+        "downloadNoCabMobile": "@:mainView.transfers.downloadNoCabMobile"
     },
     "senderQr": {
         "title": "Scan QR Code",

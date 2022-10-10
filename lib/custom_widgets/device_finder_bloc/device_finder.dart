@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nocab_desktop/custom_dialogs/welcome_dialog/pages/nocab_mobile_page.dart';
+import 'package:nocab_desktop/custom_dialogs/welcome_dialog/welcome_dialog.dart';
 import 'package:nocab_desktop/custom_widgets/device_finder_bloc/device_finder_cubit.dart';
 import 'package:nocab_desktop/custom_widgets/device_finder_bloc/device_finder_state.dart';
 import 'package:nocab_desktop/custom_widgets/svg_color_handler/svg_color_handler.dart';
@@ -74,6 +76,19 @@ class _DeviceFinderState extends State<DeviceFinder> {
               Text('deviceScanner.networkHint'.tr(), style: Theme.of(context).textTheme.bodySmall?.copyWith(fontStyle: FontStyle.italic)),
               Text('deviceScanner.instructions'.tr(), style: Theme.of(context).textTheme.bodySmall?.copyWith(fontStyle: FontStyle.italic)),
             ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: TextButton.icon(
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => const WelcomeDialog(overridePages: [NoCabMobilePage()]),
+              );
+            },
+            icon: const Icon(Icons.help_outline, size: 16),
+            label: Text('deviceScanner.downloadNoCabMobile'.tr(), style: Theme.of(context).textTheme.labelSmall?.copyWith(color: Theme.of(context).colorScheme.primary)),
           ),
         ),
       ],
