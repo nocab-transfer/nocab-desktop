@@ -104,7 +104,9 @@ class ThemeColorPickerState extends State<ThemeColorPicker> {
                             padding: const EdgeInsets.all(4.0),
                             child: InkWell(
                               onTap: () => widget.onColorClicked?.call(Colors.accents[index]),
-                              child: Container(
+                              child: AnimatedContainer(
+                                duration: const Duration(milliseconds: 300),
+                                curve: Curves.ease,
                                 decoration: BoxDecoration(
                                   color: color,
                                   boxShadow: Theme.of(context).colorScheme.primary == color ? [BoxShadow(color: Theme.of(context).colorScheme.primary, blurRadius: 5, spreadRadius: 1)] : null,
