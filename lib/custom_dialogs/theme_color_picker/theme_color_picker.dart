@@ -12,7 +12,8 @@ import 'package:provider/provider.dart';
 class ThemeColorPicker extends StatefulWidget {
   final Function(bool value)? onUseSystemColorChanged;
   final Function(Color color)? onColorClicked;
-  const ThemeColorPicker({super.key, this.onUseSystemColorChanged, this.onColorClicked});
+  const ThemeColorPicker(
+      {super.key, this.onUseSystemColorChanged, this.onColorClicked});
 
   @override
   State<ThemeColorPicker> createState() => ThemeColorPickerState();
@@ -26,7 +27,9 @@ class ThemeColorPickerState extends State<ThemeColorPicker> {
   void initState() {
     super.initState();
     currentSettings = SettingsService().getSettings;
-    _settingsSubscription = SettingsService().onSettingChanged.listen((settings) => setState(() => currentSettings = settings));
+    _settingsSubscription = SettingsService()
+        .onSettingChanged
+        .listen((settings) => setState(() => currentSettings = settings));
   }
 
   @override
@@ -40,9 +43,11 @@ class ThemeColorPickerState extends State<ThemeColorPicker> {
     var switchIcon = MaterialStateProperty.resolveWith<Icon?>(
       (Set<MaterialState> states) {
         if (states.contains(MaterialState.selected)) {
-          return Icon(Icons.check_rounded, color: Theme.of(context).colorScheme.onPrimary);
+          return Icon(Icons.check_rounded,
+              color: Theme.of(context).colorScheme.onPrimary);
         }
-        return Icon(Icons.close_rounded, color: Theme.of(context).colorScheme.onInverseSurface);
+        return Icon(Icons.close_rounded,
+            color: Theme.of(context).colorScheme.onInverseSurface);
       },
     );
 
@@ -54,7 +59,8 @@ class ThemeColorPickerState extends State<ThemeColorPicker> {
       alignment: Alignment.topRight,
       child: AnimatedContainer(
         width: 500,
-        height: currentSettings.useSystemColor && Platform.isWindows ? 120 : 500,
+        height:
+            currentSettings.useSystemColor && Platform.isWindows ? 120 : 500,
         curve: Curves.ease,
         duration: const Duration(milliseconds: 300),
         decoration: BoxDecoration(
@@ -69,7 +75,8 @@ class ThemeColorPickerState extends State<ThemeColorPicker> {
                 padding: const EdgeInsets.all(8.0),
                 child: SettingCard(
                   title: 'settings.themeColor.useSystemColor.title'.tr(),
-                  caption: 'settings.themeColor.useSystemColor.description'.tr(),
+                  caption:
+                      'settings.themeColor.useSystemColor.description'.tr(),
                   widget: Switch(
                     value: currentSettings.useSystemColor,
                     onChanged: widget.onUseSystemColorChanged?.call,
@@ -92,24 +99,43 @@ class ThemeColorPickerState extends State<ThemeColorPicker> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: GridView.builder(
-                        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(maxCrossAxisExtent: 70),
+                        gridDelegate:
+                            const SliverGridDelegateWithMaxCrossAxisExtent(
+                                maxCrossAxisExtent: 70),
                         itemCount: Colors.accents.length,
                         itemBuilder: (context, index) {
                           var color = ThemeData(
                             colorSchemeSeed: Colors.accents[index],
-                            useMaterial3: SettingsService().getSettings.useMaterial3,
-                            brightness: Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark ? Brightness.dark : Brightness.light,
+                            useMaterial3:
+                                SettingsService().getSettings.useMaterial3,
+                            brightness:
+                                Provider.of<ThemeProvider>(context).themeMode ==
+                                        ThemeMode.dark
+                                    ? Brightness.dark
+                                    : Brightness.light,
                           ).colorScheme.primary;
                           return Padding(
                             padding: const EdgeInsets.all(4.0),
                             child: InkWell(
-                              onTap: () => widget.onColorClicked?.call(Colors.accents[index]),
+                              onTap: () => widget.onColorClicked
+                                  ?.call(Colors.accents[index]),
                               child: AnimatedContainer(
                                 duration: const Duration(milliseconds: 300),
                                 curve: Curves.ease,
                                 decoration: BoxDecoration(
                                   color: color,
-                                  boxShadow: Theme.of(context).colorScheme.primary == color ? [BoxShadow(color: Theme.of(context).colorScheme.primary, blurRadius: 5, spreadRadius: 1)] : null,
+                                  boxShadow:
+                                      Theme.of(context).colorScheme.primary ==
+                                              color
+                                          ? [
+                                              BoxShadow(
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .primary,
+                                                  blurRadius: 5,
+                                                  spreadRadius: 1)
+                                            ]
+                                          : null,
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                               ),

@@ -17,15 +17,18 @@ class SenderQrCubit extends Cubit<SenderQrState> {
 
   String? _verificationString;
 
-  Future<void> startQrServer(Function(DeviceInfo device)? onDeviceConnected) async {
+  Future<void> startQrServer(
+      Function(DeviceInfo device)? onDeviceConnected) async {
     serverSocket = await ServerSocket.bind(InternetAddress.anyIPv4, 0);
     _verificationString = generateRandomString(16);
-    emit(ConnectionWaiting(Server().selectedIp.address, serverSocket!.port, _verificationString!));
+    emit(ConnectionWaiting(
+        Server().selectedIp.address, serverSocket!.port, _verificationString!));
 
     serverSocket!.listen((Socket client) async {
       try {
         var data = await client.first;
-        var decodedData = json.decode(utf8.decode(base64.decode(utf8.decode(data))));
+        var decodedData =
+            json.decode(utf8.decode(base64.decode(utf8.decode(data))));
         if (_verificationString != decodedData['verificationString']) {
           client.write("Verification string doesn't match");
           throw Exception("Verification string doesn't match");
@@ -39,7 +42,8 @@ class SenderQrCubit extends Cubit<SenderQrState> {
         await Future.delayed(const Duration(seconds: 1));
 
         _verificationString = generateRandomString(16);
-        emit(ConnectionWaiting(Server().selectedIp.address, serverSocket!.port, _verificationString!));
+        emit(ConnectionWaiting(Server().selectedIp.address, serverSocket!.port,
+            _verificationString!));
         startTimer();
       } catch (e) {
         client.close();
@@ -48,7 +52,8 @@ class SenderQrCubit extends Cubit<SenderQrState> {
         emit(const Initial());
         await Future.delayed(const Duration(seconds: 1));
         _verificationString = generateRandomString(16);
-        emit(ConnectionWaiting(Server().selectedIp.address, serverSocket!.port, _verificationString!));
+        emit(ConnectionWaiting(Server().selectedIp.address, serverSocket!.port,
+            _verificationString!));
         startTimer();
       }
     });
@@ -69,13 +74,16 @@ class SenderQrCubit extends Cubit<SenderQrState> {
         timer.cancel();
         return;
       }
-      if (currentDuration.inMilliseconds % refreshDuration.inMilliseconds == 0) {
+      if (currentDuration.inMilliseconds % refreshDuration.inMilliseconds ==
+          0) {
         emit(const Initial());
         currentDuration = Duration.zero;
         _verificationString = generateRandomString(16);
       }
 
-      emit(ConnectionWaiting(Server().selectedIp.address, serverSocket!.port, _verificationString!, currentDuration: currentDuration));
+      emit(ConnectionWaiting(
+          Server().selectedIp.address, serverSocket!.port, _verificationString!,
+          currentDuration: currentDuration));
       currentDuration += const Duration(milliseconds: 40);
     });
   }
@@ -86,7 +94,8 @@ class SenderQrCubit extends Cubit<SenderQrState> {
 
   String generateRandomString(int len) {
     var r = Random();
-    const chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+    const chars =
+        'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
     return List.generate(len, (index) => chars[r.nextInt(chars.length)]).join();
   }
 }

@@ -6,7 +6,9 @@ class TransferFailedView extends StatelessWidget {
   final TransferFailed state;
   final bool isDownload;
   final Function()? onClose;
-  const TransferFailedView({Key? key, required this.state, required this.isDownload, this.onClose}) : super(key: key);
+  const TransferFailedView(
+      {Key? key, required this.state, required this.isDownload, this.onClose})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,8 @@ class TransferFailedView extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(10)),
-          border: Border.all(color: Theme.of(context).colorScheme.primary, width: 1),
+          border: Border.all(
+              color: Theme.of(context).colorScheme.primary, width: 1),
         ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -30,7 +33,8 @@ class TransferFailedView extends StatelessWidget {
                       SizedBox(
                         height: MediaQuery.of(context).size.height / 15,
                         width: MediaQuery.of(context).size.height / 15,
-                        child: Icon(Icons.phonelink_rounded, color: Theme.of(context).colorScheme.primary),
+                        child: Icon(Icons.phonelink_rounded,
+                            color: Theme.of(context).colorScheme.primary),
                       ),
                       SizedBox(
                         width: 250,
@@ -39,8 +43,13 @@ class TransferFailedView extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(state.deviceInfo.name ?? "Unknown", style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold), overflow: TextOverflow.ellipsis),
-                              Text(state.deviceInfo.ip ?? "", style: const TextStyle(fontSize: 12)),
+                              Text(state.deviceInfo.name ?? "Unknown",
+                                  style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                  overflow: TextOverflow.ellipsis),
+                              Text(state.deviceInfo.ip ?? "",
+                                  style: const TextStyle(fontSize: 12)),
                             ],
                           ),
                         ),
@@ -48,15 +57,19 @@ class TransferFailedView extends StatelessWidget {
                     ],
                   ),
                   Tooltip(
-                    message: 'mainView.transfers.card.transferFailed.removeButtonTooltip'.tr(),
+                    message:
+                        'mainView.transfers.card.transferFailed.removeButtonTooltip'
+                            .tr(),
                     child: Material(
                       child: InkWell(
                         onTap: onClose,
                         borderRadius: BorderRadius.circular(10),
-                        hoverColor: Theme.of(context).colorScheme.primary.withAlpha(40),
+                        hoverColor:
+                            Theme.of(context).colorScheme.primary.withAlpha(40),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Icon(Icons.close_rounded, color: Theme.of(context).colorScheme.primary),
+                          child: Icon(Icons.close_rounded,
+                              color: Theme.of(context).colorScheme.primary),
                         ),
                       ),
                     ),
@@ -67,7 +80,9 @@ class TransferFailedView extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text('mainView.transfers.card.transferFailed.message'.tr(), style: const TextStyle(fontSize: 12)),
+                  child: Text(
+                      'mainView.transfers.card.transferFailed.message'.tr(),
+                      style: const TextStyle(fontSize: 12)),
                 ),
               ),
             ],

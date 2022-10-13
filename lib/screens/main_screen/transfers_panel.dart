@@ -28,7 +28,8 @@ class _TransfersState extends State<Transfers> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(color: Theme.of(context).colorScheme.outline, width: 2),
+        border:
+            Border.all(color: Theme.of(context).colorScheme.outline, width: 2),
         borderRadius: const BorderRadius.all(Radius.circular(20)),
       ),
       height: 616,
@@ -43,15 +44,23 @@ class _TransfersState extends State<Transfers> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('mainView.transfers.title'.tr(), style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold)),
+                Text('mainView.transfers.title'.tr(),
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Theme.of(context).colorScheme.primary,
+                        fontWeight: FontWeight.bold)),
                 TextButton.icon(
                   onPressed: FileOperations.openOutputFolder,
                   icon: const Icon(Icons.folder_outlined),
-                  label: Text('mainView.transfers.openOutputFolder'.tr(), style: TextStyle(color: Theme.of(context).colorScheme.primary)),
+                  label: Text('mainView.transfers.openOutputFolder'.tr(),
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary)),
                 ),
               ],
             ),
-            Server().activeTransfers.isNotEmpty ? _buildList(Server().activeTransfers) : _emptyState(),
+            Server().activeTransfers.isNotEmpty
+                ? _buildList(Server().activeTransfers)
+                : _emptyState(),
           ],
         ),
       ),
@@ -95,7 +104,9 @@ class _TransfersState extends State<Transfers> {
           const SizedBox(height: 30),
           Text(
             'mainView.transfers.emptyMessage'.tr(),
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold),
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                color: Theme.of(context).colorScheme.primary,
+                fontWeight: FontWeight.bold),
             textAlign: TextAlign.center,
           ),
           Padding(
@@ -104,11 +115,16 @@ class _TransfersState extends State<Transfers> {
               onPressed: () {
                 showDialog(
                   context: Server().navigatorKey.currentContext!,
-                  builder: (context) => const WelcomeDialog(overridePages: [NoCabMobilePage()]),
+                  builder: (context) =>
+                      const WelcomeDialog(overridePages: [NoCabMobilePage()]),
                 );
               },
               icon: const Icon(Icons.download_rounded),
-              label: Text('mainView.transfers.downloadNoCabMobile'.tr(), style: Theme.of(context).textTheme.labelLarge?.copyWith(color: Theme.of(context).colorScheme.primary)),
+              label: Text('mainView.transfers.downloadNoCabMobile'.tr(),
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelLarge
+                      ?.copyWith(color: Theme.of(context).colorScheme.primary)),
             ),
           ),
           Container(),

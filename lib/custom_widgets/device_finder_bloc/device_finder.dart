@@ -11,7 +11,8 @@ import 'package:nocab_desktop/models/deviceinfo_model.dart';
 class DeviceFinder extends StatefulWidget {
   final Function(DeviceInfo deviceInfo)? onPressed;
   final List<DeviceInfo> blockDevices;
-  const DeviceFinder({Key? key, this.onPressed, this.blockDevices = const []}) : super(key: key);
+  const DeviceFinder({Key? key, this.onPressed, this.blockDevices = const []})
+      : super(key: key);
 
   @override
   State<DeviceFinder> createState() => _DeviceFinderState();
@@ -46,7 +47,10 @@ class _DeviceFinderState extends State<DeviceFinder> {
       children: [
         SvgColorHandler(
           svgPath: "assets/images/not_found.svg",
-          colorSwitch: {const Color(0xFFFF0000): Theme.of(context).colorScheme.primaryContainer},
+          colorSwitch: {
+            const Color(0xFFFF0000):
+                Theme.of(context).colorScheme.primaryContainer
+          },
           height: 100,
         ),
         const SizedBox(height: 8),
@@ -61,10 +65,15 @@ class _DeviceFinderState extends State<DeviceFinder> {
                 child: CircularProgressIndicator(),
               ),
             ),
-            Text('deviceScanner.searching'.tr(), style: Theme.of(context).textTheme.titleLarge)
+            Text('deviceScanner.searching'.tr(),
+                style: Theme.of(context).textTheme.titleLarge)
           ],
         ),
-        Text('deviceScanner.noDevicesFound'.tr(), style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontStyle: FontStyle.italic, letterSpacing: .5)),
+        Text('deviceScanner.noDevicesFound'.tr(),
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium
+                ?.copyWith(fontStyle: FontStyle.italic, letterSpacing: .5)),
         const SizedBox(height: 8),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32.0),
@@ -73,8 +82,16 @@ class _DeviceFinderState extends State<DeviceFinder> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 8),
-              Text('deviceScanner.networkHint'.tr(), style: Theme.of(context).textTheme.bodySmall?.copyWith(fontStyle: FontStyle.italic)),
-              Text('deviceScanner.instructions'.tr(), style: Theme.of(context).textTheme.bodySmall?.copyWith(fontStyle: FontStyle.italic)),
+              Text('deviceScanner.networkHint'.tr(),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodySmall
+                      ?.copyWith(fontStyle: FontStyle.italic)),
+              Text('deviceScanner.instructions'.tr(),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodySmall
+                      ?.copyWith(fontStyle: FontStyle.italic)),
             ],
           ),
         ),
@@ -84,11 +101,16 @@ class _DeviceFinderState extends State<DeviceFinder> {
             onPressed: () {
               showDialog(
                 context: context,
-                builder: (context) => const WelcomeDialog(overridePages: [NoCabMobilePage()]),
+                builder: (context) =>
+                    const WelcomeDialog(overridePages: [NoCabMobilePage()]),
               );
             },
             icon: const Icon(Icons.help_outline, size: 16),
-            label: Text('deviceScanner.downloadNoCabMobile'.tr(), style: Theme.of(context).textTheme.labelSmall?.copyWith(color: Theme.of(context).colorScheme.primary)),
+            label: Text('deviceScanner.downloadNoCabMobile'.tr(),
+                style: Theme.of(context)
+                    .textTheme
+                    .labelSmall
+                    ?.copyWith(color: Theme.of(context).colorScheme.primary)),
           ),
         ),
       ],
@@ -102,7 +124,12 @@ class _DeviceFinderState extends State<DeviceFinder> {
           return Material(
             color: Colors.transparent,
             child: InkWell(
-              onTap: widget.blockDevices.map((e) => e.ip).toList().contains(devices[index].ip) ? null : () => widget.onPressed?.call(devices[index]),
+              onTap: widget.blockDevices
+                      .map((e) => e.ip)
+                      .toList()
+                      .contains(devices[index].ip)
+                  ? null
+                  : () => widget.onPressed?.call(devices[index]),
               borderRadius: BorderRadius.circular(10),
               child: ListTile(
                 leading: Container(

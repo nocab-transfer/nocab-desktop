@@ -12,7 +12,9 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 class WelcomeDialog extends StatefulWidget {
   final bool createdFromMain;
   final List<Widget>? overridePages;
-  const WelcomeDialog({Key? key, this.createdFromMain = false, this.overridePages}) : super(key: key);
+  const WelcomeDialog(
+      {Key? key, this.createdFromMain = false, this.overridePages})
+      : super(key: key);
 
   @override
   State<WelcomeDialog> createState() => _WelcomeDialogState();
@@ -57,7 +59,8 @@ class _WelcomeDialogState extends State<WelcomeDialog> {
                 children: [
                   PageView(
                     physics: const NeverScrollableScrollPhysics(),
-                    onPageChanged: (value) => setState(() => currentPage = value),
+                    onPageChanged: (value) =>
+                        setState(() => currentPage = value),
                     controller: _pageController,
                     scrollDirection: Axis.horizontal,
                     children: pages,
@@ -69,12 +72,21 @@ class _WelcomeDialogState extends State<WelcomeDialog> {
                       child: SmoothPageIndicator(
                         controller: _pageController,
                         count: pages.length,
-                        onDotClicked: (index) => _pageController.animateToPage(index, duration: Duration(milliseconds: (currentPage - index).abs() > 2 ? 500 : 300), curve: Curves.easeInOut),
+                        onDotClicked: (index) => _pageController.animateToPage(
+                            index,
+                            duration: Duration(
+                                milliseconds: (currentPage - index).abs() > 2
+                                    ? 500
+                                    : 300),
+                            curve: Curves.easeInOut),
                         effect: WormEffect(
                           dotHeight: 8,
                           dotWidth: 16,
                           activeDotColor: Theme.of(context).colorScheme.primary,
-                          dotColor: Theme.of(context).colorScheme.primary.withOpacity(.2),
+                          dotColor: Theme.of(context)
+                              .colorScheme
+                              .primary
+                              .withOpacity(.2),
                           spacing: 16,
                           strokeWidth: 8,
                           paintStyle: PaintingStyle.stroke,
@@ -87,12 +99,19 @@ class _WelcomeDialogState extends State<WelcomeDialog> {
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: ElevatedButton(
-                        onPressed: () => currentPage == pages.length - 1 ? Navigator.pop(context) : _pageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.ease),
+                        onPressed: () => currentPage == pages.length - 1
+                            ? Navigator.pop(context)
+                            : _pageController.nextPage(
+                                duration: const Duration(milliseconds: 300),
+                                curve: Curves.ease),
                         style: ElevatedButton.styleFrom(
                           fixedSize: const Size(150, 50),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0)),
                         ),
-                        child: Text(currentPage == pages.length - 1 ? "welcomeDialog.finishButton".tr() : "welcomeDialog.nextButton".tr()),
+                        child: Text(currentPage == pages.length - 1
+                            ? "welcomeDialog.finishButton".tr()
+                            : "welcomeDialog.nextButton".tr()),
                       ),
                     ),
                   ),

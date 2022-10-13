@@ -11,5 +11,6 @@ class ConnectionWaiting extends SenderQrState {
   final String ip;
   final int port;
   final Duration currentDuration;
-  const ConnectionWaiting(this.ip, this.port, this.verificationString, {this.currentDuration = Duration.zero});
+  const ConnectionWaiting(this.ip, this.port, this.verificationString,
+      {this.currentDuration = Duration.zero});
 }

@@ -33,7 +33,9 @@ class _SettingsState extends State<Settings> {
   void initState() {
     super.initState();
     currentSettings = SettingsService().getSettings;
-    _settingsSubscription = SettingsService().onSettingChanged.listen((settings) => setState(() => currentSettings = settings));
+    _settingsSubscription = SettingsService()
+        .onSettingChanged
+        .listen((settings) => setState(() => currentSettings = settings));
     nameController.text = currentSettings.deviceName;
   }
 
@@ -50,9 +52,11 @@ class _SettingsState extends State<Settings> {
     var switchIcon = MaterialStateProperty.resolveWith<Icon?>(
       (Set<MaterialState> states) {
         if (states.contains(MaterialState.selected)) {
-          return Icon(Icons.check_rounded, color: Theme.of(context).colorScheme.onPrimary);
+          return Icon(Icons.check_rounded,
+              color: Theme.of(context).colorScheme.onPrimary);
         }
-        return Icon(Icons.close_rounded, color: Theme.of(context).colorScheme.onInverseSurface);
+        return Icon(Icons.close_rounded,
+            color: Theme.of(context).colorScheme.onInverseSurface);
       },
     );
 
@@ -89,13 +93,20 @@ class _SettingsState extends State<Settings> {
                             context: context,
                             builder: _showAboutDialog,
                           ),
-                          icon: const Icon(Icons.question_mark_rounded, size: 16),
+                          icon:
+                              const Icon(Icons.question_mark_rounded, size: 16),
                           label: Text('settings.aboutButton'.tr()),
                         ),
                       ),
                     ),
                   ),
-                  Center(child: Text('settings.title'.tr(), style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 24, fontWeight: FontWeight.w400))),
+                  Center(
+                      child: Text('settings.title'.tr(),
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleLarge
+                              ?.copyWith(
+                                  fontSize: 24, fontWeight: FontWeight.w400))),
                   Align(
                     alignment: Alignment.centerRight,
                     child: Padding(
@@ -127,7 +138,8 @@ class _SettingsState extends State<Settings> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: ScrollConfiguration(
-                behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+                behavior:
+                    ScrollConfiguration.of(context).copyWith(scrollbars: false),
                 child: Column(
                   children: [
                     SizedBox(
@@ -148,17 +160,25 @@ class _SettingsState extends State<Settings> {
                                       child: TextField(
                                         controller: nameController,
                                         textAlign: TextAlign.center,
-                                        decoration: const InputDecoration(border: OutlineInputBorder(), isDense: true, counterText: ""),
+                                        decoration: const InputDecoration(
+                                            border: OutlineInputBorder(),
+                                            isDense: true,
+                                            counterText: ""),
                                         maxLength: 20,
                                         inputFormatters: [
                                           // block emojis
-                                          FilteringTextInputFormatter.deny(RegExp(r'(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])')),
+                                          FilteringTextInputFormatter.deny(RegExp(
+                                              r'(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])')),
                                         ],
                                         onChanged: (String value) {
                                           if (value.isNotEmpty) {
-                                            SettingsService().setSettings(currentSettings.copyWith(deviceName: value));
+                                            SettingsService().setSettings(
+                                                currentSettings.copyWith(
+                                                    deviceName: value));
                                           } else {
-                                            SettingsService().setSettings(currentSettings.copyWith(deviceName: "Unknown"));
+                                            SettingsService().setSettings(
+                                                currentSettings.copyWith(
+                                                    deviceName: "Unknown"));
                                           }
                                         },
                                       ),
@@ -166,13 +186,20 @@ class _SettingsState extends State<Settings> {
                                     const SizedBox(width: 8),
                                     Material(
                                       child: Tooltip(
-                                        triggerMode: TooltipTriggerMode.longPress,
-                                        message: 'settings.deviceName.randomNameTooltip'.tr(),
+                                        triggerMode:
+                                            TooltipTriggerMode.longPress,
+                                        message:
+                                            'settings.deviceName.randomNameTooltip'
+                                                .tr(),
                                         child: InkWell(
-                                          borderRadius: const BorderRadius.all(Radius.circular(10)),
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(10)),
                                           onTap: () {
-                                            String name = UsernameGen().generate();
-                                            SettingsService().setSettings(currentSettings.copyWith(deviceName: name));
+                                            String name =
+                                                UsernameGen().generate();
+                                            SettingsService().setSettings(
+                                                currentSettings.copyWith(
+                                                    deviceName: name));
                                             nameController.text = name;
                                           },
                                           child: const SizedBox(
@@ -192,22 +219,35 @@ class _SettingsState extends State<Settings> {
                               caption: 'settings.themeColor.description'.tr(),
                               widget: Material(
                                 child: InkWell(
-                                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(10)),
                                   onTap: () {
                                     showModal(
                                       context: context,
                                       builder: (context) => ThemeColorPicker(
                                         onUseSystemColorChanged: (value) {
-                                          SettingsService().setSettings(currentSettings.copyWith(useSystemColor: value));
+                                          SettingsService().setSettings(
+                                              currentSettings.copyWith(
+                                                  useSystemColor: value));
                                           if (value) {
-                                            Provider.of<ThemeProvider>(context, listen: false).changeSeedColor(RegistryService.getColor());
+                                            Provider.of<ThemeProvider>(context,
+                                                    listen: false)
+                                                .changeSeedColor(
+                                                    RegistryService.getColor());
                                           } else {
-                                            Provider.of<ThemeProvider>(context, listen: false).changeSeedColor(currentSettings.seedColor);
+                                            Provider.of<ThemeProvider>(context,
+                                                    listen: false)
+                                                .changeSeedColor(
+                                                    currentSettings.seedColor);
                                           }
                                         },
                                         onColorClicked: (color) {
-                                          SettingsService().setSettings(currentSettings.copyWith(seedColor: color));
-                                          Provider.of<ThemeProvider>(context, listen: false).changeSeedColor(color);
+                                          SettingsService().setSettings(
+                                              currentSettings.copyWith(
+                                                  seedColor: color));
+                                          Provider.of<ThemeProvider>(context,
+                                                  listen: false)
+                                              .changeSeedColor(color);
                                           //Navigator.pop(context);
                                         },
                                       ),
@@ -217,10 +257,15 @@ class _SettingsState extends State<Settings> {
                                     height: 50,
                                     width: 50,
                                     decoration: BoxDecoration(
-                                      borderRadius: const BorderRadius.all(Radius.circular(10)),
-                                      color: Theme.of(context).colorScheme.primary,
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(10)),
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
                                     ),
-                                    child: Icon(Icons.ads_click_rounded, color: Theme.of(context).colorScheme.onPrimary),
+                                    child: Icon(Icons.ads_click_rounded,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onPrimary),
                                   ),
                                 ),
                               ),
@@ -232,10 +277,17 @@ class _SettingsState extends State<Settings> {
                                   value: currentSettings.darkMode,
                                   thumbIcon: switchIcon,
                                   onChanged: (value) {
-                                    SettingsService().setSettings(currentSettings.copyWith(darkMode: value));
-                                    Provider.of<ThemeProvider>(context, listen: false).changeThemeMode(value ? ThemeMode.dark : ThemeMode.light);
+                                    SettingsService().setSettings(
+                                        currentSettings.copyWith(
+                                            darkMode: value));
+                                    Provider.of<ThemeProvider>(context,
+                                            listen: false)
+                                        .changeThemeMode(value
+                                            ? ThemeMode.dark
+                                            : ThemeMode.light);
                                   },
-                                  activeColor: Theme.of(context).colorScheme.primary),
+                                  activeColor:
+                                      Theme.of(context).colorScheme.primary),
                             ),
                             SettingCard(
                               title: 'settings.materialYou.title'.tr(),
@@ -244,10 +296,15 @@ class _SettingsState extends State<Settings> {
                                   value: currentSettings.useMaterial3,
                                   thumbIcon: switchIcon,
                                   onChanged: (value) {
-                                    SettingsService().setSettings(currentSettings.copyWith(useMaterial3: value));
-                                    Provider.of<ThemeProvider>(context, listen: false).materialYou(value: value);
+                                    SettingsService().setSettings(
+                                        currentSettings.copyWith(
+                                            useMaterial3: value));
+                                    Provider.of<ThemeProvider>(context,
+                                            listen: false)
+                                        .materialYou(value: value);
                                   },
-                                  activeColor: Theme.of(context).colorScheme.primary),
+                                  activeColor:
+                                      Theme.of(context).colorScheme.primary),
                             ),
                             SettingCard(
                               title: 'settings.language.title'.tr(),
@@ -257,7 +314,8 @@ class _SettingsState extends State<Settings> {
                                 height: 60,
                                 child: DropdownButtonFormField(
                                   value: context.locale,
-                                  items: context.supportedLocales.map((Locale value) {
+                                  items: context.supportedLocales
+                                      .map((Locale value) {
                                     return DropdownMenuItem<Locale>(
                                       value: value,
                                       child: Text(value.langName),
@@ -266,42 +324,56 @@ class _SettingsState extends State<Settings> {
                                   onChanged: (value) {
                                     if (value != null) {
                                       context.setLocale(value);
-                                      SettingsService().setSettings(currentSettings.copyWith(language: value.languageCode));
+                                      SettingsService().setSettings(
+                                          currentSettings.copyWith(
+                                              language: value.languageCode));
                                     }
                                   },
                                   decoration: const InputDecoration(
                                     border: OutlineInputBorder(),
                                   ),
-                                  iconEnabledColor: Theme.of(context).colorScheme.primary,
+                                  iconEnabledColor:
+                                      Theme.of(context).colorScheme.primary,
                                 ),
                               ),
                             ),
                             const Divider(),
-                            Text('settings.advanced.title'.tr(), style: Theme.of(context).textTheme.titleMedium),
-                            Text('settings.advanced.description'.tr(), textAlign: TextAlign.center),
+                            Text('settings.advanced.title'.tr(),
+                                style: Theme.of(context).textTheme.titleMedium),
+                            Text('settings.advanced.description'.tr(),
+                                textAlign: TextAlign.center),
                             const SizedBox(height: 16),
                             SettingCard(
                               title: 'settings.advanced.finderPort.title'.tr(),
-                              caption: 'settings.advanced.finderPort.description'.tr(),
-                              helpText: 'settings.advanced.finderPort.help'.tr(),
+                              caption:
+                                  'settings.advanced.finderPort.description'
+                                      .tr(),
+                              helpText:
+                                  'settings.advanced.finderPort.help'.tr(),
                               widget: SizedBox(
                                 width: 100,
                                 height: 50,
                                 child: TextField(
                                   onChanged: (String value) {
                                     if (value.isNotEmpty) {
-                                      SettingsService().setSettings(currentSettings.copyWith(finderPort: int.parse(value)));
+                                      SettingsService().setSettings(
+                                          currentSettings.copyWith(
+                                              finderPort: int.parse(value)));
                                     } else {
-                                      SettingsService().setSettings(currentSettings.copyWith(finderPort: 62193));
+                                      SettingsService().setSettings(
+                                          currentSettings.copyWith(
+                                              finderPort: 62193));
                                     }
                                   },
                                   inputFormatters: [
-                                    FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp(r'[0-9]')),
                                   ],
                                   textAlign: TextAlign.center,
                                   decoration: InputDecoration(
                                     border: const OutlineInputBorder(),
-                                    hintText: currentSettings.finderPort.toString(),
+                                    hintText:
+                                        currentSettings.finderPort.toString(),
                                   ),
                                 ),
                               ),
@@ -343,7 +415,13 @@ class _SettingsState extends State<Settings> {
               ),
               child: Stack(
                 children: [
-                  Center(child: Text('settings.title'.tr(), style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 24, fontWeight: FontWeight.w400))),
+                  Center(
+                      child: Text('settings.title'.tr(),
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleLarge
+                              ?.copyWith(
+                                  fontSize: 24, fontWeight: FontWeight.w400))),
                   Align(
                     alignment: Alignment.centerRight,
                     child: Padding(
@@ -389,8 +467,17 @@ class _SettingsState extends State<Settings> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text('Error', style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Theme.of(context).colorScheme.error)),
-                            Text('Try recreate settings file or restart the application', style: Theme.of(context).textTheme.bodyLarge),
+                            Text('Error',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleLarge
+                                    ?.copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .error)),
+                            Text(
+                                'Try recreate settings file or restart the application',
+                                style: Theme.of(context).textTheme.bodyLarge),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: OutlinedButton(
@@ -413,12 +500,23 @@ class _SettingsState extends State<Settings> {
                                       height: 70,
                                       width: 50,
                                       decoration: BoxDecoration(
-                                        color: Theme.of(context).colorScheme.errorContainer.withOpacity(.2),
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .errorContainer
+                                            .withOpacity(.2),
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
-                                        child: Text(SettingsService().errors[index], style: Theme.of(context).textTheme.labelSmall?.copyWith(color: Theme.of(context).colorScheme.error)),
+                                        child: Text(
+                                            SettingsService().errors[index],
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelSmall
+                                                ?.copyWith(
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .error)),
                                       ),
                                     ),
                                   );
@@ -452,14 +550,16 @@ class _SettingsState extends State<Settings> {
       children: [
         Center(
           child: TextButton(
-            onPressed: () => launchUrlString('https://github.com/nocab-transfer'),
+            onPressed: () =>
+                launchUrlString('https://github.com/nocab-transfer'),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text('aboutDialog.openGithubPage'.tr()),
             ),
           ),
         ),
-        Text('aboutDialog.contributors'.tr(), style: Theme.of(context).textTheme.titleMedium),
+        Text('aboutDialog.contributors'.tr(),
+            style: Theme.of(context).textTheme.titleMedium),
         const SizedBox(height: 8),
         Container(
           height: 200,
@@ -469,7 +569,8 @@ class _SettingsState extends State<Settings> {
             borderRadius: const BorderRadius.all(Radius.circular(25)),
           ),
           child: FutureBuilder(
-            future: Github.getContributors(owner: 'nocab-transfer', repo: 'nocab-desktop'),
+            future: Github.getContributors(
+                owner: 'nocab-transfer', repo: 'nocab-desktop'),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 if (snapshot.data!.isEmpty) {
@@ -477,7 +578,10 @@ class _SettingsState extends State<Settings> {
                     child: Text(
                       'aboutDialog.errorMessage'.tr(),
                       textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(fontStyle: FontStyle.italic),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodySmall
+                          ?.copyWith(fontStyle: FontStyle.italic),
                     ),
                   );
                 }
@@ -487,11 +591,13 @@ class _SettingsState extends State<Settings> {
                     return Material(
                       color: Colors.transparent,
                       child: InkWell(
-                        onTap: () => launchUrlString(snapshot.data![index]['html_url']),
+                        onTap: () =>
+                            launchUrlString(snapshot.data![index]['html_url']),
                         borderRadius: BorderRadius.circular(25),
                         child: ListTile(
                           leading: CircleAvatar(
-                            backgroundImage: NetworkImage(snapshot.data![index]['avatar_url']),
+                            backgroundImage: NetworkImage(
+                                snapshot.data![index]['avatar_url']),
                           ),
                           title: Text(snapshot.data![index]['login']),
                           visualDensity: VisualDensity.compact,

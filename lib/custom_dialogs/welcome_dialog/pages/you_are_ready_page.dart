@@ -39,9 +39,14 @@ class _YouAreReadyPageState extends State<YouAreReadyPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text("welcomeDialog.readyPage.title".tr(), style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600)),
+            Text("welcomeDialog.readyPage.title".tr(),
+                style: Theme.of(context)
+                    .textTheme
+                    .titleLarge
+                    ?.copyWith(fontWeight: FontWeight.w600)),
             const SizedBox(height: 20),
-            Text("welcomeDialog.readyPage.description".tr(), style: Theme.of(context).textTheme.bodyLarge),
+            Text("welcomeDialog.readyPage.description".tr(),
+                style: Theme.of(context).textTheme.bodyLarge),
             const SizedBox(height: 20),
             Container(
               width: 500,
@@ -53,53 +58,71 @@ class _YouAreReadyPageState extends State<YouAreReadyPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("welcomeDialog.readyPage.references.githubLinks".tr(), style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600)),
+                  Text("welcomeDialog.readyPage.references.githubLinks".tr(),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge
+                          ?.copyWith(fontWeight: FontWeight.w600)),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TextButton.icon(
                         onPressed: () => launchUrlString(nocabMobileGithub),
                         icon: const Icon(Icons.phone_android_rounded),
-                        label: Text("welcomeDialog.readyPage.references.mobile".tr()),
+                        label: Text(
+                            "welcomeDialog.readyPage.references.mobile".tr()),
                       ),
                       const SizedBox(width: 8),
                       TextButton.icon(
                         onPressed: () => launchUrlString(nocabDesktopGithub),
                         icon: const Icon(Icons.desktop_windows_rounded),
-                        label: Text("welcomeDialog.readyPage.references.desktop".tr()),
+                        label: Text(
+                            "welcomeDialog.readyPage.references.desktop".tr()),
                       ),
                     ],
                   ),
-                  Text("welcomeDialog.readyPage.references.sponsorToMe".tr(), style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600)),
+                  Text("welcomeDialog.readyPage.references.sponsorToMe".tr(),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge
+                          ?.copyWith(fontWeight: FontWeight.w600)),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TextButton.icon(
                         onPressed: () => launchUrlString(githubSponsorLink),
                         icon: const Icon(Icons.favorite),
-                        label: Text("welcomeDialog.readyPage.references.fromGithub".tr()),
+                        label: Text(
+                            "welcomeDialog.readyPage.references.fromGithub"
+                                .tr()),
                       ),
                       const SizedBox(width: 8),
                       TextButton.icon(
                         onPressed: () => launchUrlString(buyMeACoffeeLink),
                         icon: const Icon(Icons.coffee_rounded),
-                        label: Text("welcomeDialog.readyPage.references.fromBuymeacoffee".tr()),
+                        label: Text(
+                            "welcomeDialog.readyPage.references.fromBuymeacoffee"
+                                .tr()),
                       ),
                     ],
                   ),
                   const SizedBox(height: 20),
-                  Text("welcomeDialog.readyPage.references.contactText".tr(), style: Theme.of(context).textTheme.bodyLarge),
+                  Text("welcomeDialog.readyPage.references.contactText".tr(),
+                      style: Theme.of(context).textTheme.bodyLarge),
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                     TextButton(
-                      onPressed: () => launchUrlString("mailto:'berkekbgz@gmail.com'"),
+                      onPressed: () =>
+                          launchUrlString("mailto:'berkekbgz@gmail.com'"),
                       style: TextButton.styleFrom(
                         fixedSize: const Size(70, 24),
                       ),
-                      child: Text('welcomeDialog.readyPage.references.email'.tr()),
+                      child:
+                          Text('welcomeDialog.readyPage.references.email'.tr()),
                     ),
                     const SizedBox(width: 8),
                     TextButton(
-                      onPressed: () => launchUrlString("https://twitter.com/berkekbgz"),
+                      onPressed: () =>
+                          launchUrlString("https://twitter.com/berkekbgz"),
                       style: TextButton.styleFrom(
                         fixedSize: const Size(70, 24),
                       ),
@@ -107,7 +130,8 @@ class _YouAreReadyPageState extends State<YouAreReadyPage> {
                     ),
                     const SizedBox(width: 8),
                     TextButton(
-                      onPressed: () => launchUrlString("https://discordapp.com/users/505780125057679360"),
+                      onPressed: () => launchUrlString(
+                          "https://discordapp.com/users/505780125057679360"),
                       style: TextButton.styleFrom(
                         fixedSize: const Size(70, 24),
                       ),

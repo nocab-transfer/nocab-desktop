@@ -1,10 +1,12 @@
 import 'dart:io';
 
 class Network {
-  static NetworkInterface getCurrentNetworkInterface(List<NetworkInterface> networkInterfaces) {
+  static NetworkInterface getCurrentNetworkInterface(
+      List<NetworkInterface> networkInterfaces) {
     // Force to select network interfaces to Wifi or Ethernet
     //                                 ↓ this stands for blocking vEthernet
-    var interfaceNameRegex = RegExp(r'(v\b|\b)(ethernet?.?\w+)|(wi.?fi)', caseSensitive: false);
+    var interfaceNameRegex =
+        RegExp(r'(v\b|\b)(ethernet?.?\w+)|(wi.?fi)', caseSensitive: false);
 
     // if it is not found check this names matching
     List<String> defaultInterfaceNames = [
@@ -22,7 +24,8 @@ class Network {
       (element) => interfaceNameRegex.hasMatch(element.name),
       orElse: () => networkInterfaces.firstWhere(
         (element) => defaultInterfaceNames.contains(element.name),
-        orElse: () => networkInterfaces.first, // return first if not any matched :(
+        orElse: () =>
+            networkInterfaces.first, // return first if not any matched :(
       ),
     );
   }

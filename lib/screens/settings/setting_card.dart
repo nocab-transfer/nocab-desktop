@@ -5,7 +5,13 @@ class SettingCard extends StatelessWidget {
   final String? caption;
   final Widget widget;
   final String? helpText;
-  const SettingCard({Key? key, required this.title, this.caption, required this.widget, this.helpText}) : super(key: key);
+  const SettingCard(
+      {Key? key,
+      required this.title,
+      this.caption,
+      required this.widget,
+      this.helpText})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,32 +21,44 @@ class SettingCard extends StatelessWidget {
       //color: Colors.red,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Row(crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
+        child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(title, style: Theme.of(context).textTheme.titleMedium),
-              SizedBox(
-                width: 270,
-                child: Text(caption ?? "", style: Theme.of(context).textTheme.labelMedium?.copyWith(fontWeight: FontWeight.w100), maxLines: 4),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(title, style: Theme.of(context).textTheme.titleMedium),
+                  SizedBox(
+                    width: 270,
+                    child: Text(caption ?? "",
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelMedium
+                            ?.copyWith(fontWeight: FontWeight.w100),
+                        maxLines: 4),
+                  ),
+                  helpText != null
+                      ? Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: Row(
+                            children: [
+                              Icon(Icons.help_outline,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onBackground,
+                                  size: 16),
+                              const SizedBox(width: 4),
+                              Text(helpText ?? ""),
+                            ],
+                          ),
+                        )
+                      : Container(),
+                ],
               ),
-              helpText != null
-                  ? Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
-                      child: Row(
-                        children: [
-                          Icon(Icons.help_outline, color: Theme.of(context).colorScheme.onBackground, size: 16),
-                          const SizedBox(width: 4),
-                          Text(helpText ?? ""),
-                        ],
-                      ),
-                    )
-                  : Container(),
-            ],
-          ),
-          widget,
-        ]),
+              widget,
+            ]),
       ),
     );
   }

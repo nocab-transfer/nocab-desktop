@@ -43,7 +43,8 @@ class _SendStarterDialogState extends State<SendStarterDialog> {
                       borderRadius: const BorderRadius.all(Radius.circular(12)),
                       child: InkWell(
                         onTap: Navigator.of(context).pop,
-                        borderRadius: const BorderRadius.all(Radius.circular(12)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(12)),
                         child: const Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Icon(Icons.close_rounded),
@@ -67,14 +68,25 @@ class _SendStarterDialogState extends State<SendStarterDialog> {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(left: 16.0),
-                                child: Text('sender.files'.tr(), style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold)),
+                                child: Text('sender.files'.tr(),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineSmall
+                                        ?.copyWith(
+                                            fontWeight: FontWeight.bold)),
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(right: 16.0),
                                 child: Text(
-                                  'sender.fileCounter'.plural(widget.files.length, name: 'count', namedArgs: {
-                                    'size': widget.files.map((file) => file.byteSize).reduce((a, b) => a + b).formatBytes(useName: true),
-                                  }),
+                                  'sender.fileCounter'.plural(
+                                      widget.files.length,
+                                      name: 'count',
+                                      namedArgs: {
+                                        'size': widget.files
+                                            .map((file) => file.byteSize)
+                                            .reduce((a, b) => a + b)
+                                            .formatBytes(useName: true),
+                                      }),
                                 ),
                               ),
                             ],
@@ -85,14 +97,20 @@ class _SendStarterDialogState extends State<SendStarterDialog> {
                           height: 450,
                           decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.surfaceVariant,
-                            borderRadius: const BorderRadius.all(Radius.circular(8)),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(8)),
                           ),
                           child: FileList(files: widget.files),
                         ),
                       ],
                     ),
                   ),
-                  VerticalDivider(width: 1, thickness: 1, indent: 64, endIndent: 64, color: Theme.of(context).colorScheme.onSurfaceVariant),
+                  VerticalDivider(
+                      width: 1,
+                      thickness: 1,
+                      indent: 64,
+                      endIndent: 64,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant),
                   SizedBox(
                     width: 432,
                     height: 550,
@@ -107,7 +125,12 @@ class _SendStarterDialogState extends State<SendStarterDialog> {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(left: 16.0),
-                                child: Text('sender.devices'.tr(), style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold)),
+                                child: Text('sender.devices'.tr(),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineSmall
+                                        ?.copyWith(
+                                            fontWeight: FontWeight.bold)),
                               ),
                             ],
                           ),
@@ -125,16 +148,24 @@ class _SendStarterDialogState extends State<SendStarterDialog> {
                                   child: DeviceFinder(
                                     blockDevices: deviceClickBlock,
                                     onPressed: (deviceInfo) {
-                                      setState(() => deviceClickBlock.add(deviceInfo));
-                                      Server().send(deviceInfo, widget.files).then((value) => setState(() => deviceClickBlock.remove(deviceInfo)));
+                                      setState(() =>
+                                          deviceClickBlock.add(deviceInfo));
+                                      Server()
+                                          .send(deviceInfo, widget.files)
+                                          .then((value) => setState(() =>
+                                              deviceClickBlock
+                                                  .remove(deviceInfo)));
                                     },
                                   ),
                                 ),
                               ),
                               SenderQr(
                                 onDeviceConnected: (deviceInfo) {
-                                  setState(() => deviceClickBlock.add(deviceInfo));
-                                  Server().send(deviceInfo, widget.files).then((value) => setState(() => deviceClickBlock.remove(deviceInfo)));
+                                  setState(
+                                      () => deviceClickBlock.add(deviceInfo));
+                                  Server().send(deviceInfo, widget.files).then(
+                                      (value) => setState(() =>
+                                          deviceClickBlock.remove(deviceInfo)));
                                 },
                               ),
                             ],

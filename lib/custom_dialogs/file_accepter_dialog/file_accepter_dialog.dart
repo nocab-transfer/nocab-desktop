@@ -8,7 +8,9 @@ import 'package:nocab_desktop/services/server/server.dart';
 class FileAccepterDialog extends StatefulWidget {
   final ShareRequest request;
   final Socket socket;
-  const FileAccepterDialog({Key? key, required this.request, required this.socket}) : super(key: key);
+  const FileAccepterDialog(
+      {Key? key, required this.request, required this.socket})
+      : super(key: key);
 
   @override
   State<FileAccepterDialog> createState() => _FileAccepterDialogState();
@@ -48,13 +50,16 @@ class _FileAccepterDialogState extends State<FileAccepterDialog> {
                 )),
               ),
               Text(
-                'fileAccepter.title'.plural(widget.request.files.length, name: 'count', namedArgs: {
-                  'deviceName': widget.request.deviceInfo.name!,
-                }),
+                'fileAccepter.title'.plural(widget.request.files.length,
+                    name: 'count',
+                    namedArgs: {
+                      'deviceName': widget.request.deviceInfo.name!,
+                    }),
                 maxLines: 2,
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -66,7 +71,9 @@ class _FileAccepterDialogState extends State<FileAccepterDialog> {
                   maxLines: 2,
                   textAlign: TextAlign.left,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant, fontWeight: FontWeight.w600),
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      fontWeight: FontWeight.w600),
                 ),
               ),
               Container(
@@ -83,29 +90,42 @@ class _FileAccepterDialogState extends State<FileAccepterDialog> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   OutlinedButton(
-                    onPressed: () => Server().rejectRequest(widget.request, widget.socket).then((value) => Navigator.pop(context)),
+                    onPressed: () => Server()
+                        .rejectRequest(widget.request, widget.socket)
+                        .then((value) => Navigator.pop(context)),
                     style: OutlinedButton.styleFrom(
                       surfaceTintColor: Theme.of(context).colorScheme.error,
                       fixedSize: const Size(100, 50),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-                      side: BorderSide(width: 2, color: Theme.of(context).colorScheme.error),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0)),
+                      side: BorderSide(
+                          width: 2, color: Theme.of(context).colorScheme.error),
                     ),
                     child: Text(
                       'fileAccepter.rejectButton'.tr(),
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.error),
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.error),
                     ),
                   ),
                   const SizedBox(width: 16),
                   ElevatedButton(
-                    onPressed: () => Server().acceptRequest(widget.request, widget.socket).then((value) => Navigator.pop(context)),
+                    onPressed: () => Server()
+                        .acceptRequest(widget.request, widget.socket)
+                        .then((value) => Navigator.pop(context)),
                     style: ElevatedButton.styleFrom(
                       fixedSize: const Size(100, 50),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0)),
                       backgroundColor: Theme.of(context).colorScheme.primary,
                     ),
                     child: Text(
                       'fileAccepter.acceptButton'.tr(),
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.background),
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.background),
                     ),
                   ),
                 ],

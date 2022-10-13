@@ -40,7 +40,11 @@ class _UseInstructionsState extends State<UseInstructions> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("welcomeDialog.useInstructions.title".tr(), style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600)),
+            Text("welcomeDialog.useInstructions.title".tr(),
+                style: Theme.of(context)
+                    .textTheme
+                    .titleLarge
+                    ?.copyWith(fontWeight: FontWeight.w600)),
             const SizedBox(height: 20),
             // same network
             ListView.builder(
@@ -51,14 +55,18 @@ class _UseInstructionsState extends State<UseInstructions> {
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: Row(
                   children: [
-                    Text("${index + 1}. ", style: Theme.of(context).textTheme.bodyLarge),
-                    Expanded(child: Text(instructions[index], style: Theme.of(context).textTheme.bodyLarge)),
+                    Text("${index + 1}. ",
+                        style: Theme.of(context).textTheme.bodyLarge),
+                    Expanded(
+                        child: Text(instructions[index],
+                            style: Theme.of(context).textTheme.bodyLarge)),
                   ],
                 ),
               ),
             ),
             const SizedBox(height: 20),
-            Text("welcomeDialog.useInstructions.hint".tr(), style: Theme.of(context).textTheme.bodyLarge),
+            Text("welcomeDialog.useInstructions.hint".tr(),
+                style: Theme.of(context).textTheme.bodyLarge),
           ],
         ),
       ),

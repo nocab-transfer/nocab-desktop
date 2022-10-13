@@ -38,11 +38,17 @@ class _NetworkAdapterInfoPageState extends State<NetworkAdapterInfoPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("welcomeDialog.networkAdapterPage.title".tr(), style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600)),
+            Text("welcomeDialog.networkAdapterPage.title".tr(),
+                style: Theme.of(context)
+                    .textTheme
+                    .titleLarge
+                    ?.copyWith(fontWeight: FontWeight.w600)),
             const SizedBox(height: 8),
-            Text("welcomeDialog.networkAdapterPage.description".tr(), style: Theme.of(context).textTheme.bodyLarge),
+            Text("welcomeDialog.networkAdapterPage.description".tr(),
+                style: Theme.of(context).textTheme.bodyLarge),
             const SizedBox(height: 8),
-            Text("welcomeDialog.networkAdapterPage.description2".tr(), style: Theme.of(context).textTheme.bodyLarge),
+            Text("welcomeDialog.networkAdapterPage.description2".tr(),
+                style: Theme.of(context).textTheme.bodyLarge),
             Center(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -64,7 +70,8 @@ class _NetworkAdapterInfoPageState extends State<NetworkAdapterInfoPage> {
                         width: 5,
                         decoration: BoxDecoration(
                           color: Theme.of(context).colorScheme.primary,
-                          borderRadius: const BorderRadius.all(Radius.circular(10)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(10)),
                         ),
                       ),
                       Padding(
@@ -80,21 +87,39 @@ class _NetworkAdapterInfoPageState extends State<NetworkAdapterInfoPage> {
                                   mainAxisSize: MainAxisSize.max,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(SettingsService().getSettings.networkInterfaceName, style: Theme.of(context).textTheme.titleLarge, overflow: TextOverflow.ellipsis),
-                                    Text(Server().selectedIp.address, style: Theme.of(context).textTheme.bodySmall),
+                                    Text(
+                                        SettingsService()
+                                            .getSettings
+                                            .networkInterfaceName,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleLarge,
+                                        overflow: TextOverflow.ellipsis),
+                                    Text(Server().selectedIp.address,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall),
                                   ],
                                 ),
                               ),
                               ElevatedButton(
-                                onPressed: () => showModal(context: context, builder: (context) => const NetworkAdapterSettings()).then((value) => setState(() {})),
+                                onPressed: () => showModal(
+                                        context: context,
+                                        builder: (context) =>
+                                            const NetworkAdapterSettings())
+                                    .then((value) => setState(() {})),
                                 style: ElevatedButton.styleFrom(
-                                  foregroundColor: Theme.of(context).colorScheme.onPrimary,
-                                  backgroundColor: Theme.of(context).colorScheme.primary,
+                                  foregroundColor:
+                                      Theme.of(context).colorScheme.onPrimary,
+                                  backgroundColor:
+                                      Theme.of(context).colorScheme.primary,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
                                 ),
-                                child: Text("welcomeDialog.networkAdapterPage.changeButton".tr()),
+                                child: Text(
+                                    "welcomeDialog.networkAdapterPage.changeButton"
+                                        .tr()),
                               ),
                             ],
                           ),
@@ -105,7 +130,8 @@ class _NetworkAdapterInfoPageState extends State<NetworkAdapterInfoPage> {
                 ),
               ),
             ),
-            Text("welcomeDialog.networkAdapterPage.hint".tr(), style: Theme.of(context).textTheme.bodyLarge),
+            Text("welcomeDialog.networkAdapterPage.hint".tr(),
+                style: Theme.of(context).textTheme.bodyLarge),
           ],
         ),
       ),

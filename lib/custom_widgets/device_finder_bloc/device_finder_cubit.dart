@@ -14,7 +14,8 @@ class DeviceFinderCubit extends Cubit<DeviceFinderState> {
   Timer? timer;
 
   Future<void> startScanning() async {
-    String baseIp = Server().selectedIp.address.split('.').sublist(0, 3).join('.');
+    String baseIp =
+        Server().selectedIp.address.split('.').sublist(0, 3).join('.');
 
     timer = Timer.periodic(const Duration(seconds: 3), (_) async {
       if (isClosed) timer?.cancel();
@@ -22,10 +23,14 @@ class DeviceFinderCubit extends Cubit<DeviceFinderState> {
       List<DeviceInfo> devices = [];
       for (int i = 1; i < 255; i++) {
         try {
-          Socket socket = await Socket.connect('$baseIp.$i', 62192, timeout: const Duration(milliseconds: 15));
-          Uint8List data = await socket.first.timeout(const Duration(seconds: 5));
-          if (data.isNotEmpty && socket.remoteAddress.address != Server().selectedIp.address) {
-            devices.add(DeviceInfo.fromJson(json.decode(utf8.decode(base64.decode(utf8.decode(data))))));
+          Socket socket = await Socket.connect('$baseIp.$i', 62192,
+              timeout: const Duration(milliseconds: 15));
+          Uint8List data =
+              await socket.first.timeout(const Duration(seconds: 5));
+          if (data.isNotEmpty &&
+              socket.remoteAddress.address != Server().selectedIp.address) {
+            devices.add(DeviceInfo.fromJson(
+                json.decode(utf8.decode(base64.decode(utf8.decode(data))))));
             if (!isClosed) emit(Found(devices));
           }
 

@@ -26,19 +26,28 @@ class TransferCard extends StatelessWidget {
   }
 }
 
-Widget buildWidget(BuildContext context, TransferCardState state, Transfer transfer) {
+Widget buildWidget(
+    BuildContext context, TransferCardState state, Transfer transfer) {
   switch (state.runtimeType) {
     case TransferCardInitial:
       return Container();
     //return TransferStartedView(state: state as TransferStarted, isDownload: transfer is Receiver);
     case TransferStarted:
-      return TransferStartedView(state: state as TransferStarted, isDownload: transfer is Receiver);
+      return TransferStartedView(
+          state: state as TransferStarted, isDownload: transfer is Receiver);
     case Transferring:
-      return TransferringView(state: state as Transferring, isDownload: transfer is Receiver);
+      return TransferringView(
+          state: state as Transferring, isDownload: transfer is Receiver);
     case TransferSuccess:
-      return TransferSuccessView(state: state as TransferSuccess, isDownload: transfer is Receiver, onClose: () => Server().removeTransferFromList(transfer));
+      return TransferSuccessView(
+          state: state as TransferSuccess,
+          isDownload: transfer is Receiver,
+          onClose: () => Server().removeTransferFromList(transfer));
     case TransferFailed:
-      return TransferFailedView(state: state as TransferFailed, isDownload: transfer is Receiver, onClose: () => Server().removeTransferFromList(transfer));
+      return TransferFailedView(
+          state: state as TransferFailed,
+          isDownload: transfer is Receiver,
+          onClose: () => Server().removeTransferFromList(transfer));
     default:
       return Container();
   }

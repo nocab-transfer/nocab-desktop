@@ -27,13 +27,15 @@ class NetworkAdapterSettings extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
+              padding:
+                  const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
                     height: 34,
-                    child: Text('mainView.receiver.networkAdapterSettings'.tr(), style: Theme.of(context).textTheme.titleLarge),
+                    child: Text('mainView.receiver.networkAdapterSettings'.tr(),
+                        style: Theme.of(context).textTheme.titleLarge),
                   ),
                   Material(
                     child: InkWell(
@@ -59,7 +61,8 @@ class NetworkAdapterSettings extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return _buildListTile(
                           adapters.data![index],
-                          SettingsService().getSettings.networkInterfaceName == adapters.data![index].name,
+                          SettingsService().getSettings.networkInterfaceName ==
+                              adapters.data![index].name,
                           context: context,
                         );
                       },
@@ -72,8 +75,10 @@ class NetworkAdapterSettings extends StatelessWidget {
     );
   }
 
-  Widget _buildListTile(NetworkInterface interface, bool isSelected, {required BuildContext context}) {
-    var ips = interface.addresses.map((e) => e.address).toList()..sort((a, b) => a.length.compareTo(b.length));
+  Widget _buildListTile(NetworkInterface interface, bool isSelected,
+      {required BuildContext context}) {
+    var ips = interface.addresses.map((e) => e.address).toList()
+      ..sort((a, b) => a.length.compareTo(b.length));
     return Material(
       color: Colors.transparent,
       child: Padding(
@@ -82,7 +87,9 @@ class NetworkAdapterSettings extends StatelessWidget {
           borderRadius: const BorderRadius.all(Radius.circular(10)),
           onTap: () {
             Server().setSelectedIp = interface;
-            SettingsService().setSettings(SettingsService().getSettings.copyWith(networkInterfaceName: interface.name));
+            SettingsService().setSettings(SettingsService()
+                .getSettings
+                .copyWith(networkInterfaceName: interface.name));
             Navigator.of(context).pop();
           },
           child: Container(
@@ -90,7 +97,9 @@ class NetworkAdapterSettings extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(10)),
               border: Border.all(
-                color: isSelected ? Theme.of(context).colorScheme.primary : Colors.transparent,
+                color: isSelected
+                    ? Theme.of(context).colorScheme.primary
+                    : Colors.transparent,
                 width: 1,
               ),
             ),
@@ -101,7 +110,9 @@ class NetworkAdapterSettings extends StatelessWidget {
                   height: 70,
                   width: 5,
                   decoration: BoxDecoration(
-                    color: isSelected ? Theme.of(context).colorScheme.primary : Colors.transparent,
+                    color: isSelected
+                        ? Theme.of(context).colorScheme.primary
+                        : Colors.transparent,
                     borderRadius: const BorderRadius.all(Radius.circular(10)),
                   ),
                 ),
@@ -112,7 +123,8 @@ class NetworkAdapterSettings extends StatelessWidget {
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(interface.name, style: Theme.of(context).textTheme.titleLarge),
+                        Text(interface.name,
+                            style: Theme.of(context).textTheme.titleLarge),
                         SizedBox(
                           width: 450,
                           child: ListView.builder(
@@ -120,7 +132,8 @@ class NetworkAdapterSettings extends StatelessWidget {
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index) {
-                              return Text(ips[index], style: Theme.of(context).textTheme.bodySmall);
+                              return Text(ips[index],
+                                  style: Theme.of(context).textTheme.bodySmall);
                             },
                           ),
                         ),
