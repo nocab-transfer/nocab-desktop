@@ -124,7 +124,6 @@ class Server {
           ShareRequest request = ShareRequest.fromJson(json.decode(socketData));
           _requestHandler(request, socket);
         } catch (e) {
-          print(e);
           socket.close();
         }
       }, onDone: () {

@@ -41,7 +41,7 @@ class Sender extends Transfer {
     ]);
 
     SendPort? mainToDataPort; // this will be used for pausing and resuming the transfer
-
+    mainToDataPort;
     dataToMainPort.listen((message) {
       if (message is SendPort) mainToDataPort = message;
 
@@ -239,13 +239,8 @@ void _sender(List<dynamic> args) async {
           sendport.send(ConnectionAction(ConnectionActionType.start, currentFile: file));
           send(file, socket);
           break;
-        case RawSocketEvent.readClosed:
-          print("readClosed");
-          break;
-        case RawSocketEvent.closed:
-          print("closed");
-          break;
         default:
+          break;
       }
     });
   });

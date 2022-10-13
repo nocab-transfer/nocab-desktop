@@ -42,7 +42,7 @@ class Receiver extends Transfer {
     ]);
 
     SendPort? mainToDataPort; // this will be used for pausing and resuming the transfer
-
+    mainToDataPort;
     dataToMainPort.listen((message) {
       if (message is SendPort) mainToDataPort = message;
 
