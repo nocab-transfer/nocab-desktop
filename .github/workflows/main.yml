@@ -1,0 +1,17 @@
+name: Flutter Check
+
+on: [ push ]
+
+jobs:
+  test:
+    name: flutter
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+      - run: flutter pub get
+      - run: flutter analyze
+      - run: flutter format . --set-exit-if-changed
