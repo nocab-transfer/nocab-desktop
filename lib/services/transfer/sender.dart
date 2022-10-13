@@ -241,8 +241,9 @@ void _sender(List<dynamic> args) async {
       sendport.send(ConnectionAction(ConnectionActionType.fileEnd,
           currentFile: fileInfo, totalTransferredBytes: totalWrite));
       files.remove(fileInfo);
-      if (files.isEmpty)
+      if (files.isEmpty) {
         sendport.send(ConnectionAction(ConnectionActionType.end));
+      }
     } catch (e) {
       socket.shutdown(SocketDirection.both);
       sendport.send(ConnectionAction(ConnectionActionType.error));

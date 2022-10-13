@@ -71,8 +71,9 @@ class IPC {
 
   Future<void> watch(Function(List<String> args)? onData) async {
     Directory watchFile = Directory(p.join(getBasePath(), pid.toString()));
-    if (await watchFile.parent.exists())
+    if (await watchFile.parent.exists()) {
       await watchFile.parent.delete(recursive: true);
+    }
     await watchFile.create(recursive: true);
     watchFile.watch(events: FileSystemEvent.create).listen((event) async {
       while (await isPidRunning(int.parse(p.basename(event.path)))) {
@@ -87,8 +88,9 @@ class IPC {
   }
 
   static String getBasePath() {
-    if (Platform.isWindows)
+    if (Platform.isWindows) {
       return p.join(Platform.environment['APPDATA']!, 'NoCab IPC');
+    }
     return p.join(File(Platform.resolvedExecutable).parent.path, 'NoCab IPC');
   }
 }

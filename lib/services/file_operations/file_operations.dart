@@ -47,9 +47,10 @@ class FileOperations {
 
   static void showInFolder(FileInfo file) {
     String pathName = file.path!.substring(file.path!.lastIndexOf("\\") + 1);
-    if (Platform.isWindows)
+    if (Platform.isWindows) {
       Process.start("explorer.exe", ["/select,", pathName],
           runInShell: true, workingDirectory: File(file.path!).parent.path);
+    }
     // TODO: show in folder on other platforms
   }
 

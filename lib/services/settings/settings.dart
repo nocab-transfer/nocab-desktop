@@ -40,9 +40,10 @@ class SettingsService {
       if (await settingsFile.exists()) {
         var settings = SettingsModel.fromJson(
             json.decode(await settingsFile.readAsString()));
-        if (!(await Directory(settings.downloadPath).exists()))
+        if (!(await Directory(settings.downloadPath).exists())) {
           throw p.PathException(
               "Download path does not exist\n${settings.downloadPath}");
+        }
         _settings = settings;
         return false;
       }
@@ -108,9 +109,10 @@ class SettingsService {
   }
 
   String getdefaultSettingsPath() {
-    if (Platform.isWindows && !kDebugMode)
+    if (Platform.isWindows && !kDebugMode) {
       return p.join(
           Platform.environment['APPDATA']!, r'NoCab Desktop\settings.json');
+    }
     return p.join(
         File(Platform.resolvedExecutable).parent.path, "settings.json");
   }
