@@ -39,60 +39,36 @@ class _WelcomePageState extends State<WelcomePage> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("welcomeDialog.welcomePage.title".tr(),
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleLarge
-                        ?.copyWith(fontWeight: FontWeight.w600)),
+                Text("welcomeDialog.welcomePage.title".tr(), style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600)),
                 const SizedBox(height: 20),
-                Text("welcomeDialog.welcomePage.description".tr(),
-                    style: Theme.of(context).textTheme.bodyLarge),
+                Text("welcomeDialog.welcomePage.description".tr(), style: Theme.of(context).textTheme.bodyLarge),
                 const SizedBox(height: 20),
-                Text("welcomeDialog.welcomePage.description2".tr(),
-                    style: Theme.of(context).textTheme.bodyLarge),
+                Text("welcomeDialog.welcomePage.description2".tr(), style: Theme.of(context).textTheme.bodyLarge),
               ],
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 32.0),
               child: RichText(
                 text: TextSpan(
-                  text: 'welcomeDialog.welcomePage.madeWith'
-                      .tr()
-                      .split('{flutterIcon}')[0],
+                  text: 'welcomeDialog.welcomePage.madeWith'.tr().split('{flutterIcon}')[0],
                   children: [
-                    WidgetSpan(
-                        child: InkWell(
-                            onTap: () =>
-                                launchUrlString('https://flutter.dev/'),
-                            child: const FlutterLogo(size: 16))),
-                    TextSpan(
-                        text: 'welcomeDialog.welcomePage.madeWith'
-                            .tr()
-                            .split('{flutterIcon}')[1]),
+                    WidgetSpan(child: InkWell(onTap: () => launchUrlString('https://flutter.dev/'), child: const FlutterLogo(size: 16))),
+                    TextSpan(text: 'welcomeDialog.welcomePage.madeWith'.tr().split('{flutterIcon}')[1]),
                     const TextSpan(text: ' '),
-                    TextSpan(
-                        text: 'welcomeDialog.welcomePage.builtBy'
-                            .tr()
-                            .split('{author}')[0]),
+                    TextSpan(text: 'welcomeDialog.welcomePage.builtBy'.tr().split('{author}')[0]),
                     WidgetSpan(
                       child: InkWell(
-                        onTap: () =>
-                            launchUrlString('https://github.com/berkekbgz'),
+                        onTap: () => launchUrlString('https://github.com/berkekbgz'),
                         child: Text(
                           'berkekbgz',
                           style: Theme.of(context)
                               .textTheme
                               .bodySmall
-                              ?.copyWith(
-                                  color: Theme.of(context).colorScheme.primary,
-                                  fontWeight: FontWeight.w600),
+                              ?.copyWith(color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.w600),
                         ),
                       ),
                     ),
-                    TextSpan(
-                        text: 'welcomeDialog.welcomePage.builtBy'
-                            .tr()
-                            .split('{author}')[1]),
+                    TextSpan(text: 'welcomeDialog.welcomePage.builtBy'.tr().split('{author}')[1]),
                   ],
                   style: Theme.of(context).textTheme.bodySmall,
                 ),

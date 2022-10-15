@@ -26,8 +26,7 @@ class _SendDragDropState extends State<SendDragDrop> {
         if (loading) return;
 
         setState(() => loading = true);
-        List<FileInfo> files = await FileOperations.convertPathsToFileInfos(
-            details.files.map((e) => e.path).toList());
+        List<FileInfo> files = await FileOperations.convertPathsToFileInfos(details.files.map((e) => e.path).toList());
         setState(() => loading = false);
 
         widget.onFilesReady?.call(files);
@@ -35,8 +34,7 @@ class _SendDragDropState extends State<SendDragDrop> {
       child: loading
           ? Container(
               decoration: BoxDecoration(
-                border: Border.all(
-                    color: Theme.of(context).colorScheme.outline, width: 2),
+                border: Border.all(color: Theme.of(context).colorScheme.outline, width: 2),
                 borderRadius: const BorderRadius.all(Radius.circular(20)),
               ),
               height: 150,
@@ -58,37 +56,28 @@ class _SendDragDropState extends State<SendDragDrop> {
           : Container(
               decoration: BoxDecoration(
                 border: Border.all(
-                    color: isDragEntered
-                        ? Theme.of(context).colorScheme.primaryContainer
-                        : Theme.of(context).colorScheme.outline,
-                    width: 2),
+                    color: isDragEntered ? Theme.of(context).colorScheme.primaryContainer : Theme.of(context).colorScheme.outline, width: 2),
                 borderRadius: const BorderRadius.all(Radius.circular(20)),
               ),
               height: 150,
               width: 276,
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Text('mainView.sender.title'.tr(),
-                        style: TextStyle(
-                            fontSize: 20,
-                            color: Theme.of(context).colorScheme.primary,
-                            fontWeight: FontWeight.bold)),
+                        style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold)),
                     const SizedBox(height: 8),
                     Center(
                       child: ElevatedButton(
-                        onPressed: () =>
-                            filePicker.pickFilesIsolate().then((value) {
+                        onPressed: () => filePicker.pickFilesIsolate().then((value) {
                           if (value != null) widget.onFilesReady?.call(value);
                         }),
                         style: ElevatedButton.styleFrom(
                           fixedSize: const Size(150, 50),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15.0)),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,

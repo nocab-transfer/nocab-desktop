@@ -20,8 +20,7 @@ class _SenderQrState extends State<SenderQr> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          SenderQrCubit()..startQrServer(widget.onDeviceConnected),
+      create: (context) => SenderQrCubit()..startQrServer(widget.onDeviceConnected),
       child: buildWidget(),
     );
   }
@@ -33,8 +32,7 @@ class _SenderQrState extends State<SenderQr> {
             case Initial:
               return _buildInitial();
             case ConnectionWaiting:
-              return _buildQR(context, (state as ConnectionWaiting).ip,
-                  state.port, state.verificationString, state.currentDuration);
+              return _buildQR(context, (state as ConnectionWaiting).ip, state.port, state.verificationString, state.currentDuration);
             default:
               return Container();
             //return _buildNoDevice();
@@ -66,15 +64,11 @@ class _SenderQrState extends State<SenderQr> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('senderQr.title'.tr(),
-                      style: Theme.of(context).textTheme.titleMedium),
-                  Text('senderQr.instructions'.tr(),
-                      style: Theme.of(context).textTheme.bodySmall),
+                  Text('senderQr.title'.tr(), style: Theme.of(context).textTheme.titleMedium),
+                  Text('senderQr.instructions'.tr(), style: Theme.of(context).textTheme.bodySmall),
                   const SizedBox(height: 8),
-                  Text('senderQr.loading.title'.tr(),
-                      style: Theme.of(context).textTheme.bodySmall),
-                  Text('senderQr.loading.message'.tr(),
-                      style: Theme.of(context).textTheme.bodyMedium),
+                  Text('senderQr.loading.title'.tr(), style: Theme.of(context).textTheme.bodySmall),
+                  Text('senderQr.loading.message'.tr(), style: Theme.of(context).textTheme.bodyMedium),
                 ],
               ),
             ),
@@ -84,8 +78,7 @@ class _SenderQrState extends State<SenderQr> {
     );
   }
 
-  Widget _buildQR(BuildContext context, String ip, int port,
-      String verificationString, Duration currentDuration) {
+  Widget _buildQR(BuildContext context, String ip, int port, String verificationString, Duration currentDuration) {
     var refreshDuration = context.read<SenderQrCubit>().refreshDuration;
     return SizedBox(
       height: 150,
@@ -102,15 +95,10 @@ class _SenderQrState extends State<SenderQr> {
                 QrImage(
                   size: 120,
                   padding: const EdgeInsets.all(0),
-                  data: base64
-                      .encode(utf8.encode('$ip:$port:$verificationString')),
+                  data: base64.encode(utf8.encode('$ip:$port:$verificationString')),
                   version: QrVersions.auto,
-                  dataModuleStyle: QrDataModuleStyle(
-                      color: Theme.of(context).colorScheme.onSurface,
-                      dataModuleShape: QrDataModuleShape.circle),
-                  eyeStyle: QrEyeStyle(
-                      color: Theme.of(context).colorScheme.onSurface,
-                      eyeShape: QrEyeShape.circle),
+                  dataModuleStyle: QrDataModuleStyle(color: Theme.of(context).colorScheme.onSurface, dataModuleShape: QrDataModuleShape.circle),
+                  eyeStyle: QrEyeStyle(color: Theme.of(context).colorScheme.onSurface, eyeShape: QrEyeShape.circle),
                 ),
                 SizedBox(
                   width: 214,
@@ -120,27 +108,17 @@ class _SenderQrState extends State<SenderQr> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('senderQr.title'.tr(),
-                            style: Theme.of(context).textTheme.titleMedium),
-                        Text('senderQr.instructions'.tr(),
-                            style: Theme.of(context).textTheme.bodySmall),
+                        Text('senderQr.title'.tr(), style: Theme.of(context).textTheme.titleMedium),
+                        Text('senderQr.instructions'.tr(), style: Theme.of(context).textTheme.bodySmall),
                         const SizedBox(height: 8),
-                        Text('senderQr.loaded.waitingConnection'.tr(),
-                            style: Theme.of(context).textTheme.bodySmall),
-                        Text(
-                            'senderQr.loaded.connectionInfo'.tr(
-                                namedArgs: {'ip': ip, 'port': port.toString()}),
+                        Text('senderQr.loaded.waitingConnection'.tr(), style: Theme.of(context).textTheme.bodySmall),
+                        Text('senderQr.loaded.connectionInfo'.tr(namedArgs: {'ip': ip, 'port': port.toString()}),
                             style: Theme.of(context).textTheme.bodyMedium),
                         Text(verificationString,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodySmall
-                                ?.copyWith(
-                                    fontStyle: FontStyle.italic,
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onBackground
-                                        .withOpacity(0.5))),
+                                ?.copyWith(fontStyle: FontStyle.italic, color: Theme.of(context).colorScheme.onBackground.withOpacity(0.5))),
                       ],
                     ),
                   ),
@@ -158,18 +136,14 @@ class _SenderQrState extends State<SenderQr> {
                     height: 25,
                     width: 25,
                     child: CircularProgressIndicator(
-                      value: 1 -
-                          (currentDuration.inMilliseconds /
-                              refreshDuration.inMilliseconds),
+                      value: 1 - (currentDuration.inMilliseconds / refreshDuration.inMilliseconds),
                       strokeWidth: 4,
                       color: Theme.of(context).colorScheme.onBackground,
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                        "${refreshDuration.inSeconds - currentDuration.inSeconds}",
-                        style: Theme.of(context).textTheme.bodySmall),
+                    child: Text("${refreshDuration.inSeconds - currentDuration.inSeconds}", style: Theme.of(context).textTheme.bodySmall),
                   ),
                 ],
               ),

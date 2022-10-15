@@ -25,10 +25,7 @@ class _FileListState extends State<FileList> {
             child: InkWell(
               borderRadius: const BorderRadius.all(Radius.circular(10)),
               onTap: widget.files[index].path != null
-                  ? () => Process.start(widget.files[index].name, [],
-                      workingDirectory:
-                          File(widget.files[index].path!).parent.path,
-                      runInShell: true)
+                  ? () => Process.start(widget.files[index].name, [], workingDirectory: File(widget.files[index].path!).parent.path, runInShell: true)
                   : null,
               child: SizedBox(
                 height: 70,
@@ -44,28 +41,14 @@ class _FileListState extends State<FileList> {
                             height: 50,
                             decoration: BoxDecoration(
                               color: Theme.of(context).colorScheme.primary,
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(10)),
+                              borderRadius: const BorderRadius.all(Radius.circular(10)),
                             ),
                             child: Center(
                                 child: Text(
-                                    widget.files[index].name
-                                                .split('.')
-                                                .last
-                                                .length >
-                                            4
+                                    widget.files[index].name.split('.').last.length > 4
                                         ? "?"
-                                        : widget.files[index].name
-                                            .split('.')
-                                            .last
-                                            .toUpperCase(),
-                                    style:
-                                        TextStyle(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .onPrimary,
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w900))),
+                                        : widget.files[index].name.split('.').last.toUpperCase(),
+                                    style: TextStyle(color: Theme.of(context).colorScheme.onPrimary, fontSize: 15, fontWeight: FontWeight.w900))),
                           ),
                         ),
                         SizedBox(
@@ -75,25 +58,19 @@ class _FileListState extends State<FileList> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 2.0),
+                                padding: const EdgeInsets.symmetric(horizontal: 2.0),
                                 child: Tooltip(
                                   message: widget.files[index].name,
                                   child: Text(
                                     widget.files[index].name,
-                                    style: const TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold),
+                                    style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
                               ),
-                              Text(widget.files[index].byteSize.formatBytes(),
-                                  style: const TextStyle(fontSize: 12)),
+                              Text(widget.files[index].byteSize.formatBytes(), style: const TextStyle(fontSize: 12)),
                               if (widget.files[index].subDirectory != null) ...[
-                                Text(widget.files[index].subDirectory!,
-                                    style: const TextStyle(fontSize: 10),
-                                    maxLines: 2),
+                                Text(widget.files[index].subDirectory!, style: const TextStyle(fontSize: 10), maxLines: 2),
                               ],
                             ],
                           ),

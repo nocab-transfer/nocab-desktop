@@ -22,9 +22,7 @@ class LoadingDialog extends StatelessWidget {
               const CircularProgressIndicator(),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(title,
-                    style: Theme.of(context).textTheme.bodyLarge,
-                    textAlign: TextAlign.center),
+                child: Text(title, style: Theme.of(context).textTheme.bodyLarge, textAlign: TextAlign.center),
               ),
             ],
           ),

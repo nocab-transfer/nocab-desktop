@@ -27,12 +27,8 @@ Future<void> main(List<String> args) async {
 
   runApp(ChangeNotifierProvider(
     create: (context) => ThemeProvider(
-      themeMode: SettingsService().getSettings.darkMode
-          ? ThemeMode.dark
-          : ThemeMode.light,
-      seedColor: SettingsService().getSettings.useSystemColor
-          ? RegistryService.getColor()
-          : SettingsService().getSettings.seedColor,
+      themeMode: SettingsService().getSettings.darkMode ? ThemeMode.dark : ThemeMode.light,
+      seedColor: SettingsService().getSettings.useSystemColor ? RegistryService.getColor() : SettingsService().getSettings.seedColor,
       useMaterial3: SettingsService().getSettings.useMaterial3,
     ),
     child: EasyLocalization(
@@ -94,16 +90,14 @@ Future<void> _loadFiles(List<String> paths) async {
   }
   showDialog(
     context: Server().navigatorKey.currentContext!,
-    builder: (context) =>
-        LoadingDialog(title: 'mainView.sender.loadingLabel'.tr()),
+    builder: (context) => LoadingDialog(title: 'mainView.sender.loadingLabel'.tr()),
     barrierDismissible: false,
   );
   List<FileInfo> files = await FileOperations.convertPathsToFileInfos(paths);
   Navigator.pop(Server().navigatorKey.currentContext!);
   showModal(
     context: Server().navigatorKey.currentContext!,
-    configuration:
-        const FadeScaleTransitionConfiguration(barrierDismissible: false),
+    configuration: const FadeScaleTransitionConfiguration(barrierDismissible: false),
     builder: ((context) => SendStarterDialog(files: files)),
   );
 }

@@ -29,14 +29,11 @@ class Server {
 
   InternetAddress get selectedIp => _selectedIp;
   set setSelectedIp(NetworkInterface interface) =>
-      _selectedIp = interface.addresses.firstWhere(
-          (element) => element.type == InternetAddressType.IPv4, orElse: () {
+      _selectedIp = interface.addresses.firstWhere((element) => element.type == InternetAddressType.IPv4, orElse: () {
         FlutterPlatformAlert.showAlert(
           windowTitle: 'Warning',
-          text:
-              'Selected network adapter is not contain IPv4 address. Please select another network interface.',
-          options: FlutterPlatformAlertOption(
-              additionalWindowTitleOnWindows: 'NoCab Desktop'),
+          text: 'Selected network adapter is not contain IPv4 address. Please select another network interface.',
+          options: FlutterPlatformAlertOption(additionalWindowTitleOnWindows: 'NoCab Desktop'),
           alertStyle: AlertButtonStyle.ok,
           iconStyle: IconStyle.warning,
         );
@@ -48,15 +45,9 @@ class Server {
 
   Future<void> initialize() async {
     List<NetworkInterface> networkInterfaces = await NetworkInterface.list();
-    setSelectedIp = networkInterfaces.firstWhere(
-        (element) =>
-            element.name == SettingsService().getSettings.networkInterfaceName,
-        orElse: () {
-      var networkInterface =
-          Network.getCurrentNetworkInterface(networkInterfaces);
-      SettingsService().setSettings(SettingsService()
-          .getSettings
-          .copyWith(networkInterfaceName: networkInterface.name));
+    setSelectedIp = networkInterfaces.firstWhere((element) => element.name == SettingsService().getSettings.networkInterfaceName, orElse: () {
+      var networkInterface = Network.getCurrentNetworkInterface(networkInterfaces);
+      SettingsService().setSettings(SettingsService().getSettings.copyWith(networkInterfaceName: networkInterface.name));
       return networkInterface;
     });
 
@@ -80,8 +71,7 @@ class Server {
   GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   final _changeController = StreamController<List<Transfer>>();
-  Stream<List<Transfer>> get onNewTransfer =>
-      _changeController.stream.asBroadcastStream();
+  Stream<List<Transfer>> get onNewTransfer => _changeController.stream.asBroadcastStream();
 
   List<Transfer> activeTransfers = [];
 
@@ -92,27 +82,23 @@ class Server {
     // other devices can find this device
     ServerSocket? finderSocket;
     try {
-      finderSocket = await ServerSocket.bind(
-          InternetAddress.anyIPv4, SettingsService().getSettings.finderPort);
+      finderSocket = await ServerSocket.bind(InternetAddress.anyIPv4, SettingsService().getSettings.finderPort);
     } catch (e) {
       FlutterPlatformAlert.showAlert(
         windowTitle: 'Error',
-        text:
-            'Port ${SettingsService().getSettings.finderPort} is already in use. Please change the port in the settings.\n\n$e',
+        text: 'Port ${SettingsService().getSettings.finderPort} is already in use. Please change the port in the settings.\n\n$e',
         alertStyle: AlertButtonStyle.ok,
         iconStyle: IconStyle.error,
       );
     }
 
     finderSocket?.listen((socket) {
-      socket
-          .write(base64.encode(utf8.encode(json.encode(deviceInfo.toJson()))));
+      socket.write(base64.encode(utf8.encode(json.encode(deviceInfo.toJson()))));
     });
 
     ServerSocket? serverSocket;
     try {
-      serverSocket = await ServerSocket.bind(
-          InternetAddress.anyIPv4, SettingsService().getSettings.mainPort);
+      serverSocket = await ServerSocket.bind(InternetAddress.anyIPv4, SettingsService().getSettings.mainPort);
     } catch (e) {
       FlutterPlatformAlert.showCustomAlert(
         windowTitle: 'Error',
@@ -156,40 +142,28 @@ class Server {
   Future<void> _requestHandler(ShareRequest request, Socket socket) async {
     // TODO: Database ban check
     if (true) {
-      showDialog(
-          context: navigatorKey.currentContext!,
-          builder: (buildContext) =>
-              FileAccepterDialog(request: request, socket: socket));
+      showDialog(context: navigatorKey.currentContext!, builder: (buildContext) => FileAccepterDialog(request: request, socket: socket));
       windowManager.focus();
     }
   }
 
   Future<void> acceptRequest(ShareRequest request, Socket socket) async {
     ShareResponse shareResponse = ShareResponse(response: true);
-    socket
-        .write(base64.encode(utf8.encode(json.encode(shareResponse.toJson()))));
+    socket.write(base64.encode(utf8.encode(json.encode(shareResponse.toJson()))));
     socket.close();
 
     request.files = request.files.map<FileInfo>((e) {
-      e.path = FileOperations.findUnusedFilePath(
-          downloadPath: SettingsService().getSettings.downloadPath,
-          fileName: e.name);
+      e.path = FileOperations.findUnusedFilePath(downloadPath: SettingsService().getSettings.downloadPath, fileName: e.name);
       return e;
     }).toList();
 
-    activeTransfers.add(Receiver(
-        deviceInfo: request.deviceInfo,
-        files: request.files,
-        transferPort: request.transferPort));
+    activeTransfers.add(Receiver(deviceInfo: request.deviceInfo, files: request.files, transferPort: request.transferPort));
     _changeController.add(activeTransfers);
   }
 
-  Future<void> rejectRequest(ShareRequest request, Socket socket,
-      [String? message]) async {
-    ShareResponse shareResponse = ShareResponse(
-        response: false, info: message ?? "User rejected request");
-    socket
-        .write(base64.encode(utf8.encode(json.encode(shareResponse.toJson()))));
+  Future<void> rejectRequest(ShareRequest request, Socket socket, [String? message]) async {
+    ShareResponse shareResponse = ShareResponse(response: false, info: message ?? "User rejected request");
+    socket.write(base64.encode(utf8.encode(json.encode(shareResponse.toJson()))));
     socket.close();
   }
 
@@ -211,13 +185,11 @@ class Server {
       uniqueId: "test",
     ).toJson()))));
 
-    ShareResponse shareResponse = ShareResponse.fromJson(json
-        .decode(utf8.decode(base64.decode(utf8.decode(await socket.first)))));
+    ShareResponse shareResponse = ShareResponse.fromJson(json.decode(utf8.decode(base64.decode(utf8.decode(await socket.first)))));
 
     if (!shareResponse.response!) return false;
 
-    Sender sender =
-        Sender(deviceInfo: deviceInfo, files: files, transferPort: port);
+    Sender sender = Sender(deviceInfo: deviceInfo, files: files, transferPort: port);
     activeTransfers.add(sender);
     _changeController.add(activeTransfers);
     return true;

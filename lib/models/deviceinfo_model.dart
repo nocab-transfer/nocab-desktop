@@ -5,12 +5,7 @@ class DeviceInfo {
   String? opsystem;
   String? uuid;
 
-  DeviceInfo(
-      {required this.name,
-      required this.ip,
-      required this.port,
-      required this.opsystem,
-      required this.uuid});
+  DeviceInfo({required this.name, required this.ip, required this.port, required this.opsystem, required this.uuid});
 
   DeviceInfo.fromJson(Map<String, dynamic> json) {
     name = json['name'];

@@ -19,18 +19,10 @@ class TransferCardCubit extends Cubit<TransferCardState> {
   }
 
   void _onDataReport(
-          List<FileInfo> files,
-          List<FileInfo> filesTransferred,
-          FileInfo currentFile,
-          double speed,
-          double progress,
-          DeviceInfo deviceInfo) =>
-      emit(Transferring(
-          files, filesTransferred, currentFile, speed, progress, deviceInfo));
+          List<FileInfo> files, List<FileInfo> filesTransferred, FileInfo currentFile, double speed, double progress, DeviceInfo deviceInfo) =>
+      emit(Transferring(files, filesTransferred, currentFile, speed, progress, deviceInfo));
 
-  void _onEnd(DeviceInfo deviceInfo, List<FileInfo> files) =>
-      emit(TransferSuccess(deviceInfo, files));
+  void _onEnd(DeviceInfo deviceInfo, List<FileInfo> files) => emit(TransferSuccess(deviceInfo, files));
 
-  void _onError(DeviceInfo deviceInfo, String message) =>
-      emit(TransferFailed(deviceInfo, message));
+  void _onError(DeviceInfo deviceInfo, String message) => emit(TransferFailed(deviceInfo, message));
 }

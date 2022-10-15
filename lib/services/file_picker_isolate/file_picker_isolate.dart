@@ -26,14 +26,8 @@ void _pickFiles(List<dynamic> args) async {
 
   var response = await FilePicker.platform.pickFiles(allowMultiple: true);
   if (response is FilePickerResult)
-    mainReceiverPort.send(response.files
-        .map((file) => FileInfo(
-            name: file.name,
-            byteSize: file.size,
-            path: file.path,
-            hash: "unused",
-            isEncrypted: false))
-        .toList());
+    mainReceiverPort.send(
+        response.files.map((file) => FileInfo(name: file.name, byteSize: file.size, path: file.path, hash: "unused", isEncrypted: false)).toList());
   else
     mainReceiverPort.send(null);
   Isolate.current.kill();

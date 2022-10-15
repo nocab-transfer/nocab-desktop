@@ -5,9 +5,7 @@ import 'package:nocab_desktop/custom_widgets/transfer_card_bloc/transfer_card_st
 class TransferStartedView extends StatelessWidget {
   final TransferStarted state;
   final bool isDownload;
-  const TransferStartedView(
-      {Key? key, required this.state, required this.isDownload})
-      : super(key: key);
+  const TransferStartedView({Key? key, required this.state, required this.isDownload}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +15,7 @@ class TransferStartedView extends StatelessWidget {
         height: MediaQuery.of(context).size.height / 5,
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(10)),
-          border: Border.all(
-              color: Theme.of(context).colorScheme.primary, width: 1),
+          border: Border.all(color: Theme.of(context).colorScheme.primary, width: 1),
         ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -44,8 +41,7 @@ class TransferStartedView extends StatelessWidget {
                               ),
                             )),
                             Center(
-                              child: Icon(Icons.phonelink_rounded,
-                                  color: Theme.of(context).colorScheme.primary),
+                              child: Icon(Icons.phonelink_rounded, color: Theme.of(context).colorScheme.primary),
                             ),
                           ],
                         ),
@@ -58,23 +54,15 @@ class TransferStartedView extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(state.deviceInfo.name ?? "Unknown",
-                                  style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                  overflow: TextOverflow.ellipsis),
-                              Text(state.deviceInfo.ip ?? "",
-                                  style: const TextStyle(fontSize: 12)),
+                                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold), overflow: TextOverflow.ellipsis),
+                              Text(state.deviceInfo.ip ?? "", style: const TextStyle(fontSize: 12)),
                             ],
                           ),
                         ),
                       ),
                     ],
                   ),
-                  Icon(
-                      isDownload
-                          ? Icons.download_rounded
-                          : Icons.upload_rounded,
-                      color: Theme.of(context).colorScheme.primary),
+                  Icon(isDownload ? Icons.download_rounded : Icons.upload_rounded, color: Theme.of(context).colorScheme.primary),
                   //const Text("transferring..."),
                 ],
               ),
@@ -82,9 +70,7 @@ class TransferStartedView extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                      'mainView.transfers.card.transferStarted.message'.tr(),
-                      style: const TextStyle(fontSize: 12)),
+                  child: Text('mainView.transfers.card.transferStarted.message'.tr(), style: const TextStyle(fontSize: 12)),
                 ),
               ),
             ],

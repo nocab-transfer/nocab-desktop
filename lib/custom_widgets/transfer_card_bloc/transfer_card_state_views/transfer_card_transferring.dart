@@ -10,8 +10,7 @@ import 'package:nocab_desktop/services/file_operations/file_operations.dart';
 class TransferringView extends StatelessWidget {
   final Transferring state;
   final bool isDownload;
-  const TransferringView(
-      {super.key, required this.state, required this.isDownload});
+  const TransferringView({super.key, required this.state, required this.isDownload});
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +40,7 @@ class TransferringView extends StatelessWidget {
                         ),
                         height: MediaQuery.of(context).size.height / 15,
                         width: MediaQuery.of(context).size.height / 15,
-                        child: Icon(Icons.phonelink_rounded,
-                            color: Theme.of(context).colorScheme.onPrimary),
+                        child: Icon(Icons.phonelink_rounded, color: Theme.of(context).colorScheme.onPrimary),
                       ),
                       SizedBox(
                         width: 250,
@@ -52,37 +50,25 @@ class TransferringView extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(state.deviceInfo.name ?? "Unknown",
-                                  style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                  overflow: TextOverflow.ellipsis),
-                              Text(state.deviceInfo.ip ?? "",
-                                  style: const TextStyle(fontSize: 12)),
+                                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold), overflow: TextOverflow.ellipsis),
+                              Text(state.deviceInfo.ip ?? "", style: const TextStyle(fontSize: 12)),
                             ],
                           ),
                         ),
                       ),
                     ],
                   ),
-                  Icon(
-                      isDownload
-                          ? Icons.download_rounded
-                          : Icons.upload_rounded,
-                      color: Theme.of(context).colorScheme.primary),
+                  Icon(isDownload ? Icons.download_rounded : Icons.upload_rounded, color: Theme.of(context).colorScheme.primary),
                 ],
               ),
               ListView.builder(
                 itemCount: state.files.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
-                  if (state.filesTransferred
-                      .map((e) => e.name)
-                      .contains(state.files[index].name)) {
+                  if (state.filesTransferred.map((e) => e.name).contains(state.files[index].name)) {
                     return _buildtransferred(state.files[index], context);
-                  } else if (state.files[index].name ==
-                      state.currentFile.name) {
-                    return _buildTransferring(
-                        state.files[index], state, context);
+                  } else if (state.files[index].name == state.currentFile.name) {
+                    return _buildTransferring(state.files[index], state, context);
                   } else {
                     return _buildFilePending(state.files[index], context);
                   }
@@ -110,14 +96,10 @@ class TransferringView extends StatelessWidget {
                   child: Tooltip(
                     message: file.name,
                     child: Text(file.name,
-                        style: const TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1),
+                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold), overflow: TextOverflow.ellipsis, maxLines: 1),
                   ),
                 ),
-                Text(file.byteSize.formatBytes(),
-                    style: const TextStyle(fontSize: 14)),
+                Text(file.byteSize.formatBytes(), style: const TextStyle(fontSize: 14)),
               ],
             ),
             Padding(
@@ -136,8 +118,7 @@ class TransferringView extends StatelessWidget {
     );
   }
 
-  Widget _buildTransferring(
-      FileInfo file, Transferring state, BuildContext context) {
+  Widget _buildTransferring(FileInfo file, Transferring state, BuildContext context) {
     return Column(
       children: [
         Row(
@@ -151,29 +132,18 @@ class TransferringView extends StatelessWidget {
                   child: Tooltip(
                     message: file.name,
                     child: Text(file.name,
-                        style: const TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1),
+                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold), overflow: TextOverflow.ellipsis, maxLines: 1),
                   ),
                 ),
-                Text(file.byteSize.formatBytes(),
-                    style: const TextStyle(fontSize: 14)),
+                Text(file.byteSize.formatBytes(), style: const TextStyle(fontSize: 14)),
               ],
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text(
-                    'mainView.transfers.card.transferring.speed'.tr(
-                        namedArgs: {'speed': state.speed.toStringAsFixed(2)}),
-                    style: const TextStyle(
-                        fontSize: 14, fontWeight: FontWeight.bold)),
-                Text(
-                    'mainView.transfers.card.transferring.progress'.tr(
-                        namedArgs: {
-                          'progress': state.progress.toStringAsFixed(2)
-                        }),
+                Text('mainView.transfers.card.transferring.speed'.tr(namedArgs: {'speed': state.speed.toStringAsFixed(2)}),
+                    style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                Text('mainView.transfers.card.transferring.progress'.tr(namedArgs: {'progress': state.progress.toStringAsFixed(2)}),
                     style: const TextStyle(fontSize: 14)),
               ],
             )
@@ -206,14 +176,10 @@ class TransferringView extends StatelessWidget {
                   child: Tooltip(
                     message: file.name,
                     child: Text(file.name,
-                        style: const TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1),
+                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold), overflow: TextOverflow.ellipsis, maxLines: 1),
                   ),
                 ),
-                Text(file.byteSize.formatBytes(),
-                    style: const TextStyle(fontSize: 14)),
+                Text(file.byteSize.formatBytes(), style: const TextStyle(fontSize: 14)),
               ],
             ),
             isDownload ? _buildActions(file) : Container(),

@@ -40,8 +40,7 @@ class Sender extends Transfer {
       transferPort,
     ]);
 
-    SendPort?
-        mainToDataPort; // this will be used for pausing and resuming the transfer
+    SendPort? mainToDataPort; // this will be used for pausing and resuming the transfer
     mainToDataPort;
     dataToMainPort.listen((message) {
       if (message is SendPort) mainToDataPort = message;
@@ -106,23 +105,15 @@ Future<void> _dataHandler(List<dynamic> args) async {
         files: files,
         filesTransferred: filesTransferred,
         currentFile: currentFile,
-        speed: ((totalByteCount - totalByteCountBefore) *
-                1000 /
-                duration.inMilliseconds) /
-            1024 /
-            1024,
-        progress: (100 * totalByteCount / currentFile.byteSize) > 100
-            ? 100
-            : (100 * totalByteCount / currentFile.byteSize),
+        speed: ((totalByteCount - totalByteCountBefore) * 1000 / duration.inMilliseconds) / 1024 / 1024,
+        progress: (100 * totalByteCount / currentFile.byteSize) > 100 ? 100 : (100 * totalByteCount / currentFile.byteSize),
         deviceInfo: deviceInfo,
       ),
     );
 
     // if no data is send for 30 seconds, assume the transfer has crashed
     if (totalByteCountBefore == totalByteCount) {
-      currentErrorTime =
-          (currentErrorTime + (1000 / (1000 / duration.inMilliseconds)))
-              .toInt();
+      currentErrorTime = (currentErrorTime + (1000 / (1000 / duration.inMilliseconds))).toInt();
     } else {
       currentErrorTime = 0;
     }
@@ -179,28 +170,20 @@ Future<void> _dataHandler(List<dynamic> args) async {
             files: files,
             filesTransferred: filesTransferred,
             currentFile: message.currentFile,
-            speed: ((totalByteCount - totalByteCountBefore) *
-                    1000 /
-                    duration.inMilliseconds) /
-                1024 /
-                1024,
-            progress: (100 * totalByteCount / currentFile.byteSize) > 100
-                ? 100
-                : (100 * totalByteCount / currentFile.byteSize),
+            speed: ((totalByteCount - totalByteCountBefore) * 1000 / duration.inMilliseconds) / 1024 / 1024,
+            progress: (100 * totalByteCount / currentFile.byteSize) > 100 ? 100 : (100 * totalByteCount / currentFile.byteSize),
             deviceInfo: deviceInfo,
           ),
         );
         filesTransferred.add(currentFile);
         break;
       case ConnectionActionType.end:
-        dataToMainSendPort.send(DataReport(DataReportType.end,
-            deviceInfo: deviceInfo, files: files));
+        dataToMainSendPort.send(DataReport(DataReportType.end, deviceInfo: deviceInfo, files: files));
         senderIsolate?.kill();
         Isolate.current.kill();
         break;
       case ConnectionActionType.error:
-        dataToMainSendPort
-            .send(DataReport(DataReportType.error, deviceInfo: deviceInfo));
+        dataToMainSendPort.send(DataReport(DataReportType.error, deviceInfo: deviceInfo));
         senderIsolate?.kill();
         Isolate.current.kill();
         break;
@@ -214,8 +197,7 @@ void _sender(List<dynamic> args) async {
   DeviceInfo receiverDeviceInfo = args[2];
   int port = args[3];
 
-  RawServerSocket server =
-      await RawServerSocket.bind(InternetAddress.anyIPv4, port);
+  RawServerSocket server = await RawServerSocket.bind(InternetAddress.anyIPv4, port);
 
   Future<void> send(FileInfo fileInfo, RawSocket socket) async {
     try {
@@ -227,8 +209,7 @@ void _sender(List<dynamic> args) async {
 
       int readBytesCountFromFile;
       while ((readBytesCountFromFile = file.readIntoSync(buffer)) > 0) {
-        bytesWritten =
-            socket.write(buffer.getRange(0, readBytesCountFromFile).toList());
+        bytesWritten = socket.write(buffer.getRange(0, readBytesCountFromFile).toList());
         totalWrite += bytesWritten;
         file.setPositionSync(totalWrite);
 
@@ -238,8 +219,7 @@ void _sender(List<dynamic> args) async {
           totalTransferredBytes: totalWrite,
         ));
       }
-      sendport.send(ConnectionAction(ConnectionActionType.fileEnd,
-          currentFile: fileInfo, totalTransferredBytes: totalWrite));
+      sendport.send(ConnectionAction(ConnectionActionType.fileEnd, currentFile: fileInfo, totalTransferredBytes: totalWrite));
       files.remove(fileInfo);
       if (files.isEmpty) {
         sendport.send(ConnectionAction(ConnectionActionType.end));
@@ -258,8 +238,7 @@ void _sender(List<dynamic> args) async {
         case RawSocketEvent.read:
           String data = utf8.decode(socket.read()!);
           FileInfo file = files.firstWhere((element) => element.name == data);
-          sendport.send(
-              ConnectionAction(ConnectionActionType.start, currentFile: file));
+          sendport.send(ConnectionAction(ConnectionActionType.start, currentFile: file));
           send(file, socket);
           break;
         default:

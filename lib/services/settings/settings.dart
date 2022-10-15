@@ -38,11 +38,9 @@ class SettingsService {
       File settingsFile = File(getdefaultSettingsPath());
 
       if (await settingsFile.exists()) {
-        var settings = SettingsModel.fromJson(
-            json.decode(await settingsFile.readAsString()));
+        var settings = SettingsModel.fromJson(json.decode(await settingsFile.readAsString()));
         if (!(await Directory(settings.downloadPath).exists())) {
-          throw p.PathException(
-              "Download path does not exist\n${settings.downloadPath}");
+          throw p.PathException("Download path does not exist\n${settings.downloadPath}");
         }
         _settings = settings;
         return false;
@@ -67,14 +65,10 @@ class SettingsService {
       useMaterial3: true,
       mainPort: await Network.getUnusedPort(),
       finderPort: 62193,
-      locale: rawLocale.contains('_')
-          ? Locale(rawLocale.split('_')[0])
-          : Locale(rawLocale),
+      locale: rawLocale.contains('_') ? Locale(rawLocale.split('_')[0]) : Locale(rawLocale),
       seedColor: RegistryService.getColor(),
       useSystemColor: Platform.isWindows,
-      networkInterfaceName:
-          Network.getCurrentNetworkInterface(await NetworkInterface.list())
-              .name,
+      networkInterfaceName: Network.getCurrentNetworkInterface(await NetworkInterface.list()).name,
       downloadPath: Platform.isWindows
           ? p.join(Platform.environment['USERPROFILE']!, 'Downloads')
           : p.join(File(Platform.resolvedExecutable).parent.path, 'Output'),
@@ -110,10 +104,8 @@ class SettingsService {
 
   String getdefaultSettingsPath() {
     if (Platform.isWindows && !kDebugMode) {
-      return p.join(
-          Platform.environment['APPDATA']!, r'NoCab Desktop\settings.json');
+      return p.join(Platform.environment['APPDATA']!, r'NoCab Desktop\settings.json');
     }
-    return p.join(
-        File(Platform.resolvedExecutable).parent.path, "settings.json");
+    return p.join(File(Platform.resolvedExecutable).parent.path, "settings.json");
   }
 }
