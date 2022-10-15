@@ -178,6 +178,15 @@
     },
     "aboutDialog": {
         "openGithubPage": "Open Github Page",
+        "sponsor": {
+            "title": "Sponsor to me",
+            "fromGithub": "Github",
+            "fromBuymeacoffee": "Buy Me A Coffee"
+        },
+        "contact": {
+            "title": "Contact",
+            "email": "Email"
+        },
         "contributors": "Contributors",
         "errorMessage": "Cant fetch contributors.\nYou may exceed the rate limit of github or you not have internet connection."
     }

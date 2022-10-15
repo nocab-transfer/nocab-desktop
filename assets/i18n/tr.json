@@ -178,6 +178,15 @@
     },
     "aboutDialog": {
         "openGithubPage": "Github Sayfasını Aç",
+        "sponsor": {
+            "title": "Bağış Yap",
+            "fromGithub": "Github",
+            "fromBuymeacoffee": "Buy Me A Coffee"
+        },
+        "contact": {
+            "title": "İletişim",
+            "email": "E-posta"
+        },
         "contributors": "Katkıda Bulunanlar",
         "errorMessage": "Katkıda bulunanlar alınamadı.\nGithub'ın istek sınırını geçmiş olabilirsiniz veya internet bağlantınınızda sorun olabilir."
     }
