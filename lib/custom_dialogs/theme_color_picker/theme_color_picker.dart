@@ -120,7 +120,7 @@ class ThemeColorPickerState extends State<ThemeColorPicker> {
                               onTap: () => widget.onColorClicked
                                   ?.call(Colors.accents[index]),
                               child: AnimatedContainer(
-                                duration: const Duration(milliseconds: 300),
+                                duration: const Duration(milliseconds: 100),
                                 curve: Curves.ease,
                                 decoration: BoxDecoration(
                                   color: color,
