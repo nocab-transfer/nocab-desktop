@@ -189,5 +189,15 @@
         },
         "contributors": "Katkıda Bulunanlar",
         "errorMessage": "Katkıda bulunanlar alınamadı.\nGithub'ın istek sınırını geçmiş olabilirsiniz veya internet bağlantınınızda sorun olabilir."
+    },
+    "sponsorRelated": {
+        "snackbar": {
+            "title": "{count} dosya ve {size} veri aktardınız 🥳!",
+            "subtitle": "Geliştiriciye Destek Olmak İster Misiniz?",
+            "action": "Kapamak İçin Kaydırın"
+        },
+        "avatars": {
+            "title": "Yüksek Kademeli Destekçilerimiz"
+        }
     }
 }

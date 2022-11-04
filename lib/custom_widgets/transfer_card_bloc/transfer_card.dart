@@ -30,7 +30,6 @@ Widget buildWidget(BuildContext context, TransferCardState state, Transfer trans
   switch (state.runtimeType) {
     case TransferCardInitial:
       return Container();
-    //return TransferStartedView(state: state as TransferStarted, isDownload: transfer is Receiver);
     case TransferStarted:
       return TransferStartedView(state: state as TransferStarted, isDownload: transfer is Receiver);
     case Transferring:

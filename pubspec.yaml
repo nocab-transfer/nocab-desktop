@@ -38,6 +38,7 @@ dependencies:
   url_launcher: ^6.1.6
   easy_localization: ^3.0.1
   http: ^0.13.5
+  flutter_animate: ^2.0.1
 
 dev_dependencies:
 
@@ -72,3 +73,7 @@ flutter:
   - assets/context_menu_icon/icon.ico
   - assets/logo/logo.png
   - assets/i18n/
+  fonts:
+    - family:  CustomIcons
+      fonts:
+        - asset: assets/fonts/CustomIcons.ttf

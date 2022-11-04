@@ -189,5 +189,15 @@
         },
         "contributors": "Contributors",
         "errorMessage": "Cant fetch contributors.\nYou may exceed the rate limit of github or you not have internet connection."
+    },
+    "sponsorRelated": {
+        "snackbar": {
+            "title": "You transferred {count} files and {size} of data 🥳!",
+            "subtitle": "Would You Like To Support The Developer?",
+            "action": "Swipe To Close"
+        },
+        "avatars": {
+            "title": "Our High-Tier Supporters"
+        }
     }
 }
