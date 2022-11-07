@@ -8,6 +8,12 @@ import 'package:nocab_desktop/models/deviceinfo_model.dart';
 import 'package:nocab_desktop/models/file_model.dart';
 import 'package:nocab_desktop/services/file_operations/file_operations.dart';
 import 'package:nocab_desktop/services/transfer/isolate_message.dart';
+import 'package:nocab_desktop/services/transfer/report_models/base_report.dart';
+import 'package:nocab_desktop/services/transfer/report_models/data_report.dart';
+import 'package:nocab_desktop/services/transfer/report_models/end_report.dart';
+import 'package:nocab_desktop/services/transfer/report_models/error_report.dart';
+import 'package:nocab_desktop/services/transfer/report_models/fileend_report.dart';
+import 'package:nocab_desktop/services/transfer/report_models/start_report.dart';
 import 'package:nocab_desktop/services/transfer/transfer.dart';
 
 class Receiver extends Transfer {
@@ -19,21 +25,7 @@ class Receiver extends Transfer {
   }) : super(deviceInfo: deviceInfo, files: files, transferPort: transferPort, uniqueId: uniqueId);
 
   @override
-  Future<void> start({
-    Function(
-      List<FileInfo> files,
-      List<FileInfo> filesTransferred,
-      FileInfo currentFile,
-      double speed,
-      double progress,
-      DeviceInfo deviceInfo,
-    )?
-        onDataReport,
-    Function(DeviceInfo serverDeviceInfo)? onStart,
-    Function(DeviceInfo serverDeviceInfo, List<FileInfo> files)? onEnd,
-    Function(FileInfo file)? onFileEnd,
-    Function(DeviceInfo serverDeviceInfo, String message)? onError,
-  }) async {
+  Future<void> start() async {
     ReceivePort dataToMainPort = ReceivePort();
     await Isolate.spawn(_dataHandler, [
       dataToMainPort.sendPort,
@@ -47,32 +39,7 @@ class Receiver extends Transfer {
     dataToMainPort.listen((message) {
       if (message is SendPort) mainToDataPort = message;
 
-      if (message is DataReport) {
-        switch (message.type) {
-          case DataReportType.start:
-            onStart?.call(message.deviceInfo!);
-            break;
-          case DataReportType.end:
-            onEnd?.call(message.deviceInfo!, message.files!);
-            break;
-          case DataReportType.fileEnd:
-            onFileEnd?.call(message.currentFile!);
-            break;
-          case DataReportType.info:
-            onDataReport?.call(
-              message.files!,
-              message.filesTransferred!,
-              message.currentFile!,
-              message.speed!,
-              message.progress!,
-              message.deviceInfo!,
-            );
-            break;
-          case DataReportType.error:
-            onError?.call(message.deviceInfo!, "Crash");
-            break;
-        }
-      }
+      if (message is Report) eventController.add(message..transferUuid = uniqueId);
     });
   }
 }
@@ -93,6 +60,8 @@ void _dataHandler(List<dynamic> args) async {
 
   Isolate? receiverIsolate;
 
+  dataToMainSendPort.send(StartReport(startTime: DateTime.now(), deviceInfo: deviceInfo, files: files));
+
   int totalByteCount = 0;
   int totalByteCountBefore = 0;
   const Duration duration = Duration(milliseconds: 100);
@@ -103,7 +72,6 @@ void _dataHandler(List<dynamic> args) async {
   Timer.periodic(duration, (timer) {
     dataToMainSendPort.send(
       DataReport(
-        DataReportType.info,
         files: files,
         filesTransferred: filesTransferred,
         currentFile: currentFile,
@@ -122,10 +90,7 @@ void _dataHandler(List<dynamic> args) async {
 
     if (currentErrorTime > errorHandleTimeoutMilliseconds) {
       timer.cancel();
-      dataToMainSendPort.send(DataReport(
-        DataReportType.error,
-        deviceInfo: deviceInfo,
-      ));
+      dataToMainSendPort.send(ErrorReport(device: deviceInfo, message: "Transfer timed out"));
       receiverIsolate?.kill();
       Isolate.current.kill();
     }
@@ -150,7 +115,6 @@ void _dataHandler(List<dynamic> args) async {
         totalByteCount = 0;
         dataToMainSendPort.send(
           DataReport(
-            DataReportType.start,
             files: files,
             filesTransferred: filesTransferred,
             currentFile: currentFile,
@@ -167,24 +131,16 @@ void _dataHandler(List<dynamic> args) async {
       case ConnectionActionType.fileEnd:
         filesTransferred.add(currentFile);
         dataToMainSendPort.send(
-          DataReport(
-            DataReportType.info,
-            files: files,
-            filesTransferred: filesTransferred,
-            currentFile: message.currentFile,
-            speed: ((totalByteCount - totalByteCountBefore) * 1000 / duration.inMilliseconds) / 1024 / 1024,
-            progress: (100 * totalByteCount / currentFile.byteSize) > 100 ? 100 : (100 * totalByteCount / currentFile.byteSize),
-            deviceInfo: deviceInfo,
-          ),
+          FileEndReport(fileInfo: currentFile),
         );
         break;
       case ConnectionActionType.end:
-        dataToMainSendPort.send(DataReport(DataReportType.end, deviceInfo: deviceInfo, files: files));
+        dataToMainSendPort.send(EndReport(device: deviceInfo, files: files, endTime: DateTime.now()));
         receiverIsolate?.kill();
         Isolate.current.kill();
         break;
       case ConnectionActionType.error:
-        dataToMainSendPort.send(DataReport(DataReportType.error, deviceInfo: deviceInfo));
+        dataToMainSendPort.send(ErrorReport(device: deviceInfo, message: message.message));
         receiverIsolate?.kill();
         Isolate.current.kill();
         break;

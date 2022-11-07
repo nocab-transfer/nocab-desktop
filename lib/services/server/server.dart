@@ -152,7 +152,8 @@ class Server {
       ..transferUuid = request.transferUuid!
       ..requestedAt = DateTime.now()
       ..status = TransferDbStatus.pendingForAcceptance
-      ..type = TransferDbType.download);
+      ..type = TransferDbType.download
+      ..managedBy = TransferDbManagedBy.user);
     if (true) {
       showDialog(
         context: navigatorKey.currentContext!,
@@ -175,14 +176,14 @@ class Server {
       return e;
     }).toList();
 
-    activeTransfers.add(
-      Receiver(
-        deviceInfo: request.deviceInfo,
-        files: request.files,
-        transferPort: request.transferPort,
-        uniqueId: request.transferUuid!,
-      ),
-    );
+    Receiver receiver = Receiver(
+      deviceInfo: request.deviceInfo,
+      files: request.files,
+      transferPort: request.transferPort,
+      uniqueId: request.transferUuid!,
+    )..onEvent.listen((report) => Database().updateTransferByReport(report));
+
+    activeTransfers.add(receiver);
     _changeController.add(activeTransfers);
   }
 
@@ -233,14 +234,13 @@ class Server {
       return false;
     }
 
-    await Database().updateTransfer(request.transferUuid!, status: TransferDbStatus.ongoing);
-
     Sender sender = Sender(
       deviceInfo: deviceInfo,
       files: files,
       transferPort: port,
       uniqueId: request.transferUuid!,
-    );
+    )..onEvent.listen((report) => Database().updateTransferByReport(report));
+
     activeTransfers.add(sender);
     _changeController.add(activeTransfers);
     return true;

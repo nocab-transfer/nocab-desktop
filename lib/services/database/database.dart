@@ -6,6 +6,10 @@ import 'package:nocab_desktop/models/database/device_db.dart';
 import 'package:nocab_desktop/models/database/file_db.dart';
 import 'package:nocab_desktop/models/database/transfer_db.dart';
 import 'package:nocab_desktop/models/file_model.dart';
+import 'package:nocab_desktop/services/transfer/report_models/base_report.dart';
+import 'package:nocab_desktop/services/transfer/report_models/end_report.dart';
+import 'package:nocab_desktop/services/transfer/report_models/error_report.dart';
+import 'package:nocab_desktop/services/transfer/report_models/start_report.dart';
 import 'package:path/path.dart' as p;
 
 class Database {
@@ -90,5 +94,36 @@ class Database {
         .optional(deviceName != null, (q) => q.device((q) => q.deviceNameContains(deviceName!)));
 
     return await query.findAll();
+  }
+
+  Future<void> updateTransferByReport(Report report) async {
+    switch (report.runtimeType) {
+      case StartReport:
+        report as StartReport;
+        Database().updateTransfer(
+          report.transferUuid,
+          status: TransferDbStatus.ongoing,
+          files: report.files,
+          startedAt: report.startTime,
+        );
+        break;
+      case EndReport:
+        report as EndReport;
+        Database().updateTransfer(
+          report.transferUuid,
+          status: TransferDbStatus.success,
+          endedAt: report.endTime,
+        );
+        break;
+      case ErrorReport:
+        report as ErrorReport;
+        Database().updateTransfer(
+          report.transferUuid,
+          status: TransferDbStatus.error,
+          message: report.message,
+        );
+        break;
+      default:
+    }
   }
 }
