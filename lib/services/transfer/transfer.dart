@@ -5,11 +5,13 @@ abstract class Transfer {
   DeviceInfo deviceInfo;
   List<FileInfo> files;
   int transferPort;
+  String uniqueId;
 
   Transfer({
     required this.deviceInfo,
     required this.files,
     required this.transferPort,
+    required this.uniqueId,
   });
 
   Future<void> start({

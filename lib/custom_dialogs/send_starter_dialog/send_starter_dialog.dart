@@ -128,15 +128,19 @@ class _SendStarterDialogState extends State<SendStarterDialog> {
                                     blockDevices: deviceClickBlock,
                                     onPressed: (deviceInfo) {
                                       setState(() => deviceClickBlock.add(deviceInfo));
-                                      Server().send(deviceInfo, widget.files).then((value) => setState(() => deviceClickBlock.remove(deviceInfo)));
+                                      Server().send(deviceInfo, widget.files).then((value) {
+                                        if (mounted) setState(() => deviceClickBlock.remove(deviceInfo));
+                                      });
                                     },
                                   ),
                                 ),
                               ),
                               SenderQr(
                                 onDeviceConnected: (deviceInfo) {
-                                  setState(() => deviceClickBlock.add(deviceInfo));
-                                  Server().send(deviceInfo, widget.files).then((value) => setState(() => deviceClickBlock.remove(deviceInfo)));
+                                  if (mounted) {
+                                    setState(() => deviceClickBlock.add(deviceInfo));
+                                    Server().send(deviceInfo, widget.files).then((value) => setState(() => deviceClickBlock.remove(deviceInfo)));
+                                  }
                                 },
                               ),
                             ],

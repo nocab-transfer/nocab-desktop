@@ -126,11 +126,11 @@ class _MainScreenState extends State<MainScreen> {
                                           builder: (context, snapshot) {
                                             return QrImage(
                                               data: base64.encode(utf8.encode(json.encode(DeviceInfo(
-                                                      name: snapshot.data?.deviceName,
+                                                      name: snapshot.data!.deviceName,
                                                       ip: Server().selectedIp.address,
-                                                      port: snapshot.data?.mainPort,
+                                                      port: snapshot.data!.mainPort,
                                                       opsystem: Platform.operatingSystem,
-                                                      uuid: "")
+                                                      deviceId: "")
                                                   .toJson()))),
                                               version: QrVersions.auto,
                                               dataModuleStyle:

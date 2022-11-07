@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:nocab_desktop/custom_dialogs/welcome_dialog/pages/nocab_mobile_page.dart';
 import 'package:nocab_desktop/custom_dialogs/welcome_dialog/welcome_dialog.dart';
+import 'package:nocab_desktop/custom_widgets/custom_tooltip/custom_tooltip.dart';
 import 'package:nocab_desktop/custom_widgets/svg_color_handler/svg_color_handler.dart';
 import 'package:nocab_desktop/custom_widgets/transfer_card_bloc/transfer_card.dart';
 import 'package:flutter/material.dart';
@@ -8,21 +9,8 @@ import 'package:nocab_desktop/services/file_operations/file_operations.dart';
 import 'package:nocab_desktop/services/server/server.dart';
 import 'package:nocab_desktop/services/transfer/transfer.dart';
 
-class Transfers extends StatefulWidget {
-  const Transfers({Key? key}) : super(key: key);
-
-  @override
-  State<Transfers> createState() => _TransfersState();
-}
-
-class _TransfersState extends State<Transfers> {
-  @override
-  void initState() {
-    super.initState();
-    Server().onNewTransfer.listen((event) {
-      setState(() {});
-    });
-  }
+class Transfers extends StatelessWidget {
+  const Transfers({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,14 +33,34 @@ class _TransfersState extends State<Transfers> {
               children: [
                 Text('mainView.transfers.title'.tr(),
                     style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold)),
-                TextButton.icon(
-                  onPressed: FileOperations.openOutputFolder,
-                  icon: const Icon(Icons.folder_outlined),
-                  label: Text('mainView.transfers.openOutputFolder'.tr(), style: TextStyle(color: Theme.of(context).colorScheme.primary)),
+                Row(
+                  children: [
+                    CustomTooltip(
+                      message: 'mainView.transfers.openOutputFolder'.tr(),
+                      child: IconButton(
+                        onPressed: FileOperations.openOutputFolder,
+                        icon: const Icon(Icons.folder_outlined),
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                    TextButton.icon(
+                      onPressed: () => "",
+                      /*showModal(
+                        context: context,
+                        builder: (context) => const History(),
+                      ),*/
+                      icon: const Icon(Icons.history_rounded),
+                      label: const Text("History"),
+                    ),
+                  ],
                 ),
               ],
             ),
-            Server().activeTransfers.isNotEmpty ? _buildList(Server().activeTransfers) : _emptyState(),
+            StreamBuilder(
+              stream: Server().onNewTransfer,
+              initialData: const <Transfer>[],
+              builder: (context, snapshot) => snapshot.data!.isNotEmpty ? _buildList(snapshot.data!) : _emptyState(context),
+            ),
           ],
         ),
       ),
@@ -67,19 +75,19 @@ class _TransfersState extends State<Transfers> {
       ),
       child: SingleChildScrollView(
         child: ListView.builder(
-            itemCount: Server().activeTransfers.length,
+            itemCount: transfers.length,
             reverse: true,
             shrinkWrap: true,
             itemBuilder: (BuildContext context, int index) {
               return TransferCard(
-                transfer: Server().activeTransfers[index],
+                transfer: transfers[index],
               );
             }),
       ),
     );
   }
 
-  Widget _emptyState() {
+  Widget _emptyState(BuildContext context) {
     return SizedBox(
       height: 550,
       child: Column(
@@ -104,7 +112,7 @@ class _TransfersState extends State<Transfers> {
             child: TextButton.icon(
               onPressed: () {
                 showDialog(
-                  context: Server().navigatorKey.currentContext!,
+                  context: context,
                   builder: (context) => const WelcomeDialog(overridePages: [NoCabMobilePage()]),
                 );
               },

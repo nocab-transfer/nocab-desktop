@@ -5,8 +5,8 @@ extension Format on int {
     if (this <= 0) return "0 B";
     const suffixes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
     const names = ["Byte", "Kilobyte", "Megabyte", "Gigabyte", "Terabyte", "Petabyte", "Exabyte", "Zettabyte", "Yottabyte"];
-    var i = (log(this) / log(1024)).floor();
-    return '${(this / pow(1024, i)).toStringAsFixed(2)} ${useName ? names[i] : suffixes[i]}';
+    var i = (log(this) / log(1000)).floor();
+    return '${(this / pow(1000, i)).toStringAsFixed(2)} ${useName ? names[i] : suffixes[i]}';
   }
 }
 
@@ -15,7 +15,11 @@ extension FormatDouble on double {
     if (this <= 0) return "0 B";
     const suffixes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
     const names = ["Byte", "Kilobyte", "Megabyte", "Gigabyte", "Terabyte", "Petabyte", "Exabyte", "Zettabyte", "Yottabyte"];
-    var i = (log(this) / log(1024)).floor();
-    return '${(this / pow(1024, i)).toStringAsFixed(2)} ${useName ? names[i] : suffixes[i]}';
+    var i = (log(this) / log(1000)).floor();
+    return '${(this / pow(1000, i)).toStringAsFixed(2)} ${useName ? names[i] : suffixes[i]}';
   }
+}
+
+extension ConvertSizes on int {
+  int get gbToBytes => this * 1000 * 1000 * 1000;
 }

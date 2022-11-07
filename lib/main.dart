@@ -6,6 +6,7 @@ import 'package:nocab_desktop/custom_dialogs/welcome_dialog/welcome_dialog.dart'
 import 'package:nocab_desktop/models/file_model.dart';
 import 'package:nocab_desktop/provider/theme_provider.dart';
 import 'package:nocab_desktop/screens/main_screen/main_screen.dart';
+import 'package:nocab_desktop/services/database/database.dart';
 import 'package:nocab_desktop/services/file_operations/file_operations.dart';
 import 'package:nocab_desktop/services/ipc/ipc.dart';
 import 'package:nocab_desktop/services/registry/registry.dart';
@@ -23,6 +24,7 @@ Future<void> main(List<String> args) async {
   await IPC().initialize(args, onData: (data) async => _loadFiles(data));
   await Server().initialize();
   await Server().startReceiver();
+  await Database().initialize();
   await windowManager.ensureInitialized();
 
   runApp(ChangeNotifierProvider(

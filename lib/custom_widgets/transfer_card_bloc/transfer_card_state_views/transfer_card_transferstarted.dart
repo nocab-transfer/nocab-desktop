@@ -53,9 +53,9 @@ class TransferStartedView extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(state.deviceInfo.name ?? "Unknown",
+                              Text(state.deviceInfo.name,
                                   style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold), overflow: TextOverflow.ellipsis),
-                              Text(state.deviceInfo.ip ?? "", style: const TextStyle(fontSize: 12)),
+                              Text(state.deviceInfo.ip, style: const TextStyle(fontSize: 12)),
                             ],
                           ),
                         ),

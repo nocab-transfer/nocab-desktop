@@ -49,7 +49,7 @@ class _FileAccepterDialogState extends State<FileAccepterDialog> {
               ),
               Text(
                 'fileAccepter.title'.plural(widget.request.files.length, name: 'count', namedArgs: {
-                  'deviceName': widget.request.deviceInfo.name!,
+                  'deviceName': widget.request.deviceInfo.name,
                 }),
                 maxLines: 2,
                 textAlign: TextAlign.center,
@@ -60,7 +60,7 @@ class _FileAccepterDialogState extends State<FileAccepterDialog> {
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
                   'fileAccepter.connectionInfo'.tr(namedArgs: {
-                    'ip': widget.request.deviceInfo.ip!,
+                    'ip': widget.request.deviceInfo.ip,
                     'port': widget.request.transferPort.toString(),
                   }),
                   maxLines: 2,

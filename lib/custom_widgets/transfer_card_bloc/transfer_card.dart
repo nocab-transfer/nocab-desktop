@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nocab_desktop/custom_widgets/sponsor_related/sponsor_snackbar.dart';
 import 'package:nocab_desktop/custom_widgets/transfer_card_bloc/transfer_card_cubit.dart';
 import 'package:nocab_desktop/custom_widgets/transfer_card_bloc/transfer_card_state.dart';
 import 'package:nocab_desktop/custom_widgets/transfer_card_bloc/transfer_card_state_views/transfer_card_transferfailed.dart';
 import 'package:nocab_desktop/custom_widgets/transfer_card_bloc/transfer_card_state_views/transfer_card_transferring.dart';
 import 'package:nocab_desktop/custom_widgets/transfer_card_bloc/transfer_card_state_views/transfer_card_transferstarted.dart';
 import 'package:nocab_desktop/custom_widgets/transfer_card_bloc/transfer_card_state_views/transfer_card_transfersuccess.dart';
+import 'package:nocab_desktop/extensions/size_extension.dart';
+import 'package:nocab_desktop/services/database/database.dart';
 import 'package:nocab_desktop/services/server/server.dart';
 import 'package:nocab_desktop/services/transfer/receiver.dart';
 import 'package:nocab_desktop/services/transfer/transfer.dart';
@@ -19,7 +22,15 @@ class TransferCard extends StatelessWidget {
     return BlocProvider(
       create: (context) => TransferCardCubit()..start(transfer),
       child: BlocConsumer<TransferCardCubit, TransferCardState>(
-        listener: (context, state) {},
+        listener: (context, state) async {
+          // if transfer succseeded and
+          if (state is TransferSuccess &&
+              (await Database().getCount == 2 ||
+                  await Database().getCount % 10 == 0 ||
+                  transfer.files.fold(0, (totalSize, element) => totalSize + element.byteSize) > 1.gbToBytes)) {
+            if (context.mounted) SponsorSnackbar.show(context);
+          }
+        },
         builder: (context, state) => buildWidget(context, state, transfer),
       ),
     );

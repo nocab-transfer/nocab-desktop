@@ -5,15 +5,18 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_alert/flutter_platform_alert.dart';
 import 'package:nocab_desktop/custom_dialogs/file_accepter_dialog/file_accepter_dialog.dart';
+import 'package:nocab_desktop/models/database/transfer_db.dart';
 import 'package:nocab_desktop/models/deviceinfo_model.dart';
 import 'package:nocab_desktop/models/file_model.dart';
 import 'package:nocab_desktop/models/settings_model.dart';
+import 'package:nocab_desktop/services/database/database.dart';
 import 'package:nocab_desktop/services/file_operations/file_operations.dart';
 import 'package:nocab_desktop/services/network/network.dart';
 import 'package:nocab_desktop/services/settings/settings.dart';
 import 'package:nocab_desktop/services/transfer/receiver.dart';
 import 'package:nocab_desktop/services/transfer/sender.dart';
 import 'package:nocab_desktop/services/transfer/transfer.dart';
+import 'package:uuid/uuid.dart';
 import 'package:window_manager/window_manager.dart';
 
 class Server {
@@ -40,7 +43,7 @@ class Server {
         return InternetAddress("0.0.0.0", type: InternetAddressType.IPv4);
       });
 
-  late String deviceID = "test";
+  static String deviceID = "test";
   late DeviceInfo deviceInfo;
 
   Future<void> initialize() async {
@@ -56,22 +59,23 @@ class Server {
         ip: selectedIp.address,
         port: SettingsService().getSettings.mainPort,
         opsystem: Platform.operatingSystemVersion,
-        uuid: deviceID);
+        deviceId: deviceID);
     SettingsService().onSettingChanged.listen((settings) {
       deviceInfo = DeviceInfo(
         name: settings.deviceName,
         ip: selectedIp.address,
         port: settings.mainPort,
         opsystem: Platform.operatingSystemVersion,
-        uuid: deviceID,
+        deviceId: deviceID,
       );
     });
   }
 
   GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  final GlobalKey<ScaffoldMessengerState> scaffoldKey = GlobalKey<ScaffoldMessengerState>();
 
-  final _changeController = StreamController<List<Transfer>>();
-  Stream<List<Transfer>> get onNewTransfer => _changeController.stream.asBroadcastStream();
+  final _changeController = StreamController<List<Transfer>>.broadcast();
+  Stream<List<Transfer>> get onNewTransfer => _changeController.stream;
 
   List<Transfer> activeTransfers = [];
 
@@ -141,8 +145,22 @@ class Server {
 
   Future<void> _requestHandler(ShareRequest request, Socket socket) async {
     // TODO: Database ban check
+    request.transferUuid = const Uuid().v4();
+    Database().pushTransferToDb(TransferDatabase()
+      ..device = request.deviceInfo.toIsarDb()
+      ..files = request.files.map((e) => e.toIsarDb()).toList()
+      ..transferUuid = request.transferUuid!
+      ..requestedAt = DateTime.now()
+      ..status = TransferDbStatus.pendingForAcceptance
+      ..type = TransferDbType.download);
     if (true) {
-      showDialog(context: navigatorKey.currentContext!, builder: (buildContext) => FileAccepterDialog(request: request, socket: socket));
+      showDialog(
+        context: navigatorKey.currentContext!,
+        builder: (buildContext) => FileAccepterDialog(
+          request: request,
+          socket: socket,
+        ),
+      );
       windowManager.focus();
     }
   }
@@ -157,7 +175,14 @@ class Server {
       return e;
     }).toList();
 
-    activeTransfers.add(Receiver(deviceInfo: request.deviceInfo, files: request.files, transferPort: request.transferPort));
+    activeTransfers.add(
+      Receiver(
+        deviceInfo: request.deviceInfo,
+        files: request.files,
+        transferPort: request.transferPort,
+        uniqueId: request.transferUuid!,
+      ),
+    );
     _changeController.add(activeTransfers);
   }
 
@@ -165,6 +190,11 @@ class Server {
     ShareResponse shareResponse = ShareResponse(response: false, info: message ?? "User rejected request");
     socket.write(base64.encode(utf8.encode(json.encode(shareResponse.toJson()))));
     socket.close();
+    Database().updateTransfer(
+      request.transferUuid!,
+      status: TransferDbStatus.declined,
+      managedBy: TransferDbManagedBy.user,
+    );
   }
 
   // Sender
@@ -172,24 +202,45 @@ class Server {
   Future<bool> send(DeviceInfo deviceInfo, List<FileInfo> files) async {
     int port = await Network.getUnusedPort();
 
-    Socket socket = await Socket.connect(deviceInfo.ip, deviceInfo.port!);
-    socket.write(base64.encode(utf8.encode(json.encode(ShareRequest(
+    var request = ShareRequest(
       deviceInfo: DeviceInfo(
-          name: SettingsService().getSettings.deviceName,
-          ip: selectedIp.address,
-          port: SettingsService().getSettings.mainPort,
-          opsystem: Platform.operatingSystemVersion,
-          uuid: deviceID),
+        name: SettingsService().getSettings.deviceName,
+        ip: selectedIp.address,
+        port: SettingsService().getSettings.mainPort,
+        opsystem: Platform.operatingSystemVersion,
+        deviceId: deviceID,
+      ),
       files: files,
       transferPort: port,
-      uniqueId: "test",
-    ).toJson()))));
+    )..transferUuid = const Uuid().v4();
+
+    Socket socket = await Socket.connect(deviceInfo.ip, deviceInfo.port);
+    socket.write(base64.encode(utf8.encode(json.encode(request.toJson()))));
+
+    Database().pushTransferToDb(TransferDatabase()
+      ..device = request.deviceInfo.toIsarDb()
+      ..files = request.files.map((e) => e.toIsarDb()).toList()
+      ..transferUuid = request.transferUuid!
+      ..requestedAt = DateTime.now()
+      ..status = TransferDbStatus.pendingForAcceptance
+      ..type = TransferDbType.upload
+      ..managedBy = TransferDbManagedBy.user);
 
     ShareResponse shareResponse = ShareResponse.fromJson(json.decode(utf8.decode(base64.decode(utf8.decode(await socket.first)))));
 
-    if (!shareResponse.response!) return false;
+    if (!shareResponse.response!) {
+      await Database().updateTransfer(request.transferUuid!, status: TransferDbStatus.declined);
+      return false;
+    }
 
-    Sender sender = Sender(deviceInfo: deviceInfo, files: files, transferPort: port);
+    await Database().updateTransfer(request.transferUuid!, status: TransferDbStatus.ongoing);
+
+    Sender sender = Sender(
+      deviceInfo: deviceInfo,
+      files: files,
+      transferPort: port,
+      uniqueId: request.transferUuid!,
+    );
     activeTransfers.add(sender);
     _changeController.add(activeTransfers);
     return true;

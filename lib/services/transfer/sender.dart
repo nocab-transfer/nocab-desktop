@@ -14,7 +14,8 @@ class Sender extends Transfer {
     required DeviceInfo deviceInfo,
     required List<FileInfo> files,
     required int transferPort,
-  }) : super(deviceInfo: deviceInfo, files: files, transferPort: transferPort);
+    required String uniqueId,
+  }) : super(deviceInfo: deviceInfo, files: files, transferPort: transferPort, uniqueId: uniqueId);
 
   @override
   Future<void> start({

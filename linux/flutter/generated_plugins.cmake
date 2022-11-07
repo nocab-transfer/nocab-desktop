@@ -5,6 +5,7 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   desktop_drop
   flutter_platform_alert
+  isar_flutter_libs
   platform_device_id_linux
   screen_retriever
   url_launcher_linux

@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:nocab_desktop/custom_widgets/custom_tooltip/custom_tooltip.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -73,7 +74,7 @@ class _NoCabMobilePageState extends State<NoCabMobilePage> {
                     Text("welcomeDialog.noCabMobilePage.instructions.step3".tr(), style: Theme.of(context).textTheme.bodyMedium),
                   ],
                 ),
-                Tooltip(
+                CustomTooltip(
                   message: mobileAppLink,
                   child: Container(
                     decoration: BoxDecoration(

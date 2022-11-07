@@ -1,18 +1,20 @@
-class DeviceInfo {
-  String? name;
-  String? ip;
-  int? port;
-  String? opsystem;
-  String? uuid;
+import 'package:nocab_desktop/models/database/device_db.dart';
 
-  DeviceInfo({required this.name, required this.ip, required this.port, required this.opsystem, required this.uuid});
+class DeviceInfo {
+  late String name;
+  late String ip;
+  late int port;
+  late String opsystem;
+  late String deviceId;
+
+  DeviceInfo({required this.name, required this.ip, required this.port, required this.opsystem, required this.deviceId});
 
   DeviceInfo.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     ip = json['ip'];
     port = json['port'];
     opsystem = json['opsystem'];
-    uuid = json['uuid'];
+    deviceId = json['deviceId'];
   }
 
   Map<String, dynamic> toJson() {
@@ -21,7 +23,14 @@ class DeviceInfo {
     data['ip'] = ip;
     data['port'] = port;
     data['opsystem'] = opsystem;
-    data['uuid'] = uuid;
+    data['deviceId'] = deviceId;
     return data;
+  }
+
+  DeviceDb toIsarDb() {
+    return DeviceDb()
+      ..deviceName = name
+      ..deviceIp = ip
+      ..deviceOs = opsystem;
   }
 }

@@ -117,8 +117,8 @@ class _DeviceFinderState extends State<DeviceFinder> {
                   child: const Icon(Icons.desktop_windows_rounded),
                 ),
                 trailing: const Icon(Icons.arrow_forward_ios_rounded),
-                title: Text(devices[index].name ?? "Unknown"),
-                subtitle: Text(devices[index].ip ?? "Unknown"),
+                title: Text(devices[index].name),
+                subtitle: Text(devices[index].ip),
               ),
             ),
           );

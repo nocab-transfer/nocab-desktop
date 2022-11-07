@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:nocab_desktop/custom_widgets/custom_tooltip/custom_tooltip.dart';
 import 'package:nocab_desktop/custom_widgets/transfer_card_bloc/transfer_card_state.dart';
 
 class TransferFailedView extends StatelessWidget {
@@ -39,16 +40,16 @@ class TransferFailedView extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(state.deviceInfo.name ?? "Unknown",
+                              Text(state.deviceInfo.name,
                                   style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold), overflow: TextOverflow.ellipsis),
-                              Text(state.deviceInfo.ip ?? "", style: const TextStyle(fontSize: 12)),
+                              Text(state.deviceInfo.ip, style: const TextStyle(fontSize: 12)),
                             ],
                           ),
                         ),
                       ),
                     ],
                   ),
-                  Tooltip(
+                  CustomTooltip(
                     message: 'mainView.transfers.card.transferFailed.removeButtonTooltip'.tr(),
                     child: Material(
                       child: InkWell(

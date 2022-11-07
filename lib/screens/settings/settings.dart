@@ -4,6 +4,7 @@ import 'package:animations/animations.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart';
 import 'package:nocab_desktop/custom_dialogs/theme_color_picker/theme_color_picker.dart';
+import 'package:nocab_desktop/custom_widgets/custom_tooltip/custom_tooltip.dart';
 import 'package:nocab_desktop/extensions/lang_code_to_name.dart';
 import 'package:nocab_desktop/models/settings_model.dart';
 import 'package:nocab_desktop/provider/theme_provider.dart';
@@ -167,8 +168,7 @@ class _SettingsState extends State<Settings> {
                                     ),
                                     const SizedBox(width: 8),
                                     Material(
-                                      child: Tooltip(
-                                        triggerMode: TooltipTriggerMode.longPress,
+                                      child: CustomTooltip(
                                         message: 'settings.deviceName.randomNameTooltip'.tr(),
                                         child: InkWell(
                                           borderRadius: const BorderRadius.all(Radius.circular(10)),

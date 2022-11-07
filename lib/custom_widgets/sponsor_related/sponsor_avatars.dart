@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:nocab_desktop/custom_widgets/custom_tooltip/custom_tooltip.dart';
 import 'package:nocab_desktop/services/sponsors/sponsors.dart';
 
 class SponsorAvatars extends StatelessWidget {
@@ -36,8 +37,7 @@ class SponsorAvatars extends StatelessWidget {
                       return Padding(
                         padding: const EdgeInsets.all(2.0),
                         child: Center(
-                          child: Tooltip(
-                            waitDuration: const Duration(milliseconds: 500),
+                          child: CustomTooltip(
                             message: snapshot.data![index].name,
                             child: Container(
                               decoration: BoxDecoration(
