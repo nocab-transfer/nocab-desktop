@@ -63,7 +63,6 @@ class Database {
       TransferDbManagedBy? managedBy}) async {
     var transferDb = await isar.transferDatabases.where().filter().transferUuidEqualTo(transferUuid).findFirst();
     if (transferDb == null) return;
-    print('Updating transfer $status');
     transferDb
       ..startedAt = startedAt ?? transferDb.startedAt
       ..endedAt = endedAt ?? transferDb.endedAt
