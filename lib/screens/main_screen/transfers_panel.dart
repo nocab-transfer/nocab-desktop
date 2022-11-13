@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:nocab_desktop/custom_dialogs/welcome_dialog/pages/nocab_mobile_page.dart';
 import 'package:nocab_desktop/custom_dialogs/welcome_dialog/welcome_dialog.dart';
@@ -5,7 +6,7 @@ import 'package:nocab_desktop/custom_widgets/custom_tooltip/custom_tooltip.dart'
 import 'package:nocab_desktop/custom_widgets/svg_color_handler/svg_color_handler.dart';
 import 'package:nocab_desktop/custom_widgets/transfer_card_bloc/transfer_card.dart';
 import 'package:flutter/material.dart';
-import 'package:nocab_desktop/services/file_operations/file_operations.dart';
+import 'package:nocab_desktop/screens/history/history.dart';
 import 'package:nocab_desktop/services/server/server.dart';
 import 'package:nocab_desktop/services/transfer/transfer.dart';
 
@@ -38,19 +39,21 @@ class Transfers extends StatelessWidget {
                     CustomTooltip(
                       message: 'mainView.transfers.openOutputFolder'.tr(),
                       child: IconButton(
-                        onPressed: FileOperations.openOutputFolder,
+                        onPressed: () => showDialog(
+                          context: Server().navigatorKey.currentContext!,
+                          builder: (context) => const WelcomeDialog(createdFromMain: true),
+                        ), //FileOperations.openOutputFolder,
                         icon: const Icon(Icons.folder_outlined),
                         color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
                     TextButton.icon(
-                      onPressed: () => "",
-                      /*showModal(
+                      onPressed: () => showModal(
                         context: context,
-                        builder: (context) => const History(),
-                      ),*/
+                        builder: (context) => History(),
+                      ),
                       icon: const Icon(Icons.history_rounded),
-                      label: const Text("History"),
+                      label: Text("mainView.transfers.history".tr()),
                     ),
                   ],
                 ),

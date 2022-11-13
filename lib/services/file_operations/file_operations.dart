@@ -30,16 +30,16 @@ class FileOperations {
     return await compute(_getFilesUnderDirectory, [path, parentSubDirectory]);
   }
 
-  static void openFile(FileInfo file) {
-    String pathName = file.path!.substring(file.path!.lastIndexOf("\\") + 1);
-    Process.start(pathName, [], workingDirectory: File(file.path!).parent.path, runInShell: true);
+  static void openFile(String filePath) {
+    String pathName = filePath.substring(filePath.lastIndexOf("\\") + 1);
+    Process.start(pathName, [], workingDirectory: File(filePath).parent.path, runInShell: true);
     // wait, is this working?
   }
 
-  static void showInFolder(FileInfo file) {
-    String pathName = file.path!.substring(file.path!.lastIndexOf("\\") + 1);
+  static void showInFolder(String filePath) {
+    String pathName = filePath.substring(filePath.lastIndexOf("\\") + 1);
     if (Platform.isWindows) {
-      Process.start("explorer.exe", ["/select,", pathName], runInShell: true, workingDirectory: File(file.path!).parent.path);
+      Process.start("explorer.exe", ["/select,", pathName], runInShell: true, workingDirectory: File(filePath).parent.path);
     }
     // TODO: show in folder on other platforms
   }

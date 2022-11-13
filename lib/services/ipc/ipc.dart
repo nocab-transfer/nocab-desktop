@@ -76,7 +76,7 @@ class IPC {
 
   static String getBasePath() {
     if (Platform.isWindows) {
-      return p.join(Platform.environment['APPDATA']!, 'NoCab IPC');
+      return p.join(Platform.environment['APPDATA']!, 'NoCab Desktop', 'NoCab IPC');
     }
     return p.join(File(Platform.resolvedExecutable).parent.path, 'NoCab IPC');
   }

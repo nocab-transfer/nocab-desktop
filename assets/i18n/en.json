@@ -73,6 +73,7 @@
             "emptyMessage": "There is nothing except a sea of emptiness",
             "openOutputFolder": "Open Output File",
             "downloadNoCabMobile": "Download NoCab Mobile",
+            "history": "History",
             "card": {
                 "showInFolder": "Show in Folder",
                 "openFile": "Open File",
@@ -99,6 +100,75 @@
                     "removeButtonTooltip": "Remove",
                     "message": "Transfer Failed"
                 }
+            }
+        }
+    },
+    "history": {
+        "title": "History",
+        "deleteButton": {
+            "title": "Delete All History"
+        },
+        "deleteDialog": {
+            "title": "Delete History",
+            "message": "You are about to delete all history. This action cannot be undone.",
+            "confirmButton": "Confirm Delete",
+            "cancelButton": "Cancel"
+        },
+        "historyList": {
+            "emptyState": {
+                "title": "No Entry Found",
+                "message": "You have to make at least one transfer to see it here"
+            },
+            "item": {
+                "fileCount": "File Count",
+                "totalFileSize": "Total File Size",
+                "requestedAt": "Requested At",
+                "dateFormat": "hh:mm a dd/MM/yyyy",
+                "status": {
+                    "success": "SUCCESS",
+                    "error": "ERROR",
+                    "declined": "DECLINED",
+                    "ongoing": "ONGOING",
+                    "pendingForAcceptance": "PENDING"
+                }
+            }
+        },
+        "historyDetails": {
+            "status": {
+                "success": "SUCCESS",
+                "error": "ERROR",
+                "declined": "DECLINED",
+                "ongoing": "ONGOING",
+                "pendingForAcceptance": "PENDING"
+            },
+            "managedBy": {
+                "user": "Managed by USER",
+                "blacklist": "Device is in blacklist",
+                "ban": "Device is banned",
+                "automation": "Managed by AUTOMATION",
+                "thirdParty": "Managed by THIRD PARTY"
+            },
+            "youLabel": "You",
+            "info": {
+                "requestedAt": "Requested At",
+                "startedAt": "Started At",
+                "endedAt": "Ended At",
+                "fileCount": "File Count",
+                "totalFileSize": "Total File Size",
+                "message": "Message",
+                "dateFormat": "hh:mm a dd/MM/yyyy"
+            },
+            "fileTile": {
+                "showInFolder": "Show in Folder",
+                "openFile": "Open File",
+                "warnMessages": {
+                    "ongoing": "Processing",
+                    "notFound": "File moved or deleted. Maybe not even existed in the universe"
+                }
+            },
+            "emptyState": {
+                "title": "No, There is nothing!",
+                "message": "Click any history item to see more details"
             }
         }
     },
@@ -192,8 +262,12 @@
     },
     "sponsorRelated": {
         "snackbar": {
-            "title": "You transferred {count} files and {size} of data 🥳!",
-            "subtitle": "Would You Like To Support The Developer?",
+            "title": {
+                "two": "You just made your 2nd successful transfer 🥳!",
+                "other": "You just made your {count}th successful transfer 🥳!"
+            },
+            "titleBigFile": "You just successfully transferred {size} of data 🥳!",
+            "subtitle": "Thank you for using NoCab! 🎉\nIf you like this app, please consider sponsoring to developer.",
             "action": "Swipe To Close"
         },
         "avatars": {

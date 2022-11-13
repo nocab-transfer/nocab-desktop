@@ -8,6 +8,7 @@ import 'package:nocab_desktop/custom_widgets/transfer_card_bloc/transfer_card_st
 import 'package:nocab_desktop/custom_widgets/transfer_card_bloc/transfer_card_state_views/transfer_card_transferstarted.dart';
 import 'package:nocab_desktop/custom_widgets/transfer_card_bloc/transfer_card_state_views/transfer_card_transfersuccess.dart';
 import 'package:nocab_desktop/extensions/size_extension.dart';
+import 'package:nocab_desktop/models/database/transfer_db.dart';
 import 'package:nocab_desktop/services/database/database.dart';
 import 'package:nocab_desktop/services/server/server.dart';
 import 'package:nocab_desktop/services/transfer/receiver.dart';
@@ -23,12 +24,14 @@ class TransferCard extends StatelessWidget {
       create: (context) => TransferCardCubit()..start(transfer),
       child: BlocConsumer<TransferCardCubit, TransferCardState>(
         listener: (context, state) async {
-          // if transfer succseeded and
-          if (state is TransferSuccess &&
-              (await Database().getCount == 2 ||
-                  await Database().getCount % 10 == 0 ||
-                  transfer.files.fold(0, (totalSize, element) => totalSize + element.byteSize) > 1.gbToBytes)) {
-            if (context.mounted) SponsorSnackbar.show(context);
+          if (state is TransferSuccess) {
+            await Future.delayed(const Duration(seconds: 1)); // wait for database to update
+            int successfullTransfers = await Database().getCountFiltered(status: TransferDbStatus.success);
+            int latestTransferSize = transfer.files.fold(0, (totalSize, element) => totalSize + element.byteSize);
+            if (successfullTransfers == 0) return;
+            if (successfullTransfers == 2 || successfullTransfers % 10 == 0 || latestTransferSize > 1.gbToBytes) {
+              if (context.mounted) SponsorSnackbar.show(context, latestTransferSize: latestTransferSize, transferCount: successfullTransfers);
+            }
           }
         },
         builder: (context, state) => buildWidget(context, state, transfer),

@@ -44,8 +44,8 @@ class Database {
   Future<int> get getCount async => await isar.transferDatabases.count();
 
   static String getBasePath() {
-    if (Platform.isWindows || kDebugMode) {
-      return p.join(Platform.environment['APPDATA']!, 'database');
+    if (Platform.isWindows && !kDebugMode) {
+      return p.join(Platform.environment['APPDATA']!, 'NoCab Desktop', 'database');
     }
     return p.join(File(Platform.resolvedExecutable).parent.path, 'database');
   }
@@ -89,10 +89,20 @@ class Database {
         .optional(endedAt != null, (q) => q.endedAtLessThan(endedAt!))
         .optional(contains != null, (q) => q.filesElement((q) => q.nameContains(contains!)))
         .optional(fileSize != null, (q) => q.filesElement((q) => q.byteSizeGreaterThan(fileSize!)))
-        .optional(ip != null, (q) => q.device((q) => q.deviceIpContains(ip!)))
-        .optional(deviceName != null, (q) => q.device((q) => q.deviceNameContains(deviceName!)));
+        .optional(
+          ip != null,
+          (q) => q.senderDevice((q) => q.deviceIpContains(ip!)).or().receiverDevice((q) => q.deviceIpContains(ip!)),
+        )
+        .optional(
+          deviceName != null,
+          (q) => q.senderDevice((q) => q.deviceNameContains(deviceName!)).or().receiverDevice((q) => q.deviceNameContains(deviceName!)),
+        );
 
     return await query.findAll();
+  }
+
+  Future<void> deleteAllTransfers() async {
+    await isar.writeTxn(() async => await isar.transferDatabases.clear());
   }
 
   Future<void> updateTransferByReport(Report report) async {
@@ -124,5 +134,33 @@ class Database {
         break;
       default:
     }
+  }
+
+  Future<int> getCountFiltered({
+    TransferDbStatus? status,
+    DateTime? startedAt,
+    DateTime? endedAt,
+    String? contains,
+    int? fileSize,
+    String? ip,
+    String? deviceName,
+  }) async {
+    var query = isar.transferDatabases
+        .filter()
+        .optional(status != null, (q) => q.statusEqualTo(status!))
+        .optional(startedAt != null, (q) => q.startedAtGreaterThan(startedAt!))
+        .optional(endedAt != null, (q) => q.endedAtLessThan(endedAt!))
+        .optional(contains != null, (q) => q.filesElement((q) => q.nameContains(contains!)))
+        .optional(fileSize != null, (q) => q.filesElement((q) => q.byteSizeGreaterThan(fileSize!)))
+        .optional(
+          ip != null,
+          (q) => q.senderDevice((q) => q.deviceIpContains(ip!)).or().receiverDevice((q) => q.deviceIpContains(ip!)),
+        )
+        .optional(
+          deviceName != null,
+          (q) => q.senderDevice((q) => q.deviceNameContains(deviceName!)).or().receiverDevice((q) => q.deviceNameContains(deviceName!)),
+        );
+
+    return await query.count();
   }
 }

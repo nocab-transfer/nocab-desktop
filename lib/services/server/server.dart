@@ -147,7 +147,8 @@ class Server {
     // TODO: Database ban check
     request.transferUuid = const Uuid().v4();
     Database().pushTransferToDb(TransferDatabase()
-      ..device = request.deviceInfo.toIsarDb()
+      ..senderDevice = request.deviceInfo.toIsarDb()
+      ..receiverDevice = deviceInfo.toIsarDb(isCurrentDevice: true)
       ..files = request.files.map((e) => e.toIsarDb()).toList()
       ..transferUuid = request.transferUuid!
       ..requestedAt = DateTime.now()
@@ -170,6 +171,12 @@ class Server {
     ShareResponse shareResponse = ShareResponse(response: true);
     socket.write(base64.encode(utf8.encode(json.encode(shareResponse.toJson()))));
     socket.close();
+
+    Database().updateTransfer(
+      request.transferUuid!,
+      status: TransferDbStatus.ongoing,
+      managedBy: TransferDbManagedBy.user,
+    );
 
     request.files = request.files.map<FileInfo>((e) {
       e.path = FileOperations.findUnusedFilePath(downloadPath: SettingsService().getSettings.downloadPath, fileName: e.name);
@@ -195,6 +202,7 @@ class Server {
       request.transferUuid!,
       status: TransferDbStatus.declined,
       managedBy: TransferDbManagedBy.user,
+      message: message ?? "User rejected request",
     );
   }
 
@@ -204,22 +212,14 @@ class Server {
     int port = await Network.getUnusedPort();
 
     var request = ShareRequest(
-      deviceInfo: DeviceInfo(
-        name: SettingsService().getSettings.deviceName,
-        ip: selectedIp.address,
-        port: SettingsService().getSettings.mainPort,
-        opsystem: Platform.operatingSystemVersion,
-        deviceId: deviceID,
-      ),
+      deviceInfo: this.deviceInfo,
       files: files,
       transferPort: port,
     )..transferUuid = const Uuid().v4();
 
-    Socket socket = await Socket.connect(deviceInfo.ip, deviceInfo.port);
-    socket.write(base64.encode(utf8.encode(json.encode(request.toJson()))));
-
     Database().pushTransferToDb(TransferDatabase()
-      ..device = request.deviceInfo.toIsarDb()
+      ..receiverDevice = deviceInfo.toIsarDb()
+      ..senderDevice = this.deviceInfo.toIsarDb(isCurrentDevice: true)
       ..files = request.files.map((e) => e.toIsarDb()).toList()
       ..transferUuid = request.transferUuid!
       ..requestedAt = DateTime.now()
@@ -227,10 +227,43 @@ class Server {
       ..type = TransferDbType.upload
       ..managedBy = TransferDbManagedBy.user);
 
-    ShareResponse shareResponse = ShareResponse.fromJson(json.decode(utf8.decode(base64.decode(utf8.decode(await socket.first)))));
+    Socket socket;
+
+    try {
+      socket = await Socket.connect(deviceInfo.ip, deviceInfo.port);
+      socket.write(base64.encode(utf8.encode(json.encode(request.toJson()))));
+    } on SocketException catch (e) {
+      await Database().updateTransfer(request.transferUuid!, status: TransferDbStatus.error, managedBy: TransferDbManagedBy.user, message: e.message);
+      return false;
+    } catch (e) {
+      await Database().updateTransfer(
+        request.transferUuid!,
+        status: TransferDbStatus.error,
+        managedBy: TransferDbManagedBy.user,
+        message: e.toString(),
+      );
+      return false;
+    }
+
+    ShareResponse shareResponse;
+    try {
+      shareResponse = ShareResponse.fromJson(json.decode(utf8.decode(base64.decode(utf8.decode(await socket.first)))));
+    } on StateError {
+      await Database().updateTransfer(
+        request.transferUuid!,
+        status: TransferDbStatus.error,
+        managedBy: TransferDbManagedBy.user,
+        message: "Connection Lost, Cannot read response",
+      );
+      return false;
+    } catch (e) {
+      await Database()
+          .updateTransfer(request.transferUuid!, status: TransferDbStatus.error, managedBy: TransferDbManagedBy.user, message: e.toString());
+      return false;
+    }
 
     if (!shareResponse.response!) {
-      await Database().updateTransfer(request.transferUuid!, status: TransferDbStatus.declined);
+      await Database().updateTransfer(request.transferUuid!, status: TransferDbStatus.declined, message: shareResponse.info);
       return false;
     }
 

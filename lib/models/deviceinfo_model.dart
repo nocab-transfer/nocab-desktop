@@ -27,10 +27,11 @@ class DeviceInfo {
     return data;
   }
 
-  DeviceDb toIsarDb() {
+  DeviceDb toIsarDb({bool isCurrentDevice = false}) {
     return DeviceDb()
       ..deviceName = name
       ..deviceIp = ip
-      ..deviceOs = opsystem;
+      ..deviceOs = opsystem
+      ..isCurrentDevice = isCurrentDevice;
   }
 }

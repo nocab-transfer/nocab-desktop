@@ -12,4 +12,7 @@ class DeviceDb {
 
   @Name("Device Port")
   late String deviceOs;
+
+  @Name("Is Current Device")
+  late bool isCurrentDevice;
 }

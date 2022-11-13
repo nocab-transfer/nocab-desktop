@@ -13,8 +13,11 @@ class TransferDatabase {
   @Name("Transfer Unique ID")
   late String transferUuid;
 
-  @Name("Device")
-  late DeviceDb device;
+  @Name("Sender Device")
+  late DeviceDb senderDevice;
+
+  @Name("Receiver Device")
+  late DeviceDb receiverDevice;
 
   @Name("Start Time")
   DateTime? startedAt;
@@ -39,7 +42,7 @@ class TransferDatabase {
   @Name("Message")
   String? message;
 
-  @Name("Who Responded")
+  @Name("Managed By")
   @enumerated
   late TransferDbManagedBy managedBy;
 }

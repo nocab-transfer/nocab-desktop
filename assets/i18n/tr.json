@@ -73,6 +73,7 @@
             "emptyMessage": "Burada sessizlikten başka hiçbir şey yok",
             "openOutputFolder": "Çıkış klasörünü aç",
             "downloadNoCabMobile": "NoCab Mobile uygulamasını indirin",
+            "history": "Geçmiş",
             "card": {
                 "showInFolder": "Klasörde göster",
                 "openFile": "Dosyayı aç",
@@ -99,6 +100,75 @@
                     "removeButtonTooltip": "Kaldır",
                     "message": "Dosya aktarımı başarısız oldu 😞"
                 }
+            }
+        }
+    },
+    "history": {
+        "title": "Geçmiş",
+        "deleteButton": {
+            "title": "Tüm Geçmişi Sil"
+        },
+        "deleteDialog": {
+            "title": "Geçmişi Sil",
+            "message": "Tüm geçmişi silmek üzeresiniz. Bu eylem geri alınamaz.",
+            "confirmButton": "Silmeyi Onayla",
+            "cancelButton": "İptal"
+        },
+        "historyList": {
+            "emptyState": {
+                "title": "Kayıt Bulunamadı",
+                "message": "Geçmişin görünmesi için en az bir dosya aktarımı yapmanız gerekir."
+            },
+            "item": {
+                "fileCount": "Dosya Sayısı",
+                "totalFileSize": "Toplam Dosya Boyutu",
+                "requestedAt": "Talep Zamanı",
+                "dateFormat": "kk:mm dd/MM/yyyy",
+                "status": {
+                    "success": "BAŞARILI",
+                    "error": "HATA",
+                    "declined": "REDDEDİLDİ",
+                    "ongoing": "DEVAM EDEN",
+                    "pendingForAcceptance": "BEKLİYOR"
+                }
+            }
+        },
+        "historyDetails": {
+            "status": {
+                "success": "BAŞARILI",
+                "error": "HATA",
+                "declined": "REDDEDİLDİ",
+                "ongoing": "DEVAM EDEN",
+                "pendingForAcceptance": "BEKLİYOR"
+            },
+            "managedBy": {
+                "user": "KULLAINICI tarafından yönetildi",
+                "blacklist": "Cihaz kara listede",
+                "ban": "Cihaz yasaklı",
+                "automation": "OTOMASYON tarafından yönetildi",
+                "thirdParty": "ÜÇÜNCÜ TARAF tarafından yönetildi"
+            },
+            "youLabel": "Siz",
+            "info": {
+                "requestedAt": "Talep Zamanı",
+                "startedAt": "Başlangıç Zamanı",
+                "endedAt": "Bitiş Zamanı",
+                "fileCount": "Dosya Sayısı",
+                "totalFileSize": "Toplam Dosya Boyutu",
+                "message": "Mesaj",
+                "dateFormat": "kk:mm dd/MM/yyyy"
+            },
+            "fileTile": {
+                "showInFolder": "Klasörde göster",
+                "openFile": "Dosyayı aç",
+                "warnMessages": {
+                    "ongoing": "İşleniyor",
+                    "notFound": "Dosya taşınmış veya silinmiş. Belki de evrende hiç var olmamıştır."
+                }
+            },
+            "emptyState": {
+                "title": "Hayır, Burada bir şey yok!",
+                "message": "Daha fazla ayrıntı görmek için bir kayıta tıklayın."
             }
         }
     },
@@ -192,8 +262,12 @@
     },
     "sponsorRelated": {
         "snackbar": {
-            "title": "{count} dosya ve {size} veri aktardınız 🥳!",
-            "subtitle": "Geliştiriciye Destek Olmak İster Misiniz?",
+            "title": {
+                "two": "Az önce 2. başarılı transferinizi gerçekleştirdiniz 🥳!",
+                "other": "Az önce {count}. başarılı transferinizi gerçekleştirdiniz 🥳!"
+            },
+            "titleBigFile": "{size} veriyi başarıyla aktardınız 🥳!",
+            "subtitle": "NoCab'i kullandığınız için teşekkürler! 🎉\nEğer uygulamayı beğendiyseniz, lütfen geliştiriciye destek olmayı düşününün.",
             "action": "Kapamak İçin Kaydırın"
         },
         "avatars": {

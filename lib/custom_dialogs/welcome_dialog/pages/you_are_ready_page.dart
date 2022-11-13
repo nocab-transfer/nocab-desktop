@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:nocab_desktop/custom_icons/custom_icons.dart';
+import 'package:nocab_desktop/custom_widgets/sponsor_related/sponsor_providers.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class YouAreReadyPage extends StatefulWidget {
@@ -73,47 +75,35 @@ class _YouAreReadyPageState extends State<YouAreReadyPage> {
                   ),
                   Text("welcomeDialog.readyPage.references.sponsorToMe".tr(),
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600)),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TextButton.icon(
-                        onPressed: () => launchUrlString(githubSponsorLink),
-                        icon: const Icon(Icons.favorite),
-                        label: Text("welcomeDialog.readyPage.references.fromGithub".tr()),
-                      ),
-                      const SizedBox(width: 8),
-                      TextButton.icon(
-                        onPressed: () => launchUrlString(buyMeACoffeeLink),
-                        icon: const Icon(Icons.coffee_rounded),
-                        label: Text("welcomeDialog.readyPage.references.fromBuymeacoffee".tr()),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
+                  const SponsorProviders(),
+                  const SizedBox(height: 8),
                   Text("welcomeDialog.readyPage.references.contactText".tr(), style: Theme.of(context).textTheme.bodyLarge),
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    TextButton(
+                    TextButton.icon(
                       onPressed: () => launchUrlString("mailto:'berkekbgz@gmail.com'"),
                       style: TextButton.styleFrom(
-                        fixedSize: const Size(70, 24),
+                        fixedSize: const Size(100, 24),
                       ),
-                      child: Text('welcomeDialog.readyPage.references.email'.tr()),
+                      icon: const Icon(Icons.email_rounded),
+                      label: Text('aboutDialog.contact.email'.tr()),
                     ),
                     const SizedBox(width: 8),
-                    TextButton(
+                    TextButton.icon(
                       onPressed: () => launchUrlString("https://twitter.com/berkekbgz"),
                       style: TextButton.styleFrom(
-                        fixedSize: const Size(70, 24),
+                        fixedSize: const Size(100, 24),
                       ),
-                      child: const Text("Twitter"),
+                      icon: const Icon(CustomIcons.twitter),
+                      label: const Text("Twitter"),
                     ),
                     const SizedBox(width: 8),
-                    TextButton(
-                      onPressed: () => launchUrlString("https://discordapp.com/users/505780125057679360"),
+                    TextButton.icon(
+                      onPressed: () => launchUrlString("https://discord.gg/4uB5QgPgab"),
                       style: TextButton.styleFrom(
-                        fixedSize: const Size(70, 24),
+                        fixedSize: const Size(100, 24),
                       ),
-                      child: const Text("Discord"),
+                      icon: const Icon(CustomIcons.discord, size: 18),
+                      label: const Text(" Discord"),
                     ),
                   ])
                 ],

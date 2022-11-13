@@ -134,7 +134,7 @@ class TransferSuccessView extends StatelessWidget {
                   message: 'mainView.transfers.card.showInFolder'.tr(),
                   child: InkWell(
                     borderRadius: const BorderRadius.all(Radius.circular(10)),
-                    onTap: () => FileOperations.showInFolder(file),
+                    onTap: () => FileOperations.showInFolder(file.path!),
                     child: const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Icon(Icons.folder_outlined, size: 20),
@@ -147,7 +147,7 @@ class TransferSuccessView extends StatelessWidget {
           color: Colors.transparent,
           child: InkWell(
             borderRadius: const BorderRadius.all(Radius.circular(10)),
-            onTap: () => FileOperations.openFile(file),
+            onTap: () => FileOperations.openFile(file.path!),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
