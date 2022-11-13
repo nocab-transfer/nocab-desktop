@@ -7,6 +7,7 @@ import 'package:nocab_desktop/custom_widgets/svg_color_handler/svg_color_handler
 import 'package:nocab_desktop/custom_widgets/transfer_card_bloc/transfer_card.dart';
 import 'package:flutter/material.dart';
 import 'package:nocab_desktop/screens/history/history.dart';
+import 'package:nocab_desktop/services/file_operations/file_operations.dart';
 import 'package:nocab_desktop/services/server/server.dart';
 import 'package:nocab_desktop/services/transfer/transfer.dart';
 
@@ -39,10 +40,7 @@ class Transfers extends StatelessWidget {
                     CustomTooltip(
                       message: 'mainView.transfers.openOutputFolder'.tr(),
                       child: IconButton(
-                        onPressed: () => showDialog(
-                          context: Server().navigatorKey.currentContext!,
-                          builder: (context) => const WelcomeDialog(createdFromMain: true),
-                        ), //FileOperations.openOutputFolder,
+                        onPressed: FileOperations.openOutputFolder,
                         icon: const Icon(Icons.folder_outlined),
                         color: Theme.of(context).colorScheme.primary,
                       ),
