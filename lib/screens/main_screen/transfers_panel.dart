@@ -7,83 +7,68 @@ import 'package:nocab_desktop/custom_widgets/svg_color_handler/svg_color_handler
 import 'package:nocab_desktop/custom_widgets/transfer_card_bloc/transfer_card.dart';
 import 'package:flutter/material.dart';
 import 'package:nocab_desktop/screens/history/history.dart';
-import 'package:nocab_desktop/services/file_operations/file_operations.dart';
 import 'package:nocab_desktop/services/server/server.dart';
 import 'package:nocab_desktop/services/transfer/transfer.dart';
 
-class Transfers extends StatelessWidget {
-  const Transfers({super.key});
+class TransfersPanel extends StatelessWidget {
+  const TransfersPanel({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: Theme.of(context).colorScheme.outline, width: 2),
-        borderRadius: const BorderRadius.all(Radius.circular(20)),
-      ),
-      height: 616,
-      width: 632,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-        child: Column(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
           children: [
+            Text('mainView.transfers.title'.tr(),
+                style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold)),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('mainView.transfers.title'.tr(),
-                    style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold)),
-                Row(
-                  children: [
-                    CustomTooltip(
-                      message: 'mainView.transfers.openOutputFolder'.tr(),
-                      child: IconButton(
-                        onPressed: FileOperations.openOutputFolder,
-                        icon: const Icon(Icons.folder_outlined),
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                    ),
-                    TextButton.icon(
-                      onPressed: () => showModal(
-                        context: context,
-                        builder: (context) => History(),
-                      ),
-                      icon: const Icon(Icons.history_rounded),
-                      label: Text("mainView.transfers.history".tr()),
-                    ),
-                  ],
+                CustomTooltip(
+                  message: 'mainView.transfers.openOutputFolder'.tr(),
+                  child: IconButton(
+                    onPressed: () => showModal(context: context, builder: (context) => const WelcomeDialog()), //FileOperations.openOutputFolder,
+                    icon: const Icon(Icons.folder_outlined),
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+                TextButton.icon(
+                  onPressed: () => showModal(
+                    context: context,
+                    builder: (context) => History(),
+                  ),
+                  icon: const Icon(Icons.history_rounded),
+                  label: Text("mainView.transfers.history".tr()),
                 ),
               ],
             ),
-            StreamBuilder(
-              stream: Server().onNewTransfer,
-              initialData: const <Transfer>[],
-              builder: (context, snapshot) => snapshot.data!.isNotEmpty ? _buildList(snapshot.data!) : _emptyState(context),
-            ),
           ],
         ),
-      ),
+        StreamBuilder(
+          stream: Server().onNewTransfer,
+          initialData: const <Transfer>[],
+          builder: (context, snapshot) => snapshot.data!.isNotEmpty ? _buildList(snapshot.data!) : _emptyState(context),
+        ),
+      ],
     );
   }
 
   Widget _buildList(List<Transfer> transfers) {
-    return Container(
-      height: 550,
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-      ),
+    return Expanded(
       child: SingleChildScrollView(
         child: ListView.builder(
-            itemCount: transfers.length,
-            reverse: true,
-            shrinkWrap: true,
-            itemBuilder: (BuildContext context, int index) {
-              return TransferCard(
-                transfer: transfers[index],
-              );
-            }),
+          itemCount: transfers.length,
+          reverse: true,
+          shrinkWrap: true,
+          itemBuilder: (BuildContext context, int index) {
+            return TransferCard(
+              transfer: transfers[index],
+            );
+          },
+        ),
       ),
     );
   }
@@ -91,10 +76,9 @@ class Transfers extends StatelessWidget {
   Widget _emptyState(BuildContext context) {
     return SizedBox(
       height: 550,
+      width: double.infinity,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
         children: [
           SvgColorHandler(
             svgPath: "assets/images/noitem.svg",
@@ -122,7 +106,6 @@ class Transfers extends StatelessWidget {
                   style: Theme.of(context).textTheme.labelLarge?.copyWith(color: Theme.of(context).colorScheme.primary)),
             ),
           ),
-          Container(),
         ],
       ),
     );
