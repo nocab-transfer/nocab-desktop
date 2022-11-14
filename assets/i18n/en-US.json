@@ -123,7 +123,7 @@
                 "fileCount": "File Count",
                 "totalFileSize": "Total File Size",
                 "requestedAt": "Requested At",
-                "dateFormat": "hh:mm a dd/MM/yyyy",
+                "dateFormat": "hh:mm a MM/dd/yyyy",
                 "status": {
                     "success": "SUCCESS",
                     "error": "ERROR",
@@ -156,7 +156,7 @@
                 "fileCount": "File Count",
                 "totalFileSize": "Total File Size",
                 "message": "Message",
-                "dateFormat": "hh:mm a dd/MM/yyyy"
+                "dateFormat": "hh:mm a MM/dd/yyyy"
             },
             "fileTile": {
                 "showInFolder": "Show in Folder",

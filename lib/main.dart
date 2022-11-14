@@ -33,12 +33,12 @@ Future<void> main(List<String> args) async {
       seedColor: SettingsService().getSettings.useSystemColor ? RegistryService.getColor() : SettingsService().getSettings.seedColor,
     ),
     child: EasyLocalization(
-      supportedLocales: const [Locale('en'), Locale('tr')],
+      supportedLocales: const [Locale('en', 'US'), Locale('tr', 'TR')],
       path: 'assets/i18n',
-      fallbackLocale: const Locale('en'),
+      fallbackLocale: const Locale('en', 'US'),
       saveLocale: false,
       useFallbackTranslations: true,
-      useOnlyLangCode: true,
+      useOnlyLangCode: false,
       child: const MyApp(),
     ),
   ));
