@@ -63,127 +63,130 @@ class _HistoryDetailsState extends State<HistoryDetails> {
   }
 
   Widget _buildDetails(BuildContext context, TransferDatabase transfer) {
-    return SizedBox(
-      height: double.infinity,
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(height: 50),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: transfer.status.color.withOpacity(.6),
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                      child: Text(
-                        "history.historyDetails.status.${transfer.status.name}".tr(),
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.white, fontWeight: FontWeight.w600),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: SizedBox(
+        height: double.infinity,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(height: 50),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        color: transfer.status.color.withOpacity(.6),
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                        child: Text(
+                          "history.historyDetails.status.${transfer.status.name}".tr(),
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.white, fontWeight: FontWeight.w600),
+                        ),
                       ),
                     ),
-                  ),
-                  Text("history.historyDetails.managedBy.${transfer.managedBy.name}".tr(),
-                      style: Theme.of(context).textTheme.labelMedium!.copyWith(color: Colors.grey, fontStyle: FontStyle.italic)),
-                ],
-              ),
-            ),
-            const SizedBox(height: 24),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _buildDeviceInfo(transfer.senderDevice, context),
-                const Padding(padding: EdgeInsets.all(8.0), child: Icon(Icons.arrow_forward_rounded)),
-                _buildDeviceInfo(transfer.receiverDevice, context)
-              ],
-            ),
-            const SizedBox(height: 24),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Column(
-                  children: [
-                    Text("history.historyDetails.info.requestedAt".tr(),
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
-                    Text(DateFormat("history.historyDetails.info.dateFormat".tr()).format(transfer.requestedAt),
-                        style: Theme.of(context).textTheme.bodySmall),
+                    Text("history.historyDetails.managedBy.${transfer.managedBy.name}".tr(),
+                        style: Theme.of(context).textTheme.labelMedium!.copyWith(color: Colors.grey, fontStyle: FontStyle.italic)),
                   ],
                 ),
-                if (transfer.startedAt != null) ...[
+              ),
+              const SizedBox(height: 24),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _buildDeviceInfo(transfer.senderDevice, context),
+                  const Padding(padding: EdgeInsets.all(8.0), child: Icon(Icons.arrow_forward_rounded)),
+                  _buildDeviceInfo(transfer.receiverDevice, context)
+                ],
+              ),
+              const SizedBox(height: 24),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
                   Column(
                     children: [
-                      Text("history.historyDetails.info.startedAt".tr(),
+                      Text("history.historyDetails.info.requestedAt".tr(),
                           style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
-                      Text(DateFormat("history.historyDetails.info.dateFormat".tr()).format(transfer.startedAt!),
+                      Text(DateFormat("history.historyDetails.info.dateFormat".tr()).format(transfer.requestedAt),
                           style: Theme.of(context).textTheme.bodySmall),
                     ],
                   ),
+                  if (transfer.startedAt != null) ...[
+                    Column(
+                      children: [
+                        Text("history.historyDetails.info.startedAt".tr(),
+                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
+                        Text(DateFormat("history.historyDetails.info.dateFormat".tr()).format(transfer.startedAt!),
+                            style: Theme.of(context).textTheme.bodySmall),
+                      ],
+                    ),
+                  ],
+                  if (transfer.endedAt != null) ...[
+                    Column(
+                      children: [
+                        Text(
+                          "history.historyDetails.info.endedAt".tr(),
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+                        ),
+                        Text(DateFormat("history.historyDetails.info.dateFormat".tr()).format(transfer.endedAt!),
+                            style: Theme.of(context).textTheme.bodySmall),
+                      ],
+                    ),
+                  ]
                 ],
-                if (transfer.endedAt != null) ...[
+              ),
+              const SizedBox(height: 24),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
                   Column(
                     children: [
                       Text(
-                        "history.historyDetails.info.endedAt".tr(),
+                        "history.historyDetails.info.fileCount".tr(),
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
                       ),
-                      Text(DateFormat("history.historyDetails.info.dateFormat".tr()).format(transfer.endedAt!),
-                          style: Theme.of(context).textTheme.bodySmall),
+                      Text("${transfer.files.length}"),
                     ],
                   ),
-                ]
-              ],
-            ),
-            const SizedBox(height: 24),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Column(
-                  children: [
-                    Text(
-                      "history.historyDetails.info.fileCount".tr(),
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
-                    ),
-                    Text("${transfer.files.length}"),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Text(
-                      "history.historyDetails.info.totalFileSize".tr(),
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
-                    ),
-                    Text(transfer.files.fold(0, (previousValue, element) => previousValue + element.byteSize).formatBytes()),
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(height: 24),
-            Column(
-              children: [
-                Text("history.historyDetails.info.message".tr(),
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
-                Text(transfer.message ?? "-"),
-              ],
-            ),
-            const SizedBox(height: 24),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: transfer.files.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4.0),
-                    child: _buildFileInfo(transfer.files[index], transfer.status),
-                  );
-                },
+                  Column(
+                    children: [
+                      Text(
+                        "history.historyDetails.info.totalFileSize".tr(),
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+                      ),
+                      Text(transfer.files.fold(0, (previousValue, element) => previousValue + element.byteSize).formatBytes()),
+                    ],
+                  ),
+                ],
               ),
-            ),
-          ],
+              const SizedBox(height: 24),
+              Column(
+                children: [
+                  Text("history.historyDetails.info.message".tr(),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
+                  Text(transfer.message ?? "-"),
+                ],
+              ),
+              const SizedBox(height: 24),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: transfer.files.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4.0),
+                      child: _buildFileInfo(transfer.files[index], transfer.status),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
