@@ -111,7 +111,7 @@ class _HistoryDetailsState extends State<HistoryDetails> {
                     children: [
                       Text("history.historyDetails.info.requestedAt".tr(),
                           style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
-                      Text(DateFormat("history.historyDetails.info.dateFormat".tr(), context.locale.languageCode).format(transfer.requestedAt),
+                      Text(DateFormat("history.historyDetails.info.dateFormat".tr()).format(transfer.requestedAt),
                           style: Theme.of(context).textTheme.bodySmall),
                     ],
                   ),
@@ -120,7 +120,7 @@ class _HistoryDetailsState extends State<HistoryDetails> {
                       children: [
                         Text("history.historyDetails.info.startedAt".tr(),
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
-                        Text(DateFormat("history.historyDetails.info.dateFormat".tr(), context.locale.languageCode).format(transfer.startedAt!),
+                        Text(DateFormat("history.historyDetails.info.dateFormat".tr()).format(transfer.startedAt!),
                             style: Theme.of(context).textTheme.bodySmall),
                       ],
                     ),
@@ -132,7 +132,7 @@ class _HistoryDetailsState extends State<HistoryDetails> {
                           "history.historyDetails.info.endedAt".tr(),
                           style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
                         ),
-                        Text(DateFormat("history.historyDetails.info.dateFormat".tr(), context.locale.languageCode).format(transfer.endedAt!),
+                        Text(DateFormat("history.historyDetails.info.dateFormat".tr()).format(transfer.endedAt!),
                             style: Theme.of(context).textTheme.bodySmall),
                       ],
                     ),

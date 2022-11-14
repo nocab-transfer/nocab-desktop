@@ -40,7 +40,7 @@ class HistoryItem extends StatelessWidget {
                         style: Theme.of(context).textTheme.labelSmall?.copyWith(fontWeight: FontWeight.w300),
                       ),
                       Text(
-                        DateFormat("history.historyList.item.dateFormat".tr(), context.locale.languageCode).format(transfer.requestedAt),
+                        DateFormat("history.historyList.item.dateFormat".tr()).format(transfer.requestedAt), //transfer.requestedAt.toString(),
                         style: Theme.of(context).textTheme.labelMedium,
                         textAlign: TextAlign.end,
                       ),
