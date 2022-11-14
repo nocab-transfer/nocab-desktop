@@ -62,7 +62,6 @@ class SettingsService {
     return SettingsModel(
       deviceName: (await DeviceInfoPlugin().deviceInfo).deviceName,
       darkMode: RegistryService.isDarkMode(),
-      useMaterial3: true,
       mainPort: await Network.getUnusedPort(),
       finderPort: 62193,
       locale: rawLocale.contains('_') ? Locale(rawLocale.split('_')[0]) : Locale(rawLocale),

@@ -5,7 +5,6 @@ class SettingsModel {
   late final int finderPort;
   late final int mainPort;
   late final bool darkMode;
-  late final bool useMaterial3;
   late final Color seedColor;
   late final bool useSystemColor;
   late final Locale locale;
@@ -17,7 +16,6 @@ class SettingsModel {
     required this.finderPort,
     required this.mainPort,
     required this.darkMode,
-    required this.useMaterial3,
     required this.locale,
     required this.seedColor,
     required this.useSystemColor,
@@ -30,7 +28,6 @@ class SettingsModel {
     finderPort = json['finderPort'];
     mainPort = json['mainPort'];
     darkMode = json['darkMode'];
-    useMaterial3 = json['useMaterial3'];
     locale = Locale(json['language']);
     seedColor = Color(json['seedColor']);
     useSystemColor = json['useSystemColor'];
@@ -44,7 +41,6 @@ class SettingsModel {
     data['finderPort'] = finderPort;
     data['mainPort'] = mainPort;
     data['darkMode'] = darkMode;
-    data['useMaterial3'] = useMaterial3;
     data['language'] = locale.languageCode;
     data['seedColor'] = seedColor.value;
     data['useSystemColor'] = useSystemColor;
@@ -72,7 +68,6 @@ extension SettingsExtenios on SettingsModel {
       finderPort: finderPort ?? this.finderPort,
       mainPort: mainPort ?? this.mainPort,
       darkMode: darkMode ?? this.darkMode,
-      useMaterial3: useMaterial3 ?? this.useMaterial3,
       seedColor: seedColor ?? this.seedColor,
       useSystemColor: useSystemColor ?? this.useSystemColor,
       locale: Locale(language ?? locale.languageCode),

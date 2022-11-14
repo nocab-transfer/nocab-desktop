@@ -240,18 +240,6 @@ class _SettingsState extends State<Settings> {
                                   activeColor: Theme.of(context).colorScheme.primary),
                             ),
                             SettingCard(
-                              title: 'settings.materialYou.title'.tr(),
-                              caption: 'settings.materialYou.description'.tr(),
-                              widget: Switch(
-                                  value: currentSettings.useMaterial3,
-                                  thumbIcon: switchIcon,
-                                  onChanged: (value) {
-                                    SettingsService().setSettings(currentSettings.copyWith(useMaterial3: value));
-                                    Provider.of<ThemeProvider>(context, listen: false).materialYou(value: value);
-                                  },
-                                  activeColor: Theme.of(context).colorScheme.primary),
-                            ),
-                            SettingCard(
                               title: 'settings.language.title'.tr(),
                               caption: 'settings.language.description'.tr(),
                               widget: SizedBox(

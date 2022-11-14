@@ -31,7 +31,6 @@ Future<void> main(List<String> args) async {
     create: (context) => ThemeProvider(
       themeMode: SettingsService().getSettings.darkMode ? ThemeMode.dark : ThemeMode.light,
       seedColor: SettingsService().getSettings.useSystemColor ? RegistryService.getColor() : SettingsService().getSettings.seedColor,
-      useMaterial3: SettingsService().getSettings.useMaterial3,
     ),
     child: EasyLocalization(
       supportedLocales: const [Locale('en'), Locale('tr')],
@@ -70,14 +69,8 @@ class MyApp extends StatelessWidget {
       home: const MainScreen(),
       navigatorKey: Server().navigatorKey,
       themeMode: Provider.of<ThemeProvider>(context).themeMode,
-      theme: ThemeData(
-          colorSchemeSeed: Provider.of<ThemeProvider>(context).seedColor,
-          brightness: Brightness.light,
-          useMaterial3: Provider.of<ThemeProvider>(context).useMaterial3),
-      darkTheme: ThemeData(
-          colorSchemeSeed: Provider.of<ThemeProvider>(context).seedColor,
-          brightness: Brightness.dark,
-          useMaterial3: Provider.of<ThemeProvider>(context).useMaterial3),
+      theme: ThemeData(colorSchemeSeed: Provider.of<ThemeProvider>(context).seedColor, brightness: Brightness.light, useMaterial3: true),
+      darkTheme: ThemeData(colorSchemeSeed: Provider.of<ThemeProvider>(context).seedColor, brightness: Brightness.dark, useMaterial3: true),
       locale: context.locale,
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,

@@ -97,7 +97,7 @@ class ThemeColorPickerState extends State<ThemeColorPicker> {
                         itemBuilder: (context, index) {
                           var color = ThemeData(
                             colorSchemeSeed: Colors.accents[index],
-                            useMaterial3: SettingsService().getSettings.useMaterial3,
+                            useMaterial3: true,
                             brightness: Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark ? Brightness.dark : Brightness.light,
                           ).colorScheme.primary;
                           return Padding(
