@@ -13,7 +13,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   qr_flutter: ^4.0.0
   flutter_svg: ^1.1.4
-  device_info_plus: ^4.1.2
+  device_info_plus: ^8.0.0
   window_manager: ^0.2.6
   window_size:
     git:
@@ -36,13 +36,12 @@ dependencies:
   path: ^1.8.2
   flutter_platform_alert: ^0.3.0
   url_launcher: ^6.1.6
-  easy_localization: ^3.0.1
+  easy_localization: ^3.0.2-dev
   http: ^0.13.5
   flutter_animate: ^2.0.1
   isar: ^3.0.2
   isar_flutter_libs: ^3.0.2
   uuid: ^3.0.6
-  rive: ^0.9.1
 
 dev_dependencies:
 

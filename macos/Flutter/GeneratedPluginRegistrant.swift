@@ -6,7 +6,7 @@ import FlutterMacOS
 import Foundation
 
 import desktop_drop
-import device_info_plus_macos
+import device_info_plus
 import flutter_platform_alert
 import isar_flutter_libs
 import path_provider_macos
