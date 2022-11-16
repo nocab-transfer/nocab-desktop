@@ -13,7 +13,7 @@ class TransferCardCubit extends Cubit<TransferCardState> {
   void start(Transfer transfer) {
     this.transfer = transfer;
     emit(TransferStarted(transfer.deviceInfo));
-    transfer.start();
+
     transfer.onEvent.listen((event) {
       switch (event.runtimeType) {
         case DataReport:

@@ -188,7 +188,9 @@ class Server {
       files: request.files,
       transferPort: request.transferPort,
       uniqueId: request.transferUuid!,
-    )..onEvent.listen((report) => Database().updateTransferByReport(report));
+    )
+      ..onEvent.listen((report) => Database().updateTransferByReport(report))
+      ..start();
 
     activeTransfers.add(receiver);
     _changeController.add(activeTransfers);
@@ -272,7 +274,9 @@ class Server {
       files: files,
       transferPort: port,
       uniqueId: request.transferUuid!,
-    )..onEvent.listen((report) => Database().updateTransferByReport(report));
+    )
+      ..onEvent.listen((report) => Database().updateTransferByReport(report))
+      ..start();
 
     activeTransfers.add(sender);
     _changeController.add(activeTransfers);
