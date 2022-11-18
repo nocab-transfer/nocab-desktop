@@ -70,7 +70,7 @@ class ReceiverPanel extends StatelessWidget {
           'mainView.receiver.scanQrCode'.tr(),
           style: const TextStyle(fontSize: 20),
         ),
-        const SizedBox(height: 32),
+        const SizedBox(height: 24),
         Container(
           height: 220,
           width: 220,
