@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:nocab_desktop/models/database/transfer_db.dart';
 import 'package:nocab_desktop/screens/history/history_details.dart';
@@ -38,27 +37,6 @@ class History extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
                         children: [
-                          SizedBox(
-                            height: 50,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 8.0),
-                                    child: Text("history.title".tr(),
-                                        style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
-                                  ),
-                                  TextButton.icon(
-                                    onPressed: () {},
-                                    icon: const Icon(Icons.delete_forever_rounded),
-                                    label: Text("history.deleteButton.title".tr()),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
                           Expanded(
                             child: HistoryList(onClickedController: _changeController),
                           ),

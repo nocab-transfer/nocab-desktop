@@ -46,31 +46,53 @@ class _HistoryListState extends State<HistoryList> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data!.isEmpty) return _buildEmpty();
-          return SingleChildScrollView(
-            child: ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: snapshot.data!.length,
-              reverse: true,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                var item = Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-                  child: HistoryItem(
-                    transfer: snapshot.data![index],
-                    index: snapshot.data!.length - index,
-                    onClicked: (transfer) => widget.onClickedController.add(transfer),
-                    isSelected: _selectedUuid == snapshot.data![index].transferUuid,
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 50,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  child: Text.rich(
+                    TextSpan(text: "history.title".tr(), children: [
+                      TextSpan(
+                        text: " (${snapshot.data!.length})",
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                    ]),
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
                   ),
-                );
+                ),
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: snapshot.data!.length,
+                    reverse: true,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      var item = Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                        child: HistoryItem(
+                          transfer: snapshot.data![index],
+                          index: snapshot.data!.length - index,
+                          onClicked: (transfer) => widget.onClickedController.add(transfer),
+                          isSelected: _selectedUuid == snapshot.data![index].transferUuid,
+                        ),
+                      );
 
-                // avoid unnecessary animations
-                if (snapshot.data!.length - index < 15) {
-                  return item.animate().slideX(delay: (30 * (snapshot.data!.length - index)).ms, begin: -.02, curve: Curves.easeOut).fadeIn();
-                }
+                      // avoid unnecessary animations
+                      if (snapshot.data!.length - index < 15) {
+                        return item.animate().slideX(delay: (30 * (snapshot.data!.length - index)).ms, begin: -.02, curve: Curves.easeOut).fadeIn();
+                      }
 
-                return item;
-              },
-            ),
+                      return item;
+                    },
+                  ),
+                ),
+              ),
+            ],
           );
         } else {
           return const Center(
