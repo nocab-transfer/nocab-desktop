@@ -1,13 +1,10 @@
 import 'dart:async';
 
-import 'package:animations/animations.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:nocab_desktop/custom_dialogs/alert_box/alert_box.dart';
 import 'package:nocab_desktop/models/database/transfer_db.dart';
 import 'package:nocab_desktop/screens/history/history_details.dart';
 import 'package:nocab_desktop/screens/history/history_list.dart';
-import 'package:nocab_desktop/services/database/database.dart';
 
 class History extends StatelessWidget {
   History({Key? key}) : super(key: key);
@@ -54,39 +51,7 @@ class History extends StatelessWidget {
                                         style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
                                   ),
                                   TextButton.icon(
-                                    onPressed: () => showModal(
-                                        context: context,
-                                        builder: (context) => AlertBox(
-                                              title: "history.deleteDialog.title".tr(),
-                                              message: "history.deleteDialog.message".tr(),
-                                              actions: [
-                                                TextButton.icon(
-                                                  onPressed: () => Database().deleteAllTransfers().then((value) {
-                                                    _changeController.add(null);
-                                                    Navigator.pop(context);
-                                                  }),
-                                                  icon: const Icon(Icons.delete_outline_rounded),
-                                                  label: Text('history.deleteDialog.confirmButton'.tr()),
-                                                  style: TextButton.styleFrom(
-                                                    foregroundColor: Colors.red,
-                                                    textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
-                                                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                                                  ),
-                                                ),
-                                                const SizedBox(width: 4),
-                                                TextButton(
-                                                  onPressed: () => Navigator.pop(context),
-                                                  style: OutlinedButton.styleFrom(
-                                                    foregroundColor: Theme.of(context).colorScheme.onPrimary,
-                                                    backgroundColor: Theme.of(context).colorScheme.primary,
-                                                    textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
-                                                    //side: BorderSide(color: Theme.of(context).colorScheme.primary, width: 2),
-                                                    padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-                                                  ),
-                                                  child: Text('history.deleteDialog.cancelButton'.tr()),
-                                                ),
-                                              ],
-                                            )),
+                                    onPressed: () {},
                                     icon: const Icon(Icons.delete_forever_rounded),
                                     label: Text("history.deleteButton.title".tr()),
                                   )

@@ -108,12 +108,6 @@
         "deleteButton": {
             "title": "Tüm Geçmişi Sil"
         },
-        "deleteDialog": {
-            "title": "Geçmişi Sil",
-            "message": "Tüm geçmişi silmek üzeresiniz. Bu eylem geri alınamaz.",
-            "confirmButton": "Silmeyi Onayla",
-            "cancelButton": "İptal"
-        },
         "historyList": {
             "emptyState": {
                 "title": "Kayıt Bulunamadı",
@@ -123,7 +117,6 @@
                 "fileCount": "Dosya Sayısı",
                 "totalFileSize": "Toplam Dosya Boyutu",
                 "requestedAt": "Talep Zamanı",
-                "dateFormat": "kk:mm dd/MM/yyyy",
                 "status": {
                     "success": "BAŞARILI",
                     "error": "HATA",
@@ -155,8 +148,7 @@
                 "endedAt": "Bitiş Zamanı",
                 "fileCount": "Dosya Sayısı",
                 "totalFileSize": "Toplam Dosya Boyutu",
-                "message": "Mesaj",
-                "dateFormat": "kk:mm dd/MM/yyyy"
+                "message": "Mesaj"
             },
             "fileTile": {
                 "showInFolder": "Klasörde göster",
@@ -196,6 +188,10 @@
             "title": "Material 3 Dizaynı Kullan",
             "description": "Material 3 (Material You) dizaynını kullan "
         },
+        "dateFormat": {
+            "title": "Tarih ve Saat Formatı",
+            "description": "Tarih ve saat formatını değiştir"
+        },
         "language": {
             "title": "Dil",
             "description": "Uygulamanın dilini değiştir"
@@ -207,6 +203,28 @@
                 "title": "Tarayıcı Port",
                 "description": "Port telefonunuz ile iletişim için kullanılacak.\nBu ayarı değiştirmek uygulamayı bozabilir.\nVarsayılan 62193",
                 "help": "Bu ayar uygulamayı yeniden başlattığınızda etkin olacaktır"
+            },
+            "deleteHistory": {
+                "title": "Tüm Geçmişi Sil",
+                "description": "Tüm geçmişi sil. Bu eylem geri alınamaz.",
+                "button": "Tüm Geçmişi Sil",
+                "dialog": {
+                    "title": "Tüm Geçmişi Sil",
+                    "message": "Tüm geçmişi silmek üzeresiniz. Bu eylem geri alınamaz.",
+                    "confirmButton": "Silmeyi Onayla",
+                    "cancelButton": "İptal"
+                }
+            },
+            "forceRegenerateSettings": {
+                "title": "Ayarları yeniden oluşturmaya zorla",
+                "description": "Ayarları yeniden oluşturmaya zorla. Bu eylem geri alınamaz.",
+                "button": "Ayarları Yeniden Oluştur",
+                "dialog": {
+                    "title": "Ayarları Yeniden Oluştur",
+                    "message": "Bu eylem tüm ayarlarınızı silip tekrar oluşturacak. Devam etmek istediğinize emin misiniz?",
+                    "confirmButton": "Yeniden Oluşturmayı Onayla",
+                    "cancelButton": "İptal"
+                }
             }
         }
     },

@@ -71,6 +71,7 @@ class SettingsService {
       downloadPath: Platform.isWindows
           ? p.join(Platform.environment['USERPROFILE']!, 'Downloads')
           : p.join(File(Platform.resolvedExecutable).parent.path, 'Output'),
+      dateFormatType: DateFormatType.base24,
     );
   }
 

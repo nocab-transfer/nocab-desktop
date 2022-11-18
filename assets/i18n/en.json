@@ -108,12 +108,6 @@
         "deleteButton": {
             "title": "Delete All History"
         },
-        "deleteDialog": {
-            "title": "Delete History",
-            "message": "You are about to delete all history. This action cannot be undone.",
-            "confirmButton": "Confirm Delete",
-            "cancelButton": "Cancel"
-        },
         "historyList": {
             "emptyState": {
                 "title": "No Entry Found",
@@ -123,7 +117,6 @@
                 "fileCount": "File Count",
                 "totalFileSize": "Total File Size",
                 "requestedAt": "Requested At",
-                "dateFormat": "hh:mm a dd/MM/yyyy",
                 "status": {
                     "success": "SUCCESS",
                     "error": "ERROR",
@@ -155,8 +148,7 @@
                 "endedAt": "Ended At",
                 "fileCount": "File Count",
                 "totalFileSize": "Total File Size",
-                "message": "Message",
-                "dateFormat": "hh:mm a dd/MM/yyyy"
+                "message": "Message"
             },
             "fileTile": {
                 "showInFolder": "Show in Folder",
@@ -196,6 +188,10 @@
             "title": "Use Material 3 Design",
             "description": "Use Material 3 (Material You) as the theme"
         },
+        "dateFormat": {
+            "title": "Date & Time Format",
+            "description": "Change the date and time format"
+        },
         "language": {
             "title": "Language",
             "description": "Change the language of the application"
@@ -207,6 +203,28 @@
                 "title": "Finder Port",
                 "description": "The port will be used to communicate with the device you want to connect to.\nChanging this option may cause the application to malfunction.\nDefault: 62193",
                 "help": "This will take effect after restarting the application."
+            },
+            "deleteHistory": {
+                "title": "Delete All History",
+                "description": "Delete all history. This action cannot be undone.",
+                "button": "Delete All History",
+                "dialog": {
+                    "title": "Delete History",
+                    "message": "You are about to delete all history. This action cannot be undone.",
+                    "confirmButton": "Confirm Delete",
+                    "cancelButton": "Cancel"
+                }
+            },
+            "forceRegenerateSettings": {
+                "title": "Force Regenerate Settings",
+                "description": "Force regenerate settings. This action cannot be undone.",
+                "button": "Regenerate Settings",
+                "dialog": {
+                    "title": "Regenerate Settings",
+                    "message": "This will delete all your settings and regenerate them. Are you sure you want to continue?",
+                    "confirmButton": "Confirm Regenerate",
+                    "cancelButton": "Cancel"
+                }
             }
         }
     },

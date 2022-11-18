@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:animations/animations.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart';
+import 'package:nocab_desktop/custom_dialogs/alert_box/alert_box.dart';
 import 'package:nocab_desktop/custom_dialogs/theme_color_picker/theme_color_picker.dart';
 import 'package:nocab_desktop/custom_widgets/custom_tooltip/custom_tooltip.dart';
 import 'package:nocab_desktop/extensions/lang_code_to_name.dart';
@@ -11,6 +12,7 @@ import 'package:nocab_desktop/provider/theme_provider.dart';
 import 'package:nocab_desktop/screens/settings/about_dialog.dart';
 import 'package:nocab_desktop/screens/settings/setting_card.dart';
 import 'package:flutter/material.dart';
+import 'package:nocab_desktop/services/database/database.dart';
 import 'package:nocab_desktop/services/registry/registry.dart';
 import 'package:nocab_desktop/services/settings/settings.dart';
 import 'package:provider/provider.dart';
@@ -142,7 +144,7 @@ class _SettingsState extends State<Settings> {
                               caption: 'settings.deviceName.description'.tr(),
                               widget: SizedBox(
                                 width: 200,
-                                height: 70,
+                                height: 60,
                                 child: Row(
                                   children: [
                                     SizedBox(
@@ -240,13 +242,44 @@ class _SettingsState extends State<Settings> {
                                   activeColor: Theme.of(context).colorScheme.primary),
                             ),
                             SettingCard(
+                              title: 'settings.dateFormat.title'.tr(),
+                              caption: 'settings.dateFormat.description'.tr(),
+                              widget: SizedBox(
+                                width: 185,
+                                height: 60,
+                                child: DropdownButtonFormField(
+                                  value: SettingsService().getSettings.dateFormatType,
+                                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                                  items: DateFormatType.values.map((DateFormatType value) {
+                                    return DropdownMenuItem<DateFormatType>(
+                                      value: value,
+                                      child: Text(
+                                        value.dateFormat.format(DateTime(2022, 11, 18, 20, 28)),
+                                        style: Theme.of(context).textTheme.bodyMedium,
+                                      ),
+                                    );
+                                  }).toList(),
+                                  onChanged: (value) {
+                                    if (value != null) {
+                                      SettingsService().setSettings(currentSettings.copyWith(dateFormatType: value));
+                                    }
+                                  },
+                                  decoration: const InputDecoration(
+                                    border: OutlineInputBorder(),
+                                  ),
+                                  iconEnabledColor: Theme.of(context).colorScheme.primary,
+                                ),
+                              ),
+                            ),
+                            SettingCard(
                               title: 'settings.language.title'.tr(),
                               caption: 'settings.language.description'.tr(),
                               widget: SizedBox(
-                                width: 150,
+                                width: 185,
                                 height: 60,
                                 child: DropdownButtonFormField(
                                   value: context.locale,
+                                  borderRadius: const BorderRadius.all(Radius.circular(10)),
                                   items: context.supportedLocales.map((Locale value) {
                                     return DropdownMenuItem<Locale>(
                                       value: value,
@@ -292,6 +325,102 @@ class _SettingsState extends State<Settings> {
                                   decoration: InputDecoration(
                                     border: const OutlineInputBorder(),
                                     hintText: currentSettings.finderPort.toString(),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SettingCard(
+                              title: 'settings.advanced.deleteHistory.title'.tr(),
+                              caption: 'settings.advanced.deleteHistory.description'.tr(),
+                              widget: SizedBox(
+                                width: 180,
+                                height: 50,
+                                child: OutlinedButton(
+                                  onPressed: () {
+                                    showModal(
+                                        context: context,
+                                        builder: (context) => AlertBox(
+                                              title: "settings.advanced.deleteHistory.dialog.title".tr(),
+                                              message: "settings.advanced.deleteHistory.dialog.message".tr(),
+                                              actions: [
+                                                TextButton.icon(
+                                                  onPressed: () => Database().deleteAllTransfers().then((value) {
+                                                    Navigator.pop(context);
+                                                  }),
+                                                  icon: const Icon(Icons.delete_outline_rounded),
+                                                  label: Text('settings.advanced.deleteHistory.dialog.confirmButton'.tr()),
+                                                  style: TextButton.styleFrom(
+                                                    foregroundColor: Colors.red,
+                                                    textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+                                                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                                                  ),
+                                                ),
+                                                const SizedBox(width: 4),
+                                                TextButton(
+                                                  onPressed: () => Navigator.pop(context),
+                                                  style: OutlinedButton.styleFrom(
+                                                    foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                                                    backgroundColor: Theme.of(context).colorScheme.primary,
+                                                    textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+                                                    //side: BorderSide(color: Theme.of(context).colorScheme.primary, width: 2),
+                                                    padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                                                  ),
+                                                  child: Text('settings.advanced.deleteHistory.dialog.cancelButton'.tr()),
+                                                ),
+                                              ],
+                                            ));
+                                  },
+                                  child: Text(
+                                    'settings.advanced.deleteHistory.button'.tr(),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SettingCard(
+                              title: 'settings.advanced.forceRegenerateSettings.title'.tr(),
+                              caption: 'settings.advanced.forceRegenerateSettings.description'.tr(),
+                              widget: SizedBox(
+                                width: 180,
+                                height: 50,
+                                child: OutlinedButton(
+                                  onPressed: () {
+                                    showModal(
+                                        context: context,
+                                        builder: (context) => AlertBox(
+                                              title: "settings.advanced.forceRegenerateSettings.dialog.title".tr(),
+                                              message: "settings.advanced.forceRegenerateSettings.dialog.message".tr(),
+                                              actions: [
+                                                TextButton.icon(
+                                                  onPressed: () => SettingsService().recreateSettings().then((value) {
+                                                    Navigator.pop(context);
+                                                  }),
+                                                  icon: const Icon(Icons.loop_rounded),
+                                                  label: Text('settings.advanced.forceRegenerateSettings.dialog.confirmButton'.tr()),
+                                                  style: TextButton.styleFrom(
+                                                    foregroundColor: Colors.red,
+                                                    textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+                                                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                                                  ),
+                                                ),
+                                                const SizedBox(width: 4),
+                                                TextButton(
+                                                  onPressed: () => Navigator.pop(context),
+                                                  style: OutlinedButton.styleFrom(
+                                                    foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                                                    backgroundColor: Theme.of(context).colorScheme.primary,
+                                                    textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+                                                    //side: BorderSide(color: Theme.of(context).colorScheme.primary, width: 2),
+                                                    padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                                                  ),
+                                                  child: Text('settings.advanced.forceRegenerateSettings.dialog.cancelButton'.tr()),
+                                                ),
+                                              ],
+                                            ));
+                                  },
+                                  child: Text(
+                                    'settings.advanced.forceRegenerateSettings.button'.tr(),
+                                    textAlign: TextAlign.center,
                                   ),
                                 ),
                               ),

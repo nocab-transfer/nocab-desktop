@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nocab_desktop/extensions/size_extension.dart';
 import 'package:nocab_desktop/models/database/device_db.dart';
 import 'package:nocab_desktop/models/database/transfer_db.dart';
+import 'package:nocab_desktop/services/settings/settings.dart';
 
 class HistoryItem extends StatelessWidget {
   final TransferDatabase transfer;
@@ -40,7 +41,7 @@ class HistoryItem extends StatelessWidget {
                         style: Theme.of(context).textTheme.labelSmall?.copyWith(fontWeight: FontWeight.w300),
                       ),
                       Text(
-                        DateFormat("history.historyList.item.dateFormat".tr()).format(transfer.requestedAt), //transfer.requestedAt.toString(),
+                        SettingsService().getSettings.dateFormatType.dateFormat.format(transfer.requestedAt), //transfer.requestedAt.toString(),
                         style: Theme.of(context).textTheme.labelMedium,
                         textAlign: TextAlign.end,
                       ),

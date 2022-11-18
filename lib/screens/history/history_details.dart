@@ -12,6 +12,7 @@ import 'package:nocab_desktop/models/database/file_db.dart';
 import 'package:nocab_desktop/models/database/transfer_db.dart';
 import 'package:nocab_desktop/services/database/database.dart';
 import 'package:nocab_desktop/services/file_operations/file_operations.dart';
+import 'package:nocab_desktop/services/settings/settings.dart';
 
 class HistoryDetails extends StatefulWidget {
   final TransferDatabase transfer;
@@ -96,7 +97,7 @@ class _HistoryDetailsState extends State<HistoryDetails> {
               ),
               const SizedBox(height: 24),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   _buildDeviceInfo(transfer.senderDevice, context),
                   const Padding(padding: EdgeInsets.all(8.0), child: Icon(Icons.arrow_forward_rounded)),
@@ -107,70 +108,29 @@ class _HistoryDetailsState extends State<HistoryDetails> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Column(
-                    children: [
-                      Text("history.historyDetails.info.requestedAt".tr(),
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
-                      Text(DateFormat("history.historyDetails.info.dateFormat".tr()).format(transfer.requestedAt),
-                          style: Theme.of(context).textTheme.bodySmall),
-                    ],
-                  ),
+                  _buildTransferInfoCard("history.historyDetails.info.requestedAt".tr(),
+                      SettingsService().getSettings.dateFormatType.dateFormat.format(transfer.requestedAt)),
                   if (transfer.startedAt != null) ...[
-                    Column(
-                      children: [
-                        Text("history.historyDetails.info.startedAt".tr(),
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
-                        Text(DateFormat("history.historyDetails.info.dateFormat".tr()).format(transfer.startedAt!),
-                            style: Theme.of(context).textTheme.bodySmall),
-                      ],
-                    ),
+                    _buildTransferInfoCard("history.historyDetails.info.startedAt".tr(),
+                        SettingsService().getSettings.dateFormatType.dateFormat.format(transfer.startedAt!))
                   ],
                   if (transfer.endedAt != null) ...[
-                    Column(
-                      children: [
-                        Text(
-                          "history.historyDetails.info.endedAt".tr(),
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
-                        ),
-                        Text(DateFormat("history.historyDetails.info.dateFormat".tr()).format(transfer.endedAt!),
-                            style: Theme.of(context).textTheme.bodySmall),
-                      ],
-                    ),
-                  ]
+                    _buildTransferInfoCard(
+                        "history.historyDetails.info.endedAt".tr(), SettingsService().getSettings.dateFormatType.dateFormat.format(transfer.endedAt!))
+                  ],
                 ],
               ),
               const SizedBox(height: 24),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Column(
-                    children: [
-                      Text(
-                        "history.historyDetails.info.fileCount".tr(),
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
-                      ),
-                      Text("${transfer.files.length}"),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Text(
-                        "history.historyDetails.info.totalFileSize".tr(),
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
-                      ),
-                      Text(transfer.files.fold(0, (previousValue, element) => previousValue + element.byteSize).formatBytes()),
-                    ],
-                  ),
+                  _buildTransferInfoCard("history.historyDetails.info.fileCount".tr(), transfer.files.length.toString()),
+                  _buildTransferInfoCard("history.historyDetails.info.totalFileSize".tr(),
+                      transfer.files.fold(0, (previousValue, element) => previousValue + element.byteSize).formatBytes()),
                 ],
               ),
               const SizedBox(height: 24),
-              Column(
-                children: [
-                  Text("history.historyDetails.info.message".tr(),
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
-                  Text(transfer.message ?? "-"),
-                ],
-              ),
+              _buildTransferInfoCard("history.historyDetails.info.message".tr(), transfer.message ?? "-", limitWidth: double.infinity),
               const SizedBox(height: 24),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -338,6 +298,22 @@ class _HistoryDetailsState extends State<HistoryDetails> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildTransferInfoCard(String title, String message, {double? limitWidth = 120}) {
+    return SizedBox(
+      width: limitWidth,
+      child: Column(
+        children: [
+          Text(title, style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+          Text(message,
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.grey),
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center),
+        ],
       ),
     );
   }

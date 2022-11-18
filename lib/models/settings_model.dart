@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 
 class SettingsModel {
@@ -10,6 +11,7 @@ class SettingsModel {
   late final Locale locale;
   late final String networkInterfaceName;
   late String downloadPath;
+  late DateFormatType dateFormatType;
 
   SettingsModel({
     required this.deviceName,
@@ -21,6 +23,7 @@ class SettingsModel {
     required this.useSystemColor,
     required this.networkInterfaceName,
     required this.downloadPath,
+    required this.dateFormatType,
   });
 
   SettingsModel.fromJson(Map<String, dynamic> json) {
@@ -33,6 +36,7 @@ class SettingsModel {
     useSystemColor = json['useSystemColor'];
     networkInterfaceName = json['networkInterfaceName'];
     downloadPath = json['downloadPath'];
+    dateFormatType = DateFormatType.getFromName(json['dateFormatType'] ?? "normal24");
   }
 
   Map<String, dynamic> toJson() {
@@ -46,6 +50,7 @@ class SettingsModel {
     data['useSystemColor'] = useSystemColor;
     data['networkInterfaceName'] = networkInterfaceName;
     data['downloadPath'] = downloadPath;
+    data['dateFormatType'] = dateFormatType.name;
     return data;
   }
 }
@@ -62,6 +67,7 @@ extension SettingsExtenios on SettingsModel {
     String? language,
     String? networkInterfaceName,
     String? downloadPath,
+    DateFormatType? dateFormatType,
   }) {
     return SettingsModel(
       deviceName: deviceName ?? this.deviceName,
@@ -73,6 +79,24 @@ extension SettingsExtenios on SettingsModel {
       locale: Locale(language ?? locale.languageCode),
       networkInterfaceName: networkInterfaceName ?? this.networkInterfaceName,
       downloadPath: downloadPath ?? this.downloadPath,
+      dateFormatType: dateFormatType ?? this.dateFormatType,
     );
+  }
+}
+
+enum DateFormatType {
+  base24("HH:mm dd/MM/yyyy"),
+  base12("hh:mm a dd/MM/yyyy"),
+
+  imAmerican("hh:mm a MM/dd/yyyy"),
+  imAsian("HH:mm yyyy/MM/dd");
+
+  const DateFormatType(this.stringFormat);
+  final String stringFormat;
+
+  DateFormat get dateFormat => DateFormat(stringFormat);
+
+  static DateFormatType getFromName(String name) {
+    return DateFormatType.values.firstWhere((element) => element.name == name, orElse: () => DateFormatType.values.first);
   }
 }
