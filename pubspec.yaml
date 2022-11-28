@@ -2,7 +2,7 @@ name: nocab_desktop
 description: File sharing application
 
 publish_to: 'none' 
-version: 1.0.0+1
+version: 1.1.8+1
 
 environment:
   sdk: ">=2.19.0-152.0.dev <3.0.0"
@@ -36,6 +36,10 @@ dependencies:
   isar: ^3.0.2
   isar_flutter_libs: ^3.0.2
   uuid: ^3.0.6
+  package_info_plus: ^3.0.2
+  flutter_markdown: ^0.6.13
+  markdown: ^6.0.1
+  io: ^1.0.3
 
 dev_dependencies:
 
@@ -49,11 +53,13 @@ dev_dependencies:
 msix_config:
   display_name: NoCab Desktop
   publisher_display_name: berkekbgz
-  identity_name: 62318berkekbgz.17658C79871FF
+  identity_name: NoCabTransfer.Desktop
   capabilities: "internetClient"
   logo_path: assets/logo/logo.png
   languages: en-us, tr-tr
-  publisher: CN=A5490F4F-4E5D-4533-AC8A-6B5DA6F167D3
+  publisher: berkekbgz
+  version: 1.1.8.0
+  execution_alias: nocab
 
   context_menu_directory_id: NoCabContextMenu
   context_menu_directory_clsid: FDDDFECC-B9ED-4837-AF07-BD891CD8B6F4
