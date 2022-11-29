@@ -291,5 +291,105 @@
         "avatars": {
             "title": "Our High-Tier Supporters"
         }
+    },
+    "update": {
+        "tooltip": "Update Available",
+        "timeOut": "Job Timed Out",
+        "dialog": {
+            "checking": {
+                "title": "Checking for updates...",
+                "message": "Please wait while the update is being checked"
+            },
+            "checkError": {
+                "title": "Update Check Failed",
+                "error": "Error: {error}"
+            },
+            "updateAvailable": {
+                "title": "New version available",
+                "version": "Current version: {currentVersion}\nNew version: {newVersion}",
+                "switchToMsixMessage": "You are using the portable version of NoCab. Portable version cant be updated automatically. Please switch to the MSIX version.",
+                "switchToMsixButton": "Switch to MSIX",
+                "updateButton": "Update",
+                "cancelButton": "Cancel"
+            },
+            "updating": {
+                "seconds": "{seconds}s",
+                "jobs": {
+                    "downloadMsix": {
+                        "title": "Downloading MSIX",
+                        "description": "Downloading MSIX package from Github",
+                        "error": "Failed to download update",
+                        "success": "MSIX package downloaded",
+                        "timeOut": "@:update.timeOut"
+                    },
+                    "checkCert": {
+                        "title": "Checking Certificate",
+                        "description": "Checking the self-signed certificate installation",
+                        "alreadyInstalled": "Certificate already installed",
+                        "checkError": "Failed to check certificate",
+                        "installError": "Failed to install certificate",
+                        "success": "Certificate installed",
+                        "timeOut": "@:update.timeOut"
+                    },
+                    "installMsix": {
+                        "title": "Installing MSIX",
+                        "description": "Installing MSIX package",
+                        "fileNotFound": "MSIX package not found",
+                        "error": "Failed to install update",
+                        "success": "MSIX package installed",
+                        "timeOut": "@:update.timeOut"
+                    },
+                    "cleanTemp": {
+                        "title": "Cleaning Temporary Files",
+                        "description": "Cleaning temporary files generated during the update process",
+                        "error": "Failed to clean temporary files",
+                        "success": "Temporary files cleaned",
+                        "timeOut": "@:update.timeOut"
+                    },
+                    "waitProcesses": {
+                        "title": "Waiting Ongoing Processes",
+                        "description": "Waiting for ongoing processes to continue the update process",
+                        "error": "Failed to wait for processes",
+                        "success": "Processes finished",
+                        "timeOut": "@:update.timeOut"
+                    },
+                    "moveData": {
+                        "title": "Moving Settings & History",
+                        "description": "Moving settings and history to the msix package",
+                        "msixNameError": "Failed to get msix package family name",
+                        "error": "Failed to move settings and history",
+                        "success": "Settings & History moved",
+                        "timeOut": "@:update.timeOut"
+                    },
+                    "cleanPortable": {
+                        "title": "Cleaning Portable Files",
+                        "description": "Cleaning portable files to prevent conflicts",
+                        "error": "Failed to clean portable files",
+                        "success": "Portable files will be cleaned after app closed",
+                        "timeOut": "@:update.timeOut"
+                    },
+                    "finish": {
+                        "title": "Finishing Update",
+                        "description": "Finishing and restarting the application",
+                        "aliasError": "NoCab Alias not found. You need to restart the app manually.",
+                        "error": "Failed to finish update",
+                        "success": "Update finished",
+                        "timeOut": "@:update.timeOut"
+                    }
+                },
+                "panel": {
+                    "failed": {
+                        "title": "Update Failed",
+                        "crashedAt": "Crashed at: {job}",
+                        "errorMessage": "Error Message: {message}",
+                        "closeButton": "Close"
+                    },
+                    "ongoing": {
+                        "title": "Updating...",
+                        "description": "Please Wait"
+                    }
+                }
+            }
+        }
     }
 }

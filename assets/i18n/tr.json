@@ -291,5 +291,105 @@
         "avatars": {
             "title": "Yüksek Kademeli Destekçilerimiz"
         }
+    },
+    "update": {
+        "tooltip": "Yeni sürüm mevcut",
+        "timeOut": "Görev zaman aşımına uğradı",
+        "dialog": {
+            "checking": {
+                "title": "Güncelleme kontrol ediliyor...",
+                "message": "Lütfen bekleyin."
+            },
+            "checkError": {
+                "title": "Güncelleme kontrol edilemedi",
+                "error": "Hata: {error}"
+            },
+            "updateAvailable": {
+                "title": "Yeni sürüm mevcut",
+                "version": "Şuanki Sürüm: {currentVersion}\nYeni Sürüm: {newVersion}",
+                "switchToMsixMessage": "NoCab'in portable versiyonunu kullanıyorsunuz. Portable versiyon otomatik olarak güncellenemez. Yeni sürümü indirmek için lütfen NoCab'in MSIX versiyonuna geçin.",
+                "switchToMsixButton": "MSIX'e Geç",
+                "updateButton": "Güncelle",
+                "cancelButton": "İptal"
+            },
+            "updating": {
+                "seconds": "{seconds}s",
+                "jobs": {
+                    "downloadMsix": {
+                        "title": "MSIX indiriliyor",
+                        "description": "MSIX paketi GitHub'dan indiriliyor",
+                        "error": "İndirme sırasında hata oluştu",
+                        "success": "MSIX paketi indirildi",
+                        "timeOut": "@:update.timeOut"
+                    },
+                    "checkCert": {
+                        "title": "Sertifika kontrol ediliyor",
+                        "description": "Güncelleme için gerekli sertifika kontrol ediliyor",
+                        "alreadyInstalled": "Sertifika zaten kurulu",
+                        "checkError": "Sertifika kontrol ediliyorken hata oluştu",
+                        "installError": "Sertifika kurulurken hata oluştu",
+                        "success": "Sertifika kuruldu",
+                        "timeOut": "@:update.timeOut"
+                    },
+                    "installMsix": {
+                        "title": "MSIX Kuruluyor",
+                        "description": "MSIX paketi kuruluyor",
+                        "fileNotFound": "MSIX paketi bulunamadı",
+                        "error": "Güncelleme kurulurken hata oluştu",
+                        "success": "MSIX paketi başarıyla kuruldu",
+                        "timeOut": "@:update.timeOut"
+                    },
+                    "cleanTemp": {
+                        "title": "Geçici Dosyalar Temizleniyor",
+                        "description": "Güncelleme sırasında oluşan geçici dosyalar temizleniyor",
+                        "error": "Geçici dosyalar temizlenirken hata oluştu",
+                        "success": "Geçici dosyalar temizlendi",
+                        "timeOut": "@:update.timeOut"
+                    },
+                    "waitProcesses": {
+                        "title": "Devam Eden İşlemler Bekleniyor",
+                        "description": "NoCab'in güncellenmesi için devam eden işlemler bekleniyor",
+                        "error": "Devam eden işlemler beklenirken hata oluştu",
+                        "success": "Devam Eden İşlemler Beklendi",
+                        "timeOut": "@:update.timeOut"
+                    },
+                    "moveData": {
+                        "title": "Ayarlar ve Geçmiş Taşınıyor",
+                        "description": "Ayarlar ve geçmiş MSIX paketine taşınıyor",
+                        "msixNameError": "MSIX paketinin aile adı alınamadı",
+                        "error": "Ayarlar ve geçmiş taşınırken hata oluştu",
+                        "success": "Ayarlar ve geçmiş başarıyla taşındı",
+                        "timeOut": "@:update.timeOut"
+                    },
+                    "cleanPortable": {
+                        "title": "Portable Dosyalar Temizleniyor",
+                        "description": "Çakışmaları önlemek için portable dosyalar temizleniyor",
+                        "error": "Portable dosyalar temizlenirken hata oluştu",
+                        "success": "Portable dosyalar uygulama kapatıldıktan sonra temizlenecek",
+                        "timeOut": "@:update.timeOut"
+                    },
+                    "finish": {
+                        "title": "Güncelleme Bitiriliyor",
+                        "description": "Güncelleme bitiriliyor ve uygulama yeniden başlatılıyor",
+                        "aliasError": "NoCab kısayolu bulunamadı. Lütfen uygulamayı elle yeniden başlatın.",
+                        "error": "Güncelleme bitirilirken hata oluştu",
+                        "success": "Güncelleme başarıyla tamamlandı",
+                        "timeOut": "@:update.timeOut"
+                    }
+                },
+                "panel": {
+                    "failed": {
+                        "title": "Güncelleme Başarısız",
+                        "crashedAt": "Çöktü: {job}",
+                        "errorMessage": "Hata Mesajı: {message}",
+                        "closeButton": "Kapat"
+                    },
+                    "ongoing": {
+                        "title": "Güncelleniyor...",
+                        "description": "Lütfen Bekleyin"
+                    }
+                }
+            }
+        }
     }
 }

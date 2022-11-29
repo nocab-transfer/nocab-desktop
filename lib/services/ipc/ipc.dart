@@ -43,16 +43,14 @@ class IPC {
     if (!Platform.isWindows) throw Exception("This method is only for Windows");
     return await Process.run('tasklist', ['/nh', '/fo', 'csv', '/fi', 'imagename eq nocab_desktop.exe', '/fi', 'PID ne $pid'])
         .then((ProcessResult results) {
-      if (results.stdout.toString().contains('nocab_desktop.exe')) return true;
-      return false;
+      return results.stdout.toString().contains('nocab_desktop.exe');
     });
   }
 
   static Future<bool> isPidRunning(int checkPid) async {
     if (!Platform.isWindows) throw Exception("This method is only for Windows");
     return await Process.run('tasklist', ['/nh', '/fo', 'csv', '/fi', 'PID eq $checkPid']).then((ProcessResult results) {
-      if (results.stdout.toString().contains(checkPid.toString())) return true;
-      return false;
+      return results.stdout.toString().contains(checkPid.toString());
     });
   }
 

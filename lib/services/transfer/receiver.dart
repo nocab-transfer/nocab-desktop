@@ -40,6 +40,11 @@ class Receiver extends Transfer {
       if (message is SendPort) mainToDataPort = message;
 
       if (message is Report) eventController.add(message..transferUuid = uniqueId);
+      if (message is ErrorReport || message is EndReport) {
+        ongoing = false;
+        dataToMainPort.close();
+        eventController.close();
+      }
     });
   }
 }

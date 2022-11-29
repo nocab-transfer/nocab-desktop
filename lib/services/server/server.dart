@@ -78,6 +78,7 @@ class Server {
   Stream<List<Transfer>> get onNewTransfer => _changeController.stream;
 
   List<Transfer> activeTransfers = [];
+  bool get isAnyTransferOngoing => activeTransfers.any((element) => element.ongoing);
 
   //Receiver
 

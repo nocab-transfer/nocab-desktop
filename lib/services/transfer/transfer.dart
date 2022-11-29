@@ -9,6 +9,7 @@ abstract class Transfer {
   List<FileInfo> files;
   int transferPort;
   String uniqueId;
+  bool ongoing = true;
 
   final eventController = StreamController<Report>.broadcast();
   Stream<Report> get onEvent => eventController.stream;
