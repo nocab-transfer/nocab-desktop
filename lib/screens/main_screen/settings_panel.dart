@@ -53,7 +53,7 @@ class SettingsPanel extends StatelessWidget {
               FutureBuilder(
                 future: Github().isUpdateAvailable(),
                 builder: (context, snapshot) {
-                  if (true) {
+                  if (snapshot.data == true) {
                     return Row(
                       children: [
                         Padding(
