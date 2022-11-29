@@ -32,7 +32,7 @@ class UpdateDialogCubit extends Cubit<UpdateDialogState> {
   ];
 
   late UpdateVariables variables;
-  String releasesUrl = 'https://api.github.com/repos/nocab-transfer/test/releases';
+  String releasesUrl = 'https://api.github.com/repos/nocab-transfer/nocab-desktop/releases';
   bool includePrerelease = false;
 
   Future<void> check() async {
