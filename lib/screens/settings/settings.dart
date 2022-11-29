@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:nocab_desktop/services/database/database.dart';
 import 'package:nocab_desktop/services/registry/registry.dart';
 import 'package:nocab_desktop/services/settings/settings.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:username_gen/username_gen.dart';
 
@@ -30,6 +31,7 @@ class _SettingsState extends State<Settings> {
   late SettingsModel currentSettings;
 
   StreamSubscription? _settingsSubscription;
+  String? version;
 
   @override
   void initState() {
@@ -37,6 +39,8 @@ class _SettingsState extends State<Settings> {
     currentSettings = SettingsService().getSettings;
     _settingsSubscription = SettingsService().onSettingChanged.listen((settings) => setState(() => currentSettings = settings));
     nameController.text = currentSettings.deviceName;
+
+    PackageInfo.fromPlatform().then((value) => version = value.version);
   }
 
   @override
@@ -89,7 +93,7 @@ class _SettingsState extends State<Settings> {
                         child: OutlinedButton.icon(
                           onPressed: () => showModal(
                             context: context,
-                            builder: (context) => const AboutDialogCustomized(),
+                            builder: (context) => AboutDialogCustomized(version: version),
                           ),
                           icon: const Icon(Icons.question_mark_rounded, size: 16),
                           label: Text('settings.aboutButton'.tr()),

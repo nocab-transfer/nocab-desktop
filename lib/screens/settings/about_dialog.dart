@@ -9,7 +9,8 @@ import 'package:nocab_desktop/services/github/github.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class AboutDialogCustomized extends StatelessWidget {
-  const AboutDialogCustomized({Key? key}) : super(key: key);
+  final String? version;
+  const AboutDialogCustomized({Key? key, this.version}) : super(key: key);
 
   final String githubSponsorLink = "https://github.com/sponsors/berkekbgz";
   final String buyMeACoffeeLink = "https://www.buymeacoffee.com/berkekbgz";
@@ -37,7 +38,7 @@ class AboutDialogCustomized extends StatelessWidget {
                 child: SizedBox(
                   width: 600,
                   child: AboutDialog(
-                    applicationVersion: "NoCab Client for desktop file transfer.",
+                    applicationVersion: version != null ? "v$version" : null,
                     applicationIcon: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
                       child: const Image(
