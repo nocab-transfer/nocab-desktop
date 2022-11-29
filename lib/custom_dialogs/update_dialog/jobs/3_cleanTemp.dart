@@ -4,7 +4,7 @@ import 'package:nocab_desktop/custom_dialogs/update_dialog/base_job.dart';
 import 'package:nocab_desktop/custom_dialogs/update_dialog/update_variables.dart';
 
 class CleanTemp extends UpdateJob {
-  CleanTemp() : super("cleanTemp", "description");
+  CleanTemp() : super(translationMasterKey: "cleanTemp");
 
   @override
   bool get cancelOnFailure => false;

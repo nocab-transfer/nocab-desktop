@@ -19,7 +19,8 @@ class UpdateAvailable extends UpdateDialogState {
 
 class CheckError extends UpdateDialogState {
   final String message;
-  const CheckError({required this.message});
+  final String? error;
+  const CheckError({required this.message, this.error});
 }
 
 class UpdateEvent extends UpdateDialogState {

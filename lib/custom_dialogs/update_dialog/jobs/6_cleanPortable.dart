@@ -7,7 +7,7 @@ import 'package:nocab_desktop/custom_dialogs/update_dialog/update_variables.dart
 import 'package:path/path.dart';
 
 class CleanPortableFiles extends UpdateJob {
-  CleanPortableFiles() : super("cleanPortable", "description");
+  CleanPortableFiles() : super(translationMasterKey: "cleanPortable");
 
   @override
   bool get portableToMsix => true;

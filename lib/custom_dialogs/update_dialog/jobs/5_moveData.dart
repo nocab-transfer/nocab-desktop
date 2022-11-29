@@ -8,7 +8,7 @@ import 'package:path/path.dart';
 import 'package:io/io.dart' as io;
 
 class MoveData extends UpdateJob {
-  MoveData() : super("moveData", "description");
+  MoveData() : super(translationMasterKey: "moveData");
 
   @override
   bool get portableToMsix => true;

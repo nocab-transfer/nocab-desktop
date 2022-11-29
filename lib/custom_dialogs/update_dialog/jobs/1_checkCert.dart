@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 import 'package:path/path.dart';
 
 class CheckCertificate extends UpdateJob {
-  CheckCertificate() : super("checkCert", "description");
+  CheckCertificate() : super(translationMasterKey: "checkCert");
 
   @override
   Future<bool> run(UpdateVariables variables) async {

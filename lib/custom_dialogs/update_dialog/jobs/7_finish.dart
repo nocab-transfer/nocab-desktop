@@ -6,7 +6,7 @@ import 'package:nocab_desktop/custom_dialogs/update_dialog/base_job.dart';
 import 'package:nocab_desktop/custom_dialogs/update_dialog/update_variables.dart';
 
 class FinishUpdate extends UpdateJob {
-  FinishUpdate() : super("finish", "description");
+  FinishUpdate() : super(translationMasterKey: "finish");
 
   @override
   Future<bool> run(UpdateVariables variables) async {

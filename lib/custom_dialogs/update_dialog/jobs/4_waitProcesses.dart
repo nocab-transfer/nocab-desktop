@@ -5,7 +5,7 @@ import 'package:nocab_desktop/custom_dialogs/update_dialog/update_variables.dart
 import 'package:nocab_desktop/services/server/server.dart';
 
 class WaitProcesses extends UpdateJob {
-  WaitProcesses() : super("waitProcesses", "description");
+  WaitProcesses() : super(translationMasterKey: "waitProcesses");
 
   @override
   Future<bool> run(UpdateVariables variables) async {

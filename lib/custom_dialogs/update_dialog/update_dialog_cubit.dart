@@ -54,11 +54,11 @@ class UpdateDialogCubit extends Cubit<UpdateDialogState> {
         emit(const CheckError(message: "Rate limit exceeded. Please try again later."));
         return;
       } else {
-        emit(const CheckError(message: "Failed to check for updates. Please try again later."));
+        emit(CheckError(message: "Failed to check for updates. Please try again later.", error: "Status code: ${data.statusCode}"));
         return;
       }
     } catch (e) {
-      emit(const CheckError(message: "Error while checking for updates."));
+      emit(CheckError(message: "Error while checking for updates.", error: "$e"));
       return;
     }
 

@@ -6,7 +6,7 @@ import 'package:nocab_desktop/custom_dialogs/update_dialog/base_job.dart';
 import 'package:nocab_desktop/custom_dialogs/update_dialog/update_variables.dart';
 
 class InstallMsix extends UpdateJob {
-  InstallMsix() : super("installMsix", "description");
+  InstallMsix() : super(translationMasterKey: "installMsix");
 
   @override
   Future<bool> run(UpdateVariables variables) async {

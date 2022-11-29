@@ -112,6 +112,14 @@ class UpdateDialog extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                child: Text(
+                  "${error.error}",
+                  style: Theme.of(context).textTheme.labelMedium,
+                  textAlign: TextAlign.center,
+                ),
+              ),
             ],
           ),
         ).animate(delay: 150.ms).fadeIn(),

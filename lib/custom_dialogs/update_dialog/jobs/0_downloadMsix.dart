@@ -5,7 +5,7 @@ import 'package:nocab_desktop/custom_dialogs/update_dialog/update_variables.dart
 import 'package:http/http.dart' as http;
 
 class DownloadMsix extends UpdateJob {
-  DownloadMsix() : super("downloadMsix", "description");
+  DownloadMsix() : super(translationMasterKey: "downloadMsix");
 
   @override
   Future<bool> run(UpdateVariables variables) async {

@@ -10,9 +10,9 @@ abstract class UpdateJob {
   String? errorMessage = "";
 
   final String translationMasterKey;
-  String descTranslationKey;
+  String descTranslationKey = "description";
 
-  UpdateJob(this.translationMasterKey, this.descTranslationKey);
+  UpdateJob({required this.translationMasterKey});
 
   Future<bool> run(UpdateVariables variables);
 
