@@ -59,7 +59,7 @@ class SettingsPanel extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(left: 8.0),
                           child: CustomTooltip(
-                            message: "Update available",
+                            message: 'update.tooltip'.tr(),
                             child: IconButton(
                               onPressed: () => showModal(context: context, builder: (context) => const UpdateDialog()),
                               style: IconButton.styleFrom(
