@@ -25,7 +25,7 @@ class Github {
 
   Future<bool> isUpdateAvailable({bool includePrerelease = false}) async {
     try {
-      var releasesUrl = 'https://api.github.com/repos/nocab-transfer/test/releases';
+      var releasesUrl = 'https://api.github.com/repos/nocab-transfer/nocab-desktop/releases';
 
       PackageInfo packageInfo = await PackageInfo.fromPlatform();
       String version = packageInfo.version;
