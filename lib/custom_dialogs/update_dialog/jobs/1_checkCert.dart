@@ -61,7 +61,7 @@ class CheckCertificate extends UpdateJob {
         ";",
       ]).then((ProcessResult results) async {
         if (results.exitCode == 0 && results.stdout.toString().trim() == "0") {
-          if (await checkCert(variables)) return finish(descTranslationKey: "Certificate installed", status: UpdateJobStatus.done);
+          if (await checkCert(variables)) return finish(descTranslationKey: "success", status: UpdateJobStatus.done);
         }
         if (status == UpdateJobStatus.failed) return false; // if the job has already failed, don't overwrite the error message
         return finish(descTranslationKey: "installError", status: UpdateJobStatus.failed, errorMessage: results.stderr.toString());
