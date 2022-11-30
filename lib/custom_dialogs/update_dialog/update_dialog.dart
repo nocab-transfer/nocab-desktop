@@ -348,12 +348,18 @@ class UpdateDialog extends StatelessWidget {
                             style: Theme.of(context).textTheme.labelMedium,
                             textAlign: TextAlign.center,
                           ),
-                          Text(
-                            "update.dialog.updating.panel.failed.errorMessage".tr(
-                              namedArgs: {'message': event.crashedJob.errorMessage.toString()},
+                          const SizedBox(height: 8),
+                          ConstrainedBox(
+                            constraints: BoxConstraints(maxHeight: event.size.height / 4),
+                            child: SingleChildScrollView(
+                              child: Text(
+                                "update.dialog.updating.panel.failed.errorMessage".tr(
+                                  namedArgs: {'message': event.crashedJob.errorMessage.toString()},
+                                ),
+                                style: Theme.of(context).textTheme.labelMedium,
+                                textAlign: TextAlign.center,
+                              ),
                             ),
-                            style: Theme.of(context).textTheme.labelMedium,
-                            textAlign: TextAlign.center,
                           ),
                           const SizedBox(height: 16),
                           ElevatedButton(
