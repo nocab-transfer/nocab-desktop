@@ -7,9 +7,7 @@ import 'package:path/path.dart' as p;
 
 class FileOperations {
   static Future<void> tmpToFile(File thisFile) async {
-    var lastSeparatorIndex = thisFile.path.lastIndexOf(Platform.pathSeparator);
-    await thisFile
-        .rename(thisFile.path.substring(0, lastSeparatorIndex + 1) + thisFile.path.substring(lastSeparatorIndex + 1).replaceFirst('.nocabtmp', ''));
+    await thisFile.rename(p.join(thisFile.parent.path, p.basename(thisFile.path).replaceAll('.nocabtmp', '')));
   }
 
   static String findUnusedFilePath({required String fileName, required String downloadPath}) {
@@ -29,7 +27,6 @@ class FileOperations {
 
   static void openFile(String filePath) {
     Process.start(p.basename(filePath), [], workingDirectory: File(filePath).parent.path, runInShell: true);
-    // wait, is this working?
   }
 
   static void showInFolder(String filePath) {
