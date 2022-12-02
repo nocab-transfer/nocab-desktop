@@ -16,10 +16,7 @@ class FileOperations {
     int fileIndex = 0;
     String path;
     do {
-      var indexOfLastDot = fileName.lastIndexOf('.');
-      var fileNameWithoutExtension = fileName.substring(0, indexOfLastDot);
-      var fileExtension = fileName.substring(indexOfLastDot);
-      path = downloadPath + Platform.pathSeparator + fileNameWithoutExtension + (fileIndex == 0 ? '' : ' ($fileIndex)') + fileExtension;
+      path = p.join(downloadPath, p.withoutExtension(fileName) + (fileIndex > 0 ? " ($fileIndex)" : "") + p.extension(fileName));
       fileIndex++;
     } while (File(path).existsSync());
     return path;
