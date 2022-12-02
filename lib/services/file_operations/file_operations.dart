@@ -28,15 +28,13 @@ class FileOperations {
   }
 
   static void openFile(String filePath) {
-    String pathName = filePath.substring(filePath.lastIndexOf("\\") + 1);
-    Process.start(pathName, [], workingDirectory: File(filePath).parent.path, runInShell: true);
+    Process.start(p.basename(filePath), [], workingDirectory: File(filePath).parent.path, runInShell: true);
     // wait, is this working?
   }
 
   static void showInFolder(String filePath) {
-    String pathName = filePath.substring(filePath.lastIndexOf("\\") + 1);
     if (Platform.isWindows) {
-      Process.start("explorer.exe", ["/select,", pathName], runInShell: true, workingDirectory: File(filePath).parent.path);
+      Process.start("explorer.exe", ["/select,", p.basename(filePath)], runInShell: true, workingDirectory: File(filePath).parent.path);
     }
     // TODO: show in folder on other platforms
   }
