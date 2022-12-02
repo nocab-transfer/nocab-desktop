@@ -2,7 +2,7 @@ name: nocab_desktop
 description: File sharing application
 
 publish_to: 'none' 
-version: 1.2.1+1
+version: 1.2.2+1
 
 environment:
   sdk: ">=2.19.0-152.0.dev <3.0.0"
@@ -58,7 +58,7 @@ msix_config:
   logo_path: assets/logo/logo.png
   languages: en-us, tr-tr
   publisher: berkekbgz
-  version: 1.2.1.0
+  version: 1.2.2.0
   execution_alias: nocab
 
   context_menu_directory_id: NoCabContextMenu
