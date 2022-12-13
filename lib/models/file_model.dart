@@ -32,7 +32,7 @@ class FileInfo {
   String? hash;
   String? subDirectory;
 
-  FileInfo({required this.name, required this.byteSize, required this.isEncrypted, required this.hash, this.path, this.subDirectory});
+  FileInfo({required this.name, required this.byteSize, required this.isEncrypted, this.hash, this.path, this.subDirectory});
 
   FileInfo.fromJson(Map<String, dynamic> json) {
     name = json['name'];
@@ -67,7 +67,7 @@ class FileInfo {
 }
 
 class ShareResponse {
-  bool? response;
+  late bool response;
   String? info;
 
   ShareResponse({required this.response, this.info});
