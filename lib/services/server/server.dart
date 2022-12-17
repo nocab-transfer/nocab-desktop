@@ -265,7 +265,7 @@ class Server {
       return false;
     }
 
-    if (!shareResponse.response!) {
+    if (!shareResponse.response) {
       await Database().updateTransfer(request.transferUuid!, status: TransferDbStatus.declined, message: shareResponse.info);
       return false;
     }
