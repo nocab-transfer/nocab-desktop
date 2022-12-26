@@ -87,7 +87,7 @@ Future<void> _dataHandler(List<dynamic> args) async {
 
     // if no data is send for 30 seconds, assume the transfer has crashed
     if (totalByteCountBefore == totalByteCount) {
-      currentErrorTime = (currentErrorTime + (1000 / (1000 / duration.inMilliseconds))).toInt();
+      currentErrorTime += duration.inMilliseconds;
     } else {
       currentErrorTime = 0;
     }
