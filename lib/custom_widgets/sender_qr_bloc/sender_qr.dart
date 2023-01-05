@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nocab_core/nocab_core.dart';
 import 'package:nocab_desktop/custom_widgets/sender_qr_bloc/sender_qr_cubit.dart';
 import 'package:nocab_desktop/custom_widgets/sender_qr_bloc/sender_qr_state.dart';
-import 'package:nocab_desktop/models/deviceinfo_model.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class SenderQr extends StatefulWidget {

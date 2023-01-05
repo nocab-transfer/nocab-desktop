@@ -4,9 +4,8 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nocab_core/nocab_core.dart';
 import 'package:nocab_desktop/custom_widgets/sender_qr_bloc/sender_qr_state.dart';
-import 'package:nocab_desktop/models/deviceinfo_model.dart';
-import 'package:nocab_desktop/services/server/server.dart';
 
 class SenderQrCubit extends Cubit<SenderQrState> {
   SenderQrCubit() : super(const Initial());
@@ -20,14 +19,13 @@ class SenderQrCubit extends Cubit<SenderQrState> {
   Future<void> startQrServer(Function(DeviceInfo device)? onDeviceConnected) async {
     serverSocket = await ServerSocket.bind(InternetAddress.anyIPv4, 0);
     _verificationString = generateRandomString(16);
-    emit(ConnectionWaiting(Server().selectedIp.address, serverSocket!.port, _verificationString!));
+    emit(ConnectionWaiting(DeviceManager().currentDeviceInfo.ip, serverSocket!.port, _verificationString!));
 
     serverSocket!.listen((Socket client) async {
       try {
         var data = await client.first;
         var decodedData = json.decode(utf8.decode(base64.decode(utf8.decode(data))));
         if (_verificationString != decodedData['verificationString']) {
-          client.write("Verification string doesn't match");
           throw Exception("Verification string doesn't match");
         }
         DeviceInfo device = DeviceInfo.fromJson(decodedData['deviceInfo']);
@@ -39,7 +37,7 @@ class SenderQrCubit extends Cubit<SenderQrState> {
         await Future.delayed(const Duration(seconds: 1));
 
         _verificationString = generateRandomString(16);
-        emit(ConnectionWaiting(Server().selectedIp.address, serverSocket!.port, _verificationString!));
+        emit(ConnectionWaiting(DeviceManager().currentDeviceInfo.ip, serverSocket!.port, _verificationString!));
         startTimer();
       } catch (e) {
         client.close();
@@ -48,7 +46,7 @@ class SenderQrCubit extends Cubit<SenderQrState> {
         emit(const Initial());
         await Future.delayed(const Duration(seconds: 1));
         _verificationString = generateRandomString(16);
-        emit(ConnectionWaiting(Server().selectedIp.address, serverSocket!.port, _verificationString!));
+        emit(ConnectionWaiting(DeviceManager().currentDeviceInfo.ip, serverSocket!.port, _verificationString!));
         startTimer();
       }
     });
@@ -75,7 +73,7 @@ class SenderQrCubit extends Cubit<SenderQrState> {
         _verificationString = generateRandomString(16);
       }
 
-      emit(ConnectionWaiting(Server().selectedIp.address, serverSocket!.port, _verificationString!, currentDuration: currentDuration));
+      emit(ConnectionWaiting(DeviceManager().currentDeviceInfo.ip, serverSocket!.port, _verificationString!, currentDuration: currentDuration));
       currentDuration += const Duration(milliseconds: 40);
     });
   }

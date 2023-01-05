@@ -1,4 +1,4 @@
-import 'package:nocab_desktop/models/deviceinfo_model.dart';
+import 'package:nocab_core/nocab_core.dart';
 
 abstract class DeviceFinderState {
   const DeviceFinderState();

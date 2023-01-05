@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:nocab_core/nocab_core.dart';
 import 'package:nocab_desktop/models/settings_model.dart';
-import 'package:nocab_desktop/services/server/server.dart';
 import 'package:nocab_desktop/services/settings/settings.dart';
 
 class NetworkAdapterSettings extends StatelessWidget {
@@ -81,7 +81,7 @@ class NetworkAdapterSettings extends StatelessWidget {
         child: InkWell(
           borderRadius: const BorderRadius.all(Radius.circular(10)),
           onTap: () {
-            Server().setSelectedIp = interface;
+            DeviceManager().updateDeviceInfo(ip: ips.first);
             SettingsService().setSettings(SettingsService().getSettings.copyWith(networkInterfaceName: interface.name));
             Navigator.of(context).pop();
           },

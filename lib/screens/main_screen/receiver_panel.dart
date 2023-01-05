@@ -1,12 +1,10 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:animations/animations.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:nocab_core/nocab_core.dart';
 import 'package:nocab_desktop/custom_dialogs/network_adapter_settings/network_adapter_settings.dart';
-import 'package:nocab_desktop/models/deviceinfo_model.dart';
-import 'package:nocab_desktop/services/server/server.dart';
 import 'package:nocab_desktop/services/settings/settings.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
@@ -89,17 +87,11 @@ class ReceiverPanel extends StatelessWidget {
 
               //QR code
               child: StreamBuilder(
-                stream: SettingsService().onSettingChanged,
-                initialData: SettingsService().getSettings,
+                stream: DeviceManager().onDeviceInfoChanged,
+                initialData: DeviceManager().currentDeviceInfo,
                 builder: (context, snapshot) {
                   return QrImage(
-                    data: base64.encode(utf8.encode(json.encode(DeviceInfo(
-                            name: snapshot.data!.deviceName,
-                            ip: Server().selectedIp.address,
-                            port: snapshot.data!.mainPort,
-                            opsystem: Platform.operatingSystem,
-                            deviceId: "")
-                        .toJson()))),
+                    data: base64.encode(utf8.encode(json.encode(snapshot.data?.toJson() ?? ""))),
                     version: QrVersions.auto,
                     dataModuleStyle: const QrDataModuleStyle(color: Colors.black, dataModuleShape: QrDataModuleShape.circle),
                     eyeStyle: const QrEyeStyle(color: Colors.black, eyeShape: QrEyeShape.circle),

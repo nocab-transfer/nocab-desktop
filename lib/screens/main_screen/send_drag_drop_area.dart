@@ -1,8 +1,7 @@
 import 'package:desktop_drop/desktop_drop.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:nocab_desktop/models/file_model.dart';
-import 'package:nocab_desktop/services/file_operations/file_operations.dart';
+import 'package:nocab_core/nocab_core.dart';
 import 'package:nocab_desktop/services/file_picker_isolate/file_picker_isolate.dart';
 
 class SendDragDrop extends StatefulWidget {

@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:nocab_core/nocab_core.dart';
 import 'package:nocab_desktop/custom_widgets/custom_tooltip/custom_tooltip.dart';
 import 'package:nocab_desktop/extensions/size_extension.dart';
-import 'package:nocab_desktop/models/file_model.dart';
 
 class FileList extends StatefulWidget {
   final List<FileInfo> files;
