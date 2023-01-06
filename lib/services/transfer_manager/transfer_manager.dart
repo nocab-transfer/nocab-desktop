@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:nocab_core/nocab_core.dart';
 import 'package:nocab_desktop/custom_dialogs/file_accepter_dialog/file_accepter_dialog.dart';
+import 'package:nocab_desktop/models/settings_model.dart';
 import 'package:nocab_desktop/services/database/database.dart';
 import 'package:nocab_desktop/services/dialog_service/dialog_service.dart';
 import 'package:nocab_desktop/services/network/network.dart';
@@ -26,6 +27,8 @@ class TransferManager {
   final _transferController = StreamController<List<Transfer>>.broadcast();
   Stream<List<Transfer>> get onNewTransfer => _transferController.stream;
 
+  int portBindErrorCount = 0;
+
   Future<void> initialize() async {
     DeviceManager().initialize(
       SettingsService().getSettings.deviceName,
@@ -33,7 +36,17 @@ class TransferManager {
       SettingsService().getSettings.mainPort,
     );
 
-    RequestListener().start(onError: print);
+    RequestListener().start(onError: (e) async {
+      if (e is SocketException && e.osError?.errorCode == 10048) {
+        if (portBindErrorCount > 5) return; // TODO: Show error dialog
+        portBindErrorCount++;
+        int newPort = await Network.getUnusedPort();
+        await SettingsService().setSettings(SettingsService().getSettings.copyWith(mainPort: newPort));
+        DeviceManager().updateDeviceInfo(requestPort: newPort);
+        RequestListener().stop();
+        initialize();
+      }
+    });
 
     RequestListener().onRequest.listen((request) async {
       if (await Database().exist(request.transferUuid)) {
@@ -70,6 +83,7 @@ class TransferManager {
 
   void removeTranser(Transfer transfer) {
     transfers.removeWhere((element) => element.uuid == transfer.uuid);
+    _transferController.add(transfers);
   }
 
   Future<void> sendRequest(DeviceInfo receiverDeviceInfo, List files) async {
