@@ -153,7 +153,6 @@ class TransferSuccessView extends StatelessWidget {
               child: Row(
                 children: [
                   Text('mainView.transfers.card.openFile'.tr()),
-                  //Icon(Icons.arrow, size: 18),
                 ],
               ),
             ),

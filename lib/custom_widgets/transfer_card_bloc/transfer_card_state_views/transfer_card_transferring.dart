@@ -220,7 +220,6 @@ class TransferringView extends StatelessWidget {
               child: Row(
                 children: [
                   Text('mainView.transfers.card.openFile'.tr()),
-                  const Icon(Icons.open_in_new_rounded),
                 ],
               ),
             ),
