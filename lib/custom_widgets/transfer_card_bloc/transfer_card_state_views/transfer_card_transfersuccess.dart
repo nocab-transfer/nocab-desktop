@@ -132,10 +132,10 @@ class TransferSuccessView extends StatelessWidget {
                 color: Colors.transparent,
                 child: CustomTooltip(
                   message: 'mainView.transfers.card.showInFolder'.tr(),
-                  child: const InkWell(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    // onTap: () => FileOperations.showInFolder(file.path!),// TODO
-                    child: Padding(
+                  child: InkWell(
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    onTap: () => file.showInFolder(),
+                    child: const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Icon(Icons.folder_outlined, size: 20),
                     ),
