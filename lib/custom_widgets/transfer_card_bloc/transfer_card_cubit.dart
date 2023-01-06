@@ -15,7 +15,14 @@ class TransferCardCubit extends Cubit<TransferCardState> {
       switch (event.runtimeType) {
         case ProgressReport:
           event as ProgressReport;
-          emit(Transferring(transfer.files, event.filesTransferred, event.currentFile, event.speed, event.progress, transfer.deviceInfo));
+          emit(Transferring(
+            transfer.files,
+            event.filesTransferred,
+            event.currentFile,
+            event.speed / 1024 / 1024,
+            event.progress * 100,
+            transfer.deviceInfo,
+          ));
           break;
         case EndReport:
           event as EndReport;
