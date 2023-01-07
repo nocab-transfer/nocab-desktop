@@ -5,7 +5,6 @@ import 'package:nocab_desktop/custom_widgets/device_finder_bloc/device_finder.da
 import 'package:nocab_desktop/custom_widgets/file_list/file_list.dart';
 import 'package:nocab_desktop/custom_widgets/sender_qr_bloc/sender_qr.dart';
 import 'package:nocab_desktop/extensions/size_extension.dart';
-import 'package:nocab_desktop/services/network/network.dart';
 import 'package:nocab_desktop/services/transfer_manager/transfer_manager.dart';
 
 class SendStarterDialog extends StatefulWidget {
@@ -128,7 +127,7 @@ class _SendStarterDialogState extends State<SendStarterDialog> {
                                     blockDevices: deviceClickBlock,
                                     onPressed: (deviceInfo) async {
                                       setState(() => deviceClickBlock.add(deviceInfo));
-                                      RequestMaker.create(files: widget.files, transferPort: await Network.getUnusedPort());
+                                      TransferManager().sendRequest(deviceInfo, widget.files);
                                     },
                                   ),
                                 ),
