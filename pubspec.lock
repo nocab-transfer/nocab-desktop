@@ -593,9 +593,11 @@ packages:
   nocab_core:
     dependency: "direct main"
     description:
-      path: "../nocab_core"
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: "2d3a3d8d2d84d7938c133963ef84a28278046933"
+      url: "https://github.com/nocab-transfer/nocab-core.git"
+    source: git
     version: "1.0.0"
   node_preamble:
     dependency: transitive
