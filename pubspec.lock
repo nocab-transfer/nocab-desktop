@@ -595,17 +595,17 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "96b6fed5a9f4f90164356202c80bdd7a1a7e3426"
+      resolved-ref: "0b61eb087db9a59500fa4419e2b42d06d1ea514d"
       url: "https://github.com/nocab-transfer/nocab-core.git"
     source: git
     version: "1.0.0"
   nocab_logger:
-    dependency: "direct main"
+    dependency: transitive
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "9b986ff868325d7bfd5e75901682c4293932a8f1"
-      url: "https://github.com/nocab-transfer/nocab-logger.git"
+      resolved-ref: "01438e8104507d90bc36540226f19e1b8445df14"
+      url: "https://github.com/nocab-transfer/nocab-logger"
     source: git
     version: "1.0.0"
   node_preamble:
@@ -816,6 +816,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.1.5"
+  share_plus:
+    dependency: "direct main"
+    description:
+      name: share_plus
+      sha256: e387077716f80609bb979cd199331033326033ecd1c8f200a90c5f57b1c9f55e
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.3.0"
+  share_plus_platform_interface:
+    dependency: transitive
+    description:
+      name: share_plus_platform_interface
+      sha256: "82ddd4ab9260c295e6e39612d4ff00390b9a7a21f1bb1da771e2f232d80ab8a1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.2.0"
   shared_preferences:
     dependency: transitive
     description:
