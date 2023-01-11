@@ -1,6 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
-import 'package:nocab_desktop/custom_dialogs/send_starter_dialog/send_starter_dialog.dart';
+import 'package:nocab_desktop/custom_dialogs/sender_dialog/sender_dialog.dart';
 import 'package:nocab_desktop/screens/main_screen/receiver_panel.dart';
 import 'package:nocab_desktop/screens/main_screen/send_drag_drop_area.dart';
 import 'package:nocab_desktop/screens/main_screen/settings_panel.dart';

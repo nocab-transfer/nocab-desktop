@@ -32,6 +32,10 @@ class SettingsService {
     return _settings!;
   }
 
+  NetworkInterface get getNetworkInterface =>
+      Network.getNetworkInterfaceByName(getSettings.networkInterfaceName, Network().networkInterfaces) ??
+      Network.getCurrentNetworkInterface(Network().networkInterfaces);
+
   // returns true if settings creatings for the first time
   Future<bool> initialize() async {
     try {

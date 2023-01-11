@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:animations/animations.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:nocab_core/nocab_core.dart';
 import 'package:nocab_desktop/custom_dialogs/welcome_dialog/pages/nocab_mobile_page.dart';
 import 'package:nocab_desktop/custom_dialogs/welcome_dialog/welcome_dialog.dart';
 import 'package:nocab_desktop/custom_widgets/custom_tooltip/custom_tooltip.dart';
@@ -7,9 +10,8 @@ import 'package:nocab_desktop/custom_widgets/svg_color_handler/svg_color_handler
 import 'package:nocab_desktop/custom_widgets/transfer_card_bloc/transfer_card.dart';
 import 'package:flutter/material.dart';
 import 'package:nocab_desktop/screens/history/history.dart';
-import 'package:nocab_desktop/services/file_operations/file_operations.dart';
-import 'package:nocab_desktop/services/server/server.dart';
-import 'package:nocab_desktop/services/transfer/transfer.dart';
+import 'package:nocab_desktop/services/settings/settings.dart';
+import 'package:nocab_desktop/services/transfer_manager/transfer_manager.dart';
 
 class TransfersPanel extends StatelessWidget {
   const TransfersPanel({super.key});
@@ -31,7 +33,7 @@ class TransfersPanel extends StatelessWidget {
                 CustomTooltip(
                   message: 'mainView.transfers.openOutputFolder'.tr(),
                   child: IconButton(
-                    onPressed: FileOperations.openOutputFolder,
+                    onPressed: openOutputFolder,
                     icon: const Icon(Icons.folder_outlined),
                     color: Theme.of(context).colorScheme.primary,
                   ),
@@ -49,9 +51,11 @@ class TransfersPanel extends StatelessWidget {
           ],
         ),
         StreamBuilder(
-          stream: Server().onNewTransfer,
+          stream: TransferManager().onNewTransfer,
           initialData: const <Transfer>[],
-          builder: (context, snapshot) => snapshot.data!.isNotEmpty ? _buildList(snapshot.data!) : _emptyState(context),
+          builder: (context, snapshot) {
+            return snapshot.data!.isNotEmpty ? _buildList(snapshot.data!) : _emptyState(context);
+          },
         ),
       ],
     );
@@ -110,5 +114,12 @@ class TransfersPanel extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void openOutputFolder() {
+    // create method checks if output folder exists and creates it if not, so no need to check output folder exists
+    Directory(SettingsService().getSettings.downloadPath).create(recursive: true).then((value) {
+      Process.run("start .", [], runInShell: true, workingDirectory: SettingsService().getSettings.downloadPath);
+    });
   }
 }

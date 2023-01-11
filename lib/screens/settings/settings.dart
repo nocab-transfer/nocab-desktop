@@ -9,6 +9,7 @@ import 'package:nocab_desktop/custom_widgets/custom_tooltip/custom_tooltip.dart'
 import 'package:nocab_desktop/extensions/lang_code_to_name.dart';
 import 'package:nocab_desktop/models/settings_model.dart';
 import 'package:nocab_desktop/provider/theme_provider.dart';
+import 'package:nocab_desktop/screens/logs/logs.dart';
 import 'package:nocab_desktop/screens/settings/about_dialog.dart';
 import 'package:nocab_desktop/screens/settings/setting_card.dart';
 import 'package:flutter/material.dart';
@@ -102,8 +103,14 @@ class _SettingsState extends State<Settings> {
                     ),
                   ),
                   Center(
-                      child: Text('settings.title'.tr(),
-                          style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 24, fontWeight: FontWeight.w400))),
+                    child: GestureDetector(
+                      onDoubleTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const Logs())),
+                      child: Text(
+                        'settings.title'.tr(),
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 24, fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                  ),
                   Align(
                     alignment: Alignment.centerRight,
                     child: Padding(

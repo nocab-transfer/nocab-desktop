@@ -2,11 +2,11 @@ import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:nocab_core/nocab_core.dart';
 import 'package:nocab_desktop/custom_widgets/custom_tooltip/custom_tooltip.dart';
-import 'package:nocab_desktop/extensions/size_extension.dart';
-import 'package:nocab_desktop/models/file_model.dart';
 import 'package:nocab_desktop/custom_widgets/transfer_card_bloc/transfer_card_state.dart';
-import 'package:nocab_desktop/services/file_operations/file_operations.dart';
+import 'package:nocab_desktop/extensions/file_info_functions.dart';
+import 'package:nocab_desktop/extensions/size_extension.dart';
 
 class TransferSuccessView extends StatelessWidget {
   final TransferSuccess state;
@@ -134,7 +134,7 @@ class TransferSuccessView extends StatelessWidget {
                   message: 'mainView.transfers.card.showInFolder'.tr(),
                   child: InkWell(
                     borderRadius: const BorderRadius.all(Radius.circular(10)),
-                    onTap: () => FileOperations.showInFolder(file.path!),
+                    onTap: () => file.showInFolder(),
                     child: const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Icon(Icons.folder_outlined, size: 20),
@@ -147,13 +147,12 @@ class TransferSuccessView extends StatelessWidget {
           color: Colors.transparent,
           child: InkWell(
             borderRadius: const BorderRadius.all(Radius.circular(10)),
-            onTap: () => FileOperations.openFile(file.path!),
+            onTap: () => file.openFile(),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
                   Text('mainView.transfers.card.openFile'.tr()),
-                  //Icon(Icons.arrow, size: 18),
                 ],
               ),
             ),

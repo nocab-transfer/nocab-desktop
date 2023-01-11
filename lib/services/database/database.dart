@@ -2,14 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:isar/isar.dart';
+import 'package:nocab_core/nocab_core.dart';
 import 'package:nocab_desktop/models/database/device_db.dart';
 import 'package:nocab_desktop/models/database/file_db.dart';
 import 'package:nocab_desktop/models/database/transfer_db.dart';
-import 'package:nocab_desktop/models/file_model.dart';
-import 'package:nocab_desktop/services/transfer/report_models/base_report.dart';
-import 'package:nocab_desktop/services/transfer/report_models/end_report.dart';
-import 'package:nocab_desktop/services/transfer/report_models/error_report.dart';
-import 'package:nocab_desktop/services/transfer/report_models/start_report.dart';
+import 'package:nocab_desktop/services/database/converter.dart';
 import 'package:path/path.dart' as p;
 
 class Database {
@@ -101,39 +98,66 @@ class Database {
     return await query.findAll();
   }
 
+  Future<bool> exist(String uuid) async => await isar.transferDatabases.where().filter().transferUuidEqualTo(uuid).findFirst() != null;
+
   Future<void> deleteAllTransfers() async {
     await isar.writeTxn(() async => await isar.transferDatabases.clear());
   }
 
-  Future<void> updateTransferByReport(Report report) async {
-    switch (report.runtimeType) {
-      case StartReport:
-        report as StartReport;
-        Database().updateTransfer(
-          report.transferUuid,
-          status: TransferDbStatus.ongoing,
-          files: report.files,
-          startedAt: report.startTime,
-        );
-        break;
-      case EndReport:
-        report as EndReport;
-        Database().updateTransfer(
-          report.transferUuid,
-          status: TransferDbStatus.success,
-          endedAt: report.endTime,
-        );
-        break;
-      case ErrorReport:
-        report as ErrorReport;
-        Database().updateTransfer(
-          report.transferUuid,
-          status: TransferDbStatus.error,
-          message: report.message,
-        );
-        break;
-      default:
-    }
+  Future<void> registerRequest({
+    required ShareRequest request,
+    required DeviceInfo receiverDeviceInfo,
+    required DeviceInfo senderDeviceInfo,
+    required bool thisIsSender,
+  }) async {
+    var entry = TransferDatabase()
+      ..senderDevice = senderDeviceInfo.toIsarDb(isCurrentDevice: thisIsSender)
+      ..receiverDevice = receiverDeviceInfo.toIsarDb(isCurrentDevice: !thisIsSender)
+      ..files = request.files.map((e) => e.toIsarDb()).toList()
+      ..transferUuid = request.transferUuid
+      ..requestedAt = DateTime.now()
+      ..status = TransferDbStatus.pendingForAcceptance
+      ..type = TransferDbType.upload
+      ..managedBy = TransferDbManagedBy.user;
+
+    await pushTransferToDb(entry);
+
+    request.onResponse.then((value) {
+      if (value.response) {
+        linkTransferToEntry(request.linkedTransfer!, entry);
+      } else {
+        updateTransfer(request.transferUuid, status: TransferDbStatus.declined, message: value.info ?? 'Transfer was rejected');
+      }
+    });
+  }
+
+  Future<void> linkTransferToEntry(Transfer transfer, TransferDatabase entry) async {
+    entry.files = transfer.files.map((e) => e.toIsarDb()).toList();
+    transfer.onEvent.listen((report) {
+      switch (report.runtimeType) {
+        case StartReport:
+          report as StartReport;
+          entry.startedAt = report.startTime;
+          entry.status = TransferDbStatus.ongoing;
+          isar.writeTxn(() async => await isar.transferDatabases.put(entry));
+          break;
+        case EndReport:
+          report as EndReport;
+          entry.endedAt = report.endTime;
+          entry.status = TransferDbStatus.success;
+          isar.writeTxn(() async => await isar.transferDatabases.put(entry));
+          break;
+        case ErrorReport:
+          report as ErrorReport;
+          entry.endedAt = DateTime.now();
+          entry.status = TransferDbStatus.error;
+          entry.message = report.error.message;
+          isar.writeTxn(() async => await isar.transferDatabases.put(entry));
+          break;
+        default:
+          break;
+      }
+    });
   }
 
   Future<int> getCountFiltered({

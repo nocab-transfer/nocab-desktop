@@ -3,7 +3,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:nocab_desktop/custom_dialogs/network_adapter_settings/network_adapter_settings.dart';
-import 'package:nocab_desktop/services/server/server.dart';
 import 'package:nocab_desktop/services/settings/settings.dart';
 
 class NetworkAdapterInfoPage extends StatefulWidget {
@@ -63,9 +62,12 @@ class _NetworkAdapterInfoPageState extends State<NetworkAdapterInfoPage> {
                                 mainAxisSize: MainAxisSize.max,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(SettingsService().getSettings.networkInterfaceName,
-                                      style: Theme.of(context).textTheme.titleLarge, overflow: TextOverflow.ellipsis),
-                                  Text(Server().selectedIp.address, style: Theme.of(context).textTheme.bodySmall),
+                                  Text(
+                                    SettingsService().getNetworkInterface.name,
+                                    style: Theme.of(context).textTheme.titleLarge,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  Text(SettingsService().getNetworkInterface.addresses.first.address, style: Theme.of(context).textTheme.bodySmall),
                                 ],
                               ),
                             ),

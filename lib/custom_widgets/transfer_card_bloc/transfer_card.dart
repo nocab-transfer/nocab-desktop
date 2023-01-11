@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nocab_core/nocab_core.dart';
 import 'package:nocab_desktop/custom_widgets/sponsor_related/sponsor_snackbar.dart';
 import 'package:nocab_desktop/custom_widgets/transfer_card_bloc/transfer_card_cubit.dart';
 import 'package:nocab_desktop/custom_widgets/transfer_card_bloc/transfer_card_state.dart';
@@ -10,9 +11,7 @@ import 'package:nocab_desktop/custom_widgets/transfer_card_bloc/transfer_card_st
 import 'package:nocab_desktop/extensions/size_extension.dart';
 import 'package:nocab_desktop/models/database/transfer_db.dart';
 import 'package:nocab_desktop/services/database/database.dart';
-import 'package:nocab_desktop/services/server/server.dart';
-import 'package:nocab_desktop/services/transfer/receiver.dart';
-import 'package:nocab_desktop/services/transfer/transfer.dart';
+import 'package:nocab_desktop/services/transfer_manager/transfer_manager.dart';
 
 class TransferCard extends StatelessWidget {
   final Transfer transfer;
@@ -50,10 +49,10 @@ Widget buildWidget(BuildContext context, TransferCardState state, Transfer trans
       return TransferringView(state: state as Transferring, isDownload: transfer is Receiver);
     case TransferSuccess:
       return TransferSuccessView(
-          state: state as TransferSuccess, isDownload: transfer is Receiver, onClose: () => Server().removeTransferFromList(transfer));
+          state: state as TransferSuccess, isDownload: transfer is Receiver, onClose: () => TransferManager().removeTranser(transfer));
     case TransferFailed:
       return TransferFailedView(
-          state: state as TransferFailed, isDownload: transfer is Receiver, onClose: () => Server().removeTransferFromList(transfer));
+          state: state as TransferFailed, isDownload: transfer is Receiver, onClose: () => TransferManager().removeTranser(transfer));
     default:
       return Container();
   }

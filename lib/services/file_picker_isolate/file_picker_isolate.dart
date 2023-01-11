@@ -3,7 +3,7 @@
 import 'dart:isolate';
 
 import 'package:file_picker/file_picker.dart';
-import 'package:nocab_desktop/models/file_model.dart';
+import 'package:nocab_core/nocab_core.dart';
 
 class _FilePickerIsolate {
   bool isIsolateRunning = false;

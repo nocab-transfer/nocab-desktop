@@ -1,12 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nocab_core/nocab_core.dart';
 import 'package:nocab_desktop/custom_dialogs/welcome_dialog/pages/nocab_mobile_page.dart';
 import 'package:nocab_desktop/custom_dialogs/welcome_dialog/welcome_dialog.dart';
 import 'package:nocab_desktop/custom_widgets/device_finder_bloc/device_finder_cubit.dart';
 import 'package:nocab_desktop/custom_widgets/device_finder_bloc/device_finder_state.dart';
 import 'package:nocab_desktop/custom_widgets/svg_color_handler/svg_color_handler.dart';
-import 'package:nocab_desktop/models/deviceinfo_model.dart';
 
 class DeviceFinder extends StatefulWidget {
   final Function(DeviceInfo deviceInfo)? onPressed;

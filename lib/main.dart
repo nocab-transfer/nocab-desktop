@@ -1,18 +1,18 @@
-import 'package:animations/animations.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:nocab_core/nocab_core.dart';
 import 'package:nocab_desktop/custom_dialogs/loading_dialog/loading_dialog.dart';
-import 'package:nocab_desktop/custom_dialogs/send_starter_dialog/send_starter_dialog.dart';
+import 'package:nocab_desktop/custom_dialogs/sender_dialog/sender_dialog.dart';
 import 'package:nocab_desktop/custom_dialogs/welcome_dialog/welcome_dialog.dart';
-import 'package:nocab_desktop/models/file_model.dart';
 import 'package:nocab_desktop/provider/theme_provider.dart';
 import 'package:nocab_desktop/screens/main_screen/main_screen.dart';
 import 'package:nocab_desktop/services/database/database.dart';
-import 'package:nocab_desktop/services/file_operations/file_operations.dart';
+import 'package:nocab_desktop/services/dialog_service/dialog_service.dart';
 import 'package:nocab_desktop/services/ipc/ipc.dart';
+import 'package:nocab_desktop/services/network/network.dart';
 import 'package:nocab_desktop/services/registry/registry.dart';
-import 'package:nocab_desktop/services/server/server.dart';
 import 'package:flutter/material.dart';
 import 'package:nocab_desktop/services/settings/settings.dart';
+import 'package:nocab_desktop/services/transfer_manager/transfer_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -20,11 +20,12 @@ Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
 
+  await Network().initialize();
   var isFirstRun = await SettingsService().initialize();
   await IPC().initialize(args, onData: (data) async => _loadFiles(data));
-  await Server().initialize();
-  await Server().startReceiver();
   await Database().initialize();
+  Radar().start();
+  await TransferManager().initialize();
   await windowManager.ensureInitialized();
 
   runApp(ChangeNotifierProvider(
@@ -44,16 +45,7 @@ Future<void> main(List<String> args) async {
   ));
 
   if (args.isNotEmpty && !isFirstRun) _loadFiles(args);
-  if (isFirstRun) {
-    while (Server().navigatorKey.currentContext == null) {
-      await Future.delayed(const Duration(milliseconds: 100));
-    }
-
-    await showDialog(
-      context: Server().navigatorKey.currentContext!,
-      builder: (context) => const WelcomeDialog(createdFromMain: true),
-    );
-  }
+  if (isFirstRun) DialogService().showModal((context) => const WelcomeDialog(createdFromMain: true));
 }
 
 class MyApp extends StatelessWidget {
@@ -67,7 +59,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'NoCab Desktop',
       home: const MainScreen(),
-      navigatorKey: Server().navigatorKey,
+      navigatorKey: DialogService.navigatorKey,
       themeMode: Provider.of<ThemeProvider>(context).themeMode,
       theme: ThemeData(colorSchemeSeed: Provider.of<ThemeProvider>(context).seedColor, brightness: Brightness.light, useMaterial3: true),
       darkTheme: ThemeData(colorSchemeSeed: Provider.of<ThemeProvider>(context).seedColor, brightness: Brightness.dark, useMaterial3: true),
@@ -79,20 +71,12 @@ class MyApp extends StatelessWidget {
 }
 
 Future<void> _loadFiles(List<String> paths) async {
-  // yeah i know this is bad but i dont know how to do it better
-  while (Server().navigatorKey.currentContext == null) {
-    await Future.delayed(const Duration(milliseconds: 100));
-  }
-  showDialog(
-    context: Server().navigatorKey.currentContext!,
-    builder: (context) => LoadingDialog(title: 'mainView.sender.loadingLabel'.tr()),
-    barrierDismissible: false,
-  );
+  BuildContext? dialogContext;
+  DialogService().showModal((context) {
+    dialogContext = context;
+    return LoadingDialog(title: 'mainView.sender.loadingLabel'.tr());
+  }, dismissible: false);
   List<FileInfo> files = await FileOperations.convertPathsToFileInfos(paths);
-  Navigator.pop(Server().navigatorKey.currentContext!);
-  showModal(
-    context: Server().navigatorKey.currentContext!,
-    configuration: const FadeScaleTransitionConfiguration(barrierDismissible: false),
-    builder: ((context) => SendStarterDialog(files: files)),
-  );
+  Navigator.pop(dialogContext!);
+  DialogService().showModal((context) => SendStarterDialog(files: files), dismissible: false);
 }

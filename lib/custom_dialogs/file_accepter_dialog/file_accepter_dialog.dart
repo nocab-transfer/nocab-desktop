@@ -1,20 +1,26 @@
-import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:nocab_core/nocab_core.dart';
 import 'package:nocab_desktop/custom_widgets/file_list/file_list.dart';
-import 'package:nocab_desktop/models/file_model.dart';
 import 'package:flutter/material.dart';
-import 'package:nocab_desktop/services/server/server.dart';
+import 'package:nocab_desktop/services/transfer_manager/transfer_manager.dart';
 
 class FileAccepterDialog extends StatefulWidget {
   final ShareRequest request;
-  final Socket socket;
-  const FileAccepterDialog({Key? key, required this.request, required this.socket}) : super(key: key);
+  const FileAccepterDialog({Key? key, required this.request}) : super(key: key);
 
   @override
   State<FileAccepterDialog> createState() => _FileAccepterDialogState();
 }
 
 class _FileAccepterDialogState extends State<FileAccepterDialog> {
+  @override
+  void initState() {
+    super.initState();
+    widget.request.onResponse.then((value) {
+      if (mounted) Navigator.of(context).pop();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -83,7 +89,7 @@ class _FileAccepterDialogState extends State<FileAccepterDialog> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   OutlinedButton(
-                    onPressed: () => Server().rejectRequest(widget.request, widget.socket).then((value) => Navigator.pop(context)),
+                    onPressed: () => TransferManager().rejectRequest(widget.request),
                     style: OutlinedButton.styleFrom(
                       surfaceTintColor: Theme.of(context).colorScheme.error,
                       fixedSize: const Size(100, 50),
@@ -97,7 +103,7 @@ class _FileAccepterDialogState extends State<FileAccepterDialog> {
                   ),
                   const SizedBox(width: 16),
                   ElevatedButton(
-                    onPressed: () => Server().acceptRequest(widget.request, widget.socket).then((value) => Navigator.pop(context)),
+                    onPressed: () async => TransferManager().acceptRequest(widget.request),
                     style: ElevatedButton.styleFrom(
                       fixedSize: const Size(100, 50),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),

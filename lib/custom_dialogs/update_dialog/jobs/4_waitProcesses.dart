@@ -2,7 +2,7 @@
 
 import 'package:nocab_desktop/custom_dialogs/update_dialog/base_job.dart';
 import 'package:nocab_desktop/custom_dialogs/update_dialog/update_variables.dart';
-import 'package:nocab_desktop/services/server/server.dart';
+import 'package:nocab_desktop/services/transfer_manager/transfer_manager.dart';
 
 class WaitProcesses extends UpdateJob {
   WaitProcesses() : super(translationMasterKey: "waitProcesses");
@@ -12,8 +12,8 @@ class WaitProcesses extends UpdateJob {
     super.startTimer();
     try {
       do {
-        if (Server().activeTransfers.any((element) => element.ongoing)) {
-          await Server().activeTransfers.firstWhere((element) => element.ongoing).onEvent.last;
+        if (TransferManager().transfers.any((element) => element.ongoing)) {
+          await TransferManager().transfers.firstWhere((element) => element.ongoing).onEvent.last;
         } else {
           break;
         }

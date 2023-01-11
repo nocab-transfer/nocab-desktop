@@ -6,12 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:nocab_desktop/custom_widgets/custom_tooltip/custom_tooltip.dart';
 import 'package:nocab_desktop/custom_widgets/svg_color_handler/svg_color_handler.dart';
+import 'package:nocab_desktop/extensions/file_info_functions.dart';
 import 'package:nocab_desktop/extensions/size_extension.dart';
 import 'package:nocab_desktop/models/database/device_db.dart';
 import 'package:nocab_desktop/models/database/file_db.dart';
 import 'package:nocab_desktop/models/database/transfer_db.dart';
+import 'package:nocab_desktop/services/database/converter.dart';
 import 'package:nocab_desktop/services/database/database.dart';
-import 'package:nocab_desktop/services/file_operations/file_operations.dart';
 import 'package:nocab_desktop/services/settings/settings.dart';
 
 class HistoryDetails extends StatefulWidget {
@@ -210,7 +211,7 @@ class _HistoryDetailsState extends State<HistoryDetails> {
                               message: 'history.historyDetails.fileTile.showInFolder'.tr(),
                               child: InkWell(
                                 borderRadius: const BorderRadius.all(Radius.circular(10)),
-                                onTap: () => FileOperations.showInFolder(file.path!),
+                                onTap: () => file.toFileInfo().showInFolder(),
                                 child: const Padding(
                                   padding: EdgeInsets.all(8.0),
                                   child: Icon(Icons.folder_outlined, size: 20),
@@ -223,7 +224,7 @@ class _HistoryDetailsState extends State<HistoryDetails> {
                           color: Colors.transparent,
                           child: InkWell(
                             borderRadius: const BorderRadius.all(Radius.circular(10)),
-                            onTap: () => FileOperations.openFile(file.path!),
+                            onTap: () => file.toFileInfo().openFile(),
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text('history.historyDetails.fileTile.openFile'.tr()),
