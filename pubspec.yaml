@@ -2,7 +2,7 @@ name: nocab_desktop
 description: File sharing application
 
 publish_to: 'none' 
-version: 1.3.0+1
+version: 1.3.2+1
 
 environment:
   sdk: ">=3.0.0-62.0.dev <4.0.0"
@@ -44,15 +44,14 @@ dependencies:
     git:
       url: https://github.com/nocab-transfer/nocab-core.git
   path_provider: ^2.0.11
+  share_plus: ^6.3.0
 
 dev_dependencies:
-
   flutter_test:
     sdk: flutter
-
   flutter_lints: ^2.0.1  
-  isar_generator: ^3.0.2
-  build_runner: ^2.3.2
+  isar_generator: ^3.0.5
+  build_runner: ^2.3.3
   
 msix_config:
   display_name: NoCab Desktop
@@ -62,7 +61,7 @@ msix_config:
   logo_path: assets/logo/logo.png
   languages: en-us, tr-tr
   publisher: berkekbgz
-  version: 1.3.0.0
+  version: 1.3.2.0
   execution_alias: nocab
 
   context_menu_directory_id: NoCabContextMenu
