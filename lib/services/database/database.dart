@@ -151,7 +151,7 @@ class Database {
           report as ErrorReport;
           entry.endedAt = DateTime.now();
           entry.status = TransferDbStatus.error;
-          entry.message = report.message;
+          entry.message = report.error.message;
           isar.writeTxn(() async => await isar.transferDatabases.put(entry));
           break;
         default:
