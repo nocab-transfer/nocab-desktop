@@ -77,6 +77,8 @@ Future<void> _loadFiles(List<String> paths) async {
     return LoadingDialog(title: 'mainView.sender.loadingLabel'.tr());
   }, dismissible: false);
   List<FileInfo> files = await FileOperations.convertPathsToFileInfos(paths);
+  // ignore: curly_braces_in_flow_control_structures
+  while (dialogContext == null) await Future.delayed(const Duration(milliseconds: 100));
   Navigator.pop(dialogContext!);
   DialogService().showModal((context) => SendStarterDialog(files: files), dismissible: false);
 }
