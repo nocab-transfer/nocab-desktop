@@ -37,7 +37,7 @@ class TransferManager {
     );
 
     RequestListener().start(onError: (e) async {
-      if (e.methodName is SocketException) {
+      if (e.title == "Socket binding error") {
         if (portBindErrorCount > 5) return; // TODO: Show error dialog
         portBindErrorCount++;
         int newPort = await Network.getUnusedPort();
