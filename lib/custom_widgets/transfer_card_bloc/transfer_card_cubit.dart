@@ -30,7 +30,7 @@ class TransferCardCubit extends Cubit<TransferCardState> {
           break;
         case ErrorReport:
           event as ErrorReport;
-          emit(TransferFailed(transfer.deviceInfo, event.error.message));
+          emit(TransferFailed(transfer.deviceInfo, event.error.title));
           break;
         default:
       }
