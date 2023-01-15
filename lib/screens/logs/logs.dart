@@ -37,7 +37,7 @@ class _LogsState extends State<Logs> {
     subscription = Logger().onLogged.listen((event) async {
       if (logs.isEmpty) return;
 
-      var newLogs = await Logger().get();
+      var newLogs = await Logger().get(from: DateTime.now().subtract(const Duration(days: 1)));
       setState(() {
         logs = newLogs;
       });
@@ -77,7 +77,18 @@ class _LogsState extends State<Logs> {
               icon: const Icon(Icons.arrow_back_ios_rounded),
             ),
             const SizedBox(width: 8),
-            const Text("Logs"),
+            RichText(
+              text: TextSpan(
+                text: "Logs",
+                style: Theme.of(context).textTheme.titleLarge,
+                children: [
+                  TextSpan(
+                    text: "(Last day)",
+                    style: Theme.of(context).textTheme.labelSmall,
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
         automaticallyImplyLeading: false,
