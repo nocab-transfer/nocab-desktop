@@ -119,7 +119,9 @@ class _LogsState extends State<Logs> {
     Directory? directory;
     try {
       directory = await getDownloadsDirectory();
-    } catch (err) {}
+    } catch (err) {
+      return null;
+    }
     return directory?.path;
   }
 }
