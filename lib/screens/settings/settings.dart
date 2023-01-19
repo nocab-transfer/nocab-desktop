@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:animations/animations.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart';
+import 'package:nocab_core/nocab_core.dart';
 import 'package:nocab_desktop/custom_dialogs/alert_box/alert_box.dart';
 import 'package:nocab_desktop/custom_dialogs/theme_color_picker/theme_color_picker.dart';
 import 'package:nocab_desktop/custom_widgets/custom_tooltip/custom_tooltip.dart';
@@ -173,8 +174,10 @@ class _SettingsState extends State<Settings> {
                                         onChanged: (String value) {
                                           if (value.isNotEmpty) {
                                             SettingsService().setSettings(currentSettings.copyWith(deviceName: value));
+                                            DeviceManager().updateDeviceInfo(name: value);
                                           } else {
                                             SettingsService().setSettings(currentSettings.copyWith(deviceName: "Unknown"));
+                                            DeviceManager().updateDeviceInfo(name: "Unknown");
                                           }
                                         },
                                       ),
