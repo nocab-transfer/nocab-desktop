@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 class DurationIndicator extends StatefulWidget {
   final Duration duration;
   final double width;
-  const DurationIndicator({Key? key, required this.duration, required this.width}) : super(key: key);
+  final Color color;
+  const DurationIndicator({Key? key, required this.duration, required this.width, required this.color}) : super(key: key);
 
   @override
   State<DurationIndicator> createState() => _DurationIndicatorState();
@@ -29,7 +30,7 @@ class _DurationIndicatorState extends State<DurationIndicator> {
       height: 2,
       width: width,
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primaryContainer,
+        color: widget.color,
         borderRadius: const BorderRadius.all(Radius.circular(1)),
       ),
     );

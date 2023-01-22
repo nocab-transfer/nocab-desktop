@@ -4,9 +4,7 @@ import 'package:nocab_desktop/services/sponsors/sponsors.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class SponsorProviders extends StatelessWidget {
-  const SponsorProviders({
-    Key? key,
-  }) : super(key: key);
+  const SponsorProviders({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

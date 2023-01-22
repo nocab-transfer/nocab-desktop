@@ -16,7 +16,7 @@ class SponsorSnackbar {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       elevation: 10,
       margin: const EdgeInsets.fromLTRB(750, 0, 16, 16),
-      backgroundColor: Theme.of(context).colorScheme.secondary,
+      backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
       behavior: SnackBarBehavior.floating,
       duration: _hideDuration,
       padding: const EdgeInsets.all(8),
@@ -53,14 +53,14 @@ class SponsorSnackbar {
                             ? "sponsorRelated.snackbar.titleBigFile".tr(namedArgs: {"size": latestTransferSize.formatBytes()})
                             : "sponsorRelated.snackbar.title".plural(transferCount, name: 'count'),
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              color: Theme.of(context).colorScheme.onSecondary,
+                              color: Theme.of(context).colorScheme.onSurfaceVariant,
                               fontWeight: FontWeight.bold,
                             ),
                       ),
                       Text(
                         "sponsorRelated.snackbar.subtitle".tr(),
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: Theme.of(context).colorScheme.onSecondary,
+                              color: Theme.of(context).colorScheme.onSurfaceVariant,
                               fontWeight: FontWeight.w200,
                             ),
                         maxLines: 3,
@@ -84,10 +84,11 @@ class SponsorSnackbar {
                       style: Theme.of(context)
                           .textTheme
                           .bodySmall
-                          ?.copyWith(fontStyle: FontStyle.italic, color: Theme.of(context).colorScheme.onSecondary)),
+                          ?.copyWith(fontStyle: FontStyle.italic, color: Theme.of(context).colorScheme.onSurfaceVariant)),
                 ),
                 DurationIndicator(
                   duration: duration,
+                  color: Theme.of(context).colorScheme.primary,
                   width: 400,
                 ),
               ],
