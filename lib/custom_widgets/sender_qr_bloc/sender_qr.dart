@@ -16,7 +16,23 @@ class SenderQr extends StatefulWidget {
   State<SenderQr> createState() => _SenderQrState();
 }
 
-class _SenderQrState extends State<SenderQr> {
+class _SenderQrState extends State<SenderQr> with TickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(vsync: this, duration: const Duration(seconds: 10));
+    _animation = Tween<double>(begin: 1, end: 0).animate(_controller);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -79,7 +95,8 @@ class _SenderQrState extends State<SenderQr> {
   }
 
   Widget _buildQR(BuildContext context, String ip, int port, String verificationString, Duration currentDuration) {
-    var refreshDuration = context.read<SenderQrCubit>().refreshDuration;
+    _controller.reset();
+    _controller.forward();
     return SizedBox(
       height: 150,
       width: 400,
@@ -129,23 +146,18 @@ class _SenderQrState extends State<SenderQr> {
           SizedBox(
             width: 50,
             child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 25,
-                    width: 25,
-                    child: CircularProgressIndicator(
-                      value: 1 - (currentDuration.inMilliseconds / refreshDuration.inMilliseconds),
-                      strokeWidth: 4,
-                      color: Theme.of(context).colorScheme.onBackground,
+              child: AnimatedBuilder(
+                animation: _animation,
+                builder: (context, _) => Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(width: 25, height: 25, child: CircularProgressIndicator(value: _animation.value)),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text("${(_animation.value * 10).toInt()}", style: Theme.of(context).textTheme.bodySmall),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text("${refreshDuration.inSeconds - currentDuration.inSeconds}", style: Theme.of(context).textTheme.bodySmall),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

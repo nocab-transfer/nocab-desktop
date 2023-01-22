@@ -11,15 +11,24 @@ class SenderQrCubit extends Cubit<SenderQrState> {
   SenderQrCubit() : super(const Initial());
 
   ServerSocket? serverSocket;
-  final Duration refreshDuration = const Duration(seconds: 30);
-  Timer? timer;
+  final Duration refreshDuration = const Duration(seconds: 10);
 
   String? _verificationString;
+
+  Timer? timer;
 
   Future<void> startQrServer(Function(DeviceInfo device)? onDeviceConnected) async {
     serverSocket = await ServerSocket.bind(InternetAddress.anyIPv4, 0);
     _verificationString = generateRandomString(16);
     emit(ConnectionWaiting(DeviceManager().currentDeviceInfo.ip, serverSocket!.port, _verificationString!));
+
+    Timer.periodic(refreshDuration, (timer) {
+      if (isClosed) {
+        timer.cancel();
+        return;
+      }
+      rebuildQr();
+    });
 
     serverSocket!.listen((Socket client) async {
       try {
@@ -32,50 +41,20 @@ class SenderQrCubit extends Cubit<SenderQrState> {
         await client.close();
         onDeviceConnected?.call(device);
 
-        stopTimer(); // while mobile app is scanning the qr, it will scans multiple qrs if we keep showing the qr. And the timer causing rebuilds the qr every 40 milliseconds
         emit(const Initial());
         await Future.delayed(const Duration(seconds: 1));
 
-        _verificationString = generateRandomString(16);
-        emit(ConnectionWaiting(DeviceManager().currentDeviceInfo.ip, serverSocket!.port, _verificationString!));
-        startTimer();
+        rebuildQr();
       } catch (e) {
         client.close();
-
-        stopTimer();
-        emit(const Initial());
-        await Future.delayed(const Duration(seconds: 1));
-        _verificationString = generateRandomString(16);
-        emit(ConnectionWaiting(DeviceManager().currentDeviceInfo.ip, serverSocket!.port, _verificationString!));
-        startTimer();
+        rebuildQr();
       }
     });
-
-    startTimer();
   }
 
-  void stopTimer() {
-    timer?.cancel();
-  }
-
-  void startTimer() {
-    Duration currentDuration = Duration.zero;
-
-    timer = Timer.periodic(const Duration(milliseconds: 40), (timer) {
-      if (isClosed) {
-        serverSocket?.close();
-        timer.cancel();
-        return;
-      }
-      if (currentDuration.inMilliseconds % refreshDuration.inMilliseconds == 0) {
-        emit(const Initial());
-        currentDuration = Duration.zero;
-        _verificationString = generateRandomString(16);
-      }
-
-      emit(ConnectionWaiting(DeviceManager().currentDeviceInfo.ip, serverSocket!.port, _verificationString!, currentDuration: currentDuration));
-      currentDuration += const Duration(milliseconds: 40);
-    });
+  void rebuildQr() {
+    _verificationString = generateRandomString(16);
+    emit(ConnectionWaiting(DeviceManager().currentDeviceInfo.ip, serverSocket!.port, _verificationString!));
   }
 
   Future<void> stopQrServer() async {
