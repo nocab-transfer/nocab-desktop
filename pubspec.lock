@@ -595,7 +595,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: aad420aa68d7a955759e4c96d05b3d4972f307ea
+      resolved-ref: "17b8605d571bbef2347f2dcd0ec638723b84b4d2"
       url: "https://github.com/nocab-transfer/nocab-core.git"
     source: git
     version: "1.0.0"
@@ -604,7 +604,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: b8d57209f32b91e54d0cd9fc34b58e195e170d82
+      resolved-ref: "5f41a3e441708d795df97413241b61e5a8ac4f2c"
       url: "https://github.com/nocab-transfer/nocab-logger"
     source: git
     version: "1.0.0"
@@ -1017,26 +1017,26 @@ packages:
     dependency: transitive
     description:
       name: test
-      sha256: "98403d1090ac0aa9e33dfc8bf45cc2e0c1d5c58d7cb832cee1e50bf14f37961d"
+      sha256: b54d427664c00f2013ffb87797a698883c46aee9288e027a50b46eaee7486fa2
       url: "https://pub.dev"
     source: hosted
-    version: "1.22.1"
+    version: "1.22.2"
   test_api:
     dependency: transitive
     description:
       name: test_api
-      sha256: c9282698e2982b6c3817037554e52f99d4daba493e8028f8112a83d68ccd0b12
+      sha256: "6182294da5abf431177fccc1ee02401f6df30f766bc6130a0852c6b6d7ee6b2d"
       url: "https://pub.dev"
     source: hosted
-    version: "0.4.17"
+    version: "0.4.18"
   test_core:
     dependency: transitive
     description:
       name: test_core
-      sha256: c9e4661a5e6285b795d47ba27957ed8b6f980fc020e98b218e276e88aff02168
+      sha256: "95ecc12692d0dd59080ab2d38d9cf32c7e9844caba23ff6cd285690398ee8ef4"
       url: "https://pub.dev"
     source: hosted
-    version: "0.4.21"
+    version: "0.4.22"
   time:
     dependency: transitive
     description:
