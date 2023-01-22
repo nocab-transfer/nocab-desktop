@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:nocab_core/nocab_core.dart';
-import 'package:nocab_desktop/custom_widgets/device_finder_bloc/device_finder.dart';
+import 'package:nocab_desktop/custom_widgets/device_finder/device_finder.dart';
 import 'package:nocab_desktop/custom_widgets/file_list/file_list.dart';
 import 'package:nocab_desktop/custom_widgets/sender_qr_bloc/sender_qr.dart';
 import 'package:nocab_desktop/extensions/size_extension.dart';
