@@ -40,7 +40,7 @@
 > **NOTE**: What is `get-nocab.netlify.app`? Read more about it [here](https://github.com/nocab-transfer/nocab-desktop/wiki/Possible-Questions#so-what-is-get-nocabnetlifyapp)
 
 ### 2. Downloading Portable Version
-* Download the latest version from [here](https://github.com/nocab-transfer/nocab-desktop/releases/tag/1.2.3)
+* Download the latest version from [here](https://github.com/nocab-transfer/nocab-desktop/releases/latest)
 * Extract the zip file to a folder
 * Run the nocab_desktop.exe file
 * Now you are ready to go 🥳🚀
