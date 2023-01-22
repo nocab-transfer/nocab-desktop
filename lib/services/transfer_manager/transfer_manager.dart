@@ -86,7 +86,7 @@ class TransferManager {
     _transferController.add(transfers);
   }
 
-  Future<void> sendRequest(DeviceInfo receiverDeviceInfo, List files) async {
+  Future<ShareRequest> sendRequest(DeviceInfo receiverDeviceInfo, List files) async {
     var request = RequestMaker.create(files: files, transferPort: await Network.getUnusedPort());
 
     Database().registerRequest(request: request, receiverDeviceInfo: receiverDeviceInfo, senderDeviceInfo: request.deviceInfo, thisIsSender: true);
@@ -98,5 +98,6 @@ class TransferManager {
         _transferController.add(transfers);
       }
     });
+    return request;
   }
 }

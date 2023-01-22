@@ -16,7 +16,7 @@ class SendStarterDialog extends StatefulWidget {
 }
 
 class _SendStarterDialogState extends State<SendStarterDialog> {
-  List<DeviceInfo> deviceClickBlock = [];
+  Map<DeviceInfo, ShareRequest> sentRequests = {};
 
   @override
   Widget build(BuildContext context) {
@@ -122,21 +122,19 @@ class _SendStarterDialogState extends State<SendStarterDialog> {
                             children: [
                               SizedBox(
                                 height: 300,
-                                child: Center(
-                                  child: DeviceFinder(
-                                    blockDevices: deviceClickBlock,
-                                    onPressed: (deviceInfo) async {
-                                      setState(() => deviceClickBlock.add(deviceInfo));
-                                      TransferManager().sendRequest(deviceInfo, widget.files);
-                                    },
-                                  ),
+                                child: DeviceFinder(
+                                  sentRequests: sentRequests,
+                                  onPressed: (deviceInfo) async {
+                                    var request = await TransferManager().sendRequest(deviceInfo, widget.files);
+                                    setState(() => sentRequests.addAll({deviceInfo: request}));
+                                  },
                                 ),
                               ),
                               SenderQr(
-                                onDeviceConnected: (deviceInfo) {
+                                onDeviceConnected: (deviceInfo) async {
                                   if (mounted) {
-                                    setState(() => deviceClickBlock.add(deviceInfo));
-                                    TransferManager().sendRequest(deviceInfo, widget.files);
+                                    var request = await TransferManager().sendRequest(deviceInfo, widget.files);
+                                    setState(() => sentRequests.addAll({deviceInfo: request}));
                                   }
                                 },
                               ),
