@@ -86,7 +86,7 @@ class AboutDialogCustomized extends StatelessWidget {
                                 TextButton.icon(
                                   onPressed: () => launchUrlString("mailto:'berkekbgz@gmail.com'"),
                                   style: TextButton.styleFrom(
-                                    fixedSize: const Size(100, 24),
+                                    fixedSize: const Size(110, 24),
                                   ),
                                   icon: const Icon(Icons.email_rounded),
                                   label: Text('aboutDialog.contact.email'.tr()),
@@ -95,7 +95,7 @@ class AboutDialogCustomized extends StatelessWidget {
                                 TextButton.icon(
                                   onPressed: () => launchUrlString("https://twitter.com/berkekbgz"),
                                   style: TextButton.styleFrom(
-                                    fixedSize: const Size(100, 24),
+                                    fixedSize: const Size(110, 24),
                                   ),
                                   icon: const Icon(CustomIcons.twitter),
                                   label: const Text("Twitter"),
@@ -104,7 +104,7 @@ class AboutDialogCustomized extends StatelessWidget {
                                 TextButton.icon(
                                   onPressed: () => launchUrlString("https://discord.gg/4uB5QgPgab"),
                                   style: TextButton.styleFrom(
-                                    fixedSize: const Size(100, 24),
+                                    fixedSize: const Size(110, 24),
                                   ),
                                   icon: const Icon(CustomIcons.discord, size: 18),
                                   label: const Text(" Discord"),
