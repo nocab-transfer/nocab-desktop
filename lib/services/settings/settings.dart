@@ -12,16 +12,11 @@ import 'package:nocab_desktop/services/registry/registry.dart';
 import 'package:path/path.dart' as p;
 
 class SettingsService {
+  SettingsService._internal();
   static final SettingsService _singleton = SettingsService._internal();
-  bool? isMsixInstalled;
+  factory SettingsService() => _singleton;
 
   List<String> errors = [];
-
-  factory SettingsService() {
-    return _singleton;
-  }
-
-  SettingsService._internal();
 
   final _changeController = StreamController<SettingsModel>.broadcast();
   Stream<SettingsModel> get onSettingChanged => _changeController.stream;
