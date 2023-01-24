@@ -74,7 +74,6 @@ msix_config:
 
 flutter:
   uses-material-design: true
-  generate: true
   assets:
   - assets/images/
   - assets/context_menu_icon/icon.ico
