@@ -2,10 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:nocab_desktop/extensions/variables_from_base_deviceinfo.dart';
 import 'package:nocab_desktop/models/settings_model.dart';
 import 'package:nocab_desktop/services/network/network.dart';
 import 'package:nocab_desktop/services/registry/registry.dart';
@@ -59,7 +57,7 @@ class SettingsService {
   Future<SettingsModel> _createNewSettings() async {
     var rawLocale = Platform.localeName.split('.')[0];
     return SettingsModel(
-      deviceName: (await DeviceInfoPlugin().deviceInfo).deviceName,
+      deviceName: Platform.localHostname,
       darkMode: RegistryService.isDarkMode(),
       mainPort: await Network.getUnusedPort(),
       finderPort: 62193,
