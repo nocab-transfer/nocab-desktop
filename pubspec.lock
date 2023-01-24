@@ -217,14 +217,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.2"
-  cupertino_icons:
-    dependency: "direct main"
-    description:
-      name: cupertino_icons
-      sha256: e35129dc44c9118cee2a5603506d823bab99c68393879edb440e0090d07586be
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.5"
   dart_style:
     dependency: transitive
     description:
@@ -347,14 +339,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.13"
-  flutter_platform_alert:
-    dependency: "direct main"
-    description:
-      name: flutter_platform_alert
-      sha256: "49175cf8f5d2bd3bced84465046aeadb031c74b9cb50820bf5c7e9db5c35a1a9"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.3.0"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:

@@ -4,7 +4,6 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   desktop_drop
-  flutter_platform_alert
   isar_flutter_libs
   screen_retriever
   share_plus
