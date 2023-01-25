@@ -19,4 +19,5 @@ jobs:
         uses: zgosalvez/github-actions-analyze-dart@v2
         with:
           line-length: 150
+          working-directory: $(find . -name *.dart -not -name *.g.dart)
       - run: dart format --set-exit-if-changed -l 150 $(find . -name *.dart -not -name *.g.dart)
