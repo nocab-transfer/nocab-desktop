@@ -8,9 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Set up Flutter
-        uses: subosito/flutter-action@v1
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'master'
       - run: flutter pub get
       - run: flutter pub run build_runner build
       - name: Analyze Dart
