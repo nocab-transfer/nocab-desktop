@@ -1,0 +1,22 @@
+name: Check Code
+
+on: [ push, pull_request ]
+
+jobs:
+  build:
+    name: Check Code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'master'
+      - run: flutter pub get
+      - run: flutter pub run build_runner build
+      - name: Analyze Dart
+        uses: zgosalvez/github-actions-analyze-dart@v2
+        with:
+          line-length: 150
+      - run: dart format --set-exit-if-changed -l 150 $(find . -name *.dart -not -name *.g.dart)
