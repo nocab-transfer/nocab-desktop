@@ -17,4 +17,6 @@ jobs:
       - run: flutter pub run build_runner build
       - name: Analyze Dart
         uses: zgosalvez/github-actions-analyze-dart@v2
+        with:
+          line-length: 150
       - run: dart format --set-exit-if-changed -l 150 $(find . -name *.dart -not -name *.g.dart)
