@@ -28,7 +28,7 @@
 * A network that both devices are connected to
 
 ## Installing
-> **NOTE**: Unfortunately there is no Linux or MacOS Application. For Windows keep reading.
+> **Note**: Unfortunately there is no Linux or MacOS Application. For Windows keep reading.
 
 ### 1. Installing MSIX using PowerShell
 * Right click the Windows button and select PowerShell or Terminal.
@@ -37,7 +37,7 @@
 * Wait for the installation to complete
 * You can now use the NoCab 🥳🚀
 
-> **NOTE**: What is `get-nocab.netlify.app`? Read more about it [here](https://github.com/nocab-transfer/nocab-desktop/wiki/Possible-Questions#so-what-is-get-nocabnetlifyapp)
+> **Note**: What is `get-nocab.netlify.app`? Read more about it [here](https://github.com/nocab-transfer/nocab-desktop/wiki/Possible-Questions#so-what-is-get-nocabnetlifyapp)
 
 ### 2. Downloading Portable Version
 * Download the `nocab_desktop-win64-portable.zip` from [here](https://github.com/nocab-transfer/nocab-desktop/releases/latest)
@@ -45,7 +45,7 @@
 * Run the nocab_desktop.exe file
 * Now you are ready to go 🥳🚀
 
-> **NOTE**: We recommend you to use the MSIX version. Read more about why [here](https://github.com/nocab-transfer/nocab-desktop/wiki/Why-you-should-use-MSIX%3F).
+> **Note**: We recommend you to use the MSIX version. Read more about why [here](https://github.com/nocab-transfer/nocab-desktop/wiki/Why-you-should-use-MSIX%3F).
 
 
 <br>
