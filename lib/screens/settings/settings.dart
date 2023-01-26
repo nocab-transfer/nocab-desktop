@@ -104,12 +104,9 @@ class _SettingsState extends State<Settings> {
                     ),
                   ),
                   Center(
-                    child: GestureDetector(
-                      onDoubleTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const Logs())),
-                      child: Text(
-                        'settings.title'.tr(),
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 24, fontWeight: FontWeight.w400),
-                      ),
+                    child: Text(
+                      'settings.title'.tr(),
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 24, fontWeight: FontWeight.w400),
                     ),
                   ),
                   Align(
@@ -434,6 +431,21 @@ class _SettingsState extends State<Settings> {
                                   },
                                   child: Text(
                                     'settings.advanced.forceRegenerateSettings.button'.tr(),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SettingCard(
+                              title: 'settings.advanced.logs.title'.tr(),
+                              caption: 'settings.advanced.logs.description'.tr(),
+                              widget: SizedBox(
+                                width: 180,
+                                height: 50,
+                                child: OutlinedButton(
+                                  onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const Logs())),
+                                  child: Text(
+                                    'settings.advanced.logs.button'.tr(),
                                     textAlign: TextAlign.center,
                                   ),
                                 ),

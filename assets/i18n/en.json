@@ -225,6 +225,11 @@
                     "confirmButton": "Confirm Regenerate",
                     "cancelButton": "Cancel"
                 }
+            },
+            "logs": {
+                "title": "Transfer Logs",
+                "description": "View core transfer logs.",
+                "button": "View Logs"
             }
         }
     },

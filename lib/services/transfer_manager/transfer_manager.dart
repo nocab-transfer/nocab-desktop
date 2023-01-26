@@ -30,6 +30,8 @@ class TransferManager {
   int portBindErrorCount = 0;
 
   Future<void> initialize() async {
+    NoCabCore.deleteLogs(to: DateTime.now().subtract(const Duration(days: 7))); // Delete logs older than 14 days
+
     DeviceManager().initialize(
       SettingsService().getSettings.deviceName,
       SettingsService().getNetworkInterface.addresses.first.address,

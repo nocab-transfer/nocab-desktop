@@ -225,6 +225,11 @@
                     "confirmButton": "Yeniden Oluşturmayı Onayla",
                     "cancelButton": "İptal"
                 }
+            },
+            "logs": {
+                "title": "Transfer Günlükleri",
+                "description": "Çekirdek transfer günlüklerini görüntüle.",
+                "button": "Günlükleri Görüntüle"
             }
         }
     },

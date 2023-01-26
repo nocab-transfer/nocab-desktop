@@ -563,7 +563,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: e5388d73545753df38a0fe98d7a2d8ddbc798186
+      resolved-ref: "5fda93ff281cb373f9811da9aff31ac1861f326e"
       url: "https://github.com/nocab-transfer/nocab-core.git"
     source: git
     version: "1.0.0"
@@ -572,7 +572,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: e917a1fdcd30ec02db8331afc1dc6a6a52cf6a06
+      resolved-ref: a64055d4a5745129e2b076c26b5d8ff845549b87
       url: "https://github.com/nocab-transfer/nocab-logger"
     source: git
     version: "1.0.0"
