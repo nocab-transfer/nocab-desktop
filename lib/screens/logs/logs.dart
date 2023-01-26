@@ -22,7 +22,7 @@ class _LogsState extends State<Logs> {
   @override
   void initState() {
     super.initState();
-    Logger().get(from: DateTime.now().subtract(const Duration(days: 1))).then((value) {
+    NoCabCore.getLogs(from: DateTime.now().subtract(const Duration(days: 1))).then((value) {
       setState(() => logs = value);
 
       Future.delayed(const Duration(milliseconds: 200), () {
@@ -34,10 +34,10 @@ class _LogsState extends State<Logs> {
       });
     });
 
-    subscription = Logger().onLogged.listen((event) async {
+    subscription = NoCabCore.onLogged.listen((event) async {
       if (logs.isEmpty) return;
 
-      var newLogs = await Logger().get(from: DateTime.now().subtract(const Duration(days: 1)));
+      var newLogs = await NoCabCore.getLogs(from: DateTime.now().subtract(const Duration(days: 1)));
       setState(() {
         logs = newLogs;
       });
@@ -99,7 +99,7 @@ class _LogsState extends State<Logs> {
               var location = await getDownloadPath();
               if (location == null) return;
               var file = File(join(location, "nocab_desktop_logs.txt"));
-              await Logger().exportLogsLast10Days(file);
+              await NoCabCore.exportLogsLast10Days(file);
               Share.shareXFiles([XFile(file.path)], subject: 'Share NoCab Desktop Logs', text: 'Logs');
             },
             icon: const Icon(Icons.download_rounded),
