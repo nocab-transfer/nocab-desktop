@@ -26,7 +26,7 @@ class _DeviceFinderState extends State<DeviceFinder> {
     super.initState();
     timer = Timer.periodic(const Duration(seconds: 3), (_) async {
       if (!mounted) timer?.cancel();
-      Radar.searchForDevices(SettingsService().getSettings.finderPort).listen((event) {
+      Radar.searchForDevices(radarPort: SettingsService().getSettings.finderPort).listen((event) {
         if (mounted) setState(() => devices = event);
       });
     });

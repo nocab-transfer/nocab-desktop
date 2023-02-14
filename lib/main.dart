@@ -8,6 +8,7 @@ import 'package:nocab_desktop/screens/main_screen/main_screen.dart';
 import 'package:nocab_desktop/services/database/database.dart';
 import 'package:nocab_desktop/services/dialog_service/dialog_service.dart';
 import 'package:nocab_desktop/services/ipc/ipc.dart';
+import 'package:nocab_desktop/services/log_manager/log_manager.dart';
 import 'package:nocab_desktop/services/network/network.dart';
 import 'package:nocab_desktop/services/registry/registry.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,14 @@ Future<void> main(List<String> args) async {
 
   await Network().initialize();
   var isFirstRun = await SettingsService().initialize();
+
+  NoCabCore.init(
+    deviceName: SettingsService().getSettings.deviceName,
+    deviceIp: SettingsService().getNetworkInterface.addresses.first.address,
+    requestPort: SettingsService().getSettings.mainPort,
+    logFolderPath: LogManager.logFolderPath,
+  );
+  LogManager.cleanOldLogs();
   await IPC().initialize(args, onData: (data) async => _loadFiles(data));
   await Database().initialize();
   Radar().start();

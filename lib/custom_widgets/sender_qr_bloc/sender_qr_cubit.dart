@@ -20,7 +20,7 @@ class SenderQrCubit extends Cubit<SenderQrState> {
   Future<void> startQrServer(Function(DeviceInfo device)? onDeviceConnected) async {
     serverSocket = await ServerSocket.bind(InternetAddress.anyIPv4, 0);
     _verificationString = generateRandomString(16);
-    emit(ConnectionWaiting(DeviceManager().currentDeviceInfo.ip, serverSocket!.port, _verificationString!));
+    emit(ConnectionWaiting(NoCabCore().currentDeviceInfo.ip, serverSocket!.port, _verificationString!));
 
     Timer.periodic(refreshDuration, (timer) {
       if (isClosed) {
@@ -54,7 +54,7 @@ class SenderQrCubit extends Cubit<SenderQrState> {
 
   void rebuildQr() {
     _verificationString = generateRandomString(16);
-    emit(ConnectionWaiting(DeviceManager().currentDeviceInfo.ip, serverSocket!.port, _verificationString!));
+    emit(ConnectionWaiting(NoCabCore().currentDeviceInfo.ip, serverSocket!.port, _verificationString!));
   }
 
   Future<void> stopQrServer() async {

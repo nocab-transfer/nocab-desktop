@@ -30,25 +30,19 @@ class TransferManager {
   int portBindErrorCount = 0;
 
   Future<void> initialize() async {
-    NoCabCore.deleteLogs(to: DateTime.now().subtract(const Duration(days: 7))); // Delete logs older than 14 days
-
-    DeviceManager().initialize(
-      SettingsService().getSettings.deviceName,
-      SettingsService().getNetworkInterface.addresses.first.address,
-      SettingsService().getSettings.mainPort,
-    );
-
-    RequestListener().start(onError: (e) async {
-      if (e.title == "Socket binding error") {
+    try {
+      RequestListener().start();
+    } catch (e) {
+      if (e is CoreError && e.title == "Socket binding error") {
         if (portBindErrorCount > 5) return; // TODO: Show error dialog
         portBindErrorCount++;
         int newPort = await Network.getUnusedPort();
         await SettingsService().setSettings(SettingsService().getSettings.copyWith(mainPort: newPort));
-        DeviceManager().updateDeviceInfo(requestPort: newPort);
+        NoCabCore().updateDeviceInfo(requestPort: newPort);
         RequestListener().stop();
         initialize();
       }
-    });
+    }
 
     RequestListener().onRequest.listen((request) async {
       if (await Database().exist(request.transferUuid)) {
@@ -58,7 +52,7 @@ class TransferManager {
 
       Database().registerRequest(
         request: request,
-        receiverDeviceInfo: DeviceManager().currentDeviceInfo,
+        receiverDeviceInfo: NoCabCore().currentDeviceInfo,
         senderDeviceInfo: request.deviceInfo,
         thisIsSender: false,
       );
@@ -89,7 +83,7 @@ class TransferManager {
   }
 
   Future<ShareRequest> sendRequest(DeviceInfo receiverDeviceInfo, List files) async {
-    var request = RequestMaker.create(files: files, transferPort: await Network.getUnusedPort());
+    var request = RequestMaker.create(files: files, transferPort: await Network.getUnusedPort(), controlPort: await Network.getUnusedPort());
 
     Database().registerRequest(request: request, receiverDeviceInfo: receiverDeviceInfo, senderDeviceInfo: request.deviceInfo, thisIsSender: true);
     RequestMaker.requestTo(receiverDeviceInfo, request: request);

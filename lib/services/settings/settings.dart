@@ -101,7 +101,7 @@ class SettingsService {
 
   String getdefaultSettingsPath() {
     if (Platform.isWindows && !kDebugMode) {
-      return p.join(Platform.environment['APPDATA']!, r'NoCab Desktop\settings.json');
+      return p.join(Platform.environment['APPDATA']!, 'NoCab Desktop', 'settings.json');
     }
     return p.join(File(Platform.resolvedExecutable).parent.path, "settings.json");
   }

@@ -171,10 +171,10 @@ class _SettingsState extends State<Settings> {
                                         onChanged: (String value) {
                                           if (value.isNotEmpty) {
                                             SettingsService().setSettings(currentSettings.copyWith(deviceName: value));
-                                            DeviceManager().updateDeviceInfo(name: value);
+                                            NoCabCore().updateDeviceInfo(name: value);
                                           } else {
                                             SettingsService().setSettings(currentSettings.copyWith(deviceName: "Unknown"));
-                                            DeviceManager().updateDeviceInfo(name: "Unknown");
+                                            NoCabCore().updateDeviceInfo(name: "Unknown");
                                           }
                                         },
                                       ),
