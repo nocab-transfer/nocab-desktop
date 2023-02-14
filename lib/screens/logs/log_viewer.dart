@@ -53,7 +53,7 @@ class _LogViewerState extends State<LogViewer> {
         Future.delayed(const Duration(milliseconds: 500), () {
           if (scrollController.positions.isEmpty) return;
           scrollController.animateTo(
-            scrollController.position.maxScrollExtent + 100,
+            scrollController.position.maxScrollExtent + 20,
             duration: const Duration(milliseconds: 500),
             curve: Curves.fastOutSlowIn,
           );
@@ -100,28 +100,47 @@ class _LogViewerState extends State<LogViewer> {
       onTap: () => Navigator.of(context).pop(),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: Center(
-          child: Container(
-            decoration: BoxDecoration(
-              //color: Theme.of(context).colorScheme.background,
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    _buildHero(context),
-                    const SizedBox(width: 8),
-                    _buildLogs(context),
-                    const SizedBox(width: 8),
-                    _buildActions(context),
-                  ],
-                ),
-                Text("Click outside to close", style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontStyle: FontStyle.italic)),
-              ],
+        body: RawKeyboardListener(
+          focusNode: FocusNode(),
+          autofocus: true,
+          onKey: (event) {
+            // TODO: Make more clean with new Dart 3 'Usable Switches' feature
+            // https://youtu.be/KhYTFglbF2k?t=695
+            if (event.isKeyPressed(LogicalKeyboardKey.escape)) {
+              Navigator.of(context).pop();
+            } else if (event.isKeyPressed(LogicalKeyboardKey.keyC) && event.isControlPressed) {
+              Clipboard.setData(ClipboardData(text: logs.join("\r\n")));
+            } else if (event.isKeyPressed(LogicalKeyboardKey.keyS) && event.isControlPressed) {
+              Share.shareXFiles([XFile(widget.file.path)]);
+            } else if (event.isKeyPressed(LogicalKeyboardKey.keyA) && event.isControlPressed) {
+              // TODO: Select all (Not yet implemented in Flutter https://github.com/flutter/flutter/issues/107073)
+            } else if (event.isKeyPressed(LogicalKeyboardKey.keyW) && event.isControlPressed) {
+              Navigator.of(context).pop();
+            }
+          },
+          child: Center(
+            child: Container(
+              decoration: BoxDecoration(
+                //color: Theme.of(context).colorScheme.background,
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      _buildHero(context),
+                      const SizedBox(width: 8),
+                      _buildLogs(context),
+                      const SizedBox(width: 8),
+                      _buildActions(context),
+                    ],
+                  ),
+                  Text("Click outside to close", style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontStyle: FontStyle.italic)),
+                ],
+              ),
             ),
           ),
         ),
@@ -240,6 +259,7 @@ class _LogViewerState extends State<LogViewer> {
                     padding: const EdgeInsets.all(8.0),
                     child: SingleChildScrollView(
                       controller: scrollController,
+                      physics: const BouncingScrollPhysics(),
                       child: SelectionArea(
                         child: ListView.builder(
                           physics: const NeverScrollableScrollPhysics(),
