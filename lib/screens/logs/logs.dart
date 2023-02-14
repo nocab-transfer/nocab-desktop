@@ -1,13 +1,12 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:animations/animations.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:nocab_core/nocab_core.dart';
-import 'package:nocab_desktop/custom_dialogs/alert_box/alert_box.dart';
+import 'package:nocab_desktop/screens/logs/log_viewer.dart';
+import 'package:nocab_desktop/services/log_manager/log_manager.dart';
+import 'package:nocab_desktop/services/settings/settings.dart';
 import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:share_plus/share_plus.dart';
 
 class Logs extends StatefulWidget {
   const Logs({super.key});
@@ -17,46 +16,44 @@ class Logs extends StatefulWidget {
 }
 
 class _LogsState extends State<Logs> {
-  List logs = [];
+  final outerController = ScrollController();
 
-  StreamSubscription? subscription;
-  final ScrollController scrollController = ScrollController();
+  final GlobalKey<AnimatedGridState> _gridKey = GlobalKey<AnimatedGridState>();
+  late final List<File> logFiles;
+  StreamSubscription? _logSubscription;
+
   @override
   void initState() {
     super.initState();
-    NoCabCore.getLogs(from: DateTime.now().subtract(const Duration(days: 7))).then((value) {
-      setState(() => logs = value);
+    logFiles = LogManager.getLogFiles..sort((a, b) => basenameWithoutExtension(b.path).compareTo(basenameWithoutExtension(a.path)));
 
-      Future.delayed(const Duration(milliseconds: 200), () {
-        scrollController.animateTo(
-          scrollController.position.maxScrollExtent + 100,
-          duration: const Duration(milliseconds: 500),
-          curve: Curves.fastOutSlowIn,
-        );
-      });
-    });
-
-    subscription = NoCabCore.onLogged.listen((event) async {
-      if (logs.isEmpty) return;
-
-      var newLogs = await NoCabCore.getLogs(from: DateTime.now().subtract(const Duration(days: 7)));
-      setState(() {
-        logs = newLogs;
-      });
-
-      Future.delayed(const Duration(milliseconds: 500), () {
-        scrollController.animateTo(
-          scrollController.position.maxScrollExtent + 100,
-          duration: const Duration(milliseconds: 500),
-          curve: Curves.fastOutSlowIn,
-        );
-      });
+    _logSubscription = Directory(LogManager.logFolderPath).watch().listen((event) {
+      if (event.type == FileSystemEvent.delete) {
+        Future.delayed(const Duration(milliseconds: 200), () {
+          if (mounted) {
+            setState(() {
+              var index = logFiles.indexWhere((element) => element.path == event.path);
+              var file = logFiles.removeAt(index);
+              _gridKey.currentState?.removeItem(
+                index,
+                (context, animation) => FadeTransition(
+                  opacity: animation,
+                  child: ScaleTransition(
+                    scale: animation.drive(Tween(begin: 0.8, end: 1.0)),
+                    child: _buildLogFileGrid(context, file),
+                  ),
+                ),
+              );
+            });
+          }
+        });
+      }
     });
   }
 
   @override
   void dispose() {
-    subscription?.cancel();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -85,7 +82,9 @@ class _LogsState extends State<Logs> {
                 style: Theme.of(context).textTheme.titleLarge,
                 children: [
                   TextSpan(
-                    text: "(Last 7 days)",
+                    text: " (Count: ${logFiles.length} "
+                        "Total Size: "
+                        "${logFiles.fold(0, (previousValue, element) => previousValue + element.lengthSync()) / 1000} KB)",
                     style: Theme.of(context).textTheme.labelSmall,
                   ),
                 ],
@@ -96,95 +95,157 @@ class _LogsState extends State<Logs> {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         actions: [
-          TextButton.icon(
-            onPressed: () async {
-              showDeleteDialog(context).then((value) {
-                if (value) NoCabCore.deleteLogs();
-              });
-            },
-            icon: const Icon(Icons.delete_forever_rounded),
-            label: const Text("Delete"),
-            style: TextButton.styleFrom(
-              foregroundColor: Theme.of(context).colorScheme.error,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(10),
             ),
-          ),
-          IconButton(
-            onPressed: () async {
-              var location = await getDownloadPath();
-              if (location == null) return;
-              var file = File(join(location, "nocab_desktop_logs.txt"));
-              await NoCabCore.exportToFile(file);
-              Share.shareXFiles([XFile(file.path)], subject: 'Share NoCab Desktop Logs', text: 'Logs');
-            },
-            icon: const Icon(Icons.download_rounded),
-            color: Theme.of(context).colorScheme.primary,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              child: Text(
+                "Logs older than 7 days are automatically deleted",
+                style: Theme.of(context).textTheme.labelSmall,
+              ),
+            ),
           ),
           const SizedBox(width: 8),
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
-          controller: scrollController,
-          child: SelectionArea(
-            child: ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: logs.length,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                var log = logs[index];
-
-                return Text(log.toString());
-              },
-            ),
-          ),
+        padding: const EdgeInsets.all(16),
+        child: Center(
+          child: _buildGridView(logFiles),
         ),
       ),
     );
   }
 
-  Future<bool> showDeleteDialog(BuildContext context) async {
-    return await showModal<bool>(
-          context: context,
-          builder: (context) => AlertBox(
-            title: "Delete Logs",
-            message: "Are you sure you want to delete all logs?",
-            actions: [
-              TextButton.icon(
-                onPressed: () => Navigator.pop(context, true),
-                icon: const Icon(Icons.delete_forever_rounded),
-                label: const Text('Delete'),
-                style: TextButton.styleFrom(
-                  foregroundColor: Colors.red,
-                  textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                ),
-              ),
-              const SizedBox(width: 4),
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: Theme.of(context).colorScheme.onPrimary,
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                  textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
-                  padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-                ),
-                child: const Text('Cancel'),
-              ),
-            ],
-          ),
-        ) ??
-        false;
+  Widget _buildGridView(List<File> initialLogFiles) {
+    return Listener(
+      onPointerSignal: (event) {
+        if (event is PointerScrollEvent) {
+          if (event.scrollDelta.dy > 0) {
+            outerController.jumpTo(outerController.offset + 100);
+          } else {
+            outerController.jumpTo(outerController.offset - 100);
+          }
+        }
+      },
+      child: AnimatedGrid(
+        key: _gridKey,
+        controller: outerController,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 8,
+          mainAxisSpacing: 8,
+        ),
+        initialItemCount: initialLogFiles.length,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index, animation) {
+          return _buildLogFileGrid(
+            context,
+            initialLogFiles[index],
+          );
+        },
+      ),
+    );
   }
 
-  Future<String?> getDownloadPath() async {
-    Directory? directory;
-    try {
-      directory = await getDownloadsDirectory();
-    } catch (err) {
-      return null;
-    }
-    return directory?.path;
+  Widget _buildLogFileGrid(BuildContext context, File file) {
+    return Hero(
+      tag: basenameWithoutExtension(file.path),
+      transitionOnUserGestures: true,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.background,
+          border: Border.fromBorderSide(
+            BorderSide(
+              color: file.path == LogManager.currentLogFile.path
+                  ? Theme.of(context).colorScheme.primary
+                  : Theme.of(context).colorScheme.secondary.withOpacity(0.4),
+              width: 2,
+            ),
+          ),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Column(
+          children: [
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: file.path == LogManager.currentLogFile.path
+                          ? Theme.of(context).colorScheme.primaryContainer
+                          : Theme.of(context).colorScheme.secondaryContainer,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Icon(
+                        Icons.insert_drive_file_rounded,
+                        color: file.path == LogManager.currentLogFile.path
+                            ? Theme.of(context).colorScheme.primary
+                            : Theme.of(context).colorScheme.secondary,
+                        size: 32,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    basenameWithoutExtension(file.path),
+                    style: Theme.of(context).textTheme.labelLarge,
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    file.existsSync()
+                        ? "Last Modified: ${SettingsService().getSettings.dateFormatType.dateFormat.format(file.lastModifiedSync())}"
+                        : "File Deleted",
+                    style: Theme.of(context).textTheme.labelSmall,
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    file.path == LogManager.currentLogFile.path ? "CURRENT LOG" : "OLD LOG",
+                    style: Theme.of(context).textTheme.labelSmall,
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: TextButton.icon(
+                onPressed: () => Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      opaque: false,
+                      barrierColor: Colors.black.withOpacity(0.5),
+                      transitionDuration: const Duration(milliseconds: 200),
+                      reverseTransitionDuration: const Duration(milliseconds: 200),
+                      pageBuilder: (context, animation, secondaryAnimation) {
+                        return FadeTransition(
+                          opacity: animation.drive(CurveTween(curve: Curves.easeInOut)),
+                          child: ScaleTransition(
+                            scale: animation.drive(Tween(begin: 0.90, end: 1.0).chain(CurveTween(curve: Curves.easeInOut))),
+                            //opacity: animation.drive(CurveTween(curve: Curves.easeInOut)),
+                            child: LogViewer(file: file),
+                          ),
+                        );
+                      },
+                    )),
+                icon: const Icon(Icons.file_open_rounded),
+                label: const Text("Open"),
+                style: TextButton.styleFrom(
+                  foregroundColor: Theme.of(context).colorScheme.secondary,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
