@@ -1,4 +1,3 @@
-
 <h1 align="center">
 <img src="https://raw.githubusercontent.com/NoCabTransfer/.github/main/profile/icon.png" alt="NoCab Transfer" width="70"></a>
     <br>
@@ -16,11 +15,15 @@
 <p align="center">
   <a href="https://github.com/nocab-transfer/nocab-desktop/releases"><img src="https://img.shields.io/github/v/release/nocab-transfer/nocab-desktop?color=blueviolet"/></a>
   <a href="https://github.com/nocab-transfer/nocab-desktop/blob/main/LICENSE"><img src="https://img.shields.io/github/license/nocab-transfer/nocab-desktop?color=red"/></a>
+<a href="https://app.fossa.com/projects/git%2Bgithub.com%2Fnocab-transfer%2Fnocab-desktop?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fnocab-transfer%2Fnocab-desktop.svg?type=shield"/></a>
 </p>
 
 <br>
 
 <center><img src="Resources/confirmation.png" alt="NoCab Transfer" width="800"></a></center>
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fnocab-transfer%2Fnocab-desktop.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fnocab-transfer%2Fnocab-desktop?ref=badge_large)
 
 ## Minimum Requirements
 * Windows 10 1903 or later
