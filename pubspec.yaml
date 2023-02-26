@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   qr_flutter: ^4.0.0
-  flutter_svg: ^1.1.4
+  flutter_svg: ^2.0.2
   window_manager: ^0.3.0
   provider: ^6.0.3
   smooth_page_indicator: ^1.0.0+2
@@ -29,13 +29,13 @@ dependencies:
   url_launcher: ^6.1.8
   easy_localization: ^3.0.2-dev
   http: ^0.13.5
-  flutter_animate: ^3.0.0
+  flutter_animate: ^4.1.0
   isar: ^3.0.2
   isar_flutter_libs: ^3.0.2
   uuid: ^3.0.6
   package_info_plus: ^3.0.3
   flutter_markdown: ^0.6.13
-  markdown: ^6.0.1
+  markdown: ^7.0.1
   io: ^1.0.4
   nocab_core:
     git:
