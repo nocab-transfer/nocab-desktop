@@ -51,8 +51,6 @@ dependency_overrides:
     git:
       url: https://github.com/nocab-transfer/nocab-logger.git
       ref: pure-dart
-  nocab_core:
-    path: ../nocab_core
 
 dev_dependencies:
   flutter_test:

@@ -561,9 +561,11 @@ packages:
   nocab_core:
     dependency: "direct main"
     description:
-      path: "../nocab_core"
-      relative: true
-    source: path
+      path: "."
+      ref: transfer-controller
+      resolved-ref: "8956dee61e6202065b9eb48de81558bcaf2c9051"
+      url: "https://github.com/nocab-transfer/nocab-core.git"
+    source: git
     version: "1.0.0"
   nocab_logger:
     dependency: "direct main"
