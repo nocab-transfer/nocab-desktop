@@ -57,7 +57,7 @@ class _SendDragDropState extends State<SendDragDrop> {
                       if (value != null) widget.onFilesReady?.call(value);
                     }),
                     style: ElevatedButton.styleFrom(
-                      fixedSize: const Size(155, 50),
+                      fixedSize: const Size(160, 50),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
                     ),
                     child: Row(

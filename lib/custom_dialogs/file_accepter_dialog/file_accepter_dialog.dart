@@ -92,7 +92,7 @@ class _FileAccepterDialogState extends State<FileAccepterDialog> {
                     onPressed: () => TransferManager().rejectRequest(widget.request),
                     style: OutlinedButton.styleFrom(
                       surfaceTintColor: Theme.of(context).colorScheme.error,
-                      fixedSize: const Size(100, 50),
+                      fixedSize: const Size(110, 50),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
                       side: BorderSide(width: 2, color: Theme.of(context).colorScheme.error),
                     ),
@@ -105,7 +105,7 @@ class _FileAccepterDialogState extends State<FileAccepterDialog> {
                   ElevatedButton(
                     onPressed: () async => TransferManager().acceptRequest(widget.request),
                     style: ElevatedButton.styleFrom(
-                      fixedSize: const Size(100, 50),
+                      fixedSize: const Size(110, 50),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
                       backgroundColor: Theme.of(context).colorScheme.primary,
                     ),

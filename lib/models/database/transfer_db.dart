@@ -28,6 +28,9 @@ class TransferDatabase {
   @Name("End Time")
   DateTime? endedAt;
 
+  @Name("Cancelled At")
+  DateTime? cancelledAt;
+
   @Name("Files")
   late List<FileDb> files;
 
@@ -52,7 +55,8 @@ enum TransferDbStatus {
   error,
   declined,
   ongoing,
-  pendingForAcceptance;
+  pendingForAcceptance,
+  cancelled;
 }
 
 enum TransferDbType {
@@ -81,6 +85,8 @@ extension E1 on TransferDbStatus {
         return Colors.blue;
       case TransferDbStatus.pendingForAcceptance:
         return Colors.orange;
+      case TransferDbStatus.cancelled:
+        return Colors.red;
     }
   }
 }

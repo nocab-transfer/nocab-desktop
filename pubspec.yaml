@@ -2,7 +2,7 @@ name: nocab_desktop
 description: File sharing application
 
 publish_to: 'none' 
-version: 1.4.2+1
+version: 1.4.3+1
 
 environment:
   sdk: ">=3.0.0-62.0.dev <4.0.0"
@@ -33,7 +33,7 @@ dependencies:
   isar: ^3.0.2
   isar_flutter_libs: ^3.0.2
   uuid: ^3.0.6
-  package_info_plus: ^3.0.2
+  package_info_plus: ^3.0.3
   flutter_markdown: ^0.6.13
   markdown: ^6.0.1
   io: ^1.0.4
@@ -51,6 +51,8 @@ dependency_overrides:
     git:
       url: https://github.com/nocab-transfer/nocab-logger.git
       ref: pure-dart
+  nocab_core:
+    path: ../nocab_core
 
 dev_dependencies:
   flutter_test:
@@ -67,7 +69,7 @@ msix_config:
   logo_path: assets/logo/logo.png
   languages: en-us, tr-tr
   publisher: berkekbgz
-  version: 1.4.2.0
+  version: 1.4.3.0
   execution_alias: nocab
 
   context_menu_directory_id: NoCabContextMenu

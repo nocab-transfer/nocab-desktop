@@ -77,11 +77,6 @@ class TransferManager {
     request.reject();
   }
 
-  void removeTranser(Transfer transfer) {
-    transfers.removeWhere((element) => element.uuid == transfer.uuid);
-    _transferController.add(transfers);
-  }
-
   Future<ShareRequest> sendRequest(DeviceInfo receiverDeviceInfo, List files) async {
     var request = RequestMaker.create(files: files, transferPort: await Network.getUnusedPort(), controlPort: await Network.getUnusedPort());
 

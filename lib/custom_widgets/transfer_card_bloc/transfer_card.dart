@@ -4,6 +4,7 @@ import 'package:nocab_core/nocab_core.dart';
 import 'package:nocab_desktop/custom_widgets/sponsor_related/sponsor_snackbar.dart';
 import 'package:nocab_desktop/custom_widgets/transfer_card_bloc/transfer_card_cubit.dart';
 import 'package:nocab_desktop/custom_widgets/transfer_card_bloc/transfer_card_state.dart';
+import 'package:nocab_desktop/custom_widgets/transfer_card_bloc/transfer_card_state_views/transfer_card_transfercancelled.dart';
 import 'package:nocab_desktop/custom_widgets/transfer_card_bloc/transfer_card_state_views/transfer_card_transferfailed.dart';
 import 'package:nocab_desktop/custom_widgets/transfer_card_bloc/transfer_card_state_views/transfer_card_transferring.dart';
 import 'package:nocab_desktop/custom_widgets/transfer_card_bloc/transfer_card_state_views/transfer_card_transferstarted.dart';
@@ -11,11 +12,11 @@ import 'package:nocab_desktop/custom_widgets/transfer_card_bloc/transfer_card_st
 import 'package:nocab_desktop/extensions/size_extension.dart';
 import 'package:nocab_desktop/models/database/transfer_db.dart';
 import 'package:nocab_desktop/services/database/database.dart';
-import 'package:nocab_desktop/services/transfer_manager/transfer_manager.dart';
 
 class TransferCard extends StatelessWidget {
   final Transfer transfer;
-  const TransferCard({Key? key, required this.transfer}) : super(key: key);
+  final Function()? onClose;
+  const TransferCard({Key? key, required this.transfer, this.onClose}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,27 +34,28 @@ class TransferCard extends StatelessWidget {
             }
           }
         },
-        builder: (context, state) => buildWidget(context, state, transfer),
+        builder: (context, state) => buildWidget(context, state),
       ),
     );
   }
-}
 
-Widget buildWidget(BuildContext context, TransferCardState state, Transfer transfer) {
-  switch (state.runtimeType) {
-    case TransferCardInitial:
-      return Container();
-    case TransferStarted:
-      return TransferStartedView(state: state as TransferStarted, isDownload: transfer is Receiver);
-    case Transferring:
-      return TransferringView(state: state as Transferring, isDownload: transfer is Receiver);
-    case TransferSuccess:
-      return TransferSuccessView(
-          state: state as TransferSuccess, isDownload: transfer is Receiver, onClose: () => TransferManager().removeTranser(transfer));
-    case TransferFailed:
-      return TransferFailedView(
-          state: state as TransferFailed, isDownload: transfer is Receiver, onClose: () => TransferManager().removeTranser(transfer));
-    default:
-      return Container();
+  Widget buildWidget(BuildContext context, TransferCardState state) {
+    switch (state.runtimeType) {
+      case TransferCardInitial:
+        return Container();
+      case TransferStarted:
+        return TransferStartedView(state: state as TransferStarted, isDownload: transfer is Receiver);
+      case Transferring:
+        return TransferringView(
+            state: state as Transferring, isDownload: transfer is Receiver, onCancel: () => context.read<TransferCardCubit>().cancel());
+      case TransferSuccess:
+        return TransferSuccessView(state: state as TransferSuccess, isDownload: transfer is Receiver, onClose: onClose);
+      case TransferFailed:
+        return TransferFailedView(state: state as TransferFailed, isDownload: transfer is Receiver, onClose: onClose);
+      case TransferCancelled:
+        return TransferCancelledView(state: state as TransferCancelled, isDownload: transfer is Receiver, onClose: onClose);
+      default:
+        return Container();
+    }
   }
 }

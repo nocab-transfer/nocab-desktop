@@ -36,6 +36,11 @@ class TransferSuccess extends TransferCardState {
   const TransferSuccess(this.deviceInfo, this.files);
 }
 
+class TransferCancelled extends TransferCardState {
+  final DeviceInfo deviceInfo;
+  const TransferCancelled(this.deviceInfo);
+}
+
 class TransferFileEnded extends TransferCardState {
   final FileInfo file;
   const TransferFileEnded(this.file);

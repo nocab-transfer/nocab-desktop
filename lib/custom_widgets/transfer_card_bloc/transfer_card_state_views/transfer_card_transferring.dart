@@ -11,72 +11,102 @@ import 'package:nocab_desktop/custom_widgets/transfer_card_bloc/transfer_card_st
 class TransferringView extends StatelessWidget {
   final Transferring state;
   final bool isDownload;
-  const TransferringView({super.key, required this.state, required this.isDownload});
+  final Function() onCancel;
+  const TransferringView({super.key, required this.state, required this.isDownload, required this.onCancel});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        //height: MediaQuery.of(context).size.height / 5,
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surfaceVariant,
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
-        ),
+    return Container(
+      //height: MediaQuery.of(context).size.height / 5,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surfaceVariant,
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
+      ),
 
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                        height: MediaQuery.of(context).size.height / 15,
-                        width: MediaQuery.of(context).size.height / 15,
-                        child: Icon(Icons.phonelink_rounded, color: Theme.of(context).colorScheme.onPrimary),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Theme.of(context).colorScheme.primary,
                       ),
-                      SizedBox(
-                        width: 250,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(state.deviceInfo.name,
-                                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold), overflow: TextOverflow.ellipsis),
-                              Text(state.deviceInfo.ip, style: const TextStyle(fontSize: 12)),
-                            ],
-                          ),
+                      height: MediaQuery.of(context).size.height / 15,
+                      width: MediaQuery.of(context).size.height / 15,
+                      child: Icon(isDownload ? Icons.download_rounded : Icons.upload_rounded, color: Theme.of(context).colorScheme.onPrimary),
+                    ),
+                    SizedBox(
+                      width: 200,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(state.deviceInfo.name,
+                                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold), overflow: TextOverflow.ellipsis),
+                            Text(state.deviceInfo.ip, style: const TextStyle(fontSize: 12)),
+                          ],
                         ),
                       ),
-                    ],
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 2.0),
+                  child: ElevatedButton.icon(
+                    onPressed: onCancel,
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                      backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+                      foregroundColor: Theme.of(context).colorScheme.error,
+                      surfaceTintColor: Theme.of(context).colorScheme.error,
+                      shadowColor: Colors.transparent,
+                      padding: const EdgeInsets.all(16),
+                    ),
+                    label: Text('mainView.transfers.card.transferring.cancelButton'.tr()),
+                    icon: const Icon(Icons.cancel_rounded),
                   ),
-                  Icon(isDownload ? Icons.download_rounded : Icons.upload_rounded, color: Theme.of(context).colorScheme.primary),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                      "mainView.transfers.card.transferring.title.${isDownload ? 'download' : 'upload'}".plural(
+                        state.files.length,
+                        name: 'count',
+                      ),
+                      style: Theme.of(context).textTheme.labelLarge),
+                  //Icon(isDownload ? Icons.download_rounded : Icons.upload_rounded, color: Theme.of(context).colorScheme.primary),
                 ],
               ),
-              ListView.builder(
-                itemCount: state.files.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  if (state.filesTransferred.map((e) => e.name).contains(state.files[index].name)) {
-                    return _buildtransferred(state.files[index], context);
-                  } else if (state.files[index].name == state.currentFile.name) {
-                    return _buildTransferring(state.files[index], state, context);
-                  } else {
-                    return _buildFilePending(state.files[index], context);
-                  }
-                },
-              )
-            ],
-          ),
+            ),
+            const SizedBox(height: 8),
+            ListView.builder(
+              itemCount: state.files.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                if (state.filesTransferred.map((e) => e.name).contains(state.files[index].name)) {
+                  return _buildtransferred(state.files[index], context);
+                } else if (state.files[index].name == state.currentFile.name) {
+                  return _buildTransferring(state.files[index], state, context);
+                } else {
+                  return _buildFilePending(state.files[index], context);
+                }
+              },
+            )
+          ],
         ),
       ),
     );
