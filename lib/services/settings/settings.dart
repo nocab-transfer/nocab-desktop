@@ -57,7 +57,7 @@ class SettingsService {
   Future<SettingsModel> _createNewSettings() async {
     var rawLocale = Platform.localeName.split('.')[0];
     return SettingsModel(
-      deviceName: Platform.localHostname.substring(0, 20),
+      deviceName: Platform.localHostname,
       darkMode: RegistryService.isDarkMode(),
       mainPort: await Network.getUnusedPort(),
       finderPort: 62193,
