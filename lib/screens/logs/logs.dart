@@ -1,8 +1,11 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:archive/archive_io.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:nocab_core/nocab_core.dart';
+import 'package:nocab_desktop/extensions/file_info_functions.dart';
 import 'package:nocab_desktop/screens/logs/log_viewer.dart';
 import 'package:nocab_desktop/services/log_manager/log_manager.dart';
 import 'package:nocab_desktop/services/settings/settings.dart';
@@ -60,6 +63,23 @@ class _LogsState extends State<Logs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () async {
+          Directory directory = Directory(SettingsService().getSettings.downloadPath);
+          if (!directory.existsSync()) directory.createSync(recursive: true);
+          var encoder = ZipFileEncoder();
+          var unusedFile = FileOperations.findUnusedFilePath(fileName: "nocab-desktop-logs.zip", downloadPath: directory.path);
+          encoder.create(unusedFile);
+          for (var element in logFiles) {
+            await encoder.addFile(element);
+          }
+          encoder.close();
+          File(encoder.zipPath).showInFolder();
+        },
+        icon: const Icon(Icons.folder_zip_outlined),
+        label: const Text("Create Zip"),
+      ),
       appBar: AppBar(
         titleSpacing: 8,
         scrolledUnderElevation: 0,
