@@ -253,6 +253,17 @@ class _SettingsState extends State<Settings> {
                                   activeColor: Theme.of(context).colorScheme.primary),
                             ),
                             SettingCard(
+                              title: 'settings.hideSponsorSnackbar.title'.tr(),
+                              caption: 'settings.hideSponsorSnackbar.description'.tr(),
+                              widget: Switch(
+                                  value: currentSettings.hideSponsorSnackbar,
+                                  thumbIcon: switchIcon,
+                                  onChanged: (value) {
+                                    SettingsService().setSettings(currentSettings.copyWith(hideSponsorSnackbar: value));
+                                  },
+                                  activeColor: Theme.of(context).colorScheme.primary),
+                            ),
+                            SettingCard(
                               title: 'settings.dateFormat.title'.tr(),
                               caption: 'settings.dateFormat.description'.tr(),
                               widget: SizedBox(

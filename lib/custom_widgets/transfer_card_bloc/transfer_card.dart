@@ -12,6 +12,7 @@ import 'package:nocab_desktop/custom_widgets/transfer_card_bloc/transfer_card_st
 import 'package:nocab_desktop/extensions/size_extension.dart';
 import 'package:nocab_desktop/models/database/transfer_db.dart';
 import 'package:nocab_desktop/services/database/database.dart';
+import 'package:nocab_desktop/services/settings/settings.dart';
 
 class TransferCard extends StatelessWidget {
   final Transfer transfer;
@@ -24,7 +25,7 @@ class TransferCard extends StatelessWidget {
       create: (context) => TransferCardCubit()..start(transfer),
       child: BlocConsumer<TransferCardCubit, TransferCardState>(
         listener: (context, state) async {
-          if (state is TransferSuccess) {
+          if (state is TransferSuccess && !SettingsService().getSettings.hideSponsorSnackbar) {
             await Future.delayed(const Duration(seconds: 1)); // wait for database to update
             int successfullTransfers = await Database().getCountFiltered(status: TransferDbStatus.success);
             int latestTransferSize = transfer.files.fold(0, (totalSize, element) => totalSize + element.byteSize);

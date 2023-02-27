@@ -57,7 +57,7 @@ class SettingsService {
   Future<SettingsModel> _createNewSettings() async {
     var rawLocale = Platform.localeName.split('.')[0];
     return SettingsModel(
-      deviceName: Platform.localHostname,
+      deviceName: Platform.localHostname.substring(0, 20),
       darkMode: RegistryService.isDarkMode(),
       mainPort: await Network.getUnusedPort(),
       finderPort: 62193,
@@ -69,6 +69,7 @@ class SettingsService {
           ? p.join(Platform.environment['USERPROFILE']!, 'Downloads')
           : p.join(File(Platform.resolvedExecutable).parent.path, 'Output'),
       dateFormatType: DateFormatType.base24,
+      hideSponsorSnackbar: false,
     );
   }
 

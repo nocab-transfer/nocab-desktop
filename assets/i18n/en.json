@@ -202,6 +202,10 @@
             "title": "Dark Mode",
             "description": "Change the theme of the application"
         },
+        "hideSponsorSnackbar": {
+            "title": "Hide Sponsor Snackbar",
+            "description": "Hide the sponsor snackbar that sometimes appears when the transfer is completed"
+        },
         "materialYou": {
             "title": "Use Material 3 Design",
             "description": "Use Material 3 (Material You) as the theme"

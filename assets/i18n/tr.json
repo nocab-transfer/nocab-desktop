@@ -202,6 +202,10 @@
             "title": "Koyu Tema",
             "description": "Uygulama temasını değiştir"
         },
+        "hideSponsorSnackbar": {
+            "title": "Sponsor Hatırlatıcısını Gizle",
+            "description": "Transfer tamamlandığında bazen görünen Sponsor Hatırlatıcısını gizle"
+        },
         "materialYou": {
             "title": "Material 3 Dizaynı Kullan",
             "description": "Material 3 (Material You) dizaynını kullan "

@@ -66,7 +66,7 @@ class ThemeColorPickerState extends State<ThemeColorPicker> {
           children: [
             if (Platform.isWindows) ...[
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(top: 16.0, right: 16.0, left: 16.0),
                 child: SettingCard(
                   title: 'settings.themeColor.useSystemColor.title'.tr(),
                   caption: 'settings.themeColor.useSystemColor.description'.tr(),
@@ -84,7 +84,6 @@ class ThemeColorPickerState extends State<ThemeColorPicker> {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Container(
-                    height: 250,
                     decoration: BoxDecoration(
                       color: Theme.of(context).colorScheme.surfaceVariant,
                       borderRadius: BorderRadius.circular(10),

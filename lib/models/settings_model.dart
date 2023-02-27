@@ -12,6 +12,7 @@ class SettingsModel {
   late final String networkInterfaceName;
   late String downloadPath;
   late DateFormatType dateFormatType;
+  late bool hideSponsorSnackbar;
 
   SettingsModel({
     required this.deviceName,
@@ -24,6 +25,7 @@ class SettingsModel {
     required this.networkInterfaceName,
     required this.downloadPath,
     required this.dateFormatType,
+    required this.hideSponsorSnackbar,
   });
 
   SettingsModel.fromJson(Map<String, dynamic> json) {
@@ -36,7 +38,8 @@ class SettingsModel {
     useSystemColor = json['useSystemColor'];
     networkInterfaceName = json['networkInterfaceName'];
     downloadPath = json['downloadPath'];
-    dateFormatType = DateFormatType.getFromName(json['dateFormatType'] ?? "normal24");
+    dateFormatType = DateFormatType.getFromName(json['dateFormatType'] ?? DateFormatType.base24.name);
+    hideSponsorSnackbar = json['hideSponsorSnackbar'] ?? false;
   }
 
   Map<String, dynamic> toJson() {
@@ -51,6 +54,7 @@ class SettingsModel {
     data['networkInterfaceName'] = networkInterfaceName;
     data['downloadPath'] = downloadPath;
     data['dateFormatType'] = dateFormatType.name;
+    data['hideSponsorSnackbar'] = hideSponsorSnackbar;
     return data;
   }
 }
@@ -68,6 +72,7 @@ extension SettingsExtenios on SettingsModel {
     String? networkInterfaceName,
     String? downloadPath,
     DateFormatType? dateFormatType,
+    bool? hideSponsorSnackbar,
   }) {
     return SettingsModel(
       deviceName: deviceName ?? this.deviceName,
@@ -80,6 +85,7 @@ extension SettingsExtenios on SettingsModel {
       networkInterfaceName: networkInterfaceName ?? this.networkInterfaceName,
       downloadPath: downloadPath ?? this.downloadPath,
       dateFormatType: dateFormatType ?? this.dateFormatType,
+      hideSponsorSnackbar: hideSponsorSnackbar ?? this.hideSponsorSnackbar,
     );
   }
 }
@@ -88,8 +94,8 @@ enum DateFormatType {
   base24("HH:mm dd/MM/yyyy"),
   base12("hh:mm a dd/MM/yyyy"),
 
-  imAmerican("hh:mm a MM/dd/yyyy"),
-  imAsian("HH:mm yyyy/MM/dd");
+  american("hh:mm a MM/dd/yyyy"),
+  asian("HH:mm yyyy/MM/dd");
 
   const DateFormatType(this.stringFormat);
   final String stringFormat;
