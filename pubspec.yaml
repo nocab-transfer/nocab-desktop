@@ -2,7 +2,7 @@ name: nocab_desktop
 description: File sharing application
 
 publish_to: 'none' 
-version: 1.4.3+1
+version: 1.4.4+1
 
 environment:
   sdk: ">=3.0.0-62.0.dev <4.0.0"
@@ -21,10 +21,7 @@ dependencies:
   desktop_drop: ^0.4.0
   animations: ^2.0.3
   flutter_bloc: ^8.1.1
-  msix:
-    git:
-      url: https://github.com/nocab-transfer/msix.git
-      ref: main
+  msix: any # overridden in dependency_overrides
   path: ^1.8.2
   url_launcher: ^6.1.8
   easy_localization: ^3.0.2-dev
@@ -51,6 +48,10 @@ dependency_overrides:
     git:
       url: https://github.com/nocab-transfer/nocab-logger.git
       ref: pure-dart
+  msix:
+    git:
+      url: https://github.com/nocab-transfer/msix.git
+      ref: main
 
 dev_dependencies:
   flutter_test:
@@ -64,10 +65,10 @@ msix_config:
   publisher_display_name: berkekbgz
   identity_name: NoCabTransfer.Desktop
   capabilities: "internetClient"
-  logo_path: assets/logo/logo.png
+  logo_path: assets/logo/logo_400_round.png
   languages: en-us, tr-tr
   publisher: berkekbgz
-  version: 1.4.3.0
+  version: 1.4.4.0
   execution_alias: nocab
 
   context_menu_directory_id: NoCabContextMenu
