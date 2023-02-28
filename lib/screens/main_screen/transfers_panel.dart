@@ -1,7 +1,9 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:animations/animations.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:nocab_core/nocab_core.dart';
 import 'package:nocab_desktop/custom_dialogs/welcome_dialog/pages/nocab_mobile_page.dart';
 import 'package:nocab_desktop/custom_dialogs/welcome_dialog/welcome_dialog.dart';
@@ -13,8 +15,31 @@ import 'package:nocab_desktop/screens/history/history.dart';
 import 'package:nocab_desktop/services/settings/settings.dart';
 import 'package:nocab_desktop/services/transfer_manager/transfer_manager.dart';
 
-class TransfersPanel extends StatelessWidget {
+class TransfersPanel extends StatefulWidget {
   const TransfersPanel({super.key});
+
+  @override
+  State<TransfersPanel> createState() => _TransfersPanelState();
+}
+
+class _TransfersPanelState extends State<TransfersPanel> {
+  StreamSubscription? _transferSubscription;
+  List<Transfer> _transfers = [];
+  final List<Transfer> _hiddenTransfers = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _transferSubscription = TransferManager().onNewTransfer.listen((event) {
+      if (mounted) setState(() => _transfers = event);
+    });
+  }
+
+  @override
+  void dispose() {
+    _transferSubscription?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,68 +75,74 @@ class TransfersPanel extends StatelessWidget {
             ),
           ],
         ),
-        StreamBuilder(
-          stream: TransferManager().onNewTransfer,
-          initialData: const <Transfer>[],
-          builder: (context, snapshot) {
-            return snapshot.data!.isNotEmpty ? _buildList(snapshot.data!) : _emptyState(context);
-          },
-        ),
+        const SizedBox(height: 8),
+        _transfers.any((element) => !_hiddenTransfers.contains(element)) ? _buildList(_transfers) : _emptyState(context),
+        const SizedBox(height: 8),
       ],
     );
   }
 
   Widget _buildList(List<Transfer> transfers) {
     return Expanded(
-      child: SingleChildScrollView(
-        child: ListView.builder(
-          itemCount: transfers.length,
-          reverse: true,
-          shrinkWrap: true,
-          itemBuilder: (BuildContext context, int index) {
-            return TransferCard(
-              transfer: transfers[index],
-            );
-          },
+      child: ScrollConfiguration(
+        behavior: const CupertinoScrollBehavior(),
+        child: SingleChildScrollView(
+          child: ListView.builder(
+            itemCount: transfers.length,
+            shrinkWrap: true,
+            reverse: true,
+            itemBuilder: (BuildContext context, int index) {
+              if (_hiddenTransfers.contains(transfers[index])) return const SizedBox.shrink();
+              return Padding(
+                padding: EdgeInsets.only(top: index != transfers.length - 1 ? 8.0 : 0),
+                child: TransferCard(
+                  transfer: transfers[index],
+                  onClose: () {
+                    if (mounted) setState(() => _hiddenTransfers.add(transfers[index]));
+                  },
+                ),
+              );
+            },
+          ),
         ),
       ),
     );
   }
 
   Widget _emptyState(BuildContext context) {
-    return SizedBox(
-      height: 550,
-      width: double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SvgColorHandler(
-            svgPath: "assets/images/noitem.svg",
-            colorSwitch: {
-              const Color(0xFF7d5fff): Theme.of(context).colorScheme.primary,
-            },
-          ),
-          const SizedBox(height: 30),
-          Text(
-            'mainView.transfers.emptyMessage'.tr(),
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold),
-            textAlign: TextAlign.center,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextButton.icon(
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (context) => const WelcomeDialog(overridePages: [NoCabMobilePage()]),
-                );
+    return Expanded(
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SvgColorHandler(
+              svgPath: "assets/images/noitem.svg",
+              colorSwitch: {
+                const Color(0xFF7d5fff): Theme.of(context).colorScheme.primary,
               },
-              icon: const Icon(Icons.download_rounded),
-              label: Text('mainView.transfers.downloadNoCabMobile'.tr(),
-                  style: Theme.of(context).textTheme.labelLarge?.copyWith(color: Theme.of(context).colorScheme.primary)),
             ),
-          ),
-        ],
+            const SizedBox(height: 30),
+            Text(
+              'mainView.transfers.emptyMessage'.tr(),
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextButton.icon(
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => const WelcomeDialog(overridePages: [NoCabMobilePage()]),
+                  );
+                },
+                icon: const Icon(Icons.download_rounded),
+                label: Text('mainView.transfers.downloadNoCabMobile'.tr(),
+                    style: Theme.of(context).textTheme.labelLarge?.copyWith(color: Theme.of(context).colorScheme.primary)),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

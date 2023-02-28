@@ -171,10 +171,10 @@ class _SettingsState extends State<Settings> {
                                         onChanged: (String value) {
                                           if (value.isNotEmpty) {
                                             SettingsService().setSettings(currentSettings.copyWith(deviceName: value));
-                                            DeviceManager().updateDeviceInfo(name: value);
+                                            NoCabCore().updateDeviceInfo(name: value);
                                           } else {
                                             SettingsService().setSettings(currentSettings.copyWith(deviceName: "Unknown"));
-                                            DeviceManager().updateDeviceInfo(name: "Unknown");
+                                            NoCabCore().updateDeviceInfo(name: "Unknown");
                                           }
                                         },
                                       ),
@@ -249,6 +249,17 @@ class _SettingsState extends State<Settings> {
                                   onChanged: (value) {
                                     SettingsService().setSettings(currentSettings.copyWith(darkMode: value));
                                     Provider.of<ThemeProvider>(context, listen: false).changeThemeMode(value ? ThemeMode.dark : ThemeMode.light);
+                                  },
+                                  activeColor: Theme.of(context).colorScheme.primary),
+                            ),
+                            SettingCard(
+                              title: 'settings.hideSponsorSnackbar.title'.tr(),
+                              caption: 'settings.hideSponsorSnackbar.description'.tr(),
+                              widget: Switch(
+                                  value: currentSettings.hideSponsorSnackbar,
+                                  thumbIcon: switchIcon,
+                                  onChanged: (value) {
+                                    SettingsService().setSettings(currentSettings.copyWith(hideSponsorSnackbar: value));
                                   },
                                   activeColor: Theme.of(context).colorScheme.primary),
                             ),

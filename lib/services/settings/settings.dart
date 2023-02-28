@@ -69,6 +69,7 @@ class SettingsService {
           ? p.join(Platform.environment['USERPROFILE']!, 'Downloads')
           : p.join(File(Platform.resolvedExecutable).parent.path, 'Output'),
       dateFormatType: DateFormatType.base24,
+      hideSponsorSnackbar: false,
     );
   }
 
@@ -101,7 +102,7 @@ class SettingsService {
 
   String getdefaultSettingsPath() {
     if (Platform.isWindows && !kDebugMode) {
-      return p.join(Platform.environment['APPDATA']!, r'NoCab Desktop\settings.json');
+      return p.join(Platform.environment['APPDATA']!, 'NoCab Desktop', 'settings.json');
     }
     return p.join(File(Platform.resolvedExecutable).parent.path, "settings.json");
   }

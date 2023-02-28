@@ -87,8 +87,8 @@ class ReceiverPanel extends StatelessWidget {
 
               //QR code
               child: StreamBuilder(
-                stream: DeviceManager().onDeviceInfoChanged,
-                initialData: DeviceManager().currentDeviceInfo,
+                stream: NoCabCore().onDeviceInfoChanged,
+                initialData: NoCabCore().currentDeviceInfo,
                 builder: (context, snapshot) {
                   return QrImage(
                     data: base64.encode(utf8.encode(json.encode(snapshot.data?.toJson() ?? ""))),

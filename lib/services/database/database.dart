@@ -32,9 +32,13 @@ class Database {
         .statusEqualTo(TransferDbStatus.ongoing)
         .findAll()
         .then((value) async {
-      for (var element in value) {
-        await updateTransfer(element.transferUuid, status: TransferDbStatus.error, message: 'Transfer was interrupted');
-      }
+      isar.writeTxn(() async {
+        for (var transfer in value) {
+          transfer.status = TransferDbStatus.error;
+          transfer.message = "Transfer interrupted";
+          await isar.transferDatabases.put(transfer);
+        }
+      });
     });
   }
 
@@ -152,6 +156,12 @@ class Database {
           entry.endedAt = DateTime.now();
           entry.status = TransferDbStatus.error;
           entry.message = report.error.title;
+          isar.writeTxn(() async => await isar.transferDatabases.put(entry));
+          break;
+        case CancelReport:
+          report as CancelReport;
+          entry.cancelledAt = DateTime.now();
+          entry.status = TransferDbStatus.cancelled;
           isar.writeTxn(() async => await isar.transferDatabases.put(entry));
           break;
         default:

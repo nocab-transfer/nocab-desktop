@@ -81,7 +81,7 @@ class NetworkAdapterSettings extends StatelessWidget {
         child: InkWell(
           borderRadius: const BorderRadius.all(Radius.circular(10)),
           onTap: () {
-            DeviceManager().updateDeviceInfo(ip: ips.first);
+            NoCabCore().updateDeviceInfo(ip: ips.first);
             SettingsService().setSettings(SettingsService().getSettings.copyWith(networkInterfaceName: interface.name));
             Navigator.of(context).pop();
           },

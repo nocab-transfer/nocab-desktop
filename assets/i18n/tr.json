@@ -81,9 +81,20 @@
                     "message": "Dosya aktarımı başladı\nCihaz bağlantısı bekleniyor"
                 },
                 "transferring": {
+                    "title": {
+                        "download": {
+                            "one": "1 dosya indiriliyor",
+                            "other": "{count} dosya indiriliyor"
+                        },
+                        "upload": {
+                            "one": "1 dosya karşıya yükleniyor",
+                            "other": "{count} dosya karşıya yükleniyor"
+                        }
+                    },
                     "pending": "Bekliyor",
                     "speed": "{speed} MB/s",
-                    "progress": "{progress}%"
+                    "progress": "{progress}%",
+                    "cancelButton": "İptal"
                 },
                 "transferSuccess": {
                     "removeButtonTooltip": "Kaldır",
@@ -99,6 +110,10 @@
                 "transferFailed": {
                     "removeButtonTooltip": "Kaldır",
                     "message": "Dosya aktarımı başarısız oldu 😞"
+                },
+                "transferCancelled": {
+                    "removeButtonTooltip": "Kaldır",
+                    "message": "Transfer iptal edildi"
                 }
             }
         }
@@ -122,7 +137,8 @@
                     "error": "HATA",
                     "declined": "REDDEDİLDİ",
                     "ongoing": "DEVAM EDEN",
-                    "pendingForAcceptance": "BEKLİYOR"
+                    "pendingForAcceptance": "BEKLİYOR",
+                    "cancelled": "İPTAL EDİLDİ"
                 }
             }
         },
@@ -132,7 +148,8 @@
                 "error": "HATA",
                 "declined": "REDDEDİLDİ",
                 "ongoing": "DEVAM EDEN",
-                "pendingForAcceptance": "BEKLİYOR"
+                "pendingForAcceptance": "BEKLİYOR",
+                "cancelled": "IPTAL EDİLDİ"
             },
             "managedBy": {
                 "user": "KULLAINICI tarafından yönetildi",
@@ -146,6 +163,7 @@
                 "requestedAt": "Talep Zamanı",
                 "startedAt": "Başlangıç Zamanı",
                 "endedAt": "Bitiş Zamanı",
+                "cancelledAt": "İptal Zamanı",
                 "fileCount": "Dosya Sayısı",
                 "totalFileSize": "Toplam Dosya Boyutu",
                 "message": "Mesaj"
@@ -183,6 +201,10 @@
         "darkMode": {
             "title": "Koyu Tema",
             "description": "Uygulama temasını değiştir"
+        },
+        "hideSponsorSnackbar": {
+            "title": "Sponsor Hatırlatıcısını Gizle",
+            "description": "Transfer tamamlandığında bazen görünen Sponsor Hatırlatıcısını gizle"
         },
         "materialYou": {
             "title": "Material 3 Dizaynı Kullan",

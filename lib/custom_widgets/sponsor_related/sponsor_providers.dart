@@ -17,7 +17,7 @@ class SponsorProviders extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemBuilder: (_, index) {
           var widget = Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+            padding: const EdgeInsets.symmetric(horizontal: 2.0),
             child: TextButton.icon(
               label: Text(
                 Sponsors.getSponsors[index].name,

@@ -32,8 +32,16 @@ class TransferCardCubit extends Cubit<TransferCardState> {
           event as ErrorReport;
           emit(TransferFailed(transfer.deviceInfo, event.error.title));
           break;
+        case CancelReport:
+          event as CancelReport;
+          emit(TransferCancelled(transfer.deviceInfo));
+          break;
         default:
       }
     });
+  }
+
+  void cancel() {
+    transfer.cancel();
   }
 }
