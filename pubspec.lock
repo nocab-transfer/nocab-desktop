@@ -562,8 +562,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: transfer-controller
-      resolved-ref: "8956dee61e6202065b9eb48de81558bcaf2c9051"
+      ref: HEAD
+      resolved-ref: e0d64d5773235cd6c0e24c38f8551b855bf12ddb
       url: "https://github.com/nocab-transfer/nocab-core.git"
     source: git
     version: "1.0.0"
@@ -571,8 +571,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: pure-dart
-      resolved-ref: "3f2249c9f44dfe7d5bd2371cf132e4b58556d2a3"
+      ref: HEAD
+      resolved-ref: "19ebc582fcdd57c8719a7ef9f75cffdf6d0b660d"
       url: "https://github.com/nocab-transfer/nocab-logger.git"
     source: git
     version: "1.0.0"
@@ -740,10 +740,10 @@ packages:
     dependency: transitive
     description:
       name: pubspec_parse
-      sha256: "75f6614d6dde2dc68948dffbaa4fe5dae32cd700eb9fb763fe11dfb45a3c4d0a"
+      sha256: ec85d7d55339d85f44ec2b682a82fea340071e8978257e5a43e69f79e98ef50c
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.1"
+    version: "1.2.2"
   qr:
     dependency: transitive
     description:
@@ -1121,10 +1121,10 @@ packages:
     dependency: transitive
     description:
       name: vm_service
-      sha256: f24bfb5ea0b015205e583dda73d67de44785d583ad0889929deaff3a32359ff5
+      sha256: eb3cf3f45fc1500ae30481ac9ab788302fa5e8edc3f3eaddf183945ee93a8bf3
       url: "https://pub.dev"
     source: hosted
-    version: "11.1.0"
+    version: "11.2.0"
   watcher:
     dependency: transitive
     description:

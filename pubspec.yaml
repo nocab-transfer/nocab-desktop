@@ -37,7 +37,6 @@ dependencies:
   nocab_core:
     git:
       url: https://github.com/nocab-transfer/nocab-core.git
-      ref: transfer-controller
   nocab_logger: any # overridden in dependency_overrides
   path_provider: ^2.0.12
   share_plus: ^6.3.0
@@ -48,7 +47,6 @@ dependency_overrides:
   nocab_logger:
     git:
       url: https://github.com/nocab-transfer/nocab-logger.git
-      ref: pure-dart
   msix:
     git:
       url: https://github.com/nocab-transfer/msix.git
