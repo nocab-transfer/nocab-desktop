@@ -233,7 +233,7 @@
                 "dialog": {
                     "title": "Delete History",
                     "message": "You are about to delete all history. This action cannot be undone.",
-                    "confirmButton": "Confirm Delete",
+                    "confirmButton": "Confirm",
                     "cancelButton": "Cancel"
                 }
             },
@@ -244,7 +244,7 @@
                 "dialog": {
                     "title": "Regenerate Settings",
                     "message": "This will delete all your settings and regenerate them. Are you sure you want to continue?",
-                    "confirmButton": "Confirm Regenerate",
+                    "confirmButton": "Confirm",
                     "cancelButton": "Cancel"
                 }
             },

@@ -365,29 +365,41 @@ class _SettingsState extends State<Settings> {
                                               title: "settings.advanced.deleteHistory.dialog.title".tr(),
                                               message: "settings.advanced.deleteHistory.dialog.message".tr(),
                                               actions: [
-                                                TextButton.icon(
+                                                FilledButton(
+                                                  onPressed: () => Navigator.pop(context),
+                                                  style: FilledButton.styleFrom(
+                                                    textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+                                                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                                                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+                                                    minimumSize: const Size(0, 50),
+                                                    maximumSize: const Size(150, 50),
+                                                  ),
+                                                  child: Text(
+                                                    'settings.advanced.deleteHistory.dialog.cancelButton'.tr(),
+                                                    maxLines: 1,
+                                                    overflow: TextOverflow.ellipsis,
+                                                  ),
+                                                ),
+                                                const SizedBox(width: 8),
+                                                OutlinedButton(
                                                   onPressed: () => Database().deleteAllTransfers().then((value) {
                                                     Navigator.pop(context);
                                                   }),
-                                                  icon: const Icon(Icons.delete_outline_rounded),
-                                                  label: Text('settings.advanced.deleteHistory.dialog.confirmButton'.tr()),
-                                                  style: TextButton.styleFrom(
+                                                  style: OutlinedButton.styleFrom(
                                                     foregroundColor: Colors.red,
                                                     textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
-                                                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                                                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                                                    side: const BorderSide(color: Colors.red, width: 2, strokeAlign: BorderSide.strokeAlignInside),
+                                                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+                                                    minimumSize: const Size(0, 50),
+                                                    maximumSize: const Size(150, 50),
                                                   ),
-                                                ),
-                                                const SizedBox(width: 4),
-                                                TextButton(
-                                                  onPressed: () => Navigator.pop(context),
-                                                  style: OutlinedButton.styleFrom(
-                                                    foregroundColor: Theme.of(context).colorScheme.onPrimary,
-                                                    backgroundColor: Theme.of(context).colorScheme.primary,
-                                                    textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
-                                                    //side: BorderSide(color: Theme.of(context).colorScheme.primary, width: 2),
-                                                    padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                                                  //icon: const Icon(Icons.delete_outline_rounded),
+                                                  child: Text(
+                                                    'settings.advanced.deleteHistory.dialog.confirmButton'.tr(),
+                                                    maxLines: 1,
+                                                    overflow: TextOverflow.ellipsis,
                                                   ),
-                                                  child: Text('settings.advanced.deleteHistory.dialog.cancelButton'.tr()),
                                                 ),
                                               ],
                                             ));
@@ -413,29 +425,40 @@ class _SettingsState extends State<Settings> {
                                               title: "settings.advanced.forceRegenerateSettings.dialog.title".tr(),
                                               message: "settings.advanced.forceRegenerateSettings.dialog.message".tr(),
                                               actions: [
-                                                TextButton.icon(
+                                                FilledButton(
+                                                  onPressed: () => Navigator.pop(context),
+                                                  style: FilledButton.styleFrom(
+                                                    textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+                                                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                                                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+                                                    minimumSize: const Size(0, 50),
+                                                    maximumSize: const Size(150, 50),
+                                                  ),
+                                                  child: Text(
+                                                    'settings.advanced.forceRegenerateSettings.dialog.cancelButton'.tr(),
+                                                    maxLines: 1,
+                                                    overflow: TextOverflow.ellipsis,
+                                                  ),
+                                                ),
+                                                const SizedBox(width: 8),
+                                                OutlinedButton(
                                                   onPressed: () => SettingsService().recreateSettings().then((value) {
                                                     Navigator.pop(context);
                                                   }),
-                                                  icon: const Icon(Icons.loop_rounded),
-                                                  label: Text('settings.advanced.forceRegenerateSettings.dialog.confirmButton'.tr()),
-                                                  style: TextButton.styleFrom(
+                                                  style: OutlinedButton.styleFrom(
                                                     foregroundColor: Colors.red,
                                                     textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
-                                                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                                                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                                                    side: const BorderSide(color: Colors.red, width: 2, strokeAlign: BorderSide.strokeAlignInside),
+                                                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+                                                    minimumSize: const Size(0, 50),
+                                                    maximumSize: const Size(150, 50),
                                                   ),
-                                                ),
-                                                const SizedBox(width: 4),
-                                                TextButton(
-                                                  onPressed: () => Navigator.pop(context),
-                                                  style: OutlinedButton.styleFrom(
-                                                    foregroundColor: Theme.of(context).colorScheme.onPrimary,
-                                                    backgroundColor: Theme.of(context).colorScheme.primary,
-                                                    textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
-                                                    //side: BorderSide(color: Theme.of(context).colorScheme.primary, width: 2),
-                                                    padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                                                  child: Text(
+                                                    'settings.advanced.forceRegenerateSettings.dialog.confirmButton'.tr(),
+                                                    maxLines: 1,
+                                                    overflow: TextOverflow.ellipsis,
                                                   ),
-                                                  child: Text('settings.advanced.forceRegenerateSettings.dialog.cancelButton'.tr()),
                                                 ),
                                               ],
                                             ));

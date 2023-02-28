@@ -52,25 +52,21 @@ class _SendDragDropState extends State<SendDragDrop> {
                     style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 8),
                 Center(
-                  child: ElevatedButton(
+                  child: ElevatedButton.icon(
                     onPressed: () => filePicker.pickFilesIsolate().then((value) {
                       if (value != null) widget.onFilesReady?.call(value);
                     }),
                     style: ElevatedButton.styleFrom(
-                      fixedSize: const Size(160, 50),
+                      //fixedSize: const Size(160, 50),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+                      maximumSize: const Size(200, 60),
+                      minimumSize: const Size(150, 60),
                     ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(Icons.upload_file_rounded),
-                        Text('mainView.sender.button'.tr()),
-                      ],
-                    ),
+                    icon: const Icon(Icons.upload_file_rounded),
+                    label: Text('mainView.sender.button'.tr(), textAlign: TextAlign.center),
                   ),
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 4),
                 Center(child: Text('mainView.sender.dropFiles'.tr())),
               ],
             ),

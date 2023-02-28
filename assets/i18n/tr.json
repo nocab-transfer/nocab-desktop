@@ -233,7 +233,7 @@
                 "dialog": {
                     "title": "Tüm Geçmişi Sil",
                     "message": "Tüm geçmişi silmek üzeresiniz. Bu eylem geri alınamaz.",
-                    "confirmButton": "Silmeyi Onayla",
+                    "confirmButton": "Onayla",
                     "cancelButton": "İptal"
                 }
             },
@@ -244,7 +244,7 @@
                 "dialog": {
                     "title": "Ayarları Yeniden Oluştur",
                     "message": "Bu eylem tüm ayarlarınızı silip tekrar oluşturacak. Devam etmek istediğinize emin misiniz?",
-                    "confirmButton": "Yeniden Oluşturmayı Onayla",
+                    "confirmButton": "Onayla",
                     "cancelButton": "İptal"
                 }
             },
