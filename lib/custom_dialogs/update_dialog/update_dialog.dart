@@ -176,6 +176,13 @@ class UpdateDialog extends StatelessWidget {
                       inlineSyntaxes: md.ExtensionSet.gitHubWeb.inlineSyntaxes,
                       blockSyntaxes: md.ExtensionSet.gitHubWeb.blockSyntaxes,
                       onTapLink: (text, href, title) => launchUrlString(href!),
+                      styleSheet: MarkdownStyleSheet(
+                        blockquoteDecoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: Theme.of(context).colorScheme.primary.withOpacity(0.8)),
+                        ),
+                      ),
                       data: update.releaseNotes,
                       extensionSet: md.ExtensionSet.gitHubWeb,
                     ),
@@ -201,7 +208,7 @@ class UpdateDialog extends StatelessWidget {
                           onPressed: () => Navigator.of(context).pop(),
                           style: OutlinedButton.styleFrom(
                             surfaceTintColor: Theme.of(context).colorScheme.error,
-                            fixedSize: const Size(100, 50),
+                            fixedSize: const Size(120, 50),
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
                             side: BorderSide(width: 2, color: Theme.of(context).colorScheme.error),
                           ),
@@ -214,7 +221,7 @@ class UpdateDialog extends StatelessWidget {
                         ElevatedButton(
                           onPressed: () => context.read<UpdateDialogCubit>().update(msixInstalled: update.isMsixInstalled),
                           style: ElevatedButton.styleFrom(
-                            fixedSize: const Size(100, 50),
+                            fixedSize: const Size(120, 50),
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
                             backgroundColor: Theme.of(context).colorScheme.primary,
                           ),
