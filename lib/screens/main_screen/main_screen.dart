@@ -47,26 +47,23 @@ class MainScreen extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 16),
-                        Container(
-                          width: (MediaQuery.of(context).size.width / 2) -
-                              64 - // 64 is the left padding of the parent container
-                              (MediaQuery.of(context).size.width / 16) - // Size of center blank space (divided by 2)
-                              (MediaQuery.of(context).size.width / 8) - // Size of left container
-                              16, // padding
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Theme.of(context).colorScheme.outline, width: 2),
-                            borderRadius: const BorderRadius.all(Radius.circular(20)),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                            child: SendDragDrop(
-                              onFilesReady: (files) {
-                                return showModal(
-                                  context: context,
-                                  configuration: const FadeScaleTransitionConfiguration(barrierDismissible: false),
-                                  builder: ((context) => SendStarterDialog(files: files)),
-                                );
-                              },
+                        Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Theme.of(context).colorScheme.outline, width: 2),
+                              borderRadius: const BorderRadius.all(Radius.circular(20)),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                              child: SendDragDrop(
+                                onFilesReady: (files) {
+                                  return showModal(
+                                    context: context,
+                                    configuration: const FadeScaleTransitionConfiguration(barrierDismissible: false),
+                                    builder: ((context) => SendStarterDialog(files: files)),
+                                  );
+                                },
+                              ),
                             ),
                           ),
                         ),
