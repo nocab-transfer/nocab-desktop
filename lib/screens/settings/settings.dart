@@ -311,7 +311,7 @@ class _SettingsState extends State<Settings> {
                                   onChanged: (value) {
                                     if (value != null) {
                                       context.setLocale(value);
-                                      SettingsService().setSettings(currentSettings.copyWith(language: value.languageCode));
+                                      SettingsService().setSettings(currentSettings.copyWith(locale: value));
                                     }
                                   },
                                   decoration: const InputDecoration(

@@ -1,0 +1,420 @@
+{
+    "welcomeDialog": {
+        "nextButton": "下一步",
+        "finishButton": "完成",
+        "welcomePage": {
+            "title": "欢迎使用 NoCab Desktop!",
+            "description": "Nocab Desktop 是一个文件传输应用程序，允许您在您的设备之间传输文件，不需要任何服务器或第三方服务。",
+            "description2": "请点击下面的下一步按钮!",
+            "madeWith": "用 {flutterIcon} 制造",
+            "builtBy": "用 ❤️ 由 {author} 开发"
+        },
+        "noCabMobilePage": {
+            "title": "认识一下 NoCab Mobile!",
+            "description": "NoCab Mobile 需要与您的手机连接，不幸的是，没有 ios 应用程序。😔",
+            "description2": "下载安卓手机应用程序!",
+            "instructions": {
+                "step1": "1- 转到 {link}",
+                "step2": "2- 下载最新版本的移动应用程序",
+                "step3": "3- 在您的手机上安装应用程序"
+            }
+        },
+        "networkAdapterPage": {
+            "title": "您的网络",
+            "description": "NoCab 使用您的本地 IP 来连接其他设备。\n如果网络适配器设置错误，应用程序将无法工作。",
+            "description2": "确保您的网络适配器设置正确。",
+            "changeButton": "更改",
+            "hint": "您将能够从主屏幕上进行更改"
+        },
+        "useInstructions": {
+            "title": "那么，如何使用 NoCab？",
+            "hint": "就这样！您现在可以在您的设备之间发送文件了。",
+            "instructions": {
+                "step1": "确保您的两个设备都连接到同一个网络上",
+                "step2": "在两台设备上都打开 NoCab",
+                "step3": "点击您想发送文件的设备上的发送按钮",
+                "step4": "在您想接收文件的设备上点击接收按钮（不需要桌面应用）。"
+            }
+        },
+        "readyPage": {
+            "title": "现在，您已经准备好了!",
+            "description": "点击完成按钮开始。",
+            "references": {
+                "githubLinks": "Github 链接",
+                "mobile": "NoCab 手机版",
+                "desktop": "NoCab 桌面版",
+                "sponsorToMe": "捐赠支持",
+                "fromGithub": "Github",
+                "fromBuymeacoffee": "请我喝一杯咖啡",
+                "contactText": "如果您有任何问题，请随时与我联系。",
+                "email": "Email"
+            }
+        }
+    },
+    "mainView": {
+        "receiver": {
+            "title": "接收者",
+            "networkAdapterSettings": "网络适配器设置",
+            "deviceShownAs": "设备显示为 {name}",
+            "or": "或者",
+            "scanQrCode": "扫描二维码"
+        },
+        "settings": {
+            "title": "设置"
+        },
+        "sender": {
+            "title": "发送者",
+            "button": "选择文件",
+            "dropFiles": "或将文件放到这里",
+            "loadingLabel": "正在加载文件\n请稍候..."
+        },
+        "transfers": {
+            "title": "传输",
+            "emptyMessage": "除了空旷的大海，什么都没有",
+            "openOutputFolder": "打开输出文件",
+            "downloadNoCabMobile": "下载 NoCab 手机版",
+            "history": "历史记录",
+            "card": {
+                "showInFolder": "在文件夹中显示",
+                "openFile": "打开文件",
+                "transferStarted": {
+                    "message": "开始传输\n等待设备连接"
+                },
+                "transferring": {
+                    "title": {
+                        "download": {
+                            "one": "正在下载 1 个文件",
+                            "other": "正在下载 {count} 个文件"
+                        },
+                        "upload": {
+                            "one": "正在上传 1 个文件",
+                            "other": "正在上传 {count} 个文件"
+                        }
+                    },
+                    "pending": "等待中",
+                    "speed": "{speed} MB/s",
+                    "progress": "{progress}%",
+                    "cancelButton": "取消"
+                },
+                "transferSuccess": {
+                    "removeButtonTooltip": "移除",
+                    "receiverSuccess": {
+                        "one": "收到 1 个文件",
+                        "other": "收到 {count} 个文件"
+                    },
+                    "senderSuccess": {
+                        "one": "发送了 1 个文件",
+                        "other": "发送了 {count} 个文件"
+                    }
+                },
+                "transferFailed": {
+                    "removeButtonTooltip": "移除",
+                    "message": "传输失败"
+                },
+                "transferCancelled": {
+                    "removeButtonTooltip": "移除",
+                    "message": "传输已取消"
+                }
+            }
+        }
+    },
+    "history": {
+        "title": "历史记录",
+        "deleteButton": {
+            "title": "删除所有历史记录"
+        },
+        "historyList": {
+            "emptyState": {
+                "title": "没有找到条目",
+                "message": "您必须至少进行一次传输才能在这里看到它"
+            },
+            "item": {
+                "fileCount": "文件数量",
+                "totalFileSize": "总计文件大小",
+                "requestedAt": "请求在",
+                "status": {
+                    "success": "成功",
+                    "error": "错误",
+                    "declined": "已拒绝",
+                    "ongoing": "进行中",
+                    "pendingForAcceptance": "等待中",
+                    "cancelled": "已取消"
+                }
+            }
+        },
+        "historyDetails": {
+            "status": {
+                "success": "成功",
+                "error": "错误",
+                "declined": "已拒绝",
+                "ongoing": "进行中",
+                "pendingForAcceptance": "等待中",
+                "cancelled": "已取消"
+            },
+            "managedBy": {
+                "user": "由用户管理",
+                "blacklist": "设备被列入黑名单",
+                "ban": "设备被禁止使用",
+                "automation": "由自动调节管理",
+                "thirdParty": "由第三方管理"
+            },
+            "youLabel": "您",
+            "info": {
+                "requestedAt": "请求在",
+                "startedAt": "开始在",
+                "endedAt": "结束在",
+                "cancelledAt": "已取消在",
+                "fileCount": "文件数量",
+                "totalFileSize": "文件总大小",
+                "message": "信息"
+            },
+            "fileTile": {
+                "showInFolder": "在文件夹中显示",
+                "openFile": "打开文件",
+                "warnMessages": {
+                    "ongoing": "处理中",
+                    "notFound": "文件被移动或删除。也许甚至不存在于宇宙中"
+                }
+            },
+            "emptyState": {
+                "title": "不，什么都没有!",
+                "message": "点击任何历史项目以查看更多细节"
+            }
+        }
+    },
+    "settings": {
+        "title": "设置",
+        "aboutButton": "关于",
+        "deviceName": {
+            "title": "设备名称",
+            "description": "显示给其他设备的该设备的名称",
+            "randomNameTooltip": "生成随机名称"
+        },
+        "themeColor": {
+            "title": "主题颜色",
+            "description": "更改应用程序的颜色",
+            "useSystemColor": {
+                "title": "使用系统颜色",
+                "description": "使用系统颜色作为主题色"
+            }
+        },
+        "darkMode": {
+            "title": "深色模式",
+            "description": "更改应用程序的主题"
+        },
+        "hideSponsorSnackbar": {
+            "title": "隐藏赞助商广告栏",
+            "description": "隐藏有时在传输完成时出现的赞助商的广告栏"
+        },
+        "materialYou": {
+            "title": "使用 Material 3 设计",
+            "description": "使用 Material 3 (Material You) 为主题"
+        },
+        "dateFormat": {
+            "title": "日期和时间格式",
+            "description": "更改日期和时间格式"
+        },
+        "language": {
+            "title": "语言",
+            "description": "更改应用程序的语言"
+        },
+        "advanced": {
+            "title": "高级设置",
+            "description": "这些选项仅适用于高级用户。更改这些选项可能会导致应用程序发生故障。",
+            "finderPort": {
+                "title": "查找器端口",
+                "description": "该端口将被用来与您想连接的设备进行通信。\n更改这个选项可能会导致应用程序发生故障。\n默认: 62193",
+                "help": "这将在重新启动应用程序后生效。"
+            },
+            "deleteHistory": {
+                "title": "删除所有历史记录",
+                "description": "删除所有历史记录。该操作无法撤销。",
+                "button": "删除所有历史记录",
+                "dialog": {
+                    "title": "删除历史记录",
+                    "message": "您即将删除所有历史记录。该操作无法撤销。",
+                    "confirmButton": "确认",
+                    "cancelButton": "取消"
+                }
+            },
+            "forceRegenerateSettings": {
+                "title": "强制重新生成设置",
+                "description": "强制重新生成设置。该操作无法撤销。",
+                "button": "重新生成设置",
+                "dialog": {
+                    "title": "重新生成设置",
+                    "message": "这将删除您的所有设置，并重新生成它们。您确定您要继续吗？",
+                    "confirmButton": "确认",
+                    "cancelButton": "取消"
+                }
+            },
+            "logs": {
+                "title": "传输日志",
+                "description": "查看核心传输日志。",
+                "button": "查看日志"
+            }
+        }
+    },
+    "sender": {
+        "files": "文件",
+        "fileCounter": {
+            "one": "1 个文件 {size}",
+            "other": "{count} 个文件 {size}"
+        },
+        "devices": "设备"
+    },
+    "deviceScanner": {
+        "searching": "搜索设备...",
+        "noDevicesFound": "没有发现任何设备",
+        "instructions": "在您的手机上打开 NoCab 应用程序并点击接收。",
+        "networkHint": "确保两个设备都在同一个网络上。",
+        "downloadNoCabMobile": "@:mainView.transfers.downloadNoCabMobile"
+    },
+    "senderQr": {
+        "title": "扫描二维码",
+        "instructions": "点击 \"接收\" 按钮，扫描NoCab移动应用程序的二维码。",
+        "loading": {
+            "title": "创建服务器...",
+            "message": "在加载二维码的过程中，请等待"
+        },
+        "loaded": {
+            "waitingConnection": "等待连接...",
+            "connectionInfo": "Ip: {ip} 端口: {port}"
+        }
+    },
+    "fileAccepter": {
+        "title": {
+            "one": "{deviceName} 想给您发送一个文件",
+            "other": "{deviceName} 想给您发送 {count} 文件"
+        },
+        "connectionInfo": "Ip: {ip} 端口: {port}",
+        "acceptButton": "接受",
+        "rejectButton": "拒绝"
+    },
+    "aboutDialog": {
+        "openGithubPage": "打开 Github 页面",
+        "sponsor": {
+            "title": "捐赠支持"
+        },
+        "contact": {
+            "title": "联系",
+            "email": "Email"
+        },
+        "contributors": "捐赠名单",
+        "errorMessage": "无法取到贡献者。\n您可能超过了 Github 的速率限制或者您没有互联网连接。"
+    },
+    "sponsorRelated": {
+        "snackbar": {
+            "title": {
+                "two": "您刚刚进行了第 2 次成功的传输 🥳!",
+                "other": "您刚刚进行了第 {count} 次成功的传输 🥳!"
+            },
+            "titleBigFile": "您刚刚成功传输了 {size} 的数据 🥳!",
+            "subtitle": "感谢您使用 NoCab! 🎉\n如果您喜欢这个应用程序，请考虑赞助开发者。",
+            "action": "扫一扫关闭"
+        },
+        "avatars": {
+            "title": "我们的高级别支持者"
+        }
+    },
+    "update": {
+        "tooltip": "更新可用",
+        "timeOut": "工作超时",
+        "dialog": {
+            "checking": {
+                "title": "检查更新...",
+                "message": "在检查更新的过程中，请等待"
+            },
+            "checkError": {
+                "title": "更新检查失败",
+                "error": "错误: {error}"
+            },
+            "updateAvailable": {
+                "title": "新的版本可用",
+                "version": "当前版本: {currentVersion}\n新的版本: {newVersion}",
+                "switchToMsixMessage": "您正在使用 NoCab 的便携版本。便携版不能自动更新。请切换到 MSIX 版本。",
+                "switchToMsixButton": "切换到 MSIX",
+                "updateButton": "更新",
+                "cancelButton": "取消"
+            },
+            "updating": {
+                "seconds": "{seconds}s",
+                "jobs": {
+                    "downloadMsix": {
+                        "title": "正在下载 MSIX",
+                        "description": "下在从 Github 下载 MSIX 包",
+                        "error": "下载更新失败",
+                        "success": "MSIX 包已下载",
+                        "timeOut": "@:update.timeOut"
+                    },
+                    "checkCert": {
+                        "title": "检查证书",
+                        "description": "检查自签名证书的安装情况",
+                        "alreadyInstalled": "已安装好证书",
+                        "checkError": "检查证书失败",
+                        "installError": "安装证书失败",
+                        "success": "已安装的证书",
+                        "timeOut": "@:update.timeOut"
+                    },
+                    "installMsix": {
+                        "title": "正在安装 MSIX",
+                        "description": "正在安装 MSIX 包",
+                        "fileNotFound": "MSIX 包未找到",
+                        "error": "安装更新失败",
+                        "success": "MSIX 包已安装",
+                        "timeOut": "@:update.timeOut"
+                    },
+                    "cleanTemp": {
+                        "title": "清理临时文件",
+                        "description": "清理更新过程中产生的临时文件",
+                        "error": "清理临时文件失败",
+                        "success": "临时文件已清理",
+                        "timeOut": "@:update.timeOut"
+                    },
+                    "waitProcesses": {
+                        "title": "等待正在进行的进程",
+                        "description": "等待正在进行的进程，继续更新进程",
+                        "error": "等待进程失败",
+                        "success": "进程已完成",
+                        "timeOut": "@:update.timeOut"
+                    },
+                    "moveData": {
+                        "title": "移动设置和历史记录",
+                        "description": "设置和历史记录移动到 msix 包中",
+                        "msixNameError": "获取 msix 软件包族名失败",
+                        "error": "移动设置和历史记录失败",
+                        "success": "设置和历史记录已移动",
+                        "timeOut": "@:update.timeOut"
+                    },
+                    "cleanPortable": {
+                        "title": "清理便携式文件",
+                        "description": "清理便携式文件以防止冲突",
+                        "error": "清理便携式文件失败",
+                        "success": "应用程序关闭后，便携式文件将被清理",
+                        "timeOut": "@:update.timeOut"
+                    },
+                    "finish": {
+                        "title": "完成更新",
+                        "description": "完成并重新启动应用程序",
+                        "aliasError": "没有找到 NoCab 别名。您需要手动重新启动该应用程序。",
+                        "error": "未能完成更新",
+                        "success": "更新失败",
+                        "timeOut": "@:update.timeOut"
+                    }
+                },
+                "panel": {
+                    "failed": {
+                        "title": "更新失败",
+                        "crashedAt": "失败在: {job}",
+                        "errorMessage": "错误信息: {message}",
+                        "closeButton": "关闭"
+                    },
+                    "ongoing": {
+                        "title": "正在更新...",
+                        "description": "请稍候"
+                    }
+                }
+            }
+        }
+    }
+}

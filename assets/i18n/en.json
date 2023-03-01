@@ -294,9 +294,7 @@
     "aboutDialog": {
         "openGithubPage": "Open Github Page",
         "sponsor": {
-            "title": "Sponsor to me",
-            "fromGithub": "Github",
-            "fromBuymeacoffee": "Buy Me A Coffee"
+            "title": "Sponsor to me"
         },
         "contact": {
             "title": "Contact",
