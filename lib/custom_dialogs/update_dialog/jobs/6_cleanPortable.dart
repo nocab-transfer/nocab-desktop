@@ -24,12 +24,12 @@ class CleanPortableFiles extends UpdateJob {
       portableDataDir,
       join(portablePath, "data"),
       join(portablePath, "desktop_drop_plugin.dll"),
-      join(portablePath, "flutter_platform_alert_plugin.dll"),
       join(portablePath, "flutter_windows.dll"),
       join(portablePath, "isar.dll"),
       join(portablePath, "isar_flutter_libs_plugin.dll"),
       join(portablePath, "nocab_desktop.exe"),
       join(portablePath, "screen_retriever_plugin.dll"),
+      join(portablePath, "share_plus_plugin.dll"),
       join(portablePath, "url_launcher_windows_plugin.dll"),
       join(portablePath, "window_manager_plugin.dll"),
     ];
