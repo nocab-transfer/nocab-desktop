@@ -43,12 +43,12 @@ Future<void> main(List<String> args) async {
       seedColor: SettingsService().getSettings.useSystemColor ? RegistryService.getColor() : SettingsService().getSettings.seedColor,
     ),
     child: EasyLocalization(
-      supportedLocales: const [Locale('en'), Locale('tr')],
+      supportedLocales: const [Locale('en'), Locale('tr'), Locale('zh', 'CN')],
       path: 'assets/i18n',
       fallbackLocale: const Locale('en'),
       saveLocale: false,
       useFallbackTranslations: true,
-      useOnlyLangCode: true,
+      useOnlyLangCode: false,
       child: const MyApp(),
     ),
   ));
@@ -62,7 +62,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.setLocale(SettingsService().getSettings.locale);
+    context.setLocale(context.supportedLocales.firstWhere((element) => element == SettingsService().getSettings.locale, orElse: () {
+      return context.supportedLocales.firstWhere((element) => element.languageCode == SettingsService().getSettings.locale.languageCode,
+          orElse: () => context.fallbackLocale ?? context.supportedLocales.first);
+    }));
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,

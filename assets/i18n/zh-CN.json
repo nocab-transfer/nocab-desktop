@@ -294,9 +294,7 @@
     "aboutDialog": {
         "openGithubPage": "打开 Github 页面",
         "sponsor": {
-            "title": "捐赠支持",
-            "fromGithub": "Github",
-            "fromBuymeacoffee": "请我喝一杯咖啡"
+            "title": "捐赠支持"
         },
         "contact": {
             "title": "联系",

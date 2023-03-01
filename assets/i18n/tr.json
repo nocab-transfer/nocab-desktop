@@ -294,9 +294,7 @@
     "aboutDialog": {
         "openGithubPage": "Github Sayfasını Aç",
         "sponsor": {
-            "title": "Bağış Yap",
-            "fromGithub": "Github",
-            "fromBuymeacoffee": "Buy Me A Coffee"
+            "title": "Bağış Yap"
         },
         "contact": {
             "title": "İletişim",
