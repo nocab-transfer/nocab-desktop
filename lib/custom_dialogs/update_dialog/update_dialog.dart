@@ -12,14 +12,10 @@ import 'package:url_launcher/url_launcher_string.dart';
 extension S on UpdateDialogState {
   Size get size {
     switch (runtimeType) {
-      case CheckingUpdate:
-        return const Size(400, 300);
-      case UpdateAvailable:
-        return const Size(500, 500);
-      case UpdateEvent:
-        return Size(850, ((this as UpdateEvent).jobs.length * 74) + 32);
-      default:
-        return const Size(300, 300);
+      case CheckingUpdate: return const Size(400, 300);
+      case UpdateAvailable: return const Size(500, 500);
+      case UpdateEvent: return Size(850, ((this as UpdateEvent).jobs.length * 74) + 32);
+      default: return const Size(300, 300);
     }
   }
 }
@@ -50,16 +46,11 @@ class UpdateDialog extends StatelessWidget {
 
   Widget builder(context, state) {
     switch (state.runtimeType) {
-      case CheckingUpdate:
-        return buildCheckingUpdate(context, state);
-      case CheckError:
-        return buildCheckError(context, state);
-      case UpdateAvailable:
-        return buildUpdateAvailable(context, state);
-      case UpdateEvent:
-        return buildUpdating(context, state);
-      default:
-        return Container();
+      case CheckingUpdate: return buildCheckingUpdate(context, state);
+      case CheckError: return buildCheckError(context, state);
+      case UpdateAvailable: return buildUpdateAvailable(context, state);
+      case UpdateEvent: return buildUpdating(context, state);
+      default: return Container();
     }
   }
 

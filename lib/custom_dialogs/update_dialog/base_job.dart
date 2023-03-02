@@ -41,16 +41,11 @@ enum UpdateJobStatus {
 extension JobStatus on UpdateJobStatus {
   Color color(BuildContext context) {
     switch (this) {
-      case UpdateJobStatus.notStarted:
-        return Theme.of(context).colorScheme.surfaceVariant;
-      case UpdateJobStatus.pending:
-        return Theme.of(context).colorScheme.surfaceVariant;
-      case UpdateJobStatus.running:
-        return Theme.of(context).colorScheme.primary;
-      case UpdateJobStatus.done:
-        return Theme.of(context).colorScheme.primary;
-      case UpdateJobStatus.failed:
-        return Theme.of(context).colorScheme.error;
+      case UpdateJobStatus.notStarted: return Theme.of(context).colorScheme.surfaceVariant;
+      case UpdateJobStatus.pending: return Theme.of(context).colorScheme.surfaceVariant;
+      case UpdateJobStatus.running: return Theme.of(context).colorScheme.primary;
+      case UpdateJobStatus.done: return Theme.of(context).colorScheme.primary;
+      case UpdateJobStatus.failed: return Theme.of(context).colorScheme.error;
     }
   }
 

@@ -75,18 +75,12 @@ enum TransferDbManagedBy {
 extension E1 on TransferDbStatus {
   Color get color {
     switch (this) {
-      case TransferDbStatus.success:
-        return Colors.green;
-      case TransferDbStatus.error:
-        return Colors.red;
-      case TransferDbStatus.declined:
-        return Colors.red;
-      case TransferDbStatus.ongoing:
-        return Colors.blue;
-      case TransferDbStatus.pendingForAcceptance:
-        return Colors.orange;
-      case TransferDbStatus.cancelled:
-        return Colors.red;
+      case TransferDbStatus.success: return Colors.green;
+      case TransferDbStatus.error: return Colors.red;
+      case TransferDbStatus.declined: return Colors.red;
+      case TransferDbStatus.ongoing: return Colors.blue;
+      case TransferDbStatus.pendingForAcceptance: return Colors.orange;
+      case TransferDbStatus.cancelled: return Colors.red;
     }
   }
 }
@@ -94,10 +88,8 @@ extension E1 on TransferDbStatus {
 extension E2 on TransferDbType {
   IconData get icon {
     switch (this) {
-      case TransferDbType.download:
-        return Icons.download_rounded;
-      case TransferDbType.upload:
-        return Icons.upload_rounded;
+      case TransferDbType.download: return Icons.download_rounded;
+      case TransferDbType.upload: return Icons.upload_rounded;
     }
   }
 }
