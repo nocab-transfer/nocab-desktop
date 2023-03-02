@@ -1,7 +1,6 @@
-
 <h1 align="center">
-<img src="https://raw.githubusercontent.com/NoCabTransfer/.github/main/profile/icon.png" alt="NoCab Transfer" width="70"></a>
-    <br>
+<img src="Resources/icon.png" alt="NoCab Transfer" width="100">
+<br>
 <b>NoCab Desktop</b>
 </h1>
 
