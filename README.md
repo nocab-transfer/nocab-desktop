@@ -48,17 +48,21 @@
 > **Note**: We recommend you to use the MSIX version. Read more about why [here](https://github.com/nocab-transfer/nocab-desktop/wiki/Why-you-should-use-MSIX%3F).
 
 ## How to build
-1. Install [Flutter](https://flutter.dev/docs/get-started/install)
-2. Switch to the `master` channel \
-    `flutter channel master`
-3. Clone the repository \
-    `git clone https://github.com/nocab-transfer/nocab-desktop.git`
-4. Get the dependencies \
-    `flutter pub get`
-5. Generate the code \
-    `flutter pub run build_runner build`
-6. Run the app \
-    `flutter run`
+1. Installations
+    1. Install [Flutter](https://flutter.dev/docs/get-started/install) 
+    2. For windows development, you need to install [Visual Studio](https://visualstudio.microsoft.com/downloads/) with `Desktop development with C++` workload. \
+    Read more [here](https://docs.flutter.dev/development/platform-integration/windows/building)
+2. Switch to the `master` channel of Flutter
+    * `flutter channel master`
+3. Clone the repository and go to the directory
+    * `git clone https://github.com/nocab-transfer/nocab-desktop.git`
+    * `cd nocab-desktop`
+5. Get the dependencies
+    * `flutter pub get`
+6. Generate the code
+    * `flutter pub run build_runner build`
+7. Run the app
+    * `flutter run`
 
 <br>
 <h1 align="center">
