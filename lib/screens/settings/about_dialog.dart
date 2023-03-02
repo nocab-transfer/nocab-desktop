@@ -12,10 +12,6 @@ class AboutDialogCustomized extends StatelessWidget {
   final String? version;
   const AboutDialogCustomized({Key? key, this.version}) : super(key: key);
 
-  final String githubSponsorLink = "https://github.com/sponsors/berkekbgz";
-  final String buyMeACoffeeLink = "https://www.buymeacoffee.com/berkekbgz";
-  final String patreon = "https://www.patreon.com/berkekbgz";
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
